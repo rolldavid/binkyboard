@@ -1,0 +1,64 @@
+.container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin: 40px 0px 40px 0px;
+}
+
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.noteInput {
+    outline: nonel;
+    margin: 0px 0px 0px 0px;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    width: 400px;
+    resize: none;
+    font-size: 1rem;
+}
+
+.noteInput:focus {
+    outline:1px solid fuchsia;
+}
+
+.authorInput:focus {
+    outline:1px solid fuchsia;
+}
+
+.authorInput {
+    margin: 10px 0px 0px 0px;
+    padding: 10px;
+    outline: none;
+    border-radius: 5px;
+    border: none;
+    font-size: 1rem;
+}
+
+.uploadContainer {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    margin: 15px 0px 15px 0px;
+}
+
+.uploadItem {
+    border: 1px solid lightslategray;
+    border-radius: 5px;
+    padding: 5px 10px 5px 10px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.submitButton {
+    width: 100%;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
