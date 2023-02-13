@@ -11,9 +11,10 @@ datasource db {
 }
 
 model Square {
-  id     Int    @id @default(autoincrement())
-  author String
-  note   String
-  image  String
-  video  String
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  author    String
+  note      String
+  image     String?
+  video     String?
 }

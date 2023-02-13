@@ -1,19 +1,41 @@
 "use client"
 
 import { SyntheticEvent, useState } from "react"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 import styles from "./Submit.module.css"
 
 export default function Submit() {
     const [note, setNote] = useState("")
     const [author, setAuthor] = useState("")
 
-    const handleSubmit = (e: SyntheticEvent) => {
-        e.preventDefault()
-        console.log()
+    const queryClient = useQueryClient()
+
+    async function addSquare({note, author}: {note: string, author: string}) {
+        const res = await fetch("/api/add-square", {
+            method: "POST",
+            body: JSON.stringify({
+                note,
+                author
+            }),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        const data = await res.json()
+        return data
     }
+
+
+    const { mutateAsync } = useMutation(addSquare, {
+        onSuccess: () => {
+            queryClient.invalidateQueries(['squareData'])
+          },
+    });
+
+  
     return (
         <section className={styles.container}>
-            <form onSubmit={(e: SyntheticEvent) => handleSubmit(e)} className={styles.formContainer}>
+            <form onSubmit={() => mutateAsync({note, author})} className={styles.formContainer}>
                 <textarea 
                     value={note}
                     onChange={e => setNote(e.target.value)}
