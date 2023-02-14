@@ -10,7 +10,11 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<SquareRes>
 ) {
-  const squareCollection = await prisma.square.findMany()
+  const squareCollection = await prisma.square.findMany({
+    orderBy: {
+      createdAt: "desc"
+    }
+  })
 
   res.status(200).json({ squares: squareCollection })
 }

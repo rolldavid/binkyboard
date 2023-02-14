@@ -7,13 +7,13 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { square } = req.body;
+  const { note, author } = req.body;
 
-  if (square) {
+  if (note && author) {
     const add = await prisma.square.create({
         data: {
-            note: square.note,
-            author: square.author
+            note,
+            author
         }
       })
   }

@@ -3,6 +3,16 @@ const nextConfig = {
   experimental: {
     appDir: true,
   },
-}
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "www.poblanocloud.com",
+        port: "",
+        pathname: "/*",
+      },
+    ],
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

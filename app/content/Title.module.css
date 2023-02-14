@@ -1,0 +1,12 @@
+.container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin: 10px 0px 10px 0px;
+}
+
+.title {
+    margin: 10px 0px 0px 10px;
+    color: white;
+    font-family: 'Zeyada', cursive;
+}

@@ -5,7 +5,8 @@
   align-items: center;
   padding: 6rem;
   min-height: 100vh;
-  width: 100vw;
+  width: 100%;
+  max-width: 500px;
   font-family: 'Rokkitt', serif;
 
 }
