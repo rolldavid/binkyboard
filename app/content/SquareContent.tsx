@@ -16,8 +16,6 @@ export default function({content}: {content: Square}) {
                     from {content.author}
                 </p>
 
-                <ReactPlayer url="https://www.poblanocloud.com/test.mp4" controls={true} width="100%"/>
-                <Image src="https://www.poblanocloud.com/kitchen.jpeg" alt="kitchen" width="400" height="300"/>
                 
             </div>
             

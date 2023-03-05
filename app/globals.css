@@ -2,19 +2,35 @@
 @import url('https://fonts.googleapis.com/css2?family=Rokkitt:wght@200&family=Zeyada&display=swap');
 
 
+:root {
+  --red: #B33951;
+  --wenge: #54494B;
+  --cream: #F1F7ED;
+  --bluegreen: #91C7B1;
+  --yellow: #E3D081;
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
 }
 
+
+
 html,
 body {
   color: rgb(var(--foreground-rgb));
-  background: rgb(246,196,142);
- background: radial-gradient(circle, rgba(246,196,142,1) 0%, rgba(29,134,152,1) 100%);
- font-family: 'Rokkitt', serif;
+  background: #f1f7ed;
+  font-family: 'Rokkitt', serif;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
 
 a {
   color: inherit;
