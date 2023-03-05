@@ -218,12 +218,12 @@ export default function Submit() {
               </div>
                     
               
-                {/* <input 
+                <input 
                     value={author}
                     onChange={e => setAuthor(e.target.value)}
                     className={styles.authorInput}
                     placeholder="Your name"
-                /> */}
+                />
                 <div className={styles.postActions}>
                     <div className={styles.uploadContainer}>
                         <label htmlFor="upload" className={styles.uploadItem}>
