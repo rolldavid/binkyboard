@@ -10,6 +10,7 @@ export default async function handler(
   const { note, author } = req.body;
 
   if (note && author) {
+    if (typeof note === "string" && typeof author === "string") {
     const add = await prisma.square.create({
         data: {
             note,
@@ -17,6 +18,7 @@ export default async function handler(
         }
       })
   }
+}
 
   res.status(200).json({ status: "ok" })
 }
