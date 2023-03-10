@@ -2,6 +2,11 @@
 const nextConfig = {
   experimental: {
     appDir: true,
+    serverComponentsExternalPackages: [
+      "prisma",
+      "@prisma/client",
+      "next-auth/client",
+    ],
   },
   images: {
     remotePatterns: [

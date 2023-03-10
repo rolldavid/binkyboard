@@ -25,7 +25,7 @@ export default function Page() {
     return (
         <div className={styles.container}>
             <div className={styles.authModule}>
-                <AuthContainer fromReview={false}/>
+                <AuthContainer />
             </div>
         </div>
     )

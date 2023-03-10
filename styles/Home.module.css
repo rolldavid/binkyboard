@@ -11,6 +11,36 @@
 
 }
 
+
+.authModuleContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: none;
+  z-index: 10;
+}
+
+.authModule {
+display: flex;
+align-items: center;
+justify-content: center;
+position: absolute;
+top: 10vh;
+width: 500px;
+height: 500px;
+background-color: none;
+z-index: 30;
+}
+
+
+
+
+
 .description {
   display: inherit;
   justify-content: inherit;
