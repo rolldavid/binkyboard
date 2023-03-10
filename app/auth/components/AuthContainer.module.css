@@ -48,7 +48,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid var(--cream);
+    border: 2px solid var(--wenge);
     border-radius: 25px;
     width: 100%;
     padding: 8px 15px 8px 15px;
@@ -59,7 +59,7 @@
     margin: 0px 0px 0px 10px;
     font-family: "Montserrat";
     font-weight: 400;
-    color: var(--cream);
+    color: var(--wenge);
 }
 
 .emailContainer {
@@ -178,14 +178,14 @@
     font-weight: 400;
     padding: 0px 15px 0px 15px;
     margin: 0px 0px 5px 0px;
-    color: var(--wenge);
+    color: var(--darkwenge);
 }
 
 .authHeaderSubtitle {
     text-align: center;
     font-size: 1rem;
     width: 100%;
-    color: var(--wenge);
+    color: var(--darkwenge);
     padding: 0px 15px 0px 15px;
 }
 

@@ -57,7 +57,7 @@ export default function AuthContainer() {
                     {`Hey there!`}
                 </h2>
                 <p className={styles.authHeaderSubtitle}>
-                    {`Continue below to post things to Kelly & David's BinkyBoard`}
+                    {`Continue below to post things to Kelly & David's binkyboard`}
                 </p>
             </div>
             <div className={styles.googleContainer}>
