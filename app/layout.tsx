@@ -1,4 +1,4 @@
-import QueryProvider from '@/utils/QueryProvider'
+import QueryProvider from '@/lib/QueryProvider'
 import './globals.css'
 
 

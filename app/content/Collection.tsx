@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query"
 import ReactPlayer from "react-player"
 import SquareContent from "./SquareContent"
 import styles from "./Collection.module.css"
-import Spinner from "@/utils/Spinner"
+import Spinner from "@/lib/Spinner"
 
 export default function Collection() {
    
@@ -37,7 +37,7 @@ export default function Collection() {
                     )
                 })
             }
-                            <ReactPlayer url="https://soundcloud.com/liluzivert/lil-uzi-vert-just-wanna-rock" controls={true} width="100%"/>
+                    <ReactPlayer url="https://soundcloud.com/liluzivert/lil-uzi-vert-just-wanna-rock" controls={true} width="100%"/>
 
         </div>
     )}
