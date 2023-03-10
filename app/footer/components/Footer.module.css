@@ -1,0 +1,27 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 75px;
+    background-color: var(--darkgrey);
+    z-index: 0;
+}
+
+.logoContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0px 0px 0px 30px;
+    height: 100%;
+    width: 100%;
+}
+
+.logo {
+    font-size: 1.5rem;
+    letter-spacing: 1.5px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 500;
+    color: var(--wenge);
+    cursor: default;
+}
+

@@ -1,0 +1,72 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+    z-index: 35;
+}
+
+.logoContainer {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    margin: 0px 0px 0px 20px;
+}
+
+.linkContainer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    margin: 0px 15px 0px 0px;
+    gap: 10px;
+}
+
+.navItem {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    margin: 0px 0px 0px 0px;
+    cursor: pointer;
+}
+
+.linkIcon {
+    margin: 0px 0px 0px 0px;
+}
+
+.navText {
+        display: none;
+}
+
+.logo {
+    font-size: 1.5rem;
+    letter-spacing: 1.5px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
+    color: var(--wenge);
+ 
+}
+
+.notificationDesktop {
+    margin: 0px 12px 0px 12px;
+    cursor: pointer;
+}
+
+.notificationMobile {
+    display: none;
+}
+
+.authDesktop {
+    margin: 0px 12px 0px 12px;
+    cursor: pointer;
+}
+
+.authMobile {
+    display: none;
+}
+
+

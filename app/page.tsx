@@ -20,13 +20,12 @@ export default function Page() {
 
   if (data && !data.session) {
     return (
-      <div>
+   
          <div className={styles.authModuleContainer} >
             <div className={styles.authModule}>
                 <AuthContainer />
             </div>
          </div>
-      </div>
     )
   }
   return (

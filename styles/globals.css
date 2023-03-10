@@ -1,6 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Rokkitt:wght@200&family=Zeyada&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500&family=Nunito:wght@300&display=swap');
 
 :root {
   --red: #B33951;
@@ -21,7 +20,7 @@ html,
 body {
   color: rgb(var(--foreground-rgb));
   background: #f1f7ed;
-  font-family: 'Rokkitt', serif;
+  font-family: 'Montserrat', sans-serif;
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
