@@ -15,12 +15,14 @@ import styles from "./AuthContainer.module.css"
 
 const schema = yup
 .object({
+  fullname: yup.string().required(),
   email: yup.string().email().required(),
 })
 .required();
 
 export default function AuthContainer() {
     const [value, setValue] = useState("")
+    const [fullname, setFullname] = useState("")
     const [submitted, setSubmitted] = useState(false);
 
 
@@ -71,6 +73,15 @@ export default function AuthContainer() {
             </div>
             <div className={styles.emailContainer}>
                 <form className={styles.formContainer}>
+                   
+                    <input 
+                        {...register("fullname")}
+                        type="text"
+                        value={fullname}
+                        onChange={(e) => setFullname(e.target.value)}
+                        placeholder="Kelly W. or Perez Family"
+                        className={styles.inputContainer}
+                    />
                     <input 
                         {...register("email")}
                         type="email"

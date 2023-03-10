@@ -4,14 +4,12 @@
     align-items: center;
     justify-content: flex-start;
     width: 400px;
-   
     border: none;
     border-radius: 25px;
     margin-top: 25px;
     padding: 20px 10px 10px 10px;
+    border: 2px solid var(--bluegreen);
     box-shadow: 1px 1px 5px var(--greygrey);
-    background-color: var(--bluegreen);
- 
 }
 
 .checkContainer {
@@ -81,13 +79,13 @@
 
 .inputContainer {
     width: 100%;
-    border: 2px solid var(--cream);
+    border: 2px solid var(--bluegreen);
     border-radius: 25px;
     padding: 12px 20px 12px 20px;
     font-family: "Montserrat";
     font-weight: 400;
     outline: none;
-    
+    margin: 5px 0px 5px 0px;
 }
 
 .emailButton {
@@ -100,10 +98,10 @@
     font-family: "Montserrat";
     font-weight: 400;
     color: var(--wenge);
-    border: 2px solid var(--cream);
+    background-color: var(--bluegreen);
     width: 100%;
-    margin-top: 15px;
-    padding: 10px 15px 10px 15px;
+    margin-top: 5px;
+    padding: 12px 15px 12px 15px;
     cursor: pointer;
 }
 
