@@ -4,9 +4,8 @@ import { getSession } from "@/lib/db-utils"
 import { useQuery } from "@tanstack/react-query"
 import Spinner from "@/lib/Spinner"
 import AuthContainer from "./auth/components/AuthContainer"
-import Collection from './content/Collection'
-import Submit from './content/Submit'
-import Title from './content/Title'
+import Collection from './post/components/Collection'
+import CreatePost from './post/components/CreatePost'
 import styles from '@/styles/Home.module.css'
 
 export default function Page() {
@@ -20,7 +19,6 @@ export default function Page() {
 
   if (data && !data.session) {
     return (
-   
          <div className={styles.authModuleContainer} >
             <div className={styles.authModule}>
                 <AuthContainer />
@@ -28,12 +26,11 @@ export default function Page() {
          </div>
     )
   }
-  return (
-    <main >
-      <Title />
-      <Submit />
-      <Collection />
 
+  return (
+    <main className={styles.container}>
+      <CreatePost />
+      <Collection />
     </main>
   )
 }

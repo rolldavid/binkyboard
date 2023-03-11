@@ -3,11 +3,11 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    width: 400px;
+    width: 100%;
     border: none;
     border-radius: 25px;
-    margin-top: 25px;
-    padding: 20px 10px 10px 10px;
+    margin: 0px 10px 0px 10px;
+    padding: 20px 20px 10px 20px;
     border: 2px solid var(--bluegreen);
     background-color: white;
     box-shadow: 1px 1px 5px var(--greygrey);
@@ -18,8 +18,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 400px;
-    height: 300px;
+    width: 100%;
     border: none;
     border-radius: 25px;
     margin-top: 25px;
@@ -39,7 +38,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 80%;
+    width: 100%;
     padding: 5px 0px 20px 0px;
 }
 
@@ -66,7 +65,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 80%;
+    width: 100%;
     padding: 20px 0px 20px 0px;
 }
 
@@ -85,6 +84,7 @@
     padding: 12px 20px 12px 20px;
     font-family: "Montserrat";
     font-weight: 400;
+    font-size: 1rem;
     outline: none;
     margin: 5px 0px 5px 0px;
 }
@@ -131,14 +131,13 @@
     text-align: center;
     width: 100%;
     color: var(--darkgrey);
-
 }
 
 .loginLine {
     display: flex;
     align-items: center;
     width: 80%;
-    margin: 15px 0px 15px 0px;
+    margin: 8px 0px 8px 0px;
   }
   
 .loginLine::before {
@@ -153,14 +152,14 @@
     content: "";
     flex: 0 1 100%;
     border-bottom: 1px solid var(--wenge);
-    opacity: .5;
+    opacity: .3;
     transform: translateY(50%);
 }
 
 .loginOr {
     font-size: 1rem;
     color: var(--wenge);
-    opacity: .5;
+    opacity: .3;
 }
 
 .authHeader {
@@ -174,7 +173,8 @@
 
 .authHeaderTitle {
     text-align: center;
-    font-weight: 400;
+    font-weight: 500;
+    font-size: 1.25rem;
     padding: 0px 15px 0px 15px;
     margin: 0px 0px 5px 0px;
     color: var(--darkwenge);
@@ -184,7 +184,8 @@
     text-align: center;
     font-size: 1rem;
     width: 100%;
-    color: var(--darkwenge);
-    padding: 0px 15px 0px 15px;
+    color: var(--wenge);
+    opacity: .7;
+   
 }
 

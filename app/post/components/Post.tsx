@@ -1,19 +1,19 @@
 "use client"
 
 import Image from "next/image"
-import { Square } from "@prisma/client"
+import { Post } from "@prisma/client"
 import ReactPlayer from "react-player"
-import styles from "./SquareContent.module.css"
+import styles from "./Post.module.css"
 
-export default function({content}: {content: Square}) {
+export default function({post}: {post: Post}) {
     return (
         <div className={styles.container}>
             <div className={styles.noteContainer}>  
                 <p className={styles.note}>
-                    {content.note}
+                    {post.note}
                 </p>
                 <p className={styles.author}>
-                    from {content.author}
+                    from {post.userId}
                 </p>
                 <img src="https://d3h42dhdxazsqn.cloudfront.net/ancient-wizard.jpg" alt="wizard" className={styles.img}/>
             </div>

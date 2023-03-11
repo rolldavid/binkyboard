@@ -1,25 +1,25 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Square } from "@prisma/client"
+import { Post } from "@prisma/client"
 import { useQuery } from "@tanstack/react-query"
 import ReactPlayer from "react-player"
-import SquareContent from "./SquareContent"
+import PostItem from "./Post"
 import styles from "./Collection.module.css"
 import Spinner from "@/lib/Spinner"
 
 export default function Collection() {
    
 
-    async function getSquares() {
-        const res = await fetch("/api/get-squares")
+    async function getPosts() {
+        const res = await fetch("/api/get-posts")
         const data = await res.json()
         return data
     }
 
 
-    const { data, status } = useQuery(["squareData"], () => {
-        return getSquares()
+    const { data, status } = useQuery(["postData"], () => {
+        return getPosts()
       });
 
     
@@ -31,9 +31,9 @@ export default function Collection() {
     return (
         <div className={styles.container}>
             {
-                data.squares.map((square: Square, index: number) => {
+                data.posts.map((post: Post, index: number) => {
                     return (
-                        <SquareContent key={index} content={square}/>
+                        <PostItem key={index} post={post}/>
                     )
                 })
             }

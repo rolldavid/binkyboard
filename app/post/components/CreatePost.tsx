@@ -4,16 +4,17 @@ import axios from "axios";
 import { SyntheticEvent, useState, useEffect, ClipboardEvent, useReducer, KeyboardEvent } from "react"
 import Image from "next/image"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import styles from "./Submit.module.css"
+import styles from "./CreatePost.module.css"
 import ReactPlayer from "react-player"
-import img from "./assets/img.png"
-import mov from "./assets/mov.png"
+import img from "../assets/img.png"
+import mov from "../assets/mov.png"
+import Spinner from "@/lib/Spinner";
 
 let linkInput = false;
 let mediaInput = false;
 let holdLink = ""
 let linkChecked = false;
-let mediaCounter = 0;
+
 
 interface PreviewFiles {
     url: string
@@ -21,55 +22,59 @@ interface PreviewFiles {
 }
 
 export default function Submit() {
+    const [loading, setLoading] = useState(false)
     const [note, setNote] = useState("")
-    const [mediaCount, setMediaCount] = useState(0)
     const [linkPreview, setLinkPreview] = useState(false)
     const [toggleLink, setToggleLink] = useState(false)
     const [mediaPreview, setMediaPreview] = useState(false)
-    const [mediaList, setMediaList] = useState<PreviewFiles[]>([])
+    const [mediaList, setMediaList] = useState<File[]>([])
+    const [mediaPreviewList, setMediaPreviewList] = useState<PreviewFiles[]>([])
+
     const [rowCount, setRowCount] = useState(2)
     const [mediaClass, setMediaClass] = useState("")
     const [mediaDetailClass, setMediaDetailClass] = useState("")
-    
     const [link, setLink] = useState("")
     
-    const [selectedMedia, setSelectedMedia] = useState<FileList | null>(null);
-
-
+   
     const queryClient = useQueryClient()
 
-    async function addSquare({note}: {note: string}) {
-        console.log(selectedMedia)
+    // upload post to server
+    async function addPost({note}: {note: string}) {
+        console.log(mediaList)
 
+        if (mediaList) {
+            setLoading(true)
+            for (let i = 0; i < mediaList.length; i++) {
+                const { data } = await axios.post(
+                    "/api/get-s3-url",
+                    {
+                        filename: mediaList[i].name,
+                        fileType: mediaList[i].type
+                    }
+                )
+    
+                const url = data.url
+    
+    
+                await axios.put(url, mediaList[i], {
+                    headers: {
+                      "Content-Type": mediaList[i].type,
+                      "Access-Control-Allow-Origin": "*",
+                    },
+                  });
 
-        if (selectedMedia) {
-           
-           
-            const { data } = await axios.post(
-                "/api/get-s3-url",
-                {
-                    filename: selectedMedia[0].name,
-                    fileType: selectedMedia[0].type
-                }
-            )
-
-            const url = data.url
-
-            console.log("url.........", url)
-
-            await axios.put(url, selectedMedia[0], {
-                headers: {
-                  "Content-Type": selectedMedia[0].type,
-                  "Access-Control-Allow-Origin": "*",
-                },
-              });
+            }
             
         }
         setNote("")
-        setSelectedMedia(null)
+        setMediaList([])
+        setMediaPreviewList([])
+        setMediaPreview(false)
+        setLoading(false)
      
     }
 
+    // handle when user is typing a note
     const handleChange = async (e: SyntheticEvent, val: string) => {
         e.preventDefault()
         setNote(val)
@@ -83,81 +88,76 @@ export default function Submit() {
         }
     }
 
+
     // handle files when user selects them 
     const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
 
-        const selectedFiles = e.target.files;
-        
-        if (!selectedFiles) {
+        const chosenFile = e.target.files;
+
+        if (chosenFile && !chosenFile[0]) {
+            return;
+        }
+    
+        if (mediaPreviewList.length >= 4) {
+            console.log("Add a max of 4 files to your post");
             return;
         }
 
-        console.log(selectedFiles[0])
-        if (selectedFiles.length >= 4 || mediaCount >= 4) {
-            console.log("Select up to 4 files");
-            return;
-        }
 
-        setSelectedMedia(selectedFiles)
-
-        mediaCounter += selectedFiles.length;
         
-        for (let i = 0; i < selectedFiles.length; i++) {
-            
+        if (chosenFile && chosenFile[0].type) {
+            setMediaList([...mediaList, chosenFile[0]])
             let reader = new FileReader()
-            
 
-            if (selectedFiles[i].type.includes("mov")) {
-
+            if (chosenFile[0].type.includes("mov") || chosenFile[0].type.includes("mp4")) {
+                
                 reader.onload = e => {
                     let blobData = reader.result;
-                    console.log(blobData);
                };
 
                 reader.onloadend = () => {
-                    setMediaList([...mediaList, {url: reader.result as string, type: selectedFiles[i].type}])
+                    setMediaPreviewList([...mediaPreviewList, {url: reader.result as string, type: chosenFile[0].type}])
+                    
                     setMediaPreview(true)
                     
                   };
-                  reader.readAsDataURL(selectedFiles[i])
+                  reader.readAsDataURL(chosenFile[0])
             } else {
                 reader.onloadend = () => {
-                    setMediaList([...mediaList, {url: reader.result as string, type: selectedFiles[i].type}])
+                    setMediaPreviewList([...mediaPreviewList, {url: reader.result as string, type: chosenFile[0].type}])
                     setMediaPreview(true)
-                  };
-                reader.readAsDataURL(selectedFiles[i])
+                };
+                reader.readAsDataURL(chosenFile[0])
             }
-
-            
         }
-        console.log(mediaCounter, "==========")
-        setMediaCount(mediaCounter)
+
+       
         
     }
 
  
     useEffect(() => {
-        if (mediaCount === 1) {
+        if (mediaPreviewList.length === 1) {
             setLinkPreview(false)
             setMediaClass("mediaClassOne")
             setMediaDetailClass("mediaDetailOne")
             console.log("one ==============")
-        } else if (mediaCount === 2) {
+        } else if (mediaPreviewList.length === 2) {
             setMediaClass("mediaClassTwo")
             setMediaDetailClass("mediaDetailTwo")
             console.log("two ==============")
-        } else if (mediaCount === 3) {
+        } else if (mediaPreviewList.length === 3) {
             setMediaDetailClass("mediaDetailThree")
             setMediaClass("mediaClassThree")
             console.log("three ==============")
-        } else if (mediaCount === 4) {
+        } else if (mediaPreviewList.length === 4) {
             setMediaDetailClass("mediaDetailFour")
             setMediaClass("mediaClassFour")
             console.log("four ==============")
         }
 
-        if (mediaCount < 1) {
+        if (mediaPreviewList.length < 1) {
             if (link.length > 0 && linkChecked) {
                 setLinkPreview(true)
                 setMediaPreview(false)
@@ -165,7 +165,7 @@ export default function Submit() {
                 setMediaPreview(false)
             }
         }
-    }, [mediaCount])
+    }, [mediaPreviewList])
 
 
     useEffect(() => {
@@ -189,9 +189,8 @@ export default function Submit() {
         }
     }
 
-  
 
-    const { mutateAsync } = useMutation(addSquare, {
+    const { mutateAsync } = useMutation(addPost, {
         onSuccess: () => {
             queryClient.invalidateQueries(['squareData'])
           },
@@ -202,11 +201,10 @@ export default function Submit() {
         await mutateAsync({note})
     }
 
-
   
     return (
         <section className={styles.container}>
-            <form onSubmit={e => handleSubmit(e)} className={styles.formContainer}>
+            {!loading && <form onSubmit={e => handleSubmit(e)} className={styles.formContainer}>
               <div className={styles.contentContainer}>
                 <textarea 
                     value={note}
@@ -223,7 +221,7 @@ export default function Submit() {
                     
                     {mediaPreview && <div className={styles.mediaContainer}>
                         {
-                            mediaList.map((item, index) => {
+                            mediaPreviewList.map((item, index) => {
                                 return <div className={index === 2 && mediaClass === "mediaClassThree" ? styles.mediaClassThreeThird : styles[mediaClass]} key={index}>
                                     {item.type.includes("video") ? 
                                         <video controls className={styles[mediaDetailClass + "Vid"]}>
@@ -257,14 +255,14 @@ export default function Submit() {
                     <input 
                         id="upload"
                         className={styles.uploadItem} 
-                        multiple
                         type="file" 
                         accept="image/png, image/jpeg, audio/*, video/*, image/*"
                         onChange={handleUpload}
                         hidden
                         />    
                 </div>
-            </form>
+            </form>}
+            {loading && <div><Spinner /></div>}
         </section>
     )
 }

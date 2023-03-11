@@ -1,0 +1,63 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 50px 0px 0px 0px;
+    padding: 0px 10px 0px 10px;
+    border: none;
+    gap: 25px;
+    width: 100%;
+}
+
+
+.nameContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+
+}
+
+.nameTitle {
+    color: var(--wenge);
+    font-weight: 500;
+}
+
+.nameInput {
+    border: none;
+    border-radius: 10px;
+    padding: 12px 15px 12px 15px;
+    outline: 2px solid var(--bluegreen);
+    width: 100%;
+    font-size: 1rem;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.saveContainer {
+    display: flex;
+    width: 100%;
+}
+
+.saveButton {
+    border: 2px solid var(--bluegreen);
+    border-radius: 10px;
+    padding: 12px 15px 12px 15px;
+    background-color: var(--bluegreen);
+    width: 100%;
+    cursor: pointer;
+    font-size: 1rem;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.logoutButton {
+    border: 2px solid var(--wenge);
+    border-radius: 10px;
+    padding: 12px 15px 12px 15px;
+    background: none;
+    width: 100%;
+    cursor: pointer;
+    font-size: 1rem;
+    font-family: 'Montserrat', sans-serif;
+}

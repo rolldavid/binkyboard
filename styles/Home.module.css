@@ -39,10 +39,15 @@ align-items: center;
 justify-content: center;
 position: absolute;
 top: 10vh;
-width: 500px;
-height: 500px;
+width: 100%;
 background-color: none;
 z-index: 30;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 

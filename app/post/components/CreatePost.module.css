@@ -15,8 +15,7 @@
     border-radius: 10px;
     border: 3px solid var(--bluegreen);
     background-color: white;
-    min-width: 250px;
-    max-width: 400px;
+
 }
 
 .contentContainer {
