@@ -1,5 +1,6 @@
 "use client"
 
+import axios from "axios";
 import { SyntheticEvent, useState, useEffect, ClipboardEvent, useReducer, KeyboardEvent } from "react"
 import Image from "next/image"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
@@ -21,7 +22,6 @@ interface PreviewFiles {
 
 export default function Submit() {
     const [note, setNote] = useState("")
-    const [author, setAuthor] = useState("")
     const [mediaCount, setMediaCount] = useState(0)
     const [linkPreview, setLinkPreview] = useState(false)
     const [toggleLink, setToggleLink] = useState(false)
@@ -33,25 +33,41 @@ export default function Submit() {
     
     const [link, setLink] = useState("")
     
-    const [selectedFile, setSelectedFile] = useState();
-	const [isFilePicked, setIsFilePicked] = useState(false);
+    const [selectedMedia, setSelectedMedia] = useState<FileList | null>(null);
 
 
     const queryClient = useQueryClient()
 
-    async function addSquare({note, author}: {note: string, author: string}) {
-        const res = await fetch("/api/add-square", {
-            method: "POST",
-            body: JSON.stringify({
-                note,
-                author
-            }),
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
-        const data = await res.json()
-        return data
+    async function addSquare({note}: {note: string}) {
+        console.log(selectedMedia)
+
+
+        if (selectedMedia) {
+           
+           
+            const { data } = await axios.post(
+                "/api/get-s3-url",
+                {
+                    filename: selectedMedia[0].name,
+                    fileType: selectedMedia[0].type
+                }
+            )
+
+            const url = data.url
+
+            console.log("url.........", url)
+
+            await axios.put(url, selectedMedia[0], {
+                headers: {
+                  "Content-Type": selectedMedia[0].type,
+                  "Access-Control-Allow-Origin": "*",
+                },
+              });
+            
+        }
+        setNote("")
+        setSelectedMedia(null)
+     
     }
 
     const handleChange = async (e: SyntheticEvent, val: string) => {
@@ -77,11 +93,13 @@ export default function Submit() {
             return;
         }
 
-
+        console.log(selectedFiles[0])
         if (selectedFiles.length >= 4 || mediaCount >= 4) {
             console.log("Select up to 4 files");
             return;
         }
+
+        setSelectedMedia(selectedFiles)
 
         mediaCounter += selectedFiles.length;
         
@@ -179,11 +197,16 @@ export default function Submit() {
           },
     });
 
+    const handleSubmit = async (e: SyntheticEvent) => {
+        e.preventDefault()
+        await mutateAsync({note})
+    }
+
 
   
     return (
         <section className={styles.container}>
-            <form onSubmit={() => mutateAsync({note, author})} className={styles.formContainer}>
+            <form onSubmit={e => handleSubmit(e)} className={styles.formContainer}>
               <div className={styles.contentContainer}>
                 <textarea 
                     value={note}
@@ -218,12 +241,7 @@ export default function Submit() {
               </div>
                     
               
-                <input 
-                    value={author}
-                    onChange={e => setAuthor(e.target.value)}
-                    className={styles.authorInput}
-                    placeholder="Your name"
-                />
+               
                 <div className={styles.postActions}>
                     <div className={styles.uploadContainer}>
                         <label htmlFor="upload" className={styles.uploadItem}>

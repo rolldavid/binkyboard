@@ -9,6 +9,7 @@
     margin-top: 25px;
     padding: 20px 10px 10px 10px;
     border: 2px solid var(--bluegreen);
+    background-color: white;
     box-shadow: 1px 1px 5px var(--greygrey);
 }
 

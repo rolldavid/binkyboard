@@ -18,15 +18,15 @@ export default function NavLinks({userId}: {userId: string}) {
                     </Link>
                 </div>
                 <div className={styles.linkContainer}>
-                <Link href={`/account/${userId}`} className={styles.navItem}>
+                <a target="_blank" href={`https://www.babylist.com/list/baby-kelly-wilkins`} className={styles.navItem}>
                         <Image 
                             src={gift}
-                            width={27}
-                            height={27}
+                            width={26}
+                            height={26}
                             alt="gift"
                             className={styles.linkIcon}
                         />
-                    </Link>
+                    </a>
                     <Link href={`/account/${userId}`} className={styles.navItem}>
                         <Image 
                             src={profile}

@@ -3,14 +3,6 @@ import { getServerSession } from "next-auth/next"
 import { authOptions } from "./auth/[...nextauth]";
 import prisma from "@/lib/prisma";
 
-
-const names = ["Cow", "Dog", "Chicken", "Cat", "Piggy", "Duck", "Giraffe", "Bear", "Snake", "Grasshopper", "Daffodil", "Bones", "Rose", "Iris", "Ghost", "Cactus"]
-const adj = ["Silly", "Happy", "Mad", "Brave", "Bright", "Wise", "Cranky", "Kind", "Super", "Funny", "Wild", "Power"]
-const randomName = names[Math.floor(Math.random() * names.length)]; 
-const randomAdj = adj[Math.floor(Math.random() * adj.length)]; 
-const randomNum = Math.floor(Math.random() * 1000) 
-const displayName = randomAdj + randomName + randomNum
-
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 
     try {
@@ -23,17 +15,59 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 where: {
                     email: session.user.email
                 },
+                include: {
+                    accounts: {
+                        select: {
+                            provider: true
+                        }
+                    }
+                }
             })
 
-            if (user) {
-                if (!user.displayName) {
-                    await prisma.user.update({
-                        where: { id: user.id},
-                        data: {
-                            displayName,
+            
 
+            if (user) {
+
+                const userProvider = user.accounts[0].provider
+
+                if (!user.displayName) {
+
+                    if (userProvider === "google") {
+                        console.log('logged in with google')
+                        const splitName = user.name?.split(" ")
+                        if (splitName) {
+                            const firstNameRaw = splitName[0]
+                            let firstName = ""
+
+                            for (let i = 0; i < firstNameRaw.length; i++) {
+                                if (i === 0) {
+                                    firstName = firstNameRaw[i].toUpperCase()
+                                } else {
+                                    firstName += firstNameRaw[i]
+                                }
+                            }
+                            
+                            
+                            const lastName = splitName[1].slice(0, 1).toUpperCase()
+
+                            await prisma.user.update({
+                                where: { id: user.id},
+                                data: {
+                                    displayName: `${firstName} ${lastName}`
+                                }
+                            })
                         }
-                    })
+                
+                    } else {
+                        console.log('logged in with email')
+                        await prisma.user.update({
+                            where: { id: user.id},
+                            data: {
+                                displayName: "blah"
+
+                            }
+                        })
+                    }
                 } 
                 res.status(201).json({session: true, userId: user.id })
             }

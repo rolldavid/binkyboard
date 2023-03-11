@@ -15,8 +15,7 @@ export default function({content}: {content: Square}) {
                 <p className={styles.author}>
                     from {content.author}
                 </p>
-
-                
+                <img src="https://d3h42dhdxazsqn.cloudfront.net/ancient-wizard.jpg" alt="wizard" className={styles.img}/>
             </div>
             
         </div>
