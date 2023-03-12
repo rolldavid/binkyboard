@@ -27,15 +27,19 @@ export default function Submit() {
     const [linkPreview, setLinkPreview] = useState(false)
     const [toggleLink, setToggleLink] = useState(false)
     const [mediaPreview, setMediaPreview] = useState(false)
+    const [mediaPreviewTwo, setMediaPreviewTwo] = useState(false)
+    const [mediaPreviewThree, setMediaPreviewThree] = useState(false)
+    const [mediaPreviewFour, setMediaPreviewFour] = useState(false)
     const [mediaList, setMediaList] = useState<File[]>([])
     const [mediaPreviewList, setMediaPreviewList] = useState<PreviewFiles[]>([])
-
     const [rowCount, setRowCount] = useState(2)
+    const [acceptMedia, setAcceptMedia] = useState("image/png, image/jpeg, audio/*, video/*, image/*")
+    const [allowUpload, setAllowUpload] = useState(true)
     const [mediaClass, setMediaClass] = useState("")
     const [mediaDetailClass, setMediaDetailClass] = useState("")
     const [link, setLink] = useState("")
+    const [toggleMedia, setToggleMedia] = useState(false)
     
-   
     const queryClient = useQueryClient()
 
     // upload post to server
@@ -71,7 +75,6 @@ export default function Submit() {
         setMediaPreviewList([])
         setMediaPreview(false)
         setLoading(false)
-     
     }
 
     // handle when user is typing a note
@@ -104,14 +107,22 @@ export default function Submit() {
             return;
         }
 
+        if (mediaPreviewList.length === 0) {
+            setAcceptMedia("image/png, image/jpeg, audio/*, image/*")
+
+        } 
+
 
         
         if (chosenFile && chosenFile[0].type) {
             setMediaList([...mediaList, chosenFile[0]])
             let reader = new FileReader()
 
-            if (chosenFile[0].type.includes("mov") || chosenFile[0].type.includes("mp4")) {
-                
+            console.log(chosenFile[0].type)
+            if (chosenFile[0].type.includes("video") || chosenFile[0].type.includes("mp4")) {
+                if (mediaPreviewList.length === 0) {
+                    setAllowUpload(false)
+                }
                 reader.onload = e => {
                     let blobData = reader.result;
                };
@@ -132,29 +143,31 @@ export default function Submit() {
             }
         }
 
+
        
         
     }
 
  
     useEffect(() => {
+       setToggleMedia(prev => !prev)
+    }, [mediaPreviewList])
+
+    useEffect(() => {
         if (mediaPreviewList.length === 1) {
             setLinkPreview(false)
-            setMediaClass("mediaClassOne")
-            setMediaDetailClass("mediaDetailOne")
-            console.log("one ==============")
+            setMediaPreview(true)
         } else if (mediaPreviewList.length === 2) {
-            setMediaClass("mediaClassTwo")
-            setMediaDetailClass("mediaDetailTwo")
-            console.log("two ==============")
+            setMediaPreview(false)
+            setMediaPreviewTwo(true)
         } else if (mediaPreviewList.length === 3) {
-            setMediaDetailClass("mediaDetailThree")
-            setMediaClass("mediaClassThree")
-            console.log("three ==============")
+            setMediaPreviewTwo(false)
+            console.log("media preview two", mediaPreviewTwo)
+            setMediaPreviewThree(true)
+            console.log("media preview three", mediaPreviewTwo)
         } else if (mediaPreviewList.length === 4) {
-            setMediaDetailClass("mediaDetailFour")
-            setMediaClass("mediaClassFour")
-            console.log("four ==============")
+            setMediaPreviewThree(false)
+            setMediaPreviewFour(true)
         }
 
         if (mediaPreviewList.length < 1) {
@@ -165,7 +178,7 @@ export default function Submit() {
                 setMediaPreview(false)
             }
         }
-    }, [mediaPreviewList])
+    }, [toggleMedia])
 
 
     useEffect(() => {
@@ -219,7 +232,7 @@ export default function Submit() {
                             <ReactPlayer url={link} controls={true} width="100%" onError={() => setLinkPreview(false)}/>
                     </div>}
                     
-                    {mediaPreview && <div className={styles.mediaContainer}>
+                    {/* {mediaPreview && <div className={styles.mediaContainer}>
                         {
                             mediaPreviewList.map((item, index) => {
                                 return <div className={index === 2 && mediaClass === "mediaClassThree" ? styles.mediaClassThreeThird : styles[mediaClass]} key={index}>
@@ -233,7 +246,57 @@ export default function Submit() {
                                 </div>
                             })
                         }
+                    </div>} */}
+
+                    {mediaPreview && <div className={styles.mediaContainer}>
+                        {
+                            mediaPreviewList.map((item, index) => {
+                                return (
+                                    <div className={styles.mediaItem} key={index}>
+                                        {
+                                            item.type.includes("video") ?
+                                                <video controls className={styles.mediaItemVid}>
+                                                    <source src={item.url} type="video/mp4" />
+                                                        Your browser does not support HTML5 video.
+                                                </video>
+                                                : <img src={item.url} alt="preview image" className={styles.mediaItemImg}/>
+                                        }
+                                    </div>
+                                )
+                            })
+                        }
                     </div>}
+
+                    {mediaPreviewTwo && <div className={styles.mediaContainerTwo}>
+                    {
+                            mediaPreviewList.map((item, index) => {
+                                return (
+                                    <div className={styles.mediaItemTwo} key={index}>
+                                        <img src={item.url} alt="preview image" className={styles.mediaItemTwoImg}/>
+                                    </div>
+                                )
+                            })
+                        }
+                    </div>}
+
+                    {mediaPreviewThree && <div className={styles.mediaContainerThree}>
+                    {
+                            mediaPreviewList.map((item, index) => {
+                                
+                                    return (
+                                        <div className={styles.mediaItemThreeBig} key={index}>
+                                    
+                                             <img src={item.url} alt="preview image" className={styles.mediaItemThreeImg}/>
+                                        
+                                        </div>
+                                    )
+                                
+                                
+                            })
+                        }
+                    </div>}
+
+                   
                    
                 </section>
               </div>
@@ -242,12 +305,21 @@ export default function Submit() {
                
                 <div className={styles.postActions}>
                     <div className={styles.uploadContainer}>
-                        <label htmlFor="upload" className={styles.uploadItem}>
+                        {allowUpload ? <label htmlFor="upload" className={styles.uploadItem}>
                             <Image src={img} width={27} height={25} alt="image icon"/>
-                        </label>
-                        <label htmlFor="upload" className={styles.uploadItem}>
+                        </label> : 
+                        <div className={styles.uploadItemGrey}>
+                            <Image src={img} width={27} height={25} alt="image icon"/>
+                         </div>
+                        }
+                        {mediaPreviewList.length < 1 ? <label htmlFor="upload" className={styles.uploadItem}>
                             <Image src={mov} width={35} height={25} alt="movie icon"/>
-                        </label>
+                        </label> :
+                        <div className={styles.uploadItemGrey}>
+                            <Image src={mov} width={35} height={25} alt="movie icon"/>
+                        </div>
+                        
+                    }
                     </div>
                     <button type="submit" className={styles.submitButton}>Share</button>
                 </div>
@@ -256,7 +328,7 @@ export default function Submit() {
                         id="upload"
                         className={styles.uploadItem} 
                         type="file" 
-                        accept="image/png, image/jpeg, audio/*, video/*, image/*"
+                        accept={acceptMedia}
                         onChange={handleUpload}
                         hidden
                         />    

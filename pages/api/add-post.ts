@@ -9,7 +9,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { note } = req.body;
+  const { note, mediaDetails,  } = req.body;
   const session = await getServerSession(req, res, authOptions)
 
   if (!session) {
@@ -22,20 +22,20 @@ export default async function handler(
             email: session.user.email
         },
     })
-
-    if (user){
+  }
+    /* if (user){
       if (note && user.displayName) {
         if (typeof note === "string") {
-          await prisma.square.create({
+          await prisma.post.create({
             data: {
                 note,
-                author: user.displayName
+              
             }
           })
         }
       }
     }
-  }
+  } */
   
 
   res.status(200).json({ status: "ok" })
