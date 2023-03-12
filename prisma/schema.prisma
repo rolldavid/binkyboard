@@ -10,6 +10,19 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Board {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  name      String
+  users     User[]   @relation(name: "users")
+  owner     User     @relation(fields: [ownerId], references: [id], name: "owner")
+  ownerId   String
+  posts     Post[]
+  allowList User[]   @relation(name: "allowList")
+  public    Boolean  @default(true)
+  registry  String?
+}
+
 model Post {
   id        Int        @id @default(autoincrement())
   createdAt DateTime   @default(now())
@@ -17,9 +30,9 @@ model Post {
   userId    String
   media     Media[]
   note      String
-  image     String?
-  video     String?
   reactions Reaction[]
+  board     Board      @relation(fields: [boardId], references: [id], onDelete: Cascade)
+  boardId   String
 }
 
 model Media {
@@ -56,6 +69,10 @@ model User {
   accounts      Account[]
   sessions      Session[]
   reactions     Reaction[]
+  boards        Board[]    @relation(name: "users")
+  ownedBoards   Board[]    @relation(name: "owner")
+  allowedOn     Board[]    @relation(name: "allowList")
+  role          Role       @default(USER)
 }
 
 model Account {
@@ -99,4 +116,9 @@ enum ReactionType {
   LAUGH
   FIRE
   BINKY
+}
+
+enum Role {
+  USER
+  ADMIN
 }

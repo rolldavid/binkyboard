@@ -1,0 +1,116 @@
+.container {
+    display: flex;
+    width: 100%;
+}
+
+.formContainer {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+}
+
+.titleContainer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 0px 0px 10px 0px;
+}
+
+.nameInput {
+    width: 100%;
+    border: 2px solid var(--bluegreen);
+    border-radius: 25px;
+    padding: 12px 20px 12px 20px;
+    font-family: "Montserrat";
+    font-weight: 400;
+    font-size: 1rem;
+    outline: none;
+    margin: 5px 0px 5px 0px;
+}
+
+.accessContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 10px 0px 10px 0px;
+}
+
+.accessButtonContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 20px 0px 20px 10px;
+    gap: 5px;
+}
+
+.accessLabel {
+    margin: 0px 0px 0px 5px;
+}
+
+.accessText {
+    display: flex;
+    width: 100%;
+    text-align: center;
+    margin: 5px 0px 10px 0px;
+    color: var(--wenge);
+}
+
+.accessInput {
+    width: 100%;
+    border: 2px solid var(--bluegreen);
+    border-radius: 25px;
+    padding: 12px 20px 12px 20px;
+    font-family: "Montserrat";
+    font-weight: 400;
+    font-size: 1rem;
+    outline: none;
+    margin: 5px 0px 5px 0px;
+}
+
+.accessButton {
+    margin: 0px 0px 5px 0px;
+}
+
+.submitContainer {
+    display: flex;
+    width: 100%;
+}
+
+.submitButton {
+    border: 2px solid var(--bluegreen);
+    border-radius: 10px;
+    padding: 12px 15px 12px 15px;
+    background-color: var(--bluegreen);
+    width: 100%;
+    cursor: pointer;
+    font-size: 1rem;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.submittedContainer {
+    display: flex;
+    flex-direction: column;
+
+    margin: 40px 0px 0px 0px;
+    width: 100%;
+
+}
+
+.boardLink {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+}
+
+.boardLinkTitleContainer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 0px 0px 20px 0px;
+}
+
+.boardLinkTitle {
+
+}

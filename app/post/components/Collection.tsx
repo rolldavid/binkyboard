@@ -10,13 +10,11 @@ import Spinner from "@/lib/Spinner"
 
 export default function Collection() {
    
-
     async function getPosts() {
         const res = await fetch("/api/get-posts")
         const data = await res.json()
         return data
     }
-
 
     const { data, status } = useQuery(["postData"], () => {
         return getPosts()

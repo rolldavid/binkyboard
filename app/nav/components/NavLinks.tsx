@@ -7,7 +7,7 @@ import profile from "../assets/profile.png"
 import styles from "./NavLinks.module.css"
 
 
-export default function NavLinks({userId}: {userId: string}) {
+export default function NavLinks({userId, admin}: {userId: string, admin: boolean}) {
    
     if (userId !== "nope") {
         return (
@@ -18,15 +18,7 @@ export default function NavLinks({userId}: {userId: string}) {
                     </Link>
                 </div>
                 <div className={styles.linkContainer}>
-                <a target="_blank" href={`https://www.babylist.com/list/baby-kelly-wilkins`} className={styles.navItem}>
-                        <Image 
-                            src={gift}
-                            width={26}
-                            height={26}
-                            alt="gift"
-                            className={styles.linkIcon}
-                        />
-                    </a>
+                
                     <Link href={`/account/${userId}`} className={styles.navItem}>
                         <Image 
                             src={profile}
@@ -37,6 +29,9 @@ export default function NavLinks({userId}: {userId: string}) {
                         />
                     
                     </Link>
+                    {admin && <Link href="/create">
+                        Create
+                    </Link>}
                     
                 </div>
             </nav>

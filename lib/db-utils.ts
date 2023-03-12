@@ -22,3 +22,33 @@ export async function getProfile(userId: string) {
     const data = await res.json()
     return data;
 }
+
+export async function createNewBoard(boardName: string, access: boolean, registry: string) {
+    const res = await fetch("/api/create-board", {
+        method: "POST",
+        body: JSON.stringify({
+            boardName,
+            access,
+            registry
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    const data = await res.json()
+    return data;
+}
+
+export async function getBoard(boardId: string) {
+    const res = await fetch("/api/get-board", {
+        method: "POST",
+        body: JSON.stringify({
+            boardId
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    const data = await res.json()
+    return data;
+}

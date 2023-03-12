@@ -9,21 +9,31 @@ import NavLinks from "./NavLinks"
 import styles from "./NavContainer.module.css"
 
 
-
 export default function NavContainer() {
   
-
-
     const {data, status} = useQuery(["session"], () => {
         return getUserSession()
     })
 
 
-    if (data && data.userId && status === "success") {
+    if (data && data.userId && data.role === "ADMIN" && status === "success") {
+        console.log("is an admin")
+        console.log(data.role)
         return (
             <>
             <div className={styles.desktop}>
-                <NavLinks  userId={data.userId}/>
+                <NavLinks  userId={data.userId} admin={true}/>
+            </div>
+        </>
+        )
+    }
+
+    if (data && data.userId && status === "success") {
+        console.log(data.role)
+        return (
+            <>
+            <div className={styles.desktop}>
+                <NavLinks  userId={data.userId} admin={false}/>
             </div>
         </>
         )
@@ -33,7 +43,7 @@ export default function NavContainer() {
     return (
 
         <div className={styles.desktop}>
-            <NavLinks  userId={"nope"}/>
+            <NavLinks  userId={"nope"} admin={false}/>
         </div>
  
     )

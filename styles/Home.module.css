@@ -50,5 +50,46 @@ z-index: 30;
   width: 100%;
 }
 
+.titleContainer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 40px 0px 0px 0px;
+}
 
+.titleText {
+  color: var(--wenge);
+}
+
+
+.boardContainer {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  margin: 20px 0px 0px 0px;
+  gap: 20px;
+}
+
+.boardItem {
+  display: flex;
+  width: 100%;
+  cursor: pointer;
+}
+
+
+.noBoardContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  margin: 40px 0px 0px 0px;
+  padding: 0px 10px 0px 10px;
+  gap: 20px;
+}
+
+.noBoardText {
+  display: flex;
+  text-align: center;
+  opacity: .6;
+}
 

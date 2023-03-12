@@ -20,11 +20,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                         select: {
                             provider: true
                         }
-                    }
+                    },
+                    boards: true
                 }
             })
 
-            
 
             if (user) {
 
@@ -47,7 +47,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                                 }
                             }
                             
-                            
+
                             const lastName = splitName[1].slice(0, 1).toUpperCase()
 
                             await prisma.user.update({
@@ -69,7 +69,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                         })
                     }
                 } 
-                res.status(201).json({session: true, userId: user.id })
+                res.status(201).json({
+                    session: true, 
+                    userId: user.id, 
+                    role: user.role, 
+                    displayName: user.displayName,
+                    boards: user.boards
+                 })
             }
             
         } else {
