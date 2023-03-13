@@ -2,6 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { getUserSession } from "@/lib/db-utils"
+import AuthContainer from "@/app/auth/components/AuthContainer";
 import { useState, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
@@ -15,13 +16,28 @@ export default function NavContainer() {
         return getUserSession()
     })
 
+    if (data && !data.session && status === "success") {
+        return (
+
+            <div className={styles.container}>
+                <NavLinks  userId={"nope"} admin={false}/>
+                <div className={styles.authModuleContainer} >
+                    <div className={styles.authModule}>
+                        <AuthContainer />
+                    </div>
+                </div>
+            </div>
+     
+        )
+    }
+
 
     if (data && data.userId && data.role === "ADMIN" && status === "success") {
-        console.log("is an admin")
-        console.log(data.role)
+       
+ 
         return (
             <>
-            <div className={styles.desktop}>
+            <div className={styles.container}>
                 <NavLinks  userId={data.userId} admin={true}/>
             </div>
         </>
@@ -29,10 +45,10 @@ export default function NavContainer() {
     }
 
     if (data && data.userId && status === "success") {
-        console.log(data.role)
+        
         return (
             <>
-            <div className={styles.desktop}>
+            <div className={styles.container}>
                 <NavLinks  userId={data.userId} admin={false}/>
             </div>
         </>
@@ -40,11 +56,5 @@ export default function NavContainer() {
     }
 
 
-    return (
-
-        <div className={styles.desktop}>
-            <NavLinks  userId={"nope"} admin={false}/>
-        </div>
- 
-    )
+   return null;
 }

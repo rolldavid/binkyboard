@@ -20,39 +20,31 @@ export default function Page() {
       return <Spinner />
   }
 
-  if (data && !data.session) {
-    return (
-         <div className={styles.authModuleContainer} >
-            <div className={styles.authModule}>
-                <AuthContainer />
-            </div>
-         </div>
-    )
-  }
 
-  console.log(data.boards, "+++++++++++++++++++")
-  return (
-    <main className={styles.container}>
-      <div className={styles.titleContainer}>
-        <h2 className={styles.titleText}>Your Boards</h2>
-      </div>
-      {data.boards.length > 0 ? <div className={styles.boardContainer}>
-
-          {
-            data.boards.map((board: Board, index: number) => {
-              return (
-                <Link href={`/${board.id}`} key={index} className={styles.boardItem}>
-                    <BoardCard board={board}/>
-                </Link>
-              )
-            })
-          }
-          </div> :
-          <div className={styles.noBoardContainer}>
-              <p className={styles.noBoardText}>Looks like you aren&apos;t following any boards. Add boards from invite links shared with you.</p>
+  if (data && data.boards) {
+      return (
+        <main className={styles.container}>
+          <div className={styles.titleContainer}>
+            <h2 className={styles.titleText}>Your Boards</h2>
           </div>
-      
-      }
-    </main>
-  )
+          {data.boards.length > 0 ? <div className={styles.boardContainer}>
+
+              {
+                data.boards.map((board: Board, index: number) => {
+                  return (
+                    <Link href={`/${board.id}`} key={index} className={styles.boardItem}>
+                        <BoardCard board={board}/>
+                    </Link>
+                  )
+                })
+              }
+              </div> :
+              <div className={styles.noBoardContainer}>
+                  <p className={styles.noBoardText}>Star a binkyboard to add it to your favorites</p>
+              </div>
+          
+          }
+        </main>
+      )
+    }
 }

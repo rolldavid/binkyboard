@@ -51,7 +51,6 @@ export default function AuthContainer() {
     }
     return (
         <>
-        
         {!submitted && <section className={styles.container}>
             
             <div className={styles.authHeader}>
@@ -59,7 +58,7 @@ export default function AuthContainer() {
                     {`Welcome!`}
                 </h2>
                 <p className={styles.authHeaderSubtitle}>
-                    {`Continue below to post things to Kelly & David's binkyboard`}
+                    {`Continue below to join your family on binkyboard`}
                 </p>
             </div>
             <div className={styles.googleContainer}>

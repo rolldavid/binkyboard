@@ -1,7 +1,10 @@
+
 import Footer from './footer/components/Footer'
 import NavContainer from './nav/components/NavContainer'
 import QueryProvider from '@/lib/QueryProvider'
 import styles from "@/styles/Home.module.css"
+
+import AuthContainer from "./auth/components/AuthContainer"
 import "@/styles/globals.css"
 
 export default function RootLayout({
@@ -9,6 +12,10 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+
+
+
+
   return (
     <html lang="en">
       {/*
@@ -23,9 +30,9 @@ export default function RootLayout({
           </nav>
           <main className={styles.main}>
             {children}
-          </main>
+          </main> 
           <footer className={styles.footer}>
-                <Footer />
+              <Footer />
           </footer>
         </QueryProvider>
       </body>
