@@ -13,6 +13,7 @@ import share from "./assets/share.png"
 import banner from "./assets/banner.png"
 import styles from "@/styles/Board.module.css"
 import Spinner from "@/lib/Spinner"
+import ScrollToTop from "@/lib/ScrollToTop"
 
 
 export default function Page({params: {board}}: {params: { board: string }}) {
@@ -65,8 +66,10 @@ export default function Page({params: {board}}: {params: { board: string }}) {
   
 
     if (data && data.board && data.posts.length < 1) {
-
+        console.log(data.board.registry.length, "------")
         return (
+            <>
+            <ScrollToTop />
             <div className={styles.container}>
                 <div className={styles.bannerContainer}>
                     <Image
@@ -82,9 +85,9 @@ export default function Page({params: {board}}: {params: { board: string }}) {
                     <h2 className={styles.boardHeader}>{`${data.board.name}`}</h2>
                 </div>
                 
-                <div className={styles.actionContainer}>
-                    <div className={styles.actionInnerContainer}>
-                        {data.board.registry && <a target="_blank" href={`${data.board.registry}`} className={styles.navItem}>
+               <div className={styles.actionContainer}>
+                    {data.board.registry.length > 0 && <div className={styles.actionInnerContainer}>
+                         <a target="_blank" href={`${data.board.registry}`} className={styles.navItem}>
                             <Image 
                                 src={gift}
                                 width={25}
@@ -92,39 +95,16 @@ export default function Page({params: {board}}: {params: { board: string }}) {
                                 alt="registry link"
                             />
                         </a> 
-                    
-                        }
-                    
-                        {data.isStarred ? <Image 
-                                src={starshine}
-                                width={25}
-                                height={25}
-                                alt="remove star"
-                                onClick={() => updateStar.mutate({star: false, boardId: data.board.id})}
-                                className={styles.starItem}
-                        /> :
-                        <Image 
-                                src={star}
-                                width={25}
-                                height={25}
-                                alt="add star"
-                                onClick={() => updateStar.mutate({star: true, boardId: data.board.id})}
-                                className={styles.starItem}
-                        />
-                        }
+                    </div>}
+                    {data.board.registry.length === 0 && <div className={styles.actionInnerContainerHold}>
+
+                    </div>}
                 </div>
-                    
-            
-                {/* <Image 
-                        src={share}
-                        width={25}
-                        height={25}
-                        alt="share"
-                /> */}
-                </div>
+
                 <CreatePost />
                 <p>Board Id: {board}</p>
             </div>
+            </>
         )
     }
     return (

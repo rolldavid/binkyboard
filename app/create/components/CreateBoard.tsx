@@ -13,7 +13,7 @@ import styles from "./CreateBoard.module.css"
 const schema = yup
 .object({
   name: yup.string().min(5).required(),
-  registry: yup.string().min(10),
+  registry: yup.string(),
   access: yup.string().required()
 
 })
@@ -108,7 +108,7 @@ export default function CreateBoard() {
                     </label>
                 </div>
                 {!access && <div className={styles.accessContainer}>
-                    <p className={styles.accessText}>Enter emails of people you want to give access to your list. You can always add more later.</p>
+                    <p className={styles.accessText}>Enter emails of people you want to give access to your board. You can always add more later.</p>
                     <input 
                         {...register("accessList")}
                         type="textarea"

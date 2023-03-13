@@ -12,7 +12,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         if (!session) {
             return res.status(201).json({status: "failed"})
         }
-        console.log("got session............", session.user)
+    
         if (session?.user?.email) {
 
             const user = await prisma.user.findUnique({
@@ -22,9 +22,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             })
 
             if (user) {
-                console.log("attempting to create board............", user.id)
-                console.log("board name", boardName)
-                console.log("access...........:::::", access)
                 const board = await prisma.board.create({
                     data: {
                         name: boardName,
@@ -43,7 +40,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     },
                 })
 
-                console.log("created...................")
                 res.status(201).json({status: "ok", link: board.id})
                 return;
             }

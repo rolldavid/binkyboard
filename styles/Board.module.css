@@ -19,6 +19,15 @@
    
 }
 
+.actionInnerContainerHold {
+    display: flex;
+    background-color: none;
+    padding: 5px 12px 2px 12px;
+    margin-top: 30px;
+    gap: 10px;
+    border-top-left-radius: 5px;
+}
+
 .actionInnerContainer {
     display: flex;
     background-color: var(--cream);
