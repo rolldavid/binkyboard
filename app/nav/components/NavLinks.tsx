@@ -3,7 +3,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import gift from "../assets/gift.png"
-import profile from "../assets/profile.png"
+import plus from "../assets/plus.png"
+import profile from "../assets/prof.png"
 import styles from "./NavLinks.module.css"
 
 
@@ -27,10 +28,15 @@ export default function NavLinks({userId, admin}: {userId: string, admin: boolea
                             alt="profile"
                             className={styles.linkIcon}
                         />
-                    
                     </Link>
-                    {admin && <Link href="/create">
-                        Create
+                    {admin && <Link href="/create" className={styles.navItem}>
+                        <Image 
+                            src={plus}
+                            width={25}
+                            height={25}
+                            alt="create board"
+                            className={styles.linkIcon}
+                        />
                     </Link>}
                     
                 </div>

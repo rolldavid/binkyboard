@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link";
 import { useState, useEffect, SyntheticEvent } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -28,6 +29,7 @@ export default function CreateBoard() {
     const [submitted, setSubmitted] = useState(false)
     const [loading, setLoading] = useState(false)
     const [boardLink, setBoardLink] = useState("binkyboard.com/3839844739")
+    const [copyText, setCopyText] = useState("Copy board link")
 
     const {
         register,
@@ -51,6 +53,11 @@ export default function CreateBoard() {
         setLoading(false)
     }
 
+    const copyLink = (e: SyntheticEvent) => {
+        e.preventDefault()
+        navigator.clipboard.writeText(`${process.env.NEXT_PUBLIC_FRONTEND_URL}/${boardLink}`)
+        setCopyText(`✓ Copied`)
+    }
    
     return (
         <div className={styles.container}>
@@ -123,7 +130,12 @@ export default function CreateBoard() {
                 <div className={styles.boardLinkTitleContainer}>
                     <h2 className={styles.boardLinkTitle}>Share your board!</h2>
                 </div>
-                <p className={styles.boardLink}>{`${process.env.NEXT_PUBLIC_FRONTEND_URL}/${boardLink}`}</p>
+                <button onClick={(e) => copyLink(e)} className={styles.copyLink}>
+                    {copyText}
+                </button>
+
+              
+                
             </div>}
             {loading && <Spinner />}
         </div>
