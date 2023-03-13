@@ -296,8 +296,6 @@ export default function Submit() {
                         }
                     </div>}
 
-                   
-                   
                 </section>
               </div>
                     
