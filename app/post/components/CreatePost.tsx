@@ -1,6 +1,7 @@
 "use client"
 
 import axios from "axios";
+import { nanoid } from 'nanoid'
 import { SyntheticEvent, useState, useEffect, ClipboardEvent, useReducer, KeyboardEvent } from "react"
 import Image from "next/image"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
@@ -42,6 +43,7 @@ export default function Submit() {
     
     const queryClient = useQueryClient()
 
+    
     // upload post to server
     async function addPost({note}: {note: string}) {
         console.log(mediaList)
@@ -49,24 +51,27 @@ export default function Submit() {
         if (mediaList) {
             setLoading(true)
             for (let i = 0; i < mediaList.length; i++) {
+                const s3id = nanoid()
+             
+                const extensionIndex = mediaList[i].name.indexOf(".")
+                const fileExtension = mediaList[i].name.slice(extensionIndex)
+                console.log(fileExtension, "extension type")
                 const { data } = await axios.post(
                     "/api/get-s3-url",
                     {
-                        filename: mediaList[i].name,
+                        filename: `${s3id}${fileExtension}`,
                         fileType: mediaList[i].type
                     }
                 )
     
                 const url = data.url
-    
-    
+           
                 await axios.put(url, mediaList[i], {
                     headers: {
                       "Content-Type": mediaList[i].type,
                       "Access-Control-Allow-Origin": "*",
                     },
                   });
-
             }
             
         }

@@ -12,6 +12,7 @@ export default async function handler(
   })
   
   const { filename, fileType} = req.body;
+  console.log(fileType, "type ==============")
 
   const fileParams = {
     Bucket: process.env.BUCKET_NAME,
@@ -19,6 +20,7 @@ export default async function handler(
     Expires: 600,
     ContentType: fileType,
   };
+
 
   const url = await s3.getSignedUrlPromise("putObject", fileParams);
 

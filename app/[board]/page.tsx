@@ -7,8 +7,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
 import CreatePost from "../post/components/CreatePost"
 import Image from "next/image"
 import gift from "./assets/gift.png"
-import star from "./assets/star.png"
-import starshine from "./assets/starshine.png"
+import edit from "./assets/editButton.png"
 import share from "./assets/share.png"
 import banner from "./assets/banner.png"
 import styles from "@/styles/Board.module.css"
@@ -18,13 +17,18 @@ import ScrollToTop from "@/lib/ScrollToTop"
 
 export default function Page({params: {board}}: {params: { board: string }}) {
 
-    const [starred, setStarred] = useState(false)
+    const [bannerImage, setBannerImage] = useState("")
     const queryClient = useQueryClient()
+
+    useEffect(() => {
+        setBannerImage("N7dlgGtansopYNk1qt5wz.png")
+    }, [])
+
 
     const { data, status } = useQuery(["board"], () => {
         return getBoard(board)
       });
-
+    
     /* useEffect(() => {
         if (status === "success" && data) {
         if (data.isStarred) {
@@ -73,7 +77,10 @@ export default function Page({params: {board}}: {params: { board: string }}) {
             <div className={styles.container}>
                 <div className={styles.bannerContainer}>
                     <Image
-                        src={banner}
+                        src={data.board.customHeader ?  
+                            `https://d3h42dhdxazsqn.cloudfront.net/${bannerImage}` : 
+                            banner
+                        }
                         width={600}
                         height={337}
                         alt="banner"
@@ -99,8 +106,17 @@ export default function Page({params: {board}}: {params: { board: string }}) {
                     {data.board.registry.length === 0 && <div className={styles.actionInnerContainerHold}>
 
                     </div>}
+                    
                 </div>
-
+                {data.isOwner && <div className={styles.editBannerContainer}>
+                        <Image className={styles.editBanner} 
+                            src={edit}
+                            width={35}
+                            height={35}
+                            alt="edit banner image"
+                        />
+                    </div>
+                    }
                 <CreatePost />
                 <p>Board Id: {board}</p>
             </div>

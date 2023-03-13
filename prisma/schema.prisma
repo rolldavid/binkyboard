@@ -11,16 +11,18 @@ datasource db {
 }
 
 model Board {
-  id        String   @id @default(cuid())
-  createdAt DateTime @default(now())
-  name      String
-  users     User[]   @relation(name: "users")
-  owner     User     @relation(fields: [ownerId], references: [id], name: "owner")
-  ownerId   String
-  posts     Post[]
-  allowList User[]   @relation(name: "allowList")
-  public    Boolean  @default(true)
-  registry  String?
+  id           String   @id @default(cuid())
+  createdAt    DateTime @default(now())
+  name         String
+  users        User[]   @relation(name: "users")
+  owner        User     @relation(fields: [ownerId], references: [id], name: "owner")
+  ownerId      String
+  posts        Post[]
+  allowList    User[]   @relation(name: "allowList")
+  public       Boolean  @default(true)
+  registry     String?
+  customHeader Boolean  @default(false)
+  headerURL    String?
 }
 
 model Post {

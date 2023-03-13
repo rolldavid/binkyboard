@@ -16,8 +16,8 @@
     justify-content: flex-end;
     margin: -32px 0px 20px 0px;
     gap: 10px;
-   
 }
+
 
 .actionInnerContainerHold {
     display: flex;
@@ -64,6 +64,14 @@
 
 }
 
-.starItem {
+.editBannerContainer {
+    display: flex;
+    justify-content: flex-start;
+    margin: -65px 0px 35px 0px;
+    width: 100%;
+}
+
+.editBanner {
+    margin: 0px 0px 0px 12px;
     cursor: pointer;
 }

@@ -29,15 +29,34 @@ export default async function handler(
    
   })
 
-  let isStarred = false
+  if (session?.user?.email) {
 
-  if (session?.user?.email && board?.users) {
-    for (let i = 0; i < board.users.length; i++) {
-        if (board.users[i].email === session.user.email) {
-            isStarred = true;
+    const user = await prisma.user.findUnique({
+        where: {
+            email: session?.user.email
+        }, 
+        include: {
+            ownedBoards: true
         }
-    }
+      })
+
+
+      let isOwner = false
+
+   
+      if (user && board) {
+        for (let i = 0; i < user?.ownedBoards.length; i++) {
+            if (board.id === user.ownedBoards[i].id) {
+               isOwner = true
+            }
+        }
+      }
+        
+      res.status(200).json({ board, posts: board?.posts, isOwner })
+      return
   }
 
-  res.status(200).json({ board, posts: board?.posts, isStarred })
+
+
+  res.status(200).json({ board, posts: board?.posts, isOwner: false })
 }
