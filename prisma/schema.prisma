@@ -22,7 +22,7 @@ model Board {
   public       Boolean  @default(true)
   registry     String?
   customHeader Boolean  @default(false)
-  headerURL    String?
+  headerURL    String   @default("")
 }
 
 model Post {
