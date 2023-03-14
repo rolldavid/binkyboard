@@ -80,14 +80,17 @@ export default function Page({params: {board}}: {params: { board: string }}) {
 
             const s3Url = s3Data.url
         
-            await axios.put(s3Url, chosenFile[0], {
+            const putObject = await axios.put(s3Url, chosenFile[0], {
                 headers: {
                     "Content-Type": chosenFile[0].type,
                     "Access-Control-Allow-Origin": "*",
                 },
                 });
 
-            await updateHeader(`${s3id}${fileExtension}`, data.board.id)
+            console.log("......now add to db", putObject)
+
+            const updateDB = await updateHeader(`${s3id}${fileExtension}`, data.board.id)
+            console.log(updateDB, "udated....")
 
         }
     }   

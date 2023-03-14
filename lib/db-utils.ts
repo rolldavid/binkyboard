@@ -72,6 +72,7 @@ export async function updateStar({star, boardId}: {star: boolean, boardId: strin
 }
 
 export async function updateHeader(url: string, boardId: string) {
+    console.log("received in db utils....now call server")
     const res = await fetch("/api/update-header", {
         method: "POST",
         body: JSON.stringify({
@@ -83,6 +84,7 @@ export async function updateHeader(url: string, boardId: string) {
         }
     })
     const data = await res.json();
+    console.log("added, now go back.....")
     return data;
 }
 
