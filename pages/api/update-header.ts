@@ -14,7 +14,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 },
                 data: {
                     headerURL: url,
-                    customHeader: true
+                    customHeader: {
+                        set: true
+                    }
                 }
               })
     
