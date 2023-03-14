@@ -118,9 +118,7 @@ export default function Page({params: {board}}: {params: { board: string }}) {
                     />
                     
                 </div>
-                <div className={styles.headerContainer}>
-                    <h2 className={styles.boardHeader}>{`${data.board.name}`}</h2>
-                </div>
+               
                 
                <div className={styles.actionContainer}>
                     {data.board.registry.length > 0 && <div className={styles.actionInnerContainer}>
@@ -150,6 +148,9 @@ export default function Page({params: {board}}: {params: { board: string }}) {
                         
                     </div>
                     }
+                 <div className={styles.headerContainer}>
+                    <h2 className={styles.boardHeader}>{`${data.board.name}`}</h2>
+                </div>
                 <CreatePost />
                 <p>Board Id: {board}</p>
             </div>

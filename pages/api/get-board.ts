@@ -36,22 +36,47 @@ export default async function handler(
             email: session?.user.email
         }, 
         include: {
-            ownedBoards: true
+            ownedBoards: true,
+            boards: true
         }
       })
 
 
       let isOwner = false
+      let isConnected = 0
 
-   
       if (user && board) {
         for (let i = 0; i < user?.ownedBoards.length; i++) {
             if (board.id === user.ownedBoards[i].id) {
                isOwner = true
             }
         }
+
+        for (let j = 0; j < user.boards.length; j++) {
+            if (board.id === user.boards[j].id) {
+                console.log("is connected..........don't add")
+                isConnected += 1
+            }
+        }
+
+        if (isConnected === 0) {
+            console.log("not connected..................adding now")
+            await prisma.user.update({
+                where: {
+                    email: session.user.email
+                },
+                data: {
+                    boards: {
+                        connect: {
+                            id: board.id
+                        }
+                    }
+                }
+            })
+        }
       }
-        
+
+
       res.status(200).json({ board, posts: board?.posts, isOwner })
       return
   }

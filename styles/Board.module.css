@@ -52,12 +52,13 @@
 
 .headerContainer {
    display: flex;
-   margin: -100px 0px 58px 0px;
+   margin: -15px 0px 15px 0px;
 }
 
 .boardHeader {
     display: flex;
-    z-index: 10;
+    font-size: 1.4rem;
+    font-weight: 400;
     color: var(--wenge);
     padding: 5px 10px 5px 10px;
     border-radius: 5px;
