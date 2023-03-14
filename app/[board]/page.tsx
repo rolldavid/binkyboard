@@ -1,8 +1,9 @@
 "use client"
 
 import { SyntheticEvent, useEffect, useState } from "react"
-import { getBoard } from "@/lib/db-utils"
-import { updateStar } from "@/lib/db-utils"
+import axios from "axios"
+import { getBoard, updateHeader } from "@/lib/db-utils"
+import { nanoid } from "nanoid"
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
 import CreatePost from "../post/components/CreatePost"
 import Image from "next/image"
@@ -17,12 +18,8 @@ import ScrollToTop from "@/lib/ScrollToTop"
 
 export default function Page({params: {board}}: {params: { board: string }}) {
 
-    const [bannerImage, setBannerImage] = useState("")
-    const queryClient = useQueryClient()
 
-    useEffect(() => {
-        setBannerImage("N7dlgGtansopYNk1qt5wz.png")
-    }, [])
+    const queryClient = useQueryClient()
 
 
     const { data, status } = useQuery(["board"], () => {
@@ -62,6 +59,39 @@ export default function Page({params: {board}}: {params: { board: string }}) {
             },
         })
 
+
+    const handleBanner = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        e.preventDefault()
+
+        const chosenFile = e.target.files;
+
+        const s3id = nanoid()
+
+        if (chosenFile) {
+            const extensionIndex = chosenFile[0].name.lastIndexOf(".")
+            const fileExtension = chosenFile[0].name.slice(extensionIndex)
+            const { data: s3Data } = await axios.post(
+                "/api/get-s3-url",
+                {
+                    filename: `${s3id}${fileExtension}`,
+                    fileType: chosenFile[0].type
+                }
+            )
+
+            const s3Url = s3Data.url
+        
+            await axios.put(s3Url, chosenFile[0], {
+                headers: {
+                    "Content-Type": chosenFile[0].type,
+                    "Access-Control-Allow-Origin": "*",
+                },
+                });
+
+            await updateHeader(`${s3id}${fileExtension}`, data.board.id)
+
+        }
+    }   
+
     if (status === "loading") {
         return <Spinner />
     }
@@ -70,7 +100,7 @@ export default function Page({params: {board}}: {params: { board: string }}) {
   
 
     if (data && data.board && data.posts.length < 1) {
-        console.log(data.board.registry.length, "------")
+        
         return (
             <>
             <ScrollToTop />
@@ -78,7 +108,7 @@ export default function Page({params: {board}}: {params: { board: string }}) {
                 <div className={styles.bannerContainer}>
                     <Image
                         src={data.board.customHeader ?  
-                            `https://d3h42dhdxazsqn.cloudfront.net/${bannerImage}` : 
+                            `https://d3h42dhdxazsqn.cloudfront.net/${data.board.headerURL}` : 
                             banner
                         }
                         width={600}
@@ -109,36 +139,33 @@ export default function Page({params: {board}}: {params: { board: string }}) {
                     
                 </div>
                 {data.isOwner && <div className={styles.editBannerContainer}>
-                        <Image className={styles.editBanner} 
-                            src={edit}
-                            width={35}
-                            height={35}
-                            alt="edit banner image"
-                        />
+                        <label htmlFor="uploadBanner" className={styles.uploadItem}>
+                            <Image className={styles.editBanner} 
+                                src={edit}
+                                width={35}
+                                height={35}
+                                alt="edit banner image"
+                            />
+                        </label>
+                        
                     </div>
                     }
                 <CreatePost />
                 <p>Board Id: {board}</p>
             </div>
+            <div className={styles.uploadHidden}>
+                    <input 
+                        id="uploadBanner"
+                        className={styles.uploadItem} 
+                        type="file" 
+                        accept={"image/png, image/jpeg, audio/*, video/*, image/*"}
+                        onChange={handleBanner}
+                        hidden
+                        />    
+            </div>
             </>
         )
     }
-    return (
-        <div className={styles.container}>
-            <div className={styles.actionContainer}>
-            <a target="_blank" href={"#"} className={styles.navItem}>
-                <Image 
-                    src={gift}
-                    width={25}
-                    height={25}
-                    alt="registry link"
-                />
-            </a>
-                <p>Save</p>
-                <p>Share</p>
-            </div>
-            <CreatePost />
-            <p>Board Id: {board}</p>
-        </div>
-    )
+
+   return null;
 }

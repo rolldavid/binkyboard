@@ -70,3 +70,20 @@ export async function updateStar({star, boardId}: {star: boolean, boardId: strin
     const data = await res.json();
     return data;
 }
+
+export async function updateHeader(url: string, boardId: string) {
+    const res = await fetch("/api/update-header", {
+        method: "POST",
+        body: JSON.stringify({
+            url,
+            boardId
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    const data = await res.json();
+    return data;
+}
+
+
