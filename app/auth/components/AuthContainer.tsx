@@ -36,7 +36,9 @@ export default function AuthContainer() {
       });
 
     const handleLogin = async (data: LoginProps) => {
-      
+
+        localStorage.setItem("displayName", fullname)
+
         await signIn("email", {
             email: data.email,
             redirect: false,

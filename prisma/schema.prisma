@@ -23,17 +23,17 @@ model Board {
   registry     String?
   customHeader Boolean  @default(false)
   headerURL    String   @default("")
+  pinned       Boolean  @default(false)
 }
 
 model Post {
-  id        Int        @id @default(autoincrement())
-  createdAt DateTime   @default(now())
-  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    String
   media     Media[]
   note      String
-  reactions Reaction[]
-  board     Board      @relation(fields: [boardId], references: [id], onDelete: Cascade)
+  board     Board    @relation(fields: [boardId], references: [id], onDelete: Cascade)
   boardId   String
 }
 
@@ -48,33 +48,21 @@ model Media {
   postId    Int
 }
 
-model Reaction {
-  id        String       @id @default(cuid())
-  createdAt DateTime     @default(now())
-  post      Post         @relation(fields: [postId], references: [id], onDelete: Cascade)
-  postId    Int
-  type      ReactionType @default(NONE)
-  count     Int          @default(0)
-  user      User         @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId    String
-}
-
 model User {
-  id            String     @id @default(cuid())
+  id            String    @id @default(cuid())
   name          String?
   displayName   String?
-  email         String?    @unique
+  email         String?   @unique
   emailVerified DateTime?
   image         String?
   posts         Post[]
   media         Media[]
   accounts      Account[]
   sessions      Session[]
-  reactions     Reaction[]
-  boards        Board[]    @relation(name: "users")
-  ownedBoards   Board[]    @relation(name: "owner")
-  allowedOn     Board[]    @relation(name: "allowList")
-  role          Role       @default(USER)
+  boards        Board[]   @relation(name: "users")
+  ownedBoards   Board[]   @relation(name: "owner")
+  allowedOn     Board[]   @relation(name: "allowList")
+  role          Role      @default(USER)
 }
 
 model Account {

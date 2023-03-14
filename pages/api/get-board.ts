@@ -54,13 +54,13 @@ export default async function handler(
 
         for (let j = 0; j < user.boards.length; j++) {
             if (board.id === user.boards[j].id) {
-                console.log("is connected..........don't add")
+               
                 isConnected += 1
             }
         }
 
         if (isConnected === 0) {
-            console.log("not connected..................adding now")
+           
             await prisma.user.update({
                 where: {
                     email: session.user.email
