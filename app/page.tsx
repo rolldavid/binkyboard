@@ -40,7 +40,7 @@ export default function Page() {
               }
               </div> :
               <div className={styles.noBoardContainer}>
-                  <p className={styles.noBoardText}>Star a binkyboard to add it to your favorites</p>
+                  <p className={styles.noBoardText}>Looks like you are don&apos;t have any boards yet.</p>
               </div>
           
           }

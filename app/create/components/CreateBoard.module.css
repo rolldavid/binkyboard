@@ -19,7 +19,7 @@
 
 .nameInput {
     width: 100%;
-    border: 2px solid var(--bluegreen);
+    border: 2px solid var(--wenge);
     border-radius: 25px;
     padding: 12px 20px 12px 20px;
     font-family: "Montserrat";
@@ -58,7 +58,7 @@
 
 .accessInput {
     width: 100%;
-    border: 2px solid var(--bluegreen);
+    border: 2px solid var(--wenge);
     border-radius: 25px;
     padding: 12px 20px 12px 20px;
     font-family: "Montserrat";

@@ -24,7 +24,9 @@ export default async function handler(
                 createdAt: "desc"
             }
         },
-        users: true
+        users: true,
+        allowList: true
+
     }
    
   })
@@ -40,7 +42,6 @@ export default async function handler(
             boards: true
         }
       })
-
 
       let isOwner = false
       let isConnected = 0
@@ -76,12 +77,10 @@ export default async function handler(
         }
       }
 
-
-      res.status(200).json({ board, posts: board?.posts, isOwner })
+      res.status(200).json({ board, posts: board?.posts, isOwner, allowList: board?.allowList })
       return
   }
 
 
-
-  res.status(200).json({ board, posts: board?.posts, isOwner: false })
+  res.status(200).json({ board, posts: board?.posts, isOwner: false, allowList: "" })
 }

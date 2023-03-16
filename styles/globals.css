@@ -1,11 +1,15 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500&family=Nunito:wght@300&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Lobster+Two&family=Montserrat:wght@200;300;400;500&family=Pacifico&family=Rouge+Script&family=The+Girl+Next+Door&display=swap');
 :root {
   --red: #B33951;
+  --redorange: #e55628;
+  --orange: #d6583c;
   --wenge: #54494B;
   --darkwenge: #221d1e;
-  --cream: #F1F7ED;
+  --cream: #fbfdf9;
+  --lightcream: #ffffff;
+  --cream3: #F1F7ED;
+  --cream4: #ffe4c6;
   --bluegreen: #91C7B1;
   --yellow: #E3D081;
 }
@@ -16,11 +20,10 @@
   margin: 0;
 }
 
-
 html,
 body {
   color: rgb(var(--foreground-rgb));
-  background: #f1f7ed;
+  background: var(--cream);
   font-family: 'Montserrat', sans-serif;
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */

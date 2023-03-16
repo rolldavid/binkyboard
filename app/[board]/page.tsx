@@ -1,23 +1,21 @@
 "use client"
 
 import { SyntheticEvent, useEffect, useState } from "react"
-import axios from "axios"
-import { getBoard, updateHeader } from "@/lib/db-utils"
-import { nanoid } from "nanoid"
+import { getBoard } from "@/lib/db-utils"
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
 import CreatePost from "../post/components/CreatePost"
 import Image from "next/image"
 import gift from "./assets/gift.png"
-import edit from "./assets/editButton.png"
-import share from "./assets/share.png"
+import gear from "./assets/gear.png"
 import banner from "./assets/banner.png"
 import styles from "@/styles/Board.module.css"
 import Spinner from "@/lib/Spinner"
 import ScrollToTop from "@/lib/ScrollToTop"
+import BoardOptions from "./components/BoardOptions"
 
 
 export default function Page({params: {board}}: {params: { board: string }}) {
-
+    const [showOptions, setShowOptions] = useState(false)
 
     const queryClient = useQueryClient()
 
@@ -60,39 +58,7 @@ export default function Page({params: {board}}: {params: { board: string }}) {
         })
 
 
-    const handleBanner = async (e: React.ChangeEvent<HTMLInputElement>) => {
-        e.preventDefault()
-
-        const chosenFile = e.target.files;
-
-        const s3id = nanoid()
-
-        if (chosenFile) {
-            const extensionIndex = chosenFile[0].name.lastIndexOf(".")
-            const fileExtension = chosenFile[0].name.slice(extensionIndex)
-            const { data: s3Data } = await axios.post(
-                "/api/get-s3-url",
-                {
-                    filename: `${s3id}${fileExtension}`,
-                    fileType: chosenFile[0].type
-                }
-            )
-
-            const s3Url = s3Data.url
-        
-            await axios.put(s3Url, chosenFile[0], {
-                headers: {
-                    "Content-Type": chosenFile[0].type,
-                    "Access-Control-Allow-Origin": "*",
-                },
-                });
-
-
-           await updateHeader(`${s3id}${fileExtension}`, data.board.id)
-           
-
-        }
-    }   
+    
 
     if (status === "loading") {
         return <Spinner />
@@ -136,36 +102,31 @@ export default function Page({params: {board}}: {params: { board: string }}) {
                     {data.board.registry.length === 0 && <div className={styles.actionInnerContainerHold}>
 
                     </div>}
-                    
                 </div>
-                {data.isOwner && <div className={styles.editBannerContainer}>
-                        <label htmlFor="uploadBanner" className={styles.uploadItem}>
-                            <Image className={styles.editBanner} 
-                                src={edit}
-                                width={35}
-                                height={35}
+                {data.isOwner && <div className={styles.editBoardContainer}>
+                        <div className={styles.editBoardButton}>
+                            <Image className={styles.editBoard} 
+                                src={gear}
+                                width={30}
+                                height={30}
                                 alt="edit banner image"
+                                onClick={() => setShowOptions(true)}
                             />
-                        </label>
+                        </div>
                         
                     </div>
                     }
+                {/* <label htmlFor="uploadBanner" className={styles.uploadItem}></label> */}
                  <div className={styles.headerContainer}>
                     <h2 className={styles.boardHeader}>{`${data.board.name}`}</h2>
                 </div>
                 <CreatePost />
                 <p>Board Id: {board}</p>
             </div>
-            <div className={styles.uploadHidden}>
-                    <input 
-                        id="uploadBanner"
-                        className={styles.uploadItem} 
-                        type="file" 
-                        accept={"image/png, image/jpeg, audio/*, video/*, image/*"}
-                        onChange={handleBanner}
-                        hidden
-                        />    
-            </div>
+            
+            {showOptions &&  
+                <BoardOptions board={data.board} setShowOptions={setShowOptions}/> 
+            }
             </>
         )
     }

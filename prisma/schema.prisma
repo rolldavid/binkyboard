@@ -19,11 +19,11 @@ model Board {
   ownerId      String
   posts        Post[]
   allowList    User[]   @relation(name: "allowList")
+  allowedList  String?
   public       Boolean  @default(true)
   registry     String?
   customHeader Boolean  @default(false)
   headerURL    String   @default("")
-  pinned       Boolean  @default(false)
 }
 
 model Post {
@@ -98,14 +98,6 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
-}
-
-enum ReactionType {
-  NONE
-  LOVE
-  LAUGH
-  FIRE
-  BINKY
 }
 
 enum Role {

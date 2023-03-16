@@ -8,7 +8,7 @@
     border-radius: 25px;
     margin: 0px 10px 0px 10px;
     padding: 20px 20px 10px 20px;
-    border: 2px solid var(--bluegreen);
+    border: 1.5px solid var(--wenge);
     background-color: white;
     box-shadow: 1px 1px 5px var(--greygrey);
 }
@@ -24,7 +24,7 @@
     margin-top: 25px;
     padding: 0px 10px 0px 10px;
     box-shadow: 1px 1px 5px var(--greygrey);
-    background-color: var(--bluegreen);
+    background-color: var(--wenge);
 }
 
 .checkText {
@@ -46,7 +46,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid var(--wenge);
+    border: 1.5px solid var(--wenge);
     border-radius: 25px;
     width: 100%;
     padding: 8px 15px 8px 15px;
@@ -79,7 +79,7 @@
 
 .inputContainer {
     width: 100%;
-    border: 2px solid var(--bluegreen);
+    border: 1.5px solid var(--wenge);
     border-radius: 25px;
     padding: 12px 20px 12px 20px;
     font-family: "Montserrat";
@@ -98,8 +98,8 @@
     font-size: 1rem;
     font-family: "Montserrat";
     font-weight: 400;
-    color: var(--wenge);
-    background-color: var(--bluegreen);
+    color: var(--cream);
+    background-color: var(--wenge);
     width: 100%;
     margin-top: 5px;
     padding: 12px 15px 12px 15px;
