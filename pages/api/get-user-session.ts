@@ -22,7 +22,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                             provider: true
                         }
                     },
-                    boards: true
+                    boards: true,
+                    ownedBoards: true
                 }
             })
 
@@ -60,7 +61,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                                 await prisma.user.update({
                                     where: { id: user.id},
                                     data: {
-                                        displayName: "blah"
+                                        displayName: "binky"
                                     }
                                 })
                             }
@@ -73,6 +74,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                             role: user.role, 
                             displayName: user.displayName,
                             boards: user.boards,
+                            ownedBoards: user.ownedBoards,
                             email: user.email
                         })
                         return;
@@ -83,7 +85,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                                 await prisma.user.update({
                                     where: { id: user.id},
                                     data: {
-                                        displayName: "blah"
+                                        displayName: "binky"
                                     }
                                 })
                         }
@@ -92,7 +94,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                             userId: user.id, 
                             role: user.role, 
                             displayName: user.displayName,
-                            boards: user.boards
+                            boards: user.boards,
+                            ownedBoards: user.ownedBoards
                         })
                         return;
 

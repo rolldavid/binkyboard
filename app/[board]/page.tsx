@@ -30,7 +30,7 @@ export default function Page({params: {board}}: {params: { board: string }}) {
         const user = localStorage.getItem("user")
         if (data.board.allowList) {
             const isUser = data.board.allowList.includes(user)
-           
+            console.log("allow list: ", data.board.allowList)
             if (isUser) {
                 console.log("you rock")
             } else {
@@ -40,9 +40,13 @@ export default function Page({params: {board}}: {params: { board: string }}) {
                     </div>
                 )
             }
-        } 
-       
-        
+        } else {
+            return (
+                <div>
+                    The owner has set this board to private. Request access.
+                </div>
+            )
+        }
     }
 
     if (data && data.board) {
@@ -91,7 +95,6 @@ export default function Page({params: {board}}: {params: { board: string }}) {
                         
                     </div>
                     }
-                {/* <label htmlFor="uploadBanner" className={styles.uploadItem}></label> */}
                  <div className={styles.headerContainer}>
                     <h2 className={styles.boardHeader}>{`${data.board.name}`}</h2>
                 </div>
@@ -102,6 +105,7 @@ export default function Page({params: {board}}: {params: { board: string }}) {
             {showOptions &&  
                 <BoardOptions board={data.board} setShowOptions={setShowOptions}/> 
             }
+
             </>
         )
     }

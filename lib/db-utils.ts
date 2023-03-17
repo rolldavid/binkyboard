@@ -1,11 +1,12 @@
 // CREATE
-export async function createNewBoard(boardName: string, access: boolean, registry: string) {
+export async function createNewBoard(boardName: string, access: boolean, registry: string, accessList: string) {
     const res = await fetch("/api/create-board", {
         method: "POST",
         body: JSON.stringify({
             boardName,
             access,
-            registry
+            registry,
+            accessList
         }),
         headers: {
             "Content-Type": "application/json"
@@ -78,20 +79,6 @@ export async function updateBoard(boardId: string, headerUrl: string, boardName:
     return data;
 }
 
-export async function updateStar({star, boardId}: {star: boolean, boardId: string}) {
-    const res = await fetch("/api/update-star", {
-        method: "POST",
-        body: JSON.stringify({
-            star,
-            boardId
-        }),
-        headers: {
-            "Content-Type": "application/json"
-        }
-    })
-    const data = await res.json();
-    return data;
-}
 
 export async function updateDisplayName(displayName: string) {
     const res = await fetch("/api/update-display-name", {
@@ -107,11 +94,18 @@ export async function updateDisplayName(displayName: string) {
     return data;
 }
 
-export async function updateHeader(url: string, boardId: string) {
-    const res = await fetch("/api/update-header", {
+
+// DELETE
+
+export async function deleteUser(){
+    const res = await fetch("/api/delete-user");
+    return res;
+}
+
+export async function deleteBoard(boardId: string) {
+    const res = await fetch("/api/delete-board", {
         method: "POST",
         body: JSON.stringify({
-            url,
             boardId
         }),
         headers: {
@@ -121,7 +115,3 @@ export async function updateHeader(url: string, boardId: string) {
     const data = await res.json();
     return data;
 }
-
-
-
-// DELETE

@@ -3,9 +3,10 @@
 import Image from "next/image"
 import axios from "axios"
 import { nanoid } from "nanoid"
+import { useRouter } from "next/navigation"
 import { useQueryClient } from "@tanstack/react-query"
 import { Board } from "@prisma/client"
-import { updateBoard } from "@/lib/db-utils"
+import { updateBoard, deleteBoard } from "@/lib/db-utils"
 import banner from "../assets/banner.png"
 import edit from "../assets/editButton.png"
 import { Dispatch, SyntheticEvent, useEffect, useState, SetStateAction } from "react"
@@ -25,7 +26,6 @@ const schema = yup
 .required();
 
 
-
 export default function BoardOptions({board, setShowOptions}: {board: Board, setShowOptions: Dispatch<SetStateAction<boolean>> }) {
 
     const [boardName, setBoardName] = useState("")
@@ -36,8 +36,11 @@ export default function BoardOptions({board, setShowOptions}: {board: Board, set
     const [registry, setRegistry] = useState("gift")
     const [preview, setPreview] = useState("")
     const [loading, setLoading] = useState(false)
+    const [deleteButton, setDeleteButton] = useState(false)
 
     const queryClient = useQueryClient()
+
+    const router = useRouter()
 
     const {
         register,
@@ -86,7 +89,6 @@ export default function BoardOptions({board, setShowOptions}: {board: Board, set
              
             reader.readAsDataURL(e.target.files[0])
         }
-        
     }   
 
 
@@ -128,6 +130,14 @@ export default function BoardOptions({board, setShowOptions}: {board: Board, set
         await queryClient.invalidateQueries(['board'])
         setLoading(false)
         setShowOptions(false)
+    }
+
+    const handleDelete = async (e: SyntheticEvent) => {
+        e.preventDefault()
+        const res = await deleteBoard(board.id)
+        console.log("made it back")
+        router.push("/")
+        
     }
     return  (
         <div className={styles.optionsOuter}>
@@ -226,16 +236,24 @@ export default function BoardOptions({board, setShowOptions}: {board: Board, set
                             Cancel
                         </button>
                     </div>
+                    {!deleteButton && <p className={styles.deletePromptContainer}>Ready to leave it behind? <span className={styles.deletePrompt} onClick={() => setDeleteButton(prev => !prev)}>Delete this board.</span></p>}
+                    {deleteButton &&
+                        <div className={styles.deleteContainer}>
+                            <p className={styles.deleteNote}>Deleting will permanently delete this board and all posts, forever.</p>
+                            <button className={styles.deleteButton} onClick={e => handleDelete(e)}>
+                                Yes, delete the board
+                            </button>
+                            <button className={styles.cancelButton} onClick={() => setDeleteButton(false)}>Nevermind</button>
+                        </div>
+                    }
                 </div>}
                 {loading && 
                 <div className={styles.loadingContainer}>
                     <Spinner />
                     <ScrollToTop />
                 </div>
-            }
+                }
             </div>
-            
         </div>
-        
     )
 }

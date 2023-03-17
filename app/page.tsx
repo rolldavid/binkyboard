@@ -10,6 +10,7 @@ import Collection from './post/components/Collection'
 import CreatePost from './post/components/CreatePost'
 import BoardCard from "./[board]/components/BoardCard"
 import styles from '@/styles/Home.module.css'
+import ScrollToTop from "@/lib/ScrollToTop"
 
 export default function Page() {
   const { data, status } = useQuery(["user"], () => {
@@ -21,9 +22,11 @@ export default function Page() {
   }
 
 
-  if (data && data.boards) {
+  if (data && data.boards && status === "success") {
       return (
+        <>
         <main className={styles.container}>
+          
           <div className={styles.titleContainer}>
             <h2 className={styles.titleText}>Your Boards</h2>
           </div>
@@ -45,6 +48,8 @@ export default function Page() {
           
           }
         </main>
+        <ScrollToTop />
+        </>
       )
     }
 }

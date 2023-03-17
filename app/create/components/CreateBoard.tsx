@@ -46,7 +46,7 @@ export default function CreateBoard() {
     const createBoard = async () => {
         setLoading(true)
     
-        const board = await createNewBoard(boardName, access, registry)
+        const board = await createNewBoard(boardName, access, registry, accessList)
 
         if (board && board.status === "ok") {
             setSubmitted(true)

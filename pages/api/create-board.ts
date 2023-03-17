@@ -5,7 +5,7 @@ import prisma from "@/lib/prisma";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 
-    const { boardName, access, registry } = req.body;
+    const { boardName, access, registry, accessList } = req.body;
 
     try {
         const session = await getServerSession(req, res, authOptions)
@@ -31,6 +31,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                             }
                         },
                         public: access,
+                        allowList: accessList,
                         users: {
                             connect: {
                                 id: user.id

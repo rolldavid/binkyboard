@@ -7,10 +7,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
    
         const { userId } = req.body;
         
-   
         const user = await prisma.user.findUnique({
         where: {
             id: userId
+        },
+        include: {
+            ownedBoards: true
         }
         })
 
@@ -25,7 +27,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             })} else {
                 res.status(201).json({
                     displayName: user.displayName,
-                    accountOwner: true
+                    accountOwner: true,
+                    ownedBoards: user.ownedBoards
                 }) 
             }
         }
