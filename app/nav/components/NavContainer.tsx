@@ -32,24 +32,13 @@ export default function NavContainer() {
     }
 
 
-    if (data && data.userId && data.role === "ADMIN" && status === "success") {
+    if (data && data.userId && status === "success") {
        
- 
+        localStorage.setItem("user", data.email)
         return (
             <>
             <div className={styles.container}>
                 <NavLinks  userId={data.userId} admin={true}/>
-            </div>
-        </>
-        )
-    }
-
-    if (data && data.userId && status === "success") {
-        
-        return (
-            <>
-            <div className={styles.container}>
-                <NavLinks  userId={data.userId} admin={false}/>
             </div>
         </>
         )

@@ -63,6 +63,7 @@ export default function Page({params: {slug}}: {params: { slug: string }}) {
     }
 
     const handleLogout = (e: SyntheticEvent) => {
+      localStorage.setItem("user", "")
       signOut({
           callbackUrl: "/"
       });

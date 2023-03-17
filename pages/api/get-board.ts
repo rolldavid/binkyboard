@@ -25,8 +25,6 @@ export default async function handler(
             }
         },
         users: true,
-        allowList: true
-
     }
    
   })
@@ -77,10 +75,10 @@ export default async function handler(
         }
       }
 
-      res.status(200).json({ board, posts: board?.posts, isOwner, allowList: board?.allowList })
+      res.status(200).json({ board, posts: board?.posts, isOwner })
       return
   }
 
 
-  res.status(200).json({ board, posts: board?.posts, isOwner: false, allowList: "" })
+  res.status(200).json({ board, posts: board?.posts, isOwner: false })
 }

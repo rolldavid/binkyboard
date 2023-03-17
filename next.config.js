@@ -12,17 +12,12 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "www.poblanocloud.com",
-        port: "",
-        pathname: "/*",
-      },
-      {
-        protocol: "https",
         hostname: "d3h42dhdxazsqn.cloudfront.net",
         port: "",
         pathname: "/*",
       },
     ],
+    domains: ["d3h42dhdxazsqn.cloudfront.net"],
   },
 };
 

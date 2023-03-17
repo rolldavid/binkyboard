@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState, useEffect, SyntheticEvent } from "react";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Spinner from "@/lib/Spinner";
@@ -39,6 +40,8 @@ export default function CreateBoard() {
       } = useForm({
         resolver: yupResolver(schema),
       });
+
+    const router = useRouter()
 
     const createBoard = async () => {
         setLoading(true)
@@ -93,7 +96,7 @@ export default function CreateBoard() {
                             onChange={() => setAccess(true)}
                             
                         />
-                        <span className={styles.accessLabel}>Public - anyone with the link can access <em>{`(recommended)`}</em></span>
+                        <span className={styles.accessLabel}>Public - anyone with the link can access</span>
                     </label>
                     <label htmlFor="private" className={styles.accessButton}>
                         <input
@@ -108,7 +111,7 @@ export default function CreateBoard() {
                     </label>
                 </div>
                 {!access && <div className={styles.accessContainer}>
-                    <p className={styles.accessText}>Enter emails of people you want to give access to your board. You can always add more later.</p>
+                    
                     <input 
                         {...register("accessList")}
                         type="textarea"
@@ -117,6 +120,7 @@ export default function CreateBoard() {
                         className={styles.accessInput}
                         placeholder="Enter emails, separated by commas"
                     />
+                <p className={styles.accessText}>You can add more emails or make board public later in your board settings.</p>
                 </div>
                 }
                 <div className={styles.submitContainer}>
@@ -133,8 +137,9 @@ export default function CreateBoard() {
                 <button onClick={(e) => copyLink(e)} className={styles.copyLink}>
                     {copyText}
                 </button>
-
-              
+                <button onClick={() => router.push(`/${boardLink}`)} className={styles.boardLink}>
+                    Go to my board
+                </button>
                 
             </div>}
             {loading && <Spinner />}

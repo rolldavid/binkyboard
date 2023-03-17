@@ -2,7 +2,7 @@
 
 import { SyntheticEvent, useEffect, useState } from "react"
 import { getBoard } from "@/lib/db-utils"
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
+import { useQuery } from "@tanstack/react-query"
 import CreatePost from "../post/components/CreatePost"
 import Image from "next/image"
 import gift from "./assets/gift.png"
@@ -17,57 +17,35 @@ import BoardOptions from "./components/BoardOptions"
 export default function Page({params: {board}}: {params: { board: string }}) {
     const [showOptions, setShowOptions] = useState(false)
 
-    const queryClient = useQueryClient()
-
-
     const { data, status } = useQuery(["board"], () => {
         return getBoard(board)
       });
-    
-    /* useEffect(() => {
-        if (status === "success" && data) {
-        if (data.isStarred) {
-            console.log("is starred")
-            setStarred(true)
-        } else {
-            setStarred(false)
-            console.log("is not starred")
-        }
-    }
-    }, [data])
-     */
-    
- 
-    const updateStar = useMutation(async ({star,boardId}: {star: boolean, boardId: string}) => {
-        return fetch("/api/update-star", {
-            method: "POST",
-            body: JSON.stringify({
-                star,
-                boardId
-            }),
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
-        },
-        {
-            
-            onSuccess: () => {
-                queryClient.invalidateQueries(['board'])
-            },
-        })
-
-
-    
+  
 
     if (status === "loading") {
         return <Spinner />
     }
 
+    if (data && data.board && !data.board.public && !data.isOwner) {
+        const user = localStorage.getItem("user")
+        if (data.board.allowList) {
+            const isUser = data.board.allowList.includes(user)
+           
+            if (isUser) {
+                console.log("you rock")
+            } else {
+                return (
+                    <div>
+                        Sorry not allowed
+                    </div>
+                )
+            }
+        } 
+       
+        
+    }
 
-  
-
-    if (data && data.board && data.posts.length < 1) {
+    if (data && data.board) {
         
         return (
             <>
@@ -75,10 +53,7 @@ export default function Page({params: {board}}: {params: { board: string }}) {
             <div className={styles.container}>
                 <div className={styles.bannerContainer}>
                     <Image
-                        src={data.board.customHeader ?  
-                            `https://d3h42dhdxazsqn.cloudfront.net/${data.board.headerURL}` : 
-                            banner
-                        }
+                        src={`https://d3h42dhdxazsqn.cloudfront.net/${data.board.headerUrl}`}
                         width={600}
                         height={337}
                         alt="banner"

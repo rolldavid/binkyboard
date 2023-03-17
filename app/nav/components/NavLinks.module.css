@@ -45,9 +45,17 @@
 }
 
 .logo {
-    font-size: 1.5rem;
+    font-size: 1.7rem;
     letter-spacing: 1.5px;
-    font-family: 'Lobster Two', cursive;
+    /* font-family: 'Patrick Hand', cursive;  */
+    /* font-family: 'Architects Daughter', cursive; */
+    /* font-family: 'Concert One', cursive; */
+    /* font-family: 'Courgette', cursive; */
+    /* font-family: 'Lobster Two', cursive; */
+  /*   font-family: 'Rouge Script', cursive;*/
+    font-family: 'The Girl Next Door', cursive; 
+
+
 
     color: var(--darkwenge);
     margin-bottom: 0px;

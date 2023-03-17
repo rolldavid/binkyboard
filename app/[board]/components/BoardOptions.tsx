@@ -5,7 +5,8 @@ import axios from "axios"
 import { nanoid } from "nanoid"
 import { useQueryClient } from "@tanstack/react-query"
 import { Board } from "@prisma/client"
-import { getBoard, updateHeader } from "@/lib/db-utils"
+import { updateBoard } from "@/lib/db-utils"
+import banner from "../assets/banner.png"
 import edit from "../assets/editButton.png"
 import { Dispatch, SyntheticEvent, useEffect, useState, SetStateAction } from "react"
 import { useForm } from "react-hook-form";
@@ -32,7 +33,8 @@ export default function BoardOptions({board, setShowOptions}: {board: Board, set
     const [chosenFile, setChosenFile] = useState<File>()
     const [allowList, setAllowList] = useState("")
     const [access, setAccess] = useState(true)
-    const [preview, setPreview] = useState(`https://d3h42dhdxazsqn.cloudfront.net/${board.headerURL}`)
+    const [registry, setRegistry] = useState("gift")
+    const [preview, setPreview] = useState("")
     const [loading, setLoading] = useState(false)
 
     const queryClient = useQueryClient()
@@ -49,14 +51,21 @@ export default function BoardOptions({board, setShowOptions}: {board: Board, set
     useEffect(() => {
         setBoardName(board.name)
     
-        if (board.allowedList) {
-            setAllowList(board.allowedList)
+        if (board.allowList) {
+            setAllowList(board.allowList)
         }
             
         if (board.public === false) {
-            console.log("private list")
             setAccess(false)
         } 
+
+        if (board.registry) {
+            setRegistry(board.registry)
+        } else {
+            setRegistry("")
+        }
+        
+        setPreview(`${process.env.NEXT_PUBLIC_AWS_URL}/${board.headerUrl}`)
         
     }, [])
 
@@ -84,6 +93,8 @@ export default function BoardOptions({board, setShowOptions}: {board: Board, set
     const handleUpdate = async (e:SyntheticEvent) => {
         e.preventDefault()
         setLoading(true)
+
+        let bannerUrl = board.headerUrl
        
         if (bannerChanged) {
             const s3id = nanoid()
@@ -108,14 +119,15 @@ export default function BoardOptions({board, setShowOptions}: {board: Board, set
                     },
                     });
 
-
-            await updateHeader(`${s3id}${fileExtension}`, board.id)
+                bannerUrl = `${s3id}${fileExtension}`
+            
             }
+        }
+        await updateBoard(board.id, bannerUrl, boardName, registry, access, allowList)
 
         await queryClient.invalidateQueries(['board'])
         setLoading(false)
         setShowOptions(false)
-        }
     }
     return  (
         <div className={styles.optionsOuter}>
@@ -152,7 +164,7 @@ export default function BoardOptions({board, setShowOptions}: {board: Board, set
                             accept={"image/png, image/jpeg, image/*"}
                             onChange={handleBanner}
                             hidden
-                            />    
+                        />    
                     </div>
                    
                     <input 
@@ -160,6 +172,13 @@ export default function BoardOptions({board, setShowOptions}: {board: Board, set
                         value={boardName}
                         onChange={(e) => setBoardName(e.target.value)}
                         className={styles.nameInput}
+                    />
+                    <input 
+                        type="text"
+                        value={registry}
+                        onChange={(e) => setRegistry(e.target.value)}
+                        className={styles.nameInput}
+                        placeholder={registry.length > 0 ? registry : "Registry link"}
                     />
                     
                     <div className={styles.accessButtonContainer}>
@@ -169,9 +188,8 @@ export default function BoardOptions({board, setShowOptions}: {board: Board, set
                                 type="radio"
                                 value="public"
                                 id="public"
-                                defaultChecked={false}
+                                checked={access ? true : false}
                                 onChange={() => setAccess(true)}
-                                
                             />
                             <span className={styles.accessLabel}>Public - anyone with the link can access <em>{`(recommended)`}</em></span>
                         </label>
@@ -181,7 +199,7 @@ export default function BoardOptions({board, setShowOptions}: {board: Board, set
                                 type="radio"
                                 value="private"
                                 id="private"
-                                defaultChecked={true}
+                                checked={!access ? true : false}
                                 onChange={() => setAccess(false)}
                                 
                             />

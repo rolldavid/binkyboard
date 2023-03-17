@@ -13,10 +13,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     id: boardId
                 },
                 data: {
-                    headerURL: url,
-                    customHeader: {
-                        set: true
-                    }
+                    headerUrl: url
                 }
               })
     

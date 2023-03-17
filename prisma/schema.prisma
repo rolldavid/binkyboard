@@ -11,19 +11,17 @@ datasource db {
 }
 
 model Board {
-  id           String   @id @default(cuid())
-  createdAt    DateTime @default(now())
-  name         String
-  users        User[]   @relation(name: "users")
-  owner        User     @relation(fields: [ownerId], references: [id], name: "owner")
-  ownerId      String
-  posts        Post[]
-  allowList    User[]   @relation(name: "allowList")
-  allowedList  String?
-  public       Boolean  @default(true)
-  registry     String?
-  customHeader Boolean  @default(false)
-  headerURL    String   @default("")
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  name      String
+  users     User[]   @relation(name: "users")
+  owner     User     @relation(fields: [ownerId], references: [id], name: "owner")
+  ownerId   String
+  posts     Post[]
+  allowList String?
+  public    Boolean  @default(true)
+  registry  String?
+  headerUrl String   @default("")
 }
 
 model Post {
@@ -61,7 +59,6 @@ model User {
   sessions      Session[]
   boards        Board[]   @relation(name: "users")
   ownedBoards   Board[]   @relation(name: "owner")
-  allowedOn     Board[]   @relation(name: "allowList")
   role          Role      @default(USER)
 }
 

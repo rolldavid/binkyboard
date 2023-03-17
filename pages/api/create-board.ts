@@ -36,7 +36,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                                 id: user.id
                             }
                         },
-                        registry: registry
+                        registry: registry,
+                        headerUrl: `yPwbiLyA-e_APVJ1vI6MS.png`
                     },
                 })
 

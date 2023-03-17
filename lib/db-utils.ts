@@ -1,3 +1,21 @@
+// CREATE
+export async function createNewBoard(boardName: string, access: boolean, registry: string) {
+    const res = await fetch("/api/create-board", {
+        method: "POST",
+        body: JSON.stringify({
+            boardName,
+            access,
+            registry
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    const data = await res.json()
+    return data;
+}
+
+// READ
 export async function getUserSession() {
     const res = await fetch("/api/get-user-session")
     const data = await res.json()
@@ -23,21 +41,6 @@ export async function getProfile(userId: string) {
     return data;
 }
 
-export async function createNewBoard(boardName: string, access: boolean, registry: string) {
-    const res = await fetch("/api/create-board", {
-        method: "POST",
-        body: JSON.stringify({
-            boardName,
-            access,
-            registry
-        }),
-        headers: {
-            "Content-Type": "application/json"
-        }
-    })
-    const data = await res.json()
-    return data;
-}
 
 export async function getBoard(boardId: string) {
     const res = await fetch("/api/get-board", {
@@ -54,7 +57,26 @@ export async function getBoard(boardId: string) {
 }
 
 
-// update
+// UPDATE
+
+export async function updateBoard(boardId: string, headerUrl: string, boardName: string, registryLink: string, accessStatus: boolean, accessList: string) {
+    const res = await fetch("/api/update-board", {
+        method: "POST",
+        body: JSON.stringify({
+            boardId,
+            headerUrl,
+            boardName,
+            registryLink,
+            accessStatus,
+            accessList
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    const data = await res.json();
+    return data;
+}
 
 export async function updateStar({star, boardId}: {star: boolean, boardId: string}) {
     const res = await fetch("/api/update-star", {
@@ -86,7 +108,6 @@ export async function updateDisplayName(displayName: string) {
 }
 
 export async function updateHeader(url: string, boardId: string) {
-    console.log("received in db utils....now call server")
     const res = await fetch("/api/update-header", {
         method: "POST",
         body: JSON.stringify({
@@ -98,10 +119,9 @@ export async function updateHeader(url: string, boardId: string) {
         }
     })
     const data = await res.json();
-    console.log("added, now go back.....")
     return data;
 }
 
 
 
-
+// DELETE

@@ -46,16 +46,13 @@ export default function Submit() {
     
     // upload post to server
     async function addPost({note}: {note: string}) {
-        console.log(mediaList)
 
         if (mediaList) {
             setLoading(true)
             for (let i = 0; i < mediaList.length; i++) {
                 const s3id = nanoid()
-             
                 const extensionIndex = mediaList[i].name.indexOf(".")
                 const fileExtension = mediaList[i].name.slice(extensionIndex)
-                console.log(fileExtension, "extension type")
                 const { data } = await axios.post(
                     "/api/get-s3-url",
                     {
@@ -123,7 +120,6 @@ export default function Submit() {
             setMediaList([...mediaList, chosenFile[0]])
             let reader = new FileReader()
 
-            console.log(chosenFile[0].type)
             if (chosenFile[0].type.includes("video") || chosenFile[0].type.includes("mp4")) {
                 if (mediaPreviewList.length === 0) {
                     setAllowUpload(false)
@@ -147,9 +143,6 @@ export default function Submit() {
                 reader.readAsDataURL(chosenFile[0])
             }
         }
-
-
-       
         
     }
 

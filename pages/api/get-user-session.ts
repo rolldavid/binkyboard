@@ -10,7 +10,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         if (!session) {
             return res.status(201).json({session: false, userId: undefined})
         }
-        
+
         if (session?.user?.email) {
             const user = await prisma.user.findUnique({
                 where: {
@@ -72,7 +72,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                             userId: user.id, 
                             role: user.role, 
                             displayName: user.displayName,
-                            boards: user.boards
+                            boards: user.boards,
+                            email: user.email
                         })
                         return;
                     }
