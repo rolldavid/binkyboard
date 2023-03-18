@@ -6,7 +6,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
    
         const { boardId, headerUrl, boardName, registryLink, accessStatus, accessList } = req.body;
         
-        console.log(accessList, "=============")
         const board = await prisma.board.update({
             where: {
                 id: boardId

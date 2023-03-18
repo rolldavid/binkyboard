@@ -19,6 +19,10 @@ export const authOptions: NextAuthOptions = {
       from: process.env.EMAIL_FROM
     }),
   ],
+  pages: {
+    signIn: "/",
+    error: "/"
+  },
   secret: process.env.NEXTAUTH_SECRET,
   session: {
     maxAge: 365 * 24 * 60 * 60

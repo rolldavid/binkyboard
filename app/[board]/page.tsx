@@ -21,6 +21,9 @@ export default function Page({params: {board}}: {params: { board: string }}) {
         return getBoard(board)
       });
   
+    useEffect(() => {
+        localStorage.setItem("invite", board)
+    }, [])
 
     if (status === "loading") {
         return <Spinner />
@@ -30,7 +33,7 @@ export default function Page({params: {board}}: {params: { board: string }}) {
         const user = localStorage.getItem("user")
         if (data.board.allowList) {
             const isUser = data.board.allowList.includes(user)
-            console.log("allow list: ", data.board.allowList)
+          
             if (isUser) {
                 console.log("you rock")
             } else {
@@ -69,7 +72,7 @@ export default function Page({params: {board}}: {params: { board: string }}) {
                 
                <div className={styles.actionContainer}>
                     {data.board.registry.length > 0 && <div className={styles.actionInnerContainer}>
-                         <a target="_blank" href={`${data.board.registry}`} className={styles.navItem}>
+                         <a target="_blank" href={`${data.board.registry}`} className={styles.giftItem}>
                             <Image 
                                 src={gift}
                                 width={25}

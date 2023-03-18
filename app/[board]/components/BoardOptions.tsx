@@ -135,7 +135,6 @@ export default function BoardOptions({board, setShowOptions}: {board: Board, set
     const handleDelete = async (e: SyntheticEvent) => {
         e.preventDefault()
         const res = await deleteBoard(board.id)
-        console.log("made it back")
         router.push("/")
         
     }

@@ -1,5 +1,6 @@
 "use client"
 
+import { useSearchParams } from 'next/navigation';
 import { useQuery } from "@tanstack/react-query";
 import { getUserSession } from "@/lib/db-utils"
 import AuthContainer from "@/app/auth/components/AuthContainer";
@@ -11,7 +12,9 @@ import styles from "./NavContainer.module.css"
 
 
 export default function NavContainer() {
-  
+    const searchParams = useSearchParams();
+    const error = searchParams.get('error');
+
     const {data, status} = useQuery(["session"], () => {
         return getUserSession()
     })
@@ -23,7 +26,7 @@ export default function NavContainer() {
                 <NavLinks  userId={"nope"} admin={false}/>
                 <div className={styles.authModuleContainer} >
                     <div className={styles.authModule}>
-                        <AuthContainer />
+                        <AuthContainer error={error}/>
                     </div>
                 </div>
             </div>

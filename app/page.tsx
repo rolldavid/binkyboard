@@ -5,14 +5,13 @@ import { Board } from "@prisma/client"
 import { useQuery } from "@tanstack/react-query"
 import Link from "next/link"
 import Spinner from "@/lib/Spinner"
-import AuthContainer from "./auth/components/AuthContainer"
-import Collection from './post/components/Collection'
-import CreatePost from './post/components/CreatePost'
 import BoardCard from "./[board]/components/BoardCard"
 import styles from '@/styles/Home.module.css'
 import ScrollToTop from "@/lib/ScrollToTop"
 
 export default function Page() {
+ 
+
   const { data, status } = useQuery(["user"], () => {
     return getUserSession()
   });

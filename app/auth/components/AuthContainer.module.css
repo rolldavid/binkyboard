@@ -13,6 +13,19 @@
     box-shadow: 1px 1px 5px var(--greygrey);
 }
 
+.errorMessage {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    margin: 0px 0px 15px 0px;
+    background-color: var(--red);
+    color: var(--cream);
+    padding: 8px 5px 8px 5px;
+    border-radius: 5px;
+    font-size: .8rem;
+}
+
 .checkContainer {
     display: flex;
     flex-direction: column;
@@ -21,16 +34,24 @@
     width: 100%;
     border: none;
     border-radius: 25px;
-    margin-top: 25px;
-    padding: 0px 10px 0px 10px;
-    box-shadow: 1px 1px 5px var(--greygrey);
-    background-color: var(--wenge);
+    margin: 25px 15px 10px 15px;
+    padding: 20px 20px 20px 20px;
+    box-shadow: 1px 1px 5px rgba(200, 200, 200, .5);
+    background-color: var(--bluegreen);
 }
 
 .checkText {
     text-align: center;
     font-size: 1rem;
-    color: var(--lightoffblack);
+    color: var(--darkwenge);
+    margin: 10px 0px 5px 0px;
+}
+
+.checkTextSub {
+    text-align: center;
+    font-size: .9rem;
+    color: var(--darkwenge);
+    margin: 5px 0px 5px 0px;
 }
 
 .googleContainer {
@@ -188,4 +209,9 @@
     opacity: .7;
    
 }
+
+.highlight {
+    font-weight: 600;
+}
+
 

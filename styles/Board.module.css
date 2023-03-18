@@ -27,6 +27,7 @@
     margin-top: 30px;
     gap: 10px;
     border-top-left-radius: 5px;
+    
 }
 
 .actionInnerContainer {
@@ -36,7 +37,10 @@
     margin-top: -3px;
     gap: 10px;
     border-top-left-radius: 5px;
+}
 
+.giftItem {
+    z-index: 0;
 }
 
 .bannerContainer {

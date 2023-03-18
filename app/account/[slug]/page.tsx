@@ -80,7 +80,6 @@ export default function Page({params: {slug}}: {params: { slug: string }}) {
       e.preventDefault()
       localStorage.setItem("user", "")
       const res = await deleteUser()
-      console.log("done")
       signOut({
           callbackUrl: "/"
       });
