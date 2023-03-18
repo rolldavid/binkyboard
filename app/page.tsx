@@ -7,5 +7,6 @@ export default function Page() {
 
 export const metadata: Metadata = {
   title: "binkyboard",
-  description: "A simple place to celebrate life's biggest moments"
+  description: "A simple place to celebrate life's biggest moments",
+  
 }
