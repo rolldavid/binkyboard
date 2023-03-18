@@ -1,10 +1,10 @@
 
+import Head from 'next/head'
 import Footer from './footer/components/Footer'
 import NavContainer from './nav/components/NavContainer'
 import QueryProvider from '@/lib/QueryProvider'
 import styles from "@/styles/Home.module.css"
 
-import AuthContainer from "./auth/components/AuthContainer"
 import "@/styles/globals.css"
 
 export default function RootLayout({
@@ -13,10 +13,12 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
 
-
   return (
     <html lang="en">
-      <head />
+      <head>
+        <title>binkyboard</title>
+        <meta property="description" content="A simple place to celebrate life's biggest moments"/>
+      </head>
       <body>
         <QueryProvider>
           <nav className={styles.nav}>
@@ -34,22 +36,3 @@ export default function RootLayout({
   )
 }
 
-export const metadata = {
-  title: "binkyboard",
-  description: "A simple place to celebrate life's biggest moments",
-  openGraph: {
-    title: "binkyboard",
-    description: "A simple place to celebrate life's biggest moments",
-    url: `https://binkyboard.com`,
-    images: [
-      {
-      url: `https://d3h42dhdxazsqn.cloudfront.net/yPwbiLyA-e_APVJ1vI6MS.png`,
-      width: 1200,
-      height: 675,
-      alt: "binkyboard"
-      }
-    ],
-    type: "website",
-    locale: "en-US"
-  },
-}

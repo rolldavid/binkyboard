@@ -21,7 +21,6 @@ export default function Page() {
       return <Spinner />
   }
 
-
   if (data && data.boards && status === "success") {
       return (
         <>
