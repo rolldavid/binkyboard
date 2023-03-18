@@ -55,5 +55,5 @@ export const metadata = {
     ],
     type: "website",
     locale: "en-US"
-  }
+  },
 }
