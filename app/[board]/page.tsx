@@ -1,7 +1,7 @@
 "use client"
 
 import { SyntheticEvent, useEffect, useState } from "react"
-import { getBoard } from "@/lib/db-utils"
+import { getBoard, getBoardName } from "@/lib/db-utils"
 import { useQuery } from "@tanstack/react-query"
 import CreatePost from "../post/components/CreatePost"
 import Image from "next/image"
@@ -12,6 +12,18 @@ import styles from "@/styles/Board.module.css"
 import Spinner from "@/lib/Spinner"
 import ScrollToTop from "@/lib/ScrollToTop"
 import BoardOptions from "./components/BoardOptions"
+
+/* async function getName(id: string) {
+    return await getBoardName(id)
+  }
+  
+export async function generateMetadata({params: {board}}: {params: { board: string }}) {
+    console.log("get name")
+    const res = await getName(board);
+    console.log(res, "name: ")
+    return { title: res.boardName }
+  }
+ */
 
 
 export default function Page({params: {board}}: {params: { board: string }}) {
@@ -115,3 +127,4 @@ export default function Page({params: {board}}: {params: { board: string }}) {
 
    return null;
 }
+

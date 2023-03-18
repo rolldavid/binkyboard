@@ -14,8 +14,6 @@ export default function RootLayout({
 }) {
 
 
-
-
   return (
     <html lang="en">
       {/*
@@ -38,4 +36,23 @@ export default function RootLayout({
       </body>
     </html>
   )
+}
+
+export const metadata = {
+  title: "binkyboard",
+  description: "A simple place to celebrate life's biggest moments",
+  openGraph: {
+    title: "binkyboard",
+    description: "A simple place to celebrate life's biggest moments",
+    url: `${process.env.NEXT_PUBLIC_FRONTEND_URL}`,
+    images: [
+      {
+      url: `${process.env.NEXT_PUBLIC_AWS_URL}/yPwbiLyA-e_APVJ1vI6MS.png`,
+      width: 1200,
+      height: 675
+      }
+    ],
+    type: "website",
+    locale: "en-US"
+  }
 }

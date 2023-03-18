@@ -42,6 +42,20 @@ export async function getProfile(userId: string) {
     return data;
 }
 
+export async function getBoardName(boardId: string) {
+    const res = await fetch("/api/get-board-name", {
+        method: "POST",
+        body: JSON.stringify({
+            boardId
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    const data = await res.json()
+    return data;
+}
+
 
 export async function getBoard(boardId: string) {
     const res = await fetch("/api/get-board", {

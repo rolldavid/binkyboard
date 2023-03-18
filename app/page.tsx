@@ -1,7 +1,8 @@
 "use client"
 
-import { getUserSession } from "@/lib/db-utils"
 import { Board } from "@prisma/client"
+import { getUserSession } from "@/lib/db-utils"
+import { useRouter } from "next/navigation"
 import { useQuery } from "@tanstack/react-query"
 import Link from "next/link"
 import Spinner from "@/lib/Spinner"
@@ -10,7 +11,7 @@ import styles from '@/styles/Home.module.css'
 import ScrollToTop from "@/lib/ScrollToTop"
 
 export default function Page() {
- 
+  const router = useRouter()
 
   const { data, status } = useQuery(["user"], () => {
     return getUserSession()
@@ -25,12 +26,10 @@ export default function Page() {
       return (
         <>
         <main className={styles.container}>
-          
-          <div className={styles.titleContainer}>
-            <h2 className={styles.titleText}>Your Boards</h2>
-          </div>
           {data.boards.length > 0 ? <div className={styles.boardContainer}>
-
+            <div className={styles.titleContainer}>
+              <h2 className={styles.titleText}>Your Boards</h2>
+            </div>
               {
                 data.boards.map((board: Board, index: number) => {
                   return (
@@ -42,7 +41,10 @@ export default function Page() {
               }
               </div> :
               <div className={styles.noBoardContainer}>
-                  <p className={styles.noBoardText}>Looks like you are don&apos;t have any boards yet.</p>
+                  <p className={styles.noBoardText}>You don&apos;t have any boards yet 😢</p>
+                  <button className={styles.createButton} onClick={() => router.push("create")}>
+                    Create a Board        
+                  </button>
               </div>
           
           }
