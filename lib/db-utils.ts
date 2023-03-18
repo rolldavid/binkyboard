@@ -1,3 +1,5 @@
+
+
 // CREATE
 export async function createNewBoard(boardName: string, access: boolean, registry: string, accessList: string) {
     const res = await fetch("/api/create-board", {
@@ -16,7 +18,38 @@ export async function createNewBoard(boardName: string, access: boolean, registr
     return data;
 }
 
+export async function createNewPost(boardId: string, note: string, slugs: string[]) {
+    const res = await fetch("/api/create-post", {
+        method: "POST",
+        body: JSON.stringify({
+            boardId,
+            note,
+            slugs
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    const data = await res.json()
+    return data;
+}
+
 // READ
+export async function getPosts(boardId: string) {
+    const res = await fetch("/api/get-posts", {
+        method: "POST",
+        body: JSON.stringify({
+            boardId
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    const data = await res.json()
+    return data;
+}
+
+
 export async function getUserSession() {
     const res = await fetch("/api/get-user-session")
     const data = await res.json()

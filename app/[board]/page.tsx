@@ -12,18 +12,7 @@ import styles from "@/styles/Board.module.css"
 import Spinner from "@/lib/Spinner"
 import ScrollToTop from "@/lib/ScrollToTop"
 import BoardOptions from "./components/BoardOptions"
-
-/* async function getName(id: string) {
-    return await getBoardName(id)
-  }
-  
-export async function generateMetadata({params: {board}}: {params: { board: string }}) {
-    console.log("get name")
-    const res = await getName(board);
-    console.log(res, "name: ")
-    return { title: res.boardName }
-  }
- */
+import Collection from "../post/components/Collection"
 
 
 export default function Page({params: {board}}: {params: { board: string }}) {
@@ -113,7 +102,8 @@ export default function Page({params: {board}}: {params: { board: string }}) {
                  <div className={styles.headerContainer}>
                     <h2 className={styles.boardHeader}>{`${data.board.name}`}</h2>
                 </div>
-                <CreatePost />
+                <CreatePost boardId={board}/>
+                <Collection boardId={board}/>
                 <p>Board Id: {board}</p>
             </div>
             

@@ -7,7 +7,6 @@ import { useRouter } from "next/navigation"
 import { useQueryClient } from "@tanstack/react-query"
 import { Board } from "@prisma/client"
 import { updateBoard, deleteBoard } from "@/lib/db-utils"
-import banner from "../assets/banner.png"
 import edit from "../assets/editButton.png"
 import { Dispatch, SyntheticEvent, useEffect, useState, SetStateAction } from "react"
 import { useForm } from "react-hook-form";

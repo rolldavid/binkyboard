@@ -4,8 +4,10 @@ import Image from "next/image"
 import { Post } from "@prisma/client"
 import ReactPlayer from "react-player"
 import styles from "./Post.module.css"
+import ScrollToTop from "@/lib/ScrollToTop"
 
-export default function Post({post}: {post: Post}) {
+export default function PostItem({post, slugs}: {post: Post, slugs: string[]}) {
+    console.log(slugs[0])
     return (
         <div className={styles.container}>
             <div className={styles.noteContainer}>  
@@ -15,9 +17,14 @@ export default function Post({post}: {post: Post}) {
                 <p className={styles.author}>
                     from {post.userId}
                 </p>
-                <img src="https://d3h42dhdxazsqn.cloudfront.net/ancient-wizard.jpg" alt="wizard" className={styles.img}/>
+                {slugs.map((s, index) => {
+                    return (
+                        <div>
+                            <Image src={`${process.env.NEXT_PUBLIC_AWS_URL}/${s}`} width={1200} height={675} alt="post image" className={styles.img}/>
+                        </div>
+                    )
+                })}
             </div>
-            
         </div>
     )
 }

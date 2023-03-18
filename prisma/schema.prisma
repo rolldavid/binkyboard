@@ -29,21 +29,10 @@ model Post {
   createdAt DateTime @default(now())
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    String
-  media     Media[]
   note      String
+  slugs     String[]
   board     Board    @relation(fields: [boardId], references: [id], onDelete: Cascade)
   boardId   String
-}
-
-model Media {
-  id        String   @id @default(cuid())
-  createdAt DateTime @default(now())
-  slug      String
-  type      String
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId    String
-  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
-  postId    Int
 }
 
 model User {
@@ -54,7 +43,6 @@ model User {
   emailVerified DateTime?
   image         String?
   posts         Post[]
-  media         Media[]
   accounts      Account[]
   sessions      Session[]
   boards        Board[]   @relation(name: "users")

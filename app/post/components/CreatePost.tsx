@@ -2,9 +2,11 @@
 
 import axios from "axios";
 import { nanoid } from 'nanoid'
-import { SyntheticEvent, useState, useEffect, ClipboardEvent, useReducer, KeyboardEvent } from "react"
+import { SyntheticEvent, useState, useEffect, ClipboardEvent } from "react"
 import Image from "next/image"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
+import ScrollToTop from "@/lib/ScrollToTop";
+import { createNewPost } from "@/lib/db-utils";
 import styles from "./CreatePost.module.css"
 import ReactPlayer from "react-player"
 import img from "../assets/img.png"
@@ -22,9 +24,10 @@ interface PreviewFiles {
     type: string
 }
 
-export default function Submit() {
+export default function Submit({boardId}: {boardId: string}) {
     const [loading, setLoading] = useState(false)
     const [note, setNote] = useState("")
+    const [submitted, setSubmitted] = useState(false)
     const [linkPreview, setLinkPreview] = useState(false)
     const [toggleLink, setToggleLink] = useState(false)
     const [mediaPreview, setMediaPreview] = useState(false)
@@ -42,10 +45,11 @@ export default function Submit() {
     const [toggleMedia, setToggleMedia] = useState(false)
     
     const queryClient = useQueryClient()
-
     
     // upload post to server
     async function addPost({note}: {note: string}) {
+
+        let slugList: string[] = []
 
         if (mediaList) {
             setLoading(true)
@@ -63,13 +67,26 @@ export default function Submit() {
     
                 const url = data.url
            
+                console.log(url)
                 await axios.put(url, mediaList[i], {
                     headers: {
                       "Content-Type": mediaList[i].type,
                       "Access-Control-Allow-Origin": "*",
                     },
                   });
+
+               
+                slugList.push(`${s3id}${fileExtension}`)
+                
             }
+        
+            const addPost = await createNewPost(boardId, note, slugList)
+            setSubmitted(true)
+            setTimeout(() => {
+                setSubmitted(false)
+            }, 1000)
+            await queryClient.invalidateQueries(['postData'])
+        
             
         }
         setNote("")
@@ -331,6 +348,7 @@ export default function Submit() {
                 </div>
             </form>}
             {loading && <div><Spinner /></div>}
+            {submitted && <ScrollToTop />}
         </section>
     )
 }

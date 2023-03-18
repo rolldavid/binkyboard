@@ -1,23 +1,20 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { getPosts } from "@/lib/db-utils"
 import { Post } from "@prisma/client"
 import { useQuery } from "@tanstack/react-query"
 import ReactPlayer from "react-player"
 import PostItem from "./Post"
 import styles from "./Collection.module.css"
 import Spinner from "@/lib/Spinner"
+import ScrollToTop from "@/lib/ScrollToTop"
 
-export default function Collection() {
+export default function Collection({boardId}: {boardId: string}) {
    
-    async function getPosts() {
-        const res = await fetch("/api/get-posts")
-        const data = await res.json()
-        return data
-    }
 
     const { data, status } = useQuery(["postData"], () => {
-        return getPosts()
+        return getPosts(boardId)
       });
 
     
@@ -25,19 +22,21 @@ export default function Collection() {
         <Spinner />
     }
 
-    if (status === "success" && data.squares) {
+    if (status === "success" && data) {
     return (
-        <div className={styles.container}>
-            {
-                data.posts.map((post: Post, index: number) => {
-                    return (
-                        <PostItem key={index} post={post}/>
-                    )
-                })
-            }
-                    <ReactPlayer url="https://soundcloud.com/liluzivert/lil-uzi-vert-just-wanna-rock" controls={true} width="100%"/>
+        <>
+            <div className={styles.container}>
+                {
+                    data.posts.map((post: Post, index: number) => {
+                        return (
+                            <PostItem key={index} post={post} slugs={post.slugs} />
+                        )
+                    })
+                }
+                        <ReactPlayer url="https://soundcloud.com/liluzivert/lil-uzi-vert-just-wanna-rock" controls={true} width="100%"/>
 
-        </div>
+            </div>
+        </>
     )}
 
     return null;

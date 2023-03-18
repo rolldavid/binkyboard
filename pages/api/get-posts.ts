@@ -7,11 +7,27 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const posts = await prisma.post.findMany({
-    orderBy: {
-      createdAt: "desc"
-    }
-  })
 
-  res.status(200).json({ posts: posts })
+    const { boardId } = req.body;
+
+    try {
+      const board = await prisma.board.findUnique({
+        where: {
+          id: boardId
+        },
+        include: {
+          posts: {
+            orderBy: {
+              createdAt: "desc"
+            }
+          }
+        }
+      })
+
+
+      res.status(200).json({ posts: board?.posts })
+    } catch {
+      throw new Error("Did not manage to connect")
+    }
+
 }
