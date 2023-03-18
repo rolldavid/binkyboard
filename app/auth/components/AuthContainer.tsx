@@ -24,7 +24,7 @@ export default function AuthContainer({error}: {error: string | null}) {
     const [value, setValue] = useState("")
     const [fullname, setFullname] = useState("")
     const [submitted, setSubmitted] = useState(false);
-    
+
     const {
         register,
         handleSubmit,
@@ -106,7 +106,7 @@ export default function AuthContainer({error}: {error: string | null}) {
                         className={styles.emailNote}
                     >
                         
-                        <p className={styles.noteText}> <Image src={wand} width={15} height={15} alt="magic wand" className={styles.noteImg}/> We'll email you a magic link. No password required.</p>
+                        <p className={styles.noteText}> <Image src={wand} width={15} height={15} alt="magic wand" className={styles.noteImg}/> We&apos;ll email you a magic link. No password required.</p>
                     </div>
                 </form>
             </div>
@@ -117,7 +117,7 @@ export default function AuthContainer({error}: {error: string | null}) {
 
         {submitted && <section className={styles.checkContainer}>
         <Image src={wand} width={30} height={30} alt="magic wand" className={styles.noteImg}/>
-            <p className={styles.checkText}>We've emailed you a magic link!</p>
+            <p className={styles.checkText}>We&apos;ve emailed you a magic link!</p>
             <p className={styles.checkTextSub}>{`Don't see it? Check your spam folder then try again.`}</p>
             </section>}
         </>
