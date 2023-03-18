@@ -20,7 +20,7 @@ const schema = yup
 })
 .required();
 
-export default function AuthContainer({error}: {error: string | null}) {
+export default function AuthContainer() {
     const [value, setValue] = useState("")
     const [fullname, setFullname] = useState("")
     const [submitted, setSubmitted] = useState(false);
@@ -55,12 +55,12 @@ export default function AuthContainer({error}: {error: string | null}) {
         {!submitted && <section className={styles.container}>
             
             <div className={styles.authHeader}>
-                {error ? 
+                {/* {error ? 
                     error?.includes("OAuthAccountNotLinked") ? 
                         <p className={styles.errorMessage}>Looks like you already signed up using email. Continue with email to login.</p> :
                         <p className={styles.errorMessage}>{error}</p> :
                     <p />
-                }
+                } */}
                 <h2 className={styles.authHeaderTitle}>
                     {`Welcome!`}
                 </h2>
