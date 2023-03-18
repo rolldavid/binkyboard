@@ -44,10 +44,10 @@ export const metadata = {
   openGraph: {
     title: "binkyboard",
     description: "A simple place to celebrate life's biggest moments",
-    url: `${process.env.NEXT_PUBLIC_FRONTEND_URL}`,
+    url: ``,
     images: [
       {
-      url: `${process.env.NEXT_PUBLIC_AWS_URL}/yPwbiLyA-e_APVJ1vI6MS.png`,
+      url: `https://d3h42dhdxazsqn.cloudfront.net/yPwbiLyA-e_APVJ1vI6MS.png`,
       width: 1200,
       height: 675
       }
