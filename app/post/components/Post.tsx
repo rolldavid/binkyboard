@@ -5,7 +5,7 @@ import { Post } from "@prisma/client"
 import ReactPlayer from "react-player"
 import styles from "./Post.module.css"
 
-export default function({post}: {post: Post}) {
+export default function Post({post}: {post: Post}) {
     return (
         <div className={styles.container}>
             <div className={styles.noteContainer}>  

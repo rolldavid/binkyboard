@@ -84,7 +84,7 @@ export default function Page({params: {board}}: {params: { board: string }}) {
                 
                <div className={styles.actionContainer}>
                     {data.board.registry.length > 0 && <div className={styles.actionInnerContainer}>
-                         <a target="_blank" href={`${data.board.registry}`} className={styles.giftItem}>
+                         <a target="_blank" href={`${data.board.registry}`} className={styles.giftItem} rel="noopener noreferrer">
                             <Image 
                                 src={gift}
                                 width={25}

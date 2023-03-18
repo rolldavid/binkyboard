@@ -13,7 +13,12 @@ import styles from "./NavContainer.module.css"
 
 export default function NavContainer() {
     const searchParams = useSearchParams();
-    const error = searchParams.get('error');
+
+    let error: string | null = null;
+
+    if (searchParams) {
+        const error = searchParams.get('error');
+    }
 
     const {data, status} = useQuery(["session"], () => {
         return getUserSession()
