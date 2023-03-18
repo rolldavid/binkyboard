@@ -44,7 +44,7 @@ export const metadata = {
   openGraph: {
     title: "binkyboard",
     description: "A simple place to celebrate life's biggest moments",
-    url: ``,
+    url: `https://binkyboard.com/`,
     images: [
       {
       url: `https://d3h42dhdxazsqn.cloudfront.net/yPwbiLyA-e_APVJ1vI6MS.png`,
