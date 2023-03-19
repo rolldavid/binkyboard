@@ -52,8 +52,9 @@ export default function Submit({boardId}: {boardId: string}) {
     async function addPost({note}: {note: string}) {
 
         let slugList: string[] = []
-
+       
         if (mediaList) {
+            
             setLoading(true)
             for (let i = 0; i < mediaList.length; i++) {
                 const s3id = nanoid()
@@ -88,9 +89,14 @@ export default function Submit({boardId}: {boardId: string}) {
         }
         setNote("")
         setMediaList([])
+        setRowCount(2)
         setMediaPreviewList([])
         setMediaPreview(false)
         setLoading(false)
+        window.scrollTo({
+            top: 0,
+            left: 0
+          });
     }
 
     // handle when user is typing a note
@@ -217,8 +223,7 @@ export default function Submit({boardId}: {boardId: string}) {
 
     const { mutateAsync } = useMutation(addPost, {
         onSuccess: () => {
-            
-            queryClient.invalidateQueries(['board'])
+            queryClient.invalidateQueries(['collection'])
           },
     });
 
@@ -230,7 +235,7 @@ export default function Submit({boardId}: {boardId: string}) {
   
     return (
         <section className={styles.container}>
-            {!loading && <form onSubmit={e => handleSubmit(e)} className={styles.formContainer}>
+             <form onSubmit={e => handleSubmit(e)} className={styles.formContainer}>
               <div className={styles.contentContainer}>
                 <textarea 
                     value={note}
@@ -332,7 +337,7 @@ export default function Submit({boardId}: {boardId: string}) {
                         
                     }
                     </div>
-                    <button type="submit" className={styles.submitButton}>Share</button>
+                    <button type="submit" className={styles.submitButton}>{!loading ? "Share" : "Sharing..."}</button>
                 </div>
                 <div className={styles.uploadHidden}>
                     <input 
@@ -344,8 +349,9 @@ export default function Submit({boardId}: {boardId: string}) {
                         hidden
                         />    
                 </div>
-            </form>}
-            {loading && <div><Spinner /></div>}
+        </form>
+
+            
         </section>
     )
 }

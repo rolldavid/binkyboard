@@ -1,7 +1,8 @@
 "use client"
 
+import { useState, useEffect } from "react"
 import { getPosts } from "@/lib/db-utils"
-import type { Post } from "@prisma/client"
+import { PostItems } from "./types"
 import { useQuery } from "@tanstack/react-query"
 import PostItem from "./PostItem"
 import styles from "./Collection.module.css"
@@ -9,8 +10,9 @@ import Spinner from "@/lib/Spinner"
 
 
 export default function Collection({boardId}: {boardId: string}) {
+
  
-    const { data, status } = useQuery(["postData"], () => {
+    const { data, status } = useQuery(["collection"], () => {
         return getPosts(boardId)
       });
 
@@ -24,9 +26,10 @@ export default function Collection({boardId}: {boardId: string}) {
                
                 <div className={styles.container}>
                     {
-                        data.posts.map((post: Post, index: number) => {
+                        data.posts.map((post: PostItems, index: number) => {
+                
                             return (
-                                <PostItem key={index} post={post} slugs={post.slugs} />
+                                <PostItem key={index} post={post} slugs={post.post.slugs} isOwner={data.isOwner} boardId={boardId}/>
                             )
                         })
                     }

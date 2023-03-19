@@ -3,7 +3,7 @@
     justify-content: space-between;
     height: 100%;
     width: 100%;
-    z-index: 35;
+    z-index: 10;
 }
 
 .authModuleContainer {

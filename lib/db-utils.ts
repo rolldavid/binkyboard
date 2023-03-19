@@ -177,3 +177,18 @@ export async function deleteBoard(boardId: string) {
     const data = await res.json();
     return data;
 }
+
+export async function deletePost(boardId: string, postId: number) {
+    const res = await fetch("/api/delete-board", {
+        method: "POST",
+        body: JSON.stringify({
+            boardId,
+            postId
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    const data = await res.json();
+    return data;
+}

@@ -126,7 +126,7 @@ export default function BoardOptions({board, setShowOptions}: {board: Board, set
         }
         await updateBoard(board.id, bannerUrl, boardName, registry, access, allowList)
 
-        await queryClient.invalidateQueries(['board'])
+        await queryClient.invalidateQueries(['boardMain'])
         setLoading(false)
         setShowOptions(false)
     }

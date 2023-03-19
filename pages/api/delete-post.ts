@@ -1,0 +1,38 @@
+import type { NextApiRequest, NextApiResponse } from "next";
+import { getServerSession } from "next-auth/next"
+import { authOptions } from "./auth/[...nextauth]";
+import prisma from "@/lib/prisma";
+
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+
+    const { boardId, postId } = req.body;
+
+    try {
+        const session = await getServerSession(req, res, authOptions)
+        if (!session) {
+            res.status(401)
+            return
+        }
+
+        if (session?.user?.email) {
+            const board = await prisma.board.findUnique({where: {id: boardId}, include: {owner: {select: {email: true}} }})
+
+            if (board && board.owner.email === session.user.email) {
+                console.log("removing post")
+                const post = await prisma.post.delete({
+                    where: {
+                        id: postId
+                    }
+                })
+
+                res.status(201).json({status: "ok"})
+                return
+            }
+    
+        }
+        res.status(401).json({status: "not authorized"})
+            
+    } catch {
+        throw new Error("Did not manage to connect")
+    }
+}

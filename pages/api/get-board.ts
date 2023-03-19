@@ -75,8 +75,11 @@ export default async function handler(
         }
       }
 
-      res.status(200).json({ board, posts: board?.posts, isOwner })
+      if (board) {
+        console.log(board)
+        res.status(200).json({ board, posts: board.posts, isOwner })
       return
+      }
   }
 
 
