@@ -8,7 +8,7 @@ import ReactPlayer from "react-player"
 import styles from "./PostItem.module.css"
 
 export default function PostItem({post, slugs}: {post: Post, slugs: string[]}) {
-    const [postUser, setPostUser] = useState<User>()
+    
     
     const readableDate = new Date(post.createdAt).toLocaleDateString("en-US", {
         day: "numeric",
@@ -16,20 +16,10 @@ export default function PostItem({post, slugs}: {post: Post, slugs: string[]}) {
       });
 
 
-
-    useEffect(() => {
-        const getUser = async () => {
-            const user = await getPostUser(post.userId)
-            console.log(user.user)
-            setPostUser(user.user)
-        }
-        getUser()
-    },[])
-
     return (
         <div className={styles.container}>
             <div className={styles.headerContainer}>
-                <p className={styles.displayName}>{postUser?.displayName}</p>
+                <p className={styles.displayName}>Bob</p>
                 <p className={styles.dot}>·</p>
                 <p className={styles.date}>{readableDate}</p>
             </div>

@@ -217,6 +217,7 @@ export default function Submit({boardId}: {boardId: string}) {
 
     const { mutateAsync } = useMutation(addPost, {
         onSuccess: () => {
+            
             queryClient.invalidateQueries(['board'])
           },
     });
