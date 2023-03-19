@@ -17,9 +17,10 @@ export default function PostItem({post, slugs}: {post: Post, slugs: string[]}) {
                 <p className={styles.author}>
                     from {post.userId}
                 </p>
+
                 {slugs.map((s, index) => {
                     return (
-                        <div>
+                        <div key={index}>
                             <Image src={`${process.env.NEXT_PUBLIC_AWS_URL}/${s}`} width={1200} height={675} alt="post image" className={styles.img}/>
                         </div>
                     )
