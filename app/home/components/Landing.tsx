@@ -1,6 +1,6 @@
 "use client"
 
-import { Board } from "@prisma/client"
+import type { Board } from "@prisma/client"
 import { getUserSession } from "@/lib/db-utils"
 import { useRouter } from "next/navigation"
 import { useQuery } from "@tanstack/react-query"

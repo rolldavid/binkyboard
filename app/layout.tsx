@@ -1,5 +1,5 @@
 
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
 import Footer from './footer/components/Footer'
 import NavContainer from './nav/components/NavContainer'
 import QueryProvider from '@/lib/QueryProvider'
@@ -32,7 +32,6 @@ export default function RootLayout({
     </html>
   )
 }
-
 
 export const metadata: Metadata = {
   title: "binkyboard",

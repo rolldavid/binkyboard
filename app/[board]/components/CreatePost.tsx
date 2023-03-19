@@ -1,11 +1,11 @@
 "use client"
 
+
 import axios from "axios";
 import { nanoid } from 'nanoid'
-import { SyntheticEvent, useState, useEffect, ClipboardEvent } from "react"
+import { SyntheticEvent, useState, useEffect, ClipboardEvent, SetStateAction, Dispatch } from "react"
 import Image from "next/image"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import ScrollToTop from "@/lib/ScrollToTop";
 import { createNewPost } from "@/lib/db-utils";
 import styles from "./CreatePost.module.css"
 import ReactPlayer from "react-player"
@@ -25,9 +25,12 @@ interface PreviewFiles {
 }
 
 export default function Submit({boardId}: {boardId: string}) {
+
+    const queryClient = useQueryClient()
+
     const [loading, setLoading] = useState(false)
     const [note, setNote] = useState("")
-    const [submitted, setSubmitted] = useState(false)
+    
     const [linkPreview, setLinkPreview] = useState(false)
     const [toggleLink, setToggleLink] = useState(false)
     const [mediaPreview, setMediaPreview] = useState(false)
@@ -44,7 +47,6 @@ export default function Submit({boardId}: {boardId: string}) {
     const [link, setLink] = useState("")
     const [toggleMedia, setToggleMedia] = useState(false)
     
-    const queryClient = useQueryClient()
     
     // upload post to server
     async function addPost({note}: {note: string}) {
@@ -67,7 +69,6 @@ export default function Submit({boardId}: {boardId: string}) {
     
                 const url = data.url
            
-                console.log(url)
                 await axios.put(url, mediaList[i], {
                     headers: {
                       "Content-Type": mediaList[i].type,
@@ -81,11 +82,7 @@ export default function Submit({boardId}: {boardId: string}) {
             }
         
             const addPost = await createNewPost(boardId, note, slugList)
-            setSubmitted(true)
-            setTimeout(() => {
-                setSubmitted(false)
-            }, 1000)
-            await queryClient.invalidateQueries(['postData'])
+            
         
             
         }
@@ -220,7 +217,7 @@ export default function Submit({boardId}: {boardId: string}) {
 
     const { mutateAsync } = useMutation(addPost, {
         onSuccess: () => {
-            queryClient.invalidateQueries(['squareData'])
+            queryClient.invalidateQueries(['board'])
           },
     });
 
@@ -348,7 +345,6 @@ export default function Submit({boardId}: {boardId: string}) {
                 </div>
             </form>}
             {loading && <div><Spinner /></div>}
-            {submitted && <ScrollToTop />}
         </section>
     )
 }

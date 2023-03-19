@@ -1,6 +1,5 @@
 
-import { Board } from "@prisma/client"
-import Link from "next/link"
+import type { Board } from "@prisma/client"
 import styles from "./BoardCard.module.css"
 
 export default function BoardCard ({board}: {board: Board}) {

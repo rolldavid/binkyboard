@@ -19,11 +19,10 @@ export default async function handler(
           posts: {
             orderBy: {
               createdAt: "desc"
-            }
+            },
           }
         }
       })
-
 
       res.status(200).json({ posts: board?.posts })
     } catch {

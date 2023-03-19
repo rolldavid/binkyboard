@@ -35,6 +35,21 @@ export async function createNewPost(boardId: string, note: string, slugs: string
 }
 
 // READ
+
+export async function getPostUser(userId: string) {
+    const res = await fetch("/api/get-post-user", {
+        method: "POST",
+        body: JSON.stringify({
+            userId
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    const data = await res.json()
+    return data;
+}
+
 export async function getPosts(boardId: string) {
     const res = await fetch("/api/get-posts", {
         method: "POST",
