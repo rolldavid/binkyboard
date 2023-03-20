@@ -1,6 +1,6 @@
 "use client"
 
-import {  useEffect, useState } from "react"
+import {  useState } from "react"
 import { getBoard } from "@/lib/db-utils"
 import { useQuery, useQueryClient} from "@tanstack/react-query"
 import CreatePost from "./CreatePost"
@@ -13,7 +13,6 @@ import BoardOptions from "./BoardOptions"
 import Collection from "@/app/post/components/Collection"
 
 
-
 export default function Page({boardId}: {boardId: string}) {
     const [showOptions, setShowOptions] = useState(false)
 
@@ -21,10 +20,10 @@ export default function Page({boardId}: {boardId: string}) {
         return getBoard(boardId)
       });
     
-/*     useEffect(() => {
-        localStorage.setItem("invite", id)
+     /* useEffect(() => {
+        localStorage.setItem("invite", boardId)
         
-    }, [])  */
+    }, [])   */
 
    
     if (status === "loading") {
@@ -73,8 +72,8 @@ export default function Page({boardId}: {boardId: string}) {
                     <div className={styles.headerContainer}>
                         <h2 className={styles.boardHeader}>{`${data.board.name}`}</h2>
                     </div>
-                    <CreatePost boardId={boardId}/>
-                    <Collection boardId={boardId}/>
+                    <CreatePost boardId={boardId}/> 
+                    <Collection boardId={boardId}/> 
                     {showOptions &&  
                     <BoardOptions board={data.board} setShowOptions={setShowOptions}/>}
             </div>
@@ -115,8 +114,8 @@ export default function Page({boardId}: {boardId: string}) {
                             <h2 className={styles.boardHeader}>{`${data.board.name}`}</h2>
                         </div>
                         Public
-                        <CreatePost boardId={boardId}/>
-                        <Collection boardId={boardId}/>
+                       {/*  <CreatePost boardId={boardId}/> */}
+                        {/* <Collection boardId={boardId}/> */}
                         
                 </div>
             )

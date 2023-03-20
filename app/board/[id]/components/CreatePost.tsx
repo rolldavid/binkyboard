@@ -48,7 +48,7 @@ export default function Submit({boardId}: {boardId: string}) {
     const [toggleMedia, setToggleMedia] = useState(false)
     
     
-    // upload post to server
+   
     async function addPost({note}: {note: string}) {
 
         let slugList: string[] = []
@@ -83,8 +83,6 @@ export default function Submit({boardId}: {boardId: string}) {
             }
         
             const addPost = await createNewPost(boardId, note, slugList)
-            
-        
             
         }
         setNote("")
@@ -171,41 +169,14 @@ export default function Submit({boardId}: {boardId: string}) {
        setToggleMedia(prev => !prev)
     }, [mediaPreviewList])
 
-    useEffect(() => {
-        if (mediaPreviewList.length === 1) {
-            setLinkPreview(false)
-            setMediaPreview(true)
-        } else if (mediaPreviewList.length === 2) {
-            setMediaPreview(false)
-            setMediaPreviewTwo(true)
-        } else if (mediaPreviewList.length === 3) {
-            setMediaPreviewTwo(false)
-            console.log("media preview two", mediaPreviewTwo)
-            setMediaPreviewThree(true)
-            console.log("media preview three", mediaPreviewTwo)
-        } else if (mediaPreviewList.length === 4) {
-            setMediaPreviewThree(false)
-            setMediaPreviewFour(true)
-        }
-
-        if (mediaPreviewList.length < 1) {
-            if (link.length > 0 && linkChecked) {
-                setLinkPreview(true)
-                setMediaPreview(false)
-            } else {
-                setMediaPreview(false)
-            }
-        }
-    }, [toggleMedia])
-
-
+   
     useEffect(() => {
         if (!note.includes(holdLink)) {
             setLink("")
             setLinkPreview(false);
             linkChecked = false;
         }
-    }, [toggleLink])
+    }, [toggleLink, note])
 
 
 
@@ -234,7 +205,7 @@ export default function Submit({boardId}: {boardId: string}) {
 
   
     return (
-        <section className={styles.container}>
+        <div className={styles.container}>
              <form onSubmit={e => handleSubmit(e)} className={styles.formContainer}>
               <div className={styles.contentContainer}>
                 <textarea 
@@ -245,26 +216,11 @@ export default function Submit({boardId}: {boardId: string}) {
                     rows={rowCount}
                     placeholder="Create a post"
                 />
-                <section className={styles.previewSection}>
+                <div className={styles.previewSection}>
                     {linkPreview && <div className={styles.videoPreviewContainer}>
                             <ReactPlayer url={link} controls={true} width="100%" onError={() => setLinkPreview(false)}/>
                     </div>}
                     
-                    {/* {mediaPreview && <div className={styles.mediaContainer}>
-                        {
-                            mediaPreviewList.map((item, index) => {
-                                return <div className={index === 2 && mediaClass === "mediaClassThree" ? styles.mediaClassThreeThird : styles[mediaClass]} key={index}>
-                                    {item.type.includes("video") ? 
-                                        <video controls className={styles[mediaDetailClass + "Vid"]}>
-                                            <source src={item.url} type="video/mp4" />
-                                                Your browser does not support HTML5 video.
-                                        </video>
-                                        : <img src={item.url} alt="preview image" className={styles[mediaDetailClass]}/>
-                                    }
-                                </div>
-                            })
-                        }
-                    </div>} */}
 
                     {mediaPreview && <div className={styles.mediaContainer}>
                         {
@@ -285,36 +241,10 @@ export default function Submit({boardId}: {boardId: string}) {
                         }
                     </div>}
 
-                    {mediaPreviewTwo && <div className={styles.mediaContainerTwo}>
-                    {
-                            mediaPreviewList.map((item, index) => {
-                                return (
-                                    <div className={styles.mediaItemTwo} key={index}>
-                                        <img src={item.url} alt="preview image" className={styles.mediaItemTwoImg}/>
-                                    </div>
-                                )
-                            })
-                        }
-                    </div>}
+                 
+                    
 
-                    {mediaPreviewThree && <div className={styles.mediaContainerThree}>
-                    {
-                            mediaPreviewList.map((item, index) => {
-                                
-                                    return (
-                                        <div className={styles.mediaItemThreeBig} key={index}>
-                                    
-                                             <img src={item.url} alt="preview image" className={styles.mediaItemThreeImg}/>
-                                        
-                                        </div>
-                                    )
-                                
-                                
-                            })
-                        }
-                    </div>}
-
-                </section>
+                </div>
               </div>
                     
               
@@ -352,6 +282,6 @@ export default function Submit({boardId}: {boardId: string}) {
         </form>
 
             
-        </section>
+        </div>
     )
 }

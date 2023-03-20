@@ -1,0 +1,85 @@
+.container {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: none;
+    padding: 15px;
+    z-index: 50;
+    overflow: hidden;
+}
+
+.optionsModule {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+    gap: 10px;
+    border-radius: 15px;
+    padding: 25px 20px 25px 20px;
+    background-color: var(--bluegreen);
+    z-index: 55;
+}
+
+
+.ownerActions {
+    display: flex;
+    justify-content: flex-end;
+    margin: -28px 0px 0px 0px;
+    padding: 0px 10px 0px 0px;
+    width: 100%;
+}
+
+.postOptions {
+    font-weight: 600;
+    font-size: 1.3rem;
+    cursor: pointer;
+}
+
+.deletePost:hover {
+    opacity: .7;
+}
+
+.pinButton {
+    border: 2px solid var(--cream);
+    border-radius: 10px;
+    padding: 12px 15px 12px 15px;
+    background-color: var(--cream);
+    width: 100%;
+    cursor: pointer;
+    font-size: 1rem;
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+.deleteButton {
+    border: none;
+    border-radius: 10px;
+    padding: 12px 15px 12px 15px;
+    background-color: var(--red);
+    width: 100%;
+    color: var(--cream);
+    cursor: pointer;
+    font-size: 1rem;
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+.cancelButton {
+    border: 2px solid var(--wenge);
+    border-radius: 10px;
+    padding: 12px 15px 12px 15px;
+    background-color: none;
+    background: none;
+    width: 100%;
+    cursor: pointer;
+    color: var(--wenge);
+    font-size: 1rem;
+    font-family: 'Montserrat', sans-serif;
+}
