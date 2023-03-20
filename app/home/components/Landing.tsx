@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation"
 import { useQuery } from "@tanstack/react-query"
 import Link from "next/link"
 import Spinner from "@/lib/Spinner"
-import BoardCard from "@/app/[board]/components/BoardCard"
+import BoardCard from "@/app/board/[id]/components/BoardCard"
 import styles from '@/styles/Home.module.css'
 import ScrollToTop from "@/lib/ScrollToTop"
 
@@ -32,7 +32,7 @@ export default function Page() {
               {
                 data.boards.map((board: Board, index: number) => {
                   return (
-                    <Link href={`/${board.id}`} key={index} className={styles.boardItem}>
+                    <Link href={`/board/${board.id}`} key={index} className={styles.boardItem}>
                         <BoardCard board={board}/>
                     </Link>
                   )

@@ -1,7 +1,7 @@
 
 
 // CREATE
-export async function createNewBoard(boardName: string, access: boolean, registry: string, accessList: string) {
+export async function createNewBoard(boardName: string, access: "ONE" | "TWO" | "THREE", registry: string | null, accessList: string) {
     const res = await fetch("/api/create-board", {
         method: "POST",
         body: JSON.stringify({
@@ -122,7 +122,7 @@ export async function getBoard(boardId: string) {
 
 // UPDATE
 
-export async function updateBoard(boardId: string, headerUrl: string, boardName: string, registryLink: string, accessStatus: boolean, accessList: string) {
+export async function updateBoard(boardId: string, headerUrl: string, boardName: string, registryLink: string | null, accessStatus: string, accessList: string | null) {
     const res = await fetch("/api/update-board", {
         method: "POST",
         body: JSON.stringify({
@@ -178,8 +178,8 @@ export async function deleteBoard(boardId: string) {
     return data;
 }
 
-export async function deletePost(boardId: string, postId: number) {
-    const res = await fetch("/api/delete-board", {
+export async function deletePost({boardId, postId}: {boardId: string, postId: number} ) {
+    const res = await fetch("/api/delete-post", {
         method: "POST",
         body: JSON.stringify({
             boardId,

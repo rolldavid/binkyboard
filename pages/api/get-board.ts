@@ -14,74 +14,90 @@ export default async function handler(
 
   const session = await getServerSession(req, res, authOptions)
 
-  const board = await prisma.board.findUnique({
-    where: {
-        id: boardId
-    },
-    include: {
-        posts: {
-            orderBy: {
-                createdAt: "desc"
-            }
-        },
-        users: true,
-    }
-   
-  })
-
-  if (session?.user?.email) {
-
-    const user = await prisma.user.findUnique({
+  try {
+    console.log("trying to find board............")
+    const board = await prisma.board.findUnique({
         where: {
-            email: session?.user.email
-        }, 
+            id: boardId
+        },
         include: {
-            ownedBoards: true,
-            boards: true
+            posts: {
+                orderBy: {
+                    createdAt: "desc"
+                }
+            },
+            users: true,
         }
-      })
+    
+    })
 
-      let isOwner = false
-      let isConnected = 0
+    console.log("found board, now find user..............")
 
-      if (user && board) {
-        for (let i = 0; i < user?.ownedBoards.length; i++) {
-            if (board.id === user.ownedBoards[i].id) {
-               isOwner = true
+    if (session?.user?.email) {
+
+        const user = await prisma.user.findUnique({
+            where: {
+                email: session?.user.email
+            }, 
+            include: {
+                ownedBoards: true,
+                boards: true
             }
-        }
+        })
 
-        for (let j = 0; j < user.boards.length; j++) {
-            if (board.id === user.boards[j].id) {
-               
-                isConnected += 1
+        console.log("found user, now do things............")
+
+        let isOwner = false
+    
+        let isConnected = 0
+        let privLevel = "ONE"
+
+        if (user && board) {
+
+
+            for (let i = 0; i < user.ownedBoards.length; i++) {
+                if (board.id === user.ownedBoards[i].id) {
+                isOwner = true
+                }
             }
-        }
 
-        if (isConnected === 0) {
-           
-            await prisma.user.update({
-                where: {
-                    email: session.user.email
-                },
-                data: {
-                    boards: {
-                        connect: {
-                            id: board.id
+            for (let j = 0; j < user.boards.length; j++) {
+                if (board.id === user.boards[j].id) {
+                
+                    isConnected += 1
+                }
+            }
+
+            if (isConnected === 0) {
+            
+                await prisma.user.update({
+                    where: {
+                        email: session.user.email
+                    },
+                    data: {
+                        boards: {
+                            connect: {
+                                id: board.id
+                            }
                         }
                     }
-                }
-            })
+                })
+            }
         }
-      }
 
-      if (board) {
-        console.log(board)
-        res.status(200).json({ board, posts: board.posts, isOwner })
-      return
-      }
-  }
+        console.log("did stuff......now go back")
+        console.log("here's the board..........", board)
 
-
-  res.status(200).json({ board, posts: board?.posts, isOwner: false })
+        if (board && board.privacy) {
+            console.log(board, "board +++++++++++++")
+            console.log(board.privacy, "board access")
+            res.status(200).json({ board, posts: board.posts, isOwner, privacyLevel: "TWO" })
+        return
+        }
+        throw new Error("not authorized")
+    }
+    } catch {
+        throw new Error("Did not manage to connect")
+    }
+ 
 }

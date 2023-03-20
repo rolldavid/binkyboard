@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import { PostItems } from "./types"
-
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { SyntheticEvent, useEffect, useState } from "react"
 import ReactPlayer from "react-player"
 import styles from "./PostItem.module.css"
@@ -11,19 +11,35 @@ import { deletePost } from "@/lib/db-utils"
 export default function PostItem({post, slugs, isOwner, boardId}: {post: PostItems, slugs: string[], isOwner: boolean, boardId: string}) {
     const [showOptions, setShowOptions] = useState(false)
     const [confirmDelete, setConfirmDelete] = useState(false)
+    const [deleting, setDeleting] = useState(false)
+
+    const queryClient = useQueryClient()
 
     const readableDate = new Date(post.post.createdAt).toLocaleDateString("en-US", {
         day: "numeric",
         month: "long"
       });
 
-    const handleDelete = async (e: SyntheticEvent) => {
+ 
+
+    const { mutateAsync } = useMutation(deletePost, {
+        onSuccess: () => {
+            queryClient.invalidateQueries(['collection'])
+            setDeleting(false)
+            window.scrollTo({
+                top: 0,
+                left: 0
+              });
+            setShowOptions(false)
+          },
+    });
+  
+    const preDelete = async (e: SyntheticEvent) => {
         e.preventDefault()
-        console.log("removing post")
-        const remove = await deletePost(boardId, post.post.id)
+        setDeleting(true)
+        mutateAsync({boardId, postId: post.post.id})
     }
 
-  
     return (
         <>
         <div className={styles.container}>
@@ -57,8 +73,8 @@ export default function PostItem({post, slugs, isOwner, boardId}: {post: PostIte
                 {!confirmDelete && <button className={styles.deleteButton} onClick={() => setConfirmDelete(true)}>
                     Delete Post
                 </button>}
-                {confirmDelete && <button className={styles.deleteButton} onClick={handleDelete}>
-                    Yes, delete this post
+                {confirmDelete && <button className={styles.deleteButton} onClick={preDelete}>
+                    {deleting ? `Deleting...` : `Yes, delete this post`}
                 </button>}
                 <button className={styles.cancelButton} onClick={() => setShowOptions(false)}>
                     Cancel

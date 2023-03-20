@@ -11,17 +11,17 @@ datasource db {
 }
 
 model Board {
-  id        String   @id @default(cuid())
-  createdAt DateTime @default(now())
+  id        String       @id @default(cuid())
+  createdAt DateTime     @default(now())
   name      String
-  users     User[]   @relation(name: "users")
-  owner     User     @relation(fields: [ownerId], references: [id], name: "owner")
+  users     User[]       @relation(name: "users")
+  owner     User         @relation(fields: [ownerId], references: [id], name: "owner")
   ownerId   String
   posts     Post[]
   allowList String?
-  public    Boolean  @default(true)
+  privacy   PrivacyLevel @default(ONE)
   registry  String?
-  headerUrl String   @default("")
+  headerUrl String       @default("")
 }
 
 model Post {
@@ -88,4 +88,10 @@ model VerificationToken {
 enum Role {
   USER
   ADMIN
+}
+
+enum PrivacyLevel {
+  ONE
+  TWO
+  THREE
 }

@@ -30,7 +30,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                                 id: user.id
                             }
                         },
-                        public: access,
+                        privacy: access,
                         allowList: accessList,
                         users: {
                             connect: {
@@ -56,7 +56,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         }
     } catch (err) {
         throw new Error("Did not manage to connect")
-        return;
+      
     }
 
 }

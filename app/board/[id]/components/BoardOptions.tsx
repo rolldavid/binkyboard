@@ -27,13 +27,13 @@ const schema = yup
 
 export default function BoardOptions({board, setShowOptions}: {board: Board, setShowOptions: Dispatch<SetStateAction<boolean>> }) {
 
-    const [boardName, setBoardName] = useState("")
+    const [boardName, setBoardName] = useState(board.name)
     const [bannerChanged, setBannerChanged] = useState(false)
     const [chosenFile, setChosenFile] = useState<File>()
-    const [allowList, setAllowList] = useState("")
-    const [access, setAccess] = useState(true)
-    const [registry, setRegistry] = useState("gift")
-    const [preview, setPreview] = useState("")
+    const [allowList, setAllowList] = useState(board.allowList)
+    const [access, setAccess] = useState(board.privacy)
+    const [registry, setRegistry] = useState(board.registry)
+    const [preview, setPreview] = useState(`${process.env.NEXT_PUBLIC_AWS_URL}/${board.headerUrl}`)
     const [loading, setLoading] = useState(false)
     const [deleteButton, setDeleteButton] = useState(false)
 
@@ -49,27 +49,6 @@ export default function BoardOptions({board, setShowOptions}: {board: Board, set
       } = useForm({
         resolver: yupResolver(schema),
       });
-
-    useEffect(() => {
-        setBoardName(board.name)
-    
-        if (board.allowList) {
-            setAllowList(board.allowList)
-        }
-            
-        if (board.public === false) {
-            setAccess(false)
-        } 
-
-        if (board.registry) {
-            setRegistry(board.registry)
-        } else {
-            setRegistry("")
-        }
-        
-        setPreview(`${process.env.NEXT_PUBLIC_AWS_URL}/${board.headerUrl}`)
-        
-    }, [])
 
 
     const handleBanner = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -183,10 +162,10 @@ export default function BoardOptions({board, setShowOptions}: {board: Board, set
                     />
                     <input 
                         type="text"
-                        value={registry}
+                        value={registry ? registry : ""}
                         onChange={(e) => setRegistry(e.target.value)}
                         className={styles.nameInput}
-                        placeholder={registry.length > 0 ? registry : "Registry link"}
+                        placeholder={registry && registry.length > 0 ? registry : "Registry link"}
                     />
                     
                     <div className={styles.accessButtonContainer}>
@@ -196,8 +175,8 @@ export default function BoardOptions({board, setShowOptions}: {board: Board, set
                                 type="radio"
                                 value="public"
                                 id="public"
-                                checked={access ? true : false}
-                                onChange={() => setAccess(true)}
+                                checked={access === "ONE" ? true : false}
+                                onChange={() => setAccess("ONE")}
                             />
                             <span className={styles.accessLabel}>Public - anyone with the link can access <em>{`(recommended)`}</em></span>
                         </label>
@@ -207,18 +186,18 @@ export default function BoardOptions({board, setShowOptions}: {board: Board, set
                                 type="radio"
                                 value="private"
                                 id="private"
-                                checked={!access ? true : false}
-                                onChange={() => setAccess(false)}
+                                checked={access === "TWO" ? true : false}
+                                onChange={() => setAccess("TWO")}
                                 
                             />
                             <span className={styles.accessLabel}>Private - only allowed emails can access</span>
                         </label>
                     </div>
-                    {!access && <div className={styles.accessContainer}>
+                    {access === "TWO" && <div className={styles.accessContainer}>
                         <input 
                             {...register("accessList")}
                             type="textarea"
-                            value={allowList}
+                            value={allowList ? allowList : ""}
                             onChange={e => setAllowList(e.target.value)}
                             className={styles.accessInput}
                             placeholder="Enter emails, separated by commas"

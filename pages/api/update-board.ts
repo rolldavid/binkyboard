@@ -13,9 +13,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             data: {
                 name: boardName,
                 headerUrl: headerUrl,
-                registry: registryLink,
-                public: accessStatus,
-                allowList: accessList.length > 0 ? accessList : ""
+                registry: registryLink ? registryLink : "",
+                privacy: accessStatus,
+                allowList: accessList && accessList.length > 0 ? accessList : ""
             }
             })
 

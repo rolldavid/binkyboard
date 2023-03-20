@@ -53,8 +53,10 @@ export default async function handler(
             displayName: board.posts[index].user.displayName
           }
         })
-
-        res.status(200).json({ posts, isOwner: session.user.email === board.owner.email ? true : false })
+        console.log("sending back posts  ++++++++++++++++++++++++++++++++++++++++++++++++++")
+        const isOwner = session.user.email === board.owner.email ? true : false 
+        console.log(isOwner, "is owner.........................")
+        res.status(200).json({ posts, isOwner })
         return
       }
 

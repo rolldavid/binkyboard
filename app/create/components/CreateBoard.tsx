@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link";
+import { nanoid } from "nanoid"
 import { useState, useEffect, SyntheticEvent } from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
@@ -25,7 +26,7 @@ const schema = yup
 export default function CreateBoard() {
     const [boardName, setBoardName] = useState("")
     const [registry, setRegistry] = useState("")
-    const [access, setAccess] = useState(true)
+    const [access, setAccess] = useState<"ONE" | "TWO" | "THREE">("ONE")
     const [accessList, setAccessList] = useState("")
     const [submitted, setSubmitted] = useState(false)
     const [loading, setLoading] = useState(false)
@@ -58,7 +59,7 @@ export default function CreateBoard() {
 
     const copyLink = (e: SyntheticEvent) => {
         e.preventDefault()
-        navigator.clipboard.writeText(`${process.env.NEXT_PUBLIC_FRONTEND_URL}/${boardLink}`)
+        navigator.clipboard.writeText(`${process.env.NEXT_PUBLIC_FRONTEND_URL}/board/${boardLink}`)
         setCopyText(`✓ Copied`)
     }
    
@@ -93,7 +94,7 @@ export default function CreateBoard() {
                             type="radio"
                             value="public"
                             id="public"
-                            onChange={() => setAccess(true)}
+                            onChange={() => setAccess("ONE")}
                             
                         />
                         <span className={styles.accessLabel}>Public - anyone with the link can access</span>
@@ -104,7 +105,7 @@ export default function CreateBoard() {
                             type="radio"
                             value="private"
                             id="private"
-                            onChange={() => setAccess(false)}
+                            onChange={() => setAccess("TWO")}
                             
                         />
                         <span className={styles.accessLabel}>Private - only allowed emails can access</span>
@@ -137,7 +138,7 @@ export default function CreateBoard() {
                 <button onClick={(e) => copyLink(e)} className={styles.copyLink}>
                     {copyText}
                 </button>
-                <button onClick={() => router.push(`/${boardLink}`)} className={styles.boardLink}>
+                <button onClick={() => router.push(`/board/${boardLink}`)} className={styles.boardLink}>
                     Go to my board
                 </button>
                 
