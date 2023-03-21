@@ -34,6 +34,20 @@ export async function createNewPost(boardId: string, note: string, slugs: string
     return data;
 }
 
+export async function sendAccessEmail(boardId: string) {
+    const res = await fetch("/api/send-access-request", {
+        method: "POST",
+        body: JSON.stringify({
+            boardId
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    const data = await res.json()
+    return data;
+}
+
 // READ
 
 export async function getPostUser(userId: string) {
@@ -181,6 +195,20 @@ export async function updateDisplayName(displayName: string) {
         method: "POST",
         body: JSON.stringify({
             displayName
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    const data = await res.json();
+    return data;
+}
+
+export async function removeBoard(boardId: string) {
+    const res = await fetch("/api/remove-board", {
+        method: "POST",
+        body: JSON.stringify({
+            boardId
         }),
         headers: {
             "Content-Type": "application/json"

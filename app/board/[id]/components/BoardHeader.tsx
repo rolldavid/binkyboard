@@ -6,30 +6,20 @@ import { useQuery } from "@tanstack/react-query"
 import { getBoardHeader } from "@/lib/db-utils"
 import Image from "next/image"
 import gift from "../assets/gift.png"
+import banner from "../assets/banner.png"
 import gear from "../assets/gear.png"
 import Spinner from "@/lib/Spinner"
 import styles from "./BoardHeader.module.css"
 
-export default function BoardHeader({boardId, isOwner, setShowOptions}: {boardId: string, isOwner: boolean, setShowOptions: Dispatch<SetStateAction<boolean>>}) {
+export default function BoardHeader({boardId, isOwner, setShowOptions, boardName, registry, headerUrl}: {boardId: string, isOwner: boolean, setShowOptions: Dispatch<SetStateAction<boolean>>, boardName: string, registry: string, headerUrl: string}) {
 
-    const { data, status } = useQuery(["boardHeader"], () => {
-        return getBoardHeader(boardId)
-      });
-
-
-    if (status === "loading") {
-        return <Spinner />
-    }
-
-    
-
-    if (status === "success" && data && data.board) {
+  
        
     return (
         <div className={styles.container}>
                 <div className={styles.bannerContainer}>
                     <Image
-                        src={`https://d3h42dhdxazsqn.cloudfront.net/${data.board.headerUrl}`}
+                        src={`https://d3h42dhdxazsqn.cloudfront.net/${headerUrl}`}
                         width={600}
                         height={337}
                         alt="banner"
@@ -39,8 +29,8 @@ export default function BoardHeader({boardId, isOwner, setShowOptions}: {boardId
                 </div>
                    
                 <div className={styles.actionContainer}>
-                    {data.board.registry && data.board.registry.length > 0 ? <div className={styles.actionInnerContainer}>
-                        <a target="_blank" href={`${data.board.registry}`} className={styles.giftItem} rel="noopener noreferrer">
+                    {registry.length > 0 ? <div className={styles.actionInnerContainer}>
+                        <a target="_blank" href={`${registry}`} className={styles.giftItem} rel="noopener noreferrer">
                             <Image 
                                 src={gift}
                                 width={25}
@@ -65,11 +55,10 @@ export default function BoardHeader({boardId, isOwner, setShowOptions}: {boardId
                     </div>
                 </div>}
                 <div className={styles.headerContainer}>
-                    <h2 className={styles.boardHeader}>{`${data.board.name}`}</h2>
+                    <h2 className={styles.boardHeader}>{`${boardName}`}</h2>
                 </div>  
         </div>
          )
-    }
-    return null;
+
 }
 

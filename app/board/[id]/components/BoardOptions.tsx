@@ -108,7 +108,7 @@ export default function BoardOptions({boardId, setShowOptions, accessList, priva
 
 
         setLoading(false)
-        queryClient.invalidateQueries(["boardHeader"])
+        queryClient.invalidateQueries(["board"])
         setShowOptions(false)
     }
 

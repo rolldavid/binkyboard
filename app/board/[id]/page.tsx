@@ -1,21 +1,39 @@
 "use client"
 
 import { useQuery } from "@tanstack/react-query";
-import { getBoard } from "@/lib/db-utils";
+import { useRouter } from "next/navigation";
+import { getBoard, removeBoard, sendAccessEmail } from "@/lib/db-utils";
 import AuthContainer from "@/app/auth/components/AuthContainer";
 import Spinner from "@/lib/Spinner"
 import CreatePost from "./components/CreatePost"
 import BoardHeader from './components/BoardHeader';
 import Collection from '@/app/post/components/Collection';
 import styles from "@/styles/Board.module.css"
-import { useState } from "react";
+import { SyntheticEvent, useState } from "react";
 import BoardOptions from "./components/BoardOptions";
 
 export default function Page({params: {id}}: {params: { id: string }}) {
     const [showOptions, setShowOptions] = useState(false)
+
+    const router = useRouter()
+
     const {data, status} = useQuery(["board"], () => {
         return getBoard(id)
       })
+
+    const handleAccess = async (e: SyntheticEvent) => {
+        e.preventDefault()
+        console.log("requesting access")
+        await sendAccessEmail(data.board.id)
+        console.log("requested.....")
+    }
+
+    const handleRemove = async (e:SyntheticEvent) => {
+        e.preventDefault()
+        console.log("removing")
+        await removeBoard(data.board.id)
+        router.push("/")
+    }
 
     if (status === "loading") {
         return <Spinner />
@@ -34,7 +52,7 @@ export default function Page({params: {id}}: {params: { id: string }}) {
             return (
                 <div className={styles.container}>
                     {!showOptions && <>
-                        <BoardHeader boardId={data.board.id} isOwner={true} setShowOptions={setShowOptions}/>
+                        <BoardHeader boardId={data.board.id} isOwner={true} setShowOptions={setShowOptions} headerUrl={data.board.headerUrl} boardName={data.board.name} registry={data.board.registry}/>
                         <CreatePost boardId={data.board.id}/>
                         <Collection boardId={data.board.id} isOwner={true}/>
                     </>}
@@ -46,7 +64,7 @@ export default function Page({params: {id}}: {params: { id: string }}) {
         if (data.board.privacy === "TWO" && data.hasAccess) {
             return (
                 <div className={styles.container}>
-                    <BoardHeader boardId={data.board.id} isOwner={false} setShowOptions={setShowOptions}/>
+                    <BoardHeader boardId={data.board.id} isOwner={true} setShowOptions={setShowOptions} headerUrl={data.board.headerUrl} boardName={data.board.name} registry={data.board.registry}/>
                     <CreatePost boardId={data.board.id}/>
                     <Collection boardId={data.board.id} isOwner={false}/>
                 </div>
@@ -56,7 +74,17 @@ export default function Page({params: {id}}: {params: { id: string }}) {
         if (data.board.privacy === "TWO" && !data.hasAccess) {
             return (
                 <div className={styles.container}>
-                    You do not have access
+                    <div className={styles.accessContainer}>
+                        <p className={styles.accessTitle}>The owner has made this board private.</p>
+                        <div className={styles.updateContainer}>
+                            <button className={styles.requestButton} onClick={handleAccess}>
+                                Request Access
+                            </button>
+                            <button className={styles.deleteButton} onClick={handleRemove}>
+                                Remove
+                            </button>
+                        </div>
+                    </div>
                 </div>
             )
         }
@@ -64,7 +92,7 @@ export default function Page({params: {id}}: {params: { id: string }}) {
 
         return (
             <div className={styles.container}>
-                <BoardHeader boardId={data.board.id} isOwner={false} setShowOptions={setShowOptions}/>
+                <BoardHeader boardId={data.board.id} isOwner={false} setShowOptions={setShowOptions} headerUrl={data.board.headerUrl} boardName={data.board.name} registry={data.board.registry}/>
                 <CreatePost boardId={data.board.id}/>
                 <Collection boardId={data.board.id} isOwner={false}/>
             </div>
