@@ -94,6 +94,7 @@ export default function CreateBoard() {
                             type="radio"
                             value="public"
                             id="public"
+                            checked={access === "ONE" ? true : false}
                             onChange={() => setAccess("ONE")}
                             
                         />
@@ -105,13 +106,14 @@ export default function CreateBoard() {
                             type="radio"
                             value="private"
                             id="private"
+                            checked={access === "TWO" ? true : false}
                             onChange={() => setAccess("TWO")}
                             
                         />
                         <span className={styles.accessLabel}>Private - only allowed emails can access</span>
                     </label>
                 </div>
-                {!access && <div className={styles.accessContainer}>
+                {access === "TWO" && <div className={styles.accessContainer}>
                     
                     <input 
                         {...register("accessList")}

@@ -4,16 +4,14 @@ import Image from "next/image"
 import axios from "axios"
 import { nanoid } from "nanoid"
 import { useRouter } from "next/navigation"
-import { useQueryClient } from "@tanstack/react-query"
-import type { Board } from "@prisma/client"
-import { updateBoard, deleteBoard } from "@/lib/db-utils"
+import { useQuery, useQueryClient } from "@tanstack/react-query"
+import { updateBoard, deleteBoard, getBoardOptions } from "@/lib/db-utils"
 import edit from "../assets/editButton.png"
 import { Dispatch, SyntheticEvent, useEffect, useState, SetStateAction } from "react"
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Spinner from "@/lib/Spinner"
-import ScrollToTop from "@/lib/ScrollToTop"
 import styles from "./BoardOptions.module.css"
 
 
@@ -25,22 +23,26 @@ const schema = yup
 .required();
 
 
-export default function BoardOptions({board, setShowOptions}: {board: Board, setShowOptions: Dispatch<SetStateAction<boolean>> }) {
+export default function BoardOptions({boardId, setShowOptions, accessList, privacy, registryLink, headerUrl, name}: {boardId: string, setShowOptions: Dispatch<SetStateAction<boolean>>, accessList: string, privacy: "ONE" | "TWO" | "THREE", registryLink: string, headerUrl: string, name: string }) {
 
-    const [boardName, setBoardName] = useState(board.name)
+    const [boardName, setBoardName] = useState(name)
     const [bannerChanged, setBannerChanged] = useState(false)
     const [chosenFile, setChosenFile] = useState<File>()
-    const [allowList, setAllowList] = useState(board.allowList)
-    const [access, setAccess] = useState(board.privacy)
-    const [registry, setRegistry] = useState(board.registry)
-    const [preview, setPreview] = useState(`${process.env.NEXT_PUBLIC_AWS_URL}/${board.headerUrl}`)
+    const [allowList, setAllowList] = useState(accessList)
+    const [access, setAccess] = useState(privacy)
+    const [registry, setRegistry] = useState(registryLink)
+    const [preview, setPreview] = useState(`${process.env.NEXT_PUBLIC_AWS_URL}/${headerUrl}`)
     const [loading, setLoading] = useState(false)
     const [deleteButton, setDeleteButton] = useState(false)
 
-    const queryClient = useQueryClient()
+    //`${process.env.NEXT_PUBLIC_AWS_URL}/${board.headerUrl}`
+
 
     const router = useRouter()
 
+    const queryClient = useQueryClient()
+
+   
     const {
         register,
         handleSubmit,
@@ -49,7 +51,6 @@ export default function BoardOptions({board, setShowOptions}: {board: Board, set
       } = useForm({
         resolver: yupResolver(schema),
       });
-
 
     const handleBanner = async (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault()
@@ -74,7 +75,7 @@ export default function BoardOptions({board, setShowOptions}: {board: Board, set
         e.preventDefault()
         setLoading(true)
 
-        let bannerUrl = board.headerUrl
+        let bannerUrl = headerUrl
        
         if (bannerChanged) {
             const s3id = nanoid()
@@ -103,134 +104,137 @@ export default function BoardOptions({board, setShowOptions}: {board: Board, set
             
             }
         }
-        await updateBoard(board.id, bannerUrl, boardName, registry, access, allowList)
+        await updateBoard(boardId, bannerUrl, boardName, registry, access, allowList)
 
-        await queryClient.invalidateQueries(['boardMain'])
+
         setLoading(false)
+        queryClient.invalidateQueries(["boardHeader"])
         setShowOptions(false)
     }
 
     const handleDelete = async (e: SyntheticEvent) => {
         e.preventDefault()
-        const res = await deleteBoard(board.id)
+        const res = await deleteBoard(boardId)
         router.push("/")
         
     }
-    return  (
-        <div className={styles.optionsOuter}>
-            <div className={styles.optionsContainer}>
-                {!loading && <div className={styles.nameContainer}>
-                    <div className={styles.bannerWrapper}>
-                        <Image 
-                            src={preview}
-                            width={600}
-                            height={337}
-                            alt="banner"
-                            className={styles.banner}
-                        
+
+    
+       return  (
+            <div className={styles.optionsOuter}>
+                <div className={styles.optionsContainer}>
+                    {!loading && <form className={styles.nameContainer}>
+                        <div className={styles.bannerWrapper}>
+                            <Image 
+                                src={preview}
+                                width={600}
+                                height={337}
+                                alt="banner"
+                                className={styles.banner}
+                            />
+                        </div>
+                        <div className={styles.editBannerContainer}>
+                            <div className={styles.editButton}>
+                                <label htmlFor="uploadBanner" className={styles.uploadItem}>
+                                    <Image 
+                                        src={edit}
+                                        width={45}
+                                        height={45}
+                                        alt="edit banner button"
+                                        className={styles.editBanner}
+                                    />
+                                </label>
+                            </div>
+                        </div>
+                        <div className={styles.uploadHidden}>
+                            <input 
+                                id="uploadBanner"
+                                className={styles.uploadItem} 
+                                type="file" 
+                                accept={"image/png, image/jpeg, image/*"}
+                                onChange={handleBanner}
+                                hidden
+                            />    
+                        </div>
+                    
+                        <input 
+                            type="text"
+                            value={boardName}
+                            onChange={(e) => setBoardName(e.target.value)}
+                            className={styles.nameInput}
                         />
-                    </div>
-                    <div className={styles.editBannerContainer}>
-                        <div className={styles.editButton}>
-                            <label htmlFor="uploadBanner" className={styles.uploadItem}>
-                                <Image 
-                                    src={edit}
-                                    width={45}
-                                    height={45}
-                                    alt="edit banner button"
-                                    className={styles.editBanner}
+                        <input 
+                            type="text"
+                            value={registry}
+                            onChange={(e) => setRegistry(e.target.value)}
+                            className={styles.nameInput}
+                            placeholder={registry && registry.length > 0 ? registry : "Registry link"}
+                        />
+                        
+                        <div className={styles.accessButtonContainer}>
+                            <label htmlFor="public" className={styles.accessButton}>
+                                <input
+                                    {...register("access")}
+                                    type="radio"
+                                    value="public"
+                                    id="public"
+                                    checked={access === "ONE" ? true : false}
+                                    onChange={() => setAccess("ONE")}
                                 />
+                                <span className={styles.accessLabel}>Public - anyone with the link can access <em>{`(recommended)`}</em></span>
+                            </label>
+                            <label htmlFor="private" className={styles.accessButton}>
+                                <input
+                                    {...register("access")}
+                                    type="radio"
+                                    value="private"
+                                    id="private"
+                                    checked={access === "TWO" ? true : false}
+                                    onChange={() => setAccess("TWO")}
+                                    
+                                />
+                                <span className={styles.accessLabel}>Private - only allowed emails can access</span>
                             </label>
                         </div>
-                    </div>
-                    <div className={styles.uploadHidden}>
-                        <input 
-                            id="uploadBanner"
-                            className={styles.uploadItem} 
-                            type="file" 
-                            accept={"image/png, image/jpeg, image/*"}
-                            onChange={handleBanner}
-                            hidden
-                        />    
-                    </div>
-                   
-                    <input 
-                        type="text"
-                        value={boardName}
-                        onChange={(e) => setBoardName(e.target.value)}
-                        className={styles.nameInput}
-                    />
-                    <input 
-                        type="text"
-                        value={registry ? registry : ""}
-                        onChange={(e) => setRegistry(e.target.value)}
-                        className={styles.nameInput}
-                        placeholder={registry && registry.length > 0 ? registry : "Registry link"}
-                    />
-                    
-                    <div className={styles.accessButtonContainer}>
-                        <label htmlFor="public" className={styles.accessButton}>
-                            <input
-                                {...register("access")}
-                                type="radio"
-                                value="public"
-                                id="public"
-                                checked={access === "ONE" ? true : false}
-                                onChange={() => setAccess("ONE")}
+                        {access === "TWO" && <div className={styles.accessContainer}>
+                            <input 
+                                {...register("accessList")}
+                                type="textarea"
+                                value={allowList}
+                                onChange={e => setAllowList(e.target.value)}
+                                className={styles.accessInput}
+                                placeholder="Enter emails, separated by commas"
                             />
-                            <span className={styles.accessLabel}>Public - anyone with the link can access <em>{`(recommended)`}</em></span>
-                        </label>
-                        <label htmlFor="private" className={styles.accessButton}>
-                            <input
-                                {...register("access")}
-                                type="radio"
-                                value="private"
-                                id="private"
-                                checked={access === "TWO" ? true : false}
-                                onChange={() => setAccess("TWO")}
-                                
-                            />
-                            <span className={styles.accessLabel}>Private - only allowed emails can access</span>
-                        </label>
-                    </div>
-                    {access === "TWO" && <div className={styles.accessContainer}>
-                        <input 
-                            {...register("accessList")}
-                            type="textarea"
-                            value={allowList ? allowList : ""}
-                            onChange={e => setAllowList(e.target.value)}
-                            className={styles.accessInput}
-                            placeholder="Enter emails, separated by commas"
-                        />
-                    </div>
-                    }
-
-                    <div className={styles.saveContainer}>
-                        <button className={styles.saveButton} onClick={handleUpdate}>
-                            Save
-                        </button>
-                        <button className={styles.cancelButton} onClick={() => setShowOptions(false)}>
-                            Cancel
-                        </button>
-                    </div>
-                    {!deleteButton && <p className={styles.deletePromptContainer}>Ready to leave it behind? <span className={styles.deletePrompt} onClick={() => setDeleteButton(prev => !prev)}>Delete this board.</span></p>}
-                    {deleteButton &&
-                        <div className={styles.deleteContainer}>
-                            <p className={styles.deleteNote}>Deleting will permanently delete this board and all posts, forever.</p>
-                            <button className={styles.deleteButton} onClick={e => handleDelete(e)}>
-                                Yes, delete the board
-                            </button>
-                            <button className={styles.cancelButton} onClick={() => setDeleteButton(false)}>Nevermind</button>
                         </div>
+                        }
+
+                        <div className={styles.saveContainer}>
+                            <button className={styles.saveButton} onClick={handleUpdate}>
+                                Save
+                            </button>
+                            <button className={styles.cancelButton} onClick={() => setShowOptions(false)}>
+                                Cancel
+                            </button>
+                        </div>
+                        {!deleteButton && <p className={styles.deletePromptContainer}>Ready to leave it behind? <span className={styles.deletePrompt} onClick={() => setDeleteButton(prev => !prev)}>Delete this board.</span></p>}
+                        {deleteButton &&
+                            <div className={styles.deleteContainer}>
+                                <p className={styles.deleteNote}>Deleting will permanently delete this board and all posts, forever.</p>
+                                <button className={styles.deleteButton} onClick={e => handleDelete(e)}>
+                                    Yes, delete the board
+                                </button>
+                                <button className={styles.cancelButton} onClick={() => setDeleteButton(false)}>Nevermind</button>
+                            </div>
+                        }
+                    </form>}
+                    {loading && 
+                    <div className={styles.loadingContainer}>
+                        <Spinner />
+                      
+                    </div>
                     }
-                </div>}
-                {loading && 
-                <div className={styles.loadingContainer}>
-                    <Spinner />
-                    <ScrollToTop />
                 </div>
-                }
             </div>
-        </div>
-    )
+        ) 
+   
 }

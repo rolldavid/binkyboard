@@ -50,6 +50,34 @@ export async function getPostUser(userId: string) {
     return data;
 }
 
+export async function getBoardOptions(boardId: string) {
+    const res = await fetch("/api/get-board-options", {
+        method: "POST",
+        body: JSON.stringify({
+            boardId
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    const data = await res.json()
+    return data;
+}
+
+export async function getBoardHeader(boardId: string) {
+    const res = await fetch("/api/get-board-header", {
+        method: "POST",
+        body: JSON.stringify({
+            boardId
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    const data = await res.json()
+    return data;
+}
+
 export async function getPosts(boardId: string) {
     const res = await fetch("/api/get-posts", {
         method: "POST",
@@ -67,6 +95,12 @@ export async function getPosts(boardId: string) {
 
 export async function getUserSession() {
     const res = await fetch("/api/get-user-session")
+    const data = await res.json()
+    return data;
+}
+
+export async function getUserBoards() {
+    const res = await fetch("/api/get-user-boards")
     const data = await res.json()
     return data;
 }

@@ -8,9 +8,9 @@ import profile from "../assets/prof.png"
 import styles from "./NavLinks.module.css"
 
 
-export default function NavLinks({userId, admin}: {userId: string, admin: boolean}) {
+export default function NavLinks({userId, admin, signedIn}: {userId: string, admin: boolean, signedIn: boolean}) {
    
-    if (userId !== "nope") {
+    if (signedIn) {
         return (
             <nav className={styles.container}>
                 <div className={styles.logoContainer}>

@@ -10,7 +10,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         if (session?.user) {
             res.status(201).json({session: true})
         } else {
-            res.status(201).json({message: "Did not find user"})
+            res.status(201).json({session: false})
         }
         
     } catch (err) {

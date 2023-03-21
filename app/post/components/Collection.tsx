@@ -9,9 +9,8 @@ import styles from "./Collection.module.css"
 import Spinner from "@/lib/Spinner"
 
 
-export default function Collection({boardId}: {boardId: string}) {
+export default function Collection({boardId, isOwner}: {boardId: string, isOwner: boolean}) {
 
- 
     const { data, status } = useQuery(["collection"], () => {
         return getPosts(boardId)
       });
@@ -29,7 +28,7 @@ export default function Collection({boardId}: {boardId: string}) {
                         data.posts.map((post: PostItems, index: number) => {
                 
                             return (
-                                <PostItem key={index} post={post} slugs={post.post.slugs} isOwner={data.isOwner} boardId={boardId}/>
+                                <PostItem key={index} post={post} slugs={post.post.slugs} boardId={boardId}/>
                             )
                         })
                     }
@@ -38,7 +37,7 @@ export default function Collection({boardId}: {boardId: string}) {
         )}
 
     return (
-        <div>Hey</div>
+        <div>Hey there</div>
     )
 }
 

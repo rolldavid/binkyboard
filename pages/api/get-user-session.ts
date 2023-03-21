@@ -21,95 +21,50 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                         select: {
                             provider: true
                         }
-                    },
-                    boards: true,
-                    ownedBoards: true
+                    }
                 }
             })
 
-            if (user) {
-                
-                if (user.accounts && user.accounts.length > 0 && user.accounts[0].provider) {
-                    if (user.displayName === null) {
+            if (user && user.accounts && user.displayName === null) {
                      
-                        if (user.accounts[0].provider === "google") {
-                        
-                            const splitName = user.name?.split(" ")
-                            if (splitName) {
-                                const firstNameRaw = splitName[0]
-                                let firstName = ""
-    
-                                for (let i = 0; i < firstNameRaw.length; i++) {
-                                    if (i === 0) {
-                                        firstName = firstNameRaw[i].toUpperCase()
-                                    } else {
-                                        firstName += firstNameRaw[i]
-                                    }
-                                }
-                                
-    
-                                const lastName = splitName[1].slice(0, 1).toUpperCase()
-    
-                                await prisma.user.update({
-                                    where: { id: user.id},
-                                    data: {
-                                        displayName: `${firstName} ${lastName}`
-                                    }
-                                })
-                                }
-                            } else {
-                                await prisma.user.update({
-                                    where: { id: user.id},
-                                    data: {
-                                        displayName: "binky"
-                                    }
-                                })
-                            }
-
-                        }
-
-                        res.status(201).json({
-                            session: true, 
-                            userId: user.id, 
-                            role: user.role, 
-                            displayName: user.displayName,
-                            boards: user.boards,
-                            ownedBoards: user.ownedBoards,
-                            email: user.email
-                        })
-                        return;
-                    }
-
-                    else {
-                        if (user.displayName === null) {
-                                await prisma.user.update({
-                                    where: { id: user.id},
-                                    data: {
-                                        displayName: "binky"
-                                    }
-                                })
-                        }
-                        res.status(201).json({
-                            session: true, 
-                            userId: user.id, 
-                            role: user.role, 
-                            displayName: user.displayName,
-                            boards: user.boards,
-                            ownedBoards: user.ownedBoards
-                        })
-                        return;
-
-                    }
+                if (user.accounts[0].provider === "google") {
                 
-                    
+                    const splitName = user.name?.split(" ")
+                    if (splitName) {
+                        const firstNameRaw = splitName[0]
+                        let firstName = ""
+
+                        for (let i = 0; i < firstNameRaw.length; i++) {
+                            if (i === 0) {
+                                firstName = firstNameRaw[i].toUpperCase()
+                            } else {
+                                firstName += firstNameRaw[i]
+                            }
+                        }
+                        
+
+                        const lastName = splitName[1].slice(0, 1).toUpperCase()
+
+                        await prisma.user.update({
+                            where: { id: user.id},
+                            data: {
+                                displayName: `${firstName} ${lastName}`
+                            }
+                        })
+                        }
+                    } 
+
+                
+                res.status(201).json({session: true, userId: user.id})
+
+            } else if (user) {
+                res.status(201).json({session: true, userId: user.id})
             }
-            res.status(401).json({session: false, userId: "nope"})
-            
         } else {
-            res.status(401).json({session: false, userId: "nope"})
+            res.status(401).json({session: true, userId: undefined})
         }
+                       
     } catch (err) {
         throw new Error("Did not manage to connect")
     }
-
 }

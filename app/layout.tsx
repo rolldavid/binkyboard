@@ -1,17 +1,17 @@
 
-import type { Metadata } from 'next'
 import Footer from './footer/components/Footer'
 import NavContainer from './nav/components/NavContainer'
 import QueryProvider from '@/lib/QueryProvider'
 import styles from "@/styles/Home.module.css"
-
 import "@/styles/globals.css"
+
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+
 
   return (
     <html lang="en">
@@ -33,7 +33,7 @@ export default function RootLayout({
   )
 }
 
-export const metadata: Metadata = {
+/* export const metadata: Metadata = {
   title: "binkyboard",
   description: "A simple place to celebrate life's biggest moments",
   openGraph: {
@@ -51,4 +51,4 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en-US"
   },
-} 
+}  */

@@ -13,13 +13,7 @@ export default async function handler(
     const { boardId } = req.body;
 
     try {
-
-      const session = await getServerSession(req, res, authOptions)
-        if (!session) {
-            res.status(401)
-            return
-        }
-
+      
       const board = await prisma.board.findUnique({
         where: {
           id: boardId
@@ -37,33 +31,26 @@ export default async function handler(
               }
             }
           },
-          owner: {
-            select: {
-              email: true
-            }
-          }
+          
         }
       })
 
+      if (board) {
 
-      if (board && session.user?.email) {
         const posts = board.posts.map((post, index) => {
           return {
             post,
             displayName: board.posts[index].user.displayName
           }
         })
-        console.log("sending back posts  ++++++++++++++++++++++++++++++++++++++++++++++++++")
-        const isOwner = session.user.email === board.owner.email ? true : false 
-        console.log(isOwner, "is owner.........................")
-        res.status(200).json({ posts, isOwner })
+        res.status(200).json({ posts })
         return
       }
 
-      res.status(404).json({status: "nope"})
+    
+      throw new Error("Did not manage to connect")
 
     } catch {
       throw new Error("Did not manage to connect")
     }
-
 }

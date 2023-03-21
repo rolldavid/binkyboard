@@ -1,30 +1,30 @@
 "use client"
 
 import type { Board } from "@prisma/client"
-import { getUserSession } from "@/lib/db-utils"
+import { getUserBoards } from "@/lib/db-utils"
 import { useRouter } from "next/navigation"
 import { useQuery } from "@tanstack/react-query"
 import Link from "next/link"
 import Spinner from "@/lib/Spinner"
 import BoardCard from "@/app/board/[id]/components/BoardCard"
-import styles from '@/styles/Home.module.css'
-import ScrollToTop from "@/lib/ScrollToTop"
+import styles from './Landing.module.css'
 
 export default function Page() {
   const router = useRouter()
 
-  const { data, status } = useQuery(["user"], () => {
-    return getUserSession()
+  const { data, status } = useQuery(["userBoards"], () => {
+    return getUserBoards()
   });
 
   if (status === "loading") {
       return <Spinner />
   }
 
-  if (data && data.boards && status === "success") {
+  if (status === "success" && data.boards) {
       return (
-        <>
-        <main className={styles.container}>
+  
+        <div className={styles.container}>
+
           {data.boards.length > 0 ? <div className={styles.boardContainer}>
             <div className={styles.titleContainer}>
               <h2 className={styles.titleText}>Your Boards</h2>
@@ -38,20 +38,25 @@ export default function Page() {
                   )
                 })
               }
-              </div> :
-              <div className={styles.noBoardContainer}>
-                  <p className={styles.noBoardText}>You don&apos;t have any boards yet 😢</p>
-                  <button className={styles.createButton} onClick={() => router.push("create")}>
-                    Create a Board        
-                  </button>
-              </div>
-          
+            </div> :
+            <div className={styles.noBoardContainer}>
+                <p className={styles.noBoardText}>You don&apos;t have any boards yet 😢</p>
+                <button className={styles.createButton} onClick={() => router.push("create")}>
+                  Create a Board        
+                </button>
+            </div>
           }
-        </main>
-        <ScrollToTop />
-        </>
+
+        </div>
       )
     }
 
-    return null;
+    return (
+      <div className={styles.noBoardContainer}>
+          <p className={styles.noBoardText}>You don&apos;t have any boards yet 😢</p>
+          <button className={styles.createButton} onClick={() => router.push("create")}>
+            Create a Board        
+          </button>
+      </div>
+    )
 }
