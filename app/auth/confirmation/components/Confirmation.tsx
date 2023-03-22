@@ -22,7 +22,7 @@ export default function Confirmation() {
     }
 
     if (invite) {
-      router.push(`/${invite}`)
+      router.push(`/board/${invite}`)
      
     } else {
       router.push(`/`)
