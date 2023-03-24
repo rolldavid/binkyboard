@@ -2,6 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
+import { useUser } from "@auth0/nextjs-auth0/client";
 import { getBoard, removeBoard, sendAccessEmail } from "@/lib/db-utils";
 import AuthContainer from "@/app/auth/components/AuthContainer";
 import Spinner from "@/lib/Spinner"
@@ -9,17 +10,22 @@ import CreatePost from "./components/CreatePost"
 import BoardHeader from './components/BoardHeader';
 import Collection from '@/app/post/components/Collection';
 import styles from "@/styles/Board.module.css"
-import { SyntheticEvent, useState } from "react";
+import { SyntheticEvent, useEffect, useState } from "react";
 import BoardOptions from "./components/BoardOptions";
 
 export default function Page({params: {id}}: {params: { id: string }}) {
     const [showOptions, setShowOptions] = useState(false)
 
     const router = useRouter()
+    const {isLoading, user, error} = useUser()
 
     const {data, status} = useQuery(["board"], () => {
         return getBoard(id)
       })
+
+    useEffect(() => {
+        localStorage.setItem("invite", id)
+    }, [])
 
     const handleAccess = async (e: SyntheticEvent) => {
         e.preventDefault()
@@ -35,11 +41,11 @@ export default function Page({params: {id}}: {params: { id: string }}) {
         router.push("/")
     }
 
-    if (status === "loading") {
+    if (isLoading) {
         return <Spinner />
     }
 
-    if (status === "success" && !data.session) {
+    if (!isLoading && (!user || error)) {
         return (
             <div className={styles.authContainer}>
                 <AuthContainer />
@@ -47,7 +53,7 @@ export default function Page({params: {id}}: {params: { id: string }}) {
         )
     }
 
-    if (status === "success" && data.board) {
+    if (!isLoading && user && status === "success" && data.board) {
         if (data.isOwner) {
             return (
                 <div className={styles.container}>

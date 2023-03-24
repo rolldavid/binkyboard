@@ -107,16 +107,15 @@ export async function getPosts(boardId: string) {
 }
 
 
-export async function getUserSession() {
-    const res = await fetch("/api/get-user-session")
-    const data = await res.json()
-    return data;
-}
-
 export async function getUserBoards() {
     const res = await fetch("/api/get-user-boards")
     const data = await res.json()
     return data;
+}
+
+export async function getUserId() {
+    const res = await fetch("/api/get-user-id")
+    return res.json()
 }
 
 export async function getSession() {
@@ -190,6 +189,8 @@ export async function updateBoard(boardId: string, headerUrl: string, boardName:
 }
 
 
+
+
 export async function updateDisplayName(displayName: string) {
     const res = await fetch("/api/update-display-name", {
         method: "POST",
@@ -218,6 +219,11 @@ export async function removeBoard(boardId: string) {
     return data;
 }
 
+export async function updateUser(){
+    const res = await fetch("/api/update-user");
+    const data = await res.json();
+    return data;
+}
 
 // DELETE
 

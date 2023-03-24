@@ -1,32 +1,60 @@
 "use client"
 
-
-import { useQuery } from "@tanstack/react-query";
-import { getUserSession } from "@/lib/db-utils"
+import { useUser } from "@auth0/nextjs-auth0/client"
+import { useQuery, useQueryClient } from "@tanstack/react-query"
+import { getUserId, updateUser } from "@/lib/db-utils"
+import { useState, useEffect } from "react"
 import NavLinks from "./NavLinks"
 import styles from "./NavContainer.module.css"
+import Spinner from "@/lib/Spinner"
 
 
 export default function NavContainer() {
+    const [userId, setUserId] = useState("")
+    const [userRole, setUserRole] = useState("")
+    const [userUpdated, setUserUpdated] = useState(false)
 
-    const {data, status} = useQuery(["nav"], () => {
-        return getUserSession()
+    const queryClient = useQueryClient()
+
+    const {isLoading, user, error} = useUser()
+
+    const {data, status} = useQuery(["userId"], () => {
+        return getUserId()
     })
 
-    if (status === "success" && data && !data.session) {
+    useEffect(() => {
+        if (user) {
+            const upUser = async () => {
+                await updateUser()
+                queryClient.invalidateQueries(["userId"])
+            }
+            upUser()
+        }
+    }, [user])
+
+
+    if (isLoading || !user || error) {
+       
         return (
             <div className={styles.container}>
-            <NavLinks  userId={data.userId} admin={false} signedIn={false}/>
-        </div>
+                <NavLinks  userId={userId} admin={false} signedIn={false}/>
+            </div>
         )
     }
-
-
-    if (data && data.userId && status === "success") {
-        return (
-            <div className={styles.container}>
+   
+    if (user && data) {
+      
+        if (userRole === "ADMIN") {
+            return (
+                <div className={styles.container}>
                 <NavLinks  userId={data.userId} admin={true} signedIn={true}/>
             </div>
+            )
+        }
+        return (
+            <div className={styles.container}>
+            <NavLinks  userId={data.userId} admin={false} signedIn={true}/>
+        </div>
         )
     }
 

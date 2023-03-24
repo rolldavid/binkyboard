@@ -14,12 +14,7 @@ export default function Confirmation() {
   const router = useRouter()
 
   useEffect(() => {
-    const username = localStorage.getItem("displayName")
     invite = localStorage.getItem("invite")
-
-    if (username) {
-      updateDisplayName(username)
-    }
 
     if (invite) {
       router.push(`/board/${invite}`)

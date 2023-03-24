@@ -1,14 +1,15 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { getServerSession } from "next-auth/next"
-import { authOptions } from "./auth/[...nextauth]";
+import { getSession } from '@auth0/nextjs-auth0';
 import prisma from "@/lib/prisma";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 
     const { boardName, access, registry, accessList } = req.body;
 
+    console.log("lets try this")
     try {
-        const session = await getServerSession(req, res, authOptions)
+        const session = await getSession(req, res)
+        console.log("no session")
         if (!session) {
             return res.status(201).json({status: "failed"})
         }
@@ -22,6 +23,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             })
 
             if (user) {
+                console.log("yes user!!!!")
                 const board = await prisma.board.create({
                     data: {
                         name: boardName,

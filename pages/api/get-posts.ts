@@ -1,7 +1,5 @@
 
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { getServerSession } from "next-auth/next"
-import { authOptions } from "./auth/[...nextauth]";
 import prisma from '@/lib/prisma'
 
 
@@ -26,7 +24,7 @@ export default async function handler(
             include: {
               user: {
                 select: {
-                  displayName: true
+                  name: true
                 }
               }
             }
@@ -40,7 +38,7 @@ export default async function handler(
         const posts = board.posts.map((post, index) => {
           return {
             post,
-            displayName: board.posts[index].user.displayName
+            displayName: board.posts[index].user.name
           }
         })
         res.status(200).json({ posts })

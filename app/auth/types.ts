@@ -1,6 +1,7 @@
 export interface LoginProps {
     fullname: string
     email: string
+    password: string
 }
 
 export interface SignupProps {

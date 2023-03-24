@@ -1,69 +1,30 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { getServerSession } from "next-auth/next"
-import { authOptions } from "./auth/[...nextauth]";
+import { getSession } from '@auth0/nextjs-auth0';
 import prisma from "@/lib/prisma";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 
     try {
-        const session = await getServerSession(req, res, authOptions)
+        const session = await getSession(req, res)
         if (!session) {
             return res.status(201).json({session: false, userId: undefined})
         }
 
+        console.log(session.user)
+
         if (session?.user?.email) {
-            const user = await prisma.user.findUnique({
+            const upsertUser = await prisma.user.upsert({
                 where: {
-                    email: session.user.email
+                  email: session.user.email,
                 },
-                include: {
-                    accounts: {
-                        select: {
-                            provider: true
-                        }
-                    }
-                }
-            })
-
-            if (user && user.accounts && user.displayName === null) {
-                     
-                if (user.accounts[0].provider === "google") {
-                
-                    const splitName = user.name?.split(" ")
-                    if (splitName) {
-                        const firstNameRaw = splitName[0]
-                        let firstName = ""
-
-                        for (let i = 0; i < firstNameRaw.length; i++) {
-                            if (i === 0) {
-                                firstName = firstNameRaw[i].toUpperCase()
-                            } else {
-                                firstName += firstNameRaw[i]
-                            }
-                        }
-                        
-
-                        const lastName = splitName[1].slice(0, 1).toUpperCase()
-
-                        await prisma.user.update({
-                            where: { id: user.id},
-                            data: {
-                                displayName: `${firstName} ${lastName}`
-                            }
-                        })
-                        }
-                    } 
-
-                
-                res.status(201).json({session: true, userId: user.id})
-
-            } else if (user) {
-                res.status(201).json({session: true, userId: user.id})
-            }
-        } else {
-            res.status(401).json({session: true, userId: undefined})
+                update: {},
+                create: {
+                  email: session.user.email,
+                  name: session.user.nickname,
+                },
+              })
+            
         }
-                       
     } catch (err) {
         throw new Error("Did not manage to connect")
     }

@@ -2,8 +2,8 @@
 
 import { useState, SyntheticEvent, useEffect } from "react"
 import { useRouter } from "next/navigation"
+import { useUser } from "@auth0/nextjs-auth0/client"
 import { useQuery } from "@tanstack/react-query"
-import { signOut } from "next-auth/react"
 import { deleteUser, updateDisplayName } from "@/lib/db-utils"
 import Spinner from "@/lib/Spinner"
 import { getProfile } from "@/lib/db-utils"
@@ -19,6 +19,9 @@ export default function Page({params: {slug}}: {params: { slug: string }}) {
     const [saveName, setSaveName] = useState(false)
     const [loading, setLoading] = useState(false)
     const [showDeleteModule, setShowDeleteModule] = useState(false)
+
+    const {isLoading, user, error} = useUser()
+
 
     const { data, status } = useQuery(["profile"], () => {
         return getProfile(slug)
@@ -69,20 +72,12 @@ export default function Page({params: {slug}}: {params: { slug: string }}) {
       router.push("/")
     }
 
-    const handleLogout = (e: SyntheticEvent) => {
-      localStorage.setItem("user", "")
-      signOut({
-          callbackUrl: "/"
-      });
-      }
 
     const handleDelete = async (e: SyntheticEvent) => {
       e.preventDefault()
       localStorage.setItem("user", "")
       const res = await deleteUser()
-      signOut({
-          callbackUrl: "/"
-      });
+      router.push("/api/auth/logout")
       
     }
 
@@ -103,9 +98,9 @@ export default function Page({params: {slug}}: {params: { slug: string }}) {
                         Save
                       </button>
                   </div>}
-                  <button className={styles.logoutButton} onClick={e => handleLogout(e)}>
+                  <a className={styles.logoutButton} href="/api/auth/logout">
                     Logout
-                </button>
+                </a>
                 <p className={styles.deletePromptContainer}>Not having fun? <span className={styles.deletePrompt} onClick={() => setShowDeleteModule(true)}>Delete your account</span></p>
               </div>}
               {loading && <div className={styles.container}>

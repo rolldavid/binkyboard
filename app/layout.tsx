@@ -2,6 +2,7 @@
 import Footer from './footer/components/Footer'
 import NavContainer from './nav/components/NavContainer'
 import QueryProvider from '@/lib/QueryProvider'
+import { UserProvider } from '@auth0/nextjs-auth0/client'
 import styles from "@/styles/Home.module.css"
 import "@/styles/globals.css"
 
@@ -18,15 +19,17 @@ export default function RootLayout({
       <head />
       <body>
         <QueryProvider>
-          <nav className={styles.nav}>
-              <NavContainer/>
-          </nav>
-          <main className={styles.main}>
-            {children}
-          </main> 
-          <footer className={styles.footer}>
-              <Footer />
-          </footer>
+            <UserProvider>
+            <nav className={styles.nav}>
+                <NavContainer/>
+            </nav>
+            <main className={styles.main}>
+              {children}
+            </main> 
+            <footer className={styles.footer}>
+                <Footer />
+            </footer>
+          </UserProvider>
         </QueryProvider>
       </body>
     </html>

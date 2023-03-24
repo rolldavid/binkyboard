@@ -1,6 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { getServerSession } from "next-auth/next"
-import { authOptions } from "./auth/[...nextauth]";
+import { getSession } from '@auth0/nextjs-auth0';
 import prisma from "@/lib/prisma";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -8,7 +7,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const { boardId, postId } = req.body;
 
     try {
-        const session = await getServerSession(req, res, authOptions)
+        const session = await getSession(req, res)
         if (!session) {
             res.status(401)
             return

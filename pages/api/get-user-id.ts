@@ -4,33 +4,27 @@ import prisma from "@/lib/prisma";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 
-    const { boardId } = req.body;
     try {
         const session = await getSession(req, res)
         if (!session) {
-            res.status(401)
-            return
+            return res.status(201).json({session: false, userId: undefined})
         }
 
+        console.log("user id", session.user)
         if (session?.user?.email) {
-            const user = await prisma.user.update({
+            const user = await prisma.user.findUnique({
                 where: {
                     email: session.user.email
-                },
-                data: {
-                    boards: {
-                        disconnect: {
-                            id: boardId
-                        }
-                    }
-                }   
+                }
             })
 
-            console.log("removed....")
-            res.status(201).json({status: "ok"})
+            res.status(201).json({userId: user?.id, role: user?.role})
+        } else {
+            res.status(201).json({userId: "", role: "USER"})
         }
 
-    } catch {
+
+    } catch (err) {
         throw new Error("Did not manage to connect")
     }
 }
