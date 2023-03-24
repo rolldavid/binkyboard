@@ -1,6 +1,7 @@
 "use client"
 
 import { useRouter } from "next/navigation"
+import Link from "next/link"
 import styles from "./AuthContainer.module.css"
 
 export default function AuthContainer() {
@@ -20,12 +21,11 @@ export default function AuthContainer() {
                 </p>
             </div>
             <div className={styles.authContainer}>
-                <a href="/api/auth/login" className={styles.authButton}>
+                <Link href="/api/auth/login" className={styles.authButton}>
                     <p className={styles.authText}>Continue to Login</p>
-                </a>
+                </Link>
             </div>
         </section>
-
         </>
     )
 }

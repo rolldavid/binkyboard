@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, SyntheticEvent, useEffect } from "react"
+import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useUser } from "@auth0/nextjs-auth0/client"
 import { useQuery } from "@tanstack/react-query"
@@ -98,9 +99,9 @@ export default function Page({params: {slug}}: {params: { slug: string }}) {
                         Save
                       </button>
                   </div>}
-                  <a className={styles.logoutButton} href="/api/auth/logout">
+                  <Link className={styles.logoutButton} href="/api/auth/logout">
                     Logout
-                </a>
+                </Link>
                 <p className={styles.deletePromptContainer}>Not having fun? <span className={styles.deletePrompt} onClick={() => setShowDeleteModule(true)}>Delete your account</span></p>
               </div>}
               {loading && <div className={styles.container}>
