@@ -1,3 +1,4 @@
+"use client"
 
 import CreateBoard from "./components/CreateBoard"
 import styles from "@/styles/Create.module.css"
