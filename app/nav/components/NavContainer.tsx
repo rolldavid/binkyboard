@@ -23,13 +23,12 @@ export default function NavContainer() {
     })
 
     useEffect(() => {
-        if (user) {
             const upUser = async () => {
                 await updateUser()
                 queryClient.invalidateQueries(["userId"])
             }
             upUser()
-        }
+        
     }, [user])
 
 
