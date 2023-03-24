@@ -5,7 +5,7 @@ const nextConfig = {
     serverComponentsExternalPackages: [
       "prisma",
       "@prisma/client",
-      "next-auth/client",
+      "@auth0/nextjs-auth0",
     ],
   },
   images: {
