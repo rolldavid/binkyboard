@@ -17,7 +17,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 where: {
                   email: session.user.email,
                 },
-                update: {},
+                update: {
+                  email: session.user.email,
+                  name: session.user.nickname,
+                },
                 create: {
                   email: session.user.email,
                   name: session.user.nickname,
