@@ -10,7 +10,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             return res.status(201).json({session: false, userId: undefined})
         }
 
-        console.log("user id", session.user)
         if (session?.user?.email) {
             console.log("does have an email +++++++++++++++++++++++", session.user.email)
             const dbUser = await prisma.user.findUnique({
@@ -23,7 +22,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         } else {
             res.status(201).json({userId: "", role: "USER"})
         }
-
 
     } catch (err) {
         throw new Error("Did not manage to connect")

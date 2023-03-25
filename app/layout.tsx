@@ -7,7 +7,6 @@ import styles from "@/styles/Home.module.css"
 import "@/styles/globals.css"
 
 
-
 export default async function RootLayout({
   children,
 }: {
@@ -15,6 +14,7 @@ export default async function RootLayout({
 }) {
 
   return (
+    
     <html lang="en">
       <head />
       <body>

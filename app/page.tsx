@@ -20,7 +20,6 @@ export default function Page() {
       <div className={styles.container}>
           <AuthContainer />
       </div>
-      
     )
   }
 

@@ -6,9 +6,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     try {
         const session = await getSession(req, res)
 
-        if (session?.user) {
+        console.log("here's the session...............")
+
+        if (session) {
+            console.log("found.............")
             res.status(201).json({session: true})
         } else {
+            console.log("not found.............")
             res.status(201).json({session: false})
         }
         
