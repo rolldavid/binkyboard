@@ -13,7 +13,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         console.log("user id", session.user)
         if (session?.user?.email) {
             console.log("does have an email +++++++++++++++++++++++", session.user.email)
-            const dbUser = await prisma.user.findFirst({
+            const dbUser = await prisma.user.findUnique({
                 where: {
                     email: session.user.email
                 }

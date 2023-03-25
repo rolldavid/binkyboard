@@ -5,6 +5,7 @@ import Spinner from "@/lib/Spinner";
 import AuthContainer from "./auth/components/AuthContainer";
 import Landing from "./home/components/Landing"
 import styles from "@/styles/Home.module.css"
+import { updateUser } from "@/lib/db-utils";
 
 export default function Page() {
   const {isLoading, user, error} = useUser()
@@ -24,6 +25,7 @@ export default function Page() {
   }
 
   if (user) {
+    updateUser()
     return <Landing />
   }
 
