@@ -1,0 +1,15 @@
+.loginButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-family: "Montserrat";
+    font-weight: 400;
+    color: var(--cream);
+    background-color: var(--bluegreen);
+    width: 100%;
+    padding: 12px 15px 12px 15px;
+    cursor: pointer;
+}

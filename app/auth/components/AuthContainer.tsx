@@ -3,6 +3,7 @@
 
 import Link from "next/link"
 import styles from "./AuthContainer.module.css"
+import Login from "./Login"
 
 export default function AuthContainer() {
  
@@ -20,9 +21,7 @@ export default function AuthContainer() {
                 </p>
             </div>
             <div className={styles.authContainer}>
-                <a href="/api/auth/login" className={styles.authButton}>
-                    <p className={styles.authText}>Continue to Login</p>
-                </a>
+                <Login />
             </div>
         </section>
         </>

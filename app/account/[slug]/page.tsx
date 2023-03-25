@@ -10,6 +10,7 @@ import Spinner from "@/lib/Spinner"
 import { getProfile } from "@/lib/db-utils"
 
 import styles from "@/styles/Account.module.css"
+import Logout from "../../auth/components/Logout"
 
 let holdName = "";
 let heldName = false;
@@ -97,9 +98,7 @@ export default function Page({params: {slug}}: {params: { slug: string }}) {
                         Save
                       </button>
                   </div>}
-                  <a className={styles.logoutButton} href="/api/auth/logout">
-                    Logout
-                </a>
+                  <Logout />
                 <p className={styles.deletePromptContainer}>Not having fun? <span className={styles.deletePrompt} onClick={() => setShowDeleteModule(true)}>Delete your account</span></p>
               </div>}
               {loading && <div className={styles.container}>
