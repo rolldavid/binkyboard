@@ -7,12 +7,12 @@ import styles from "@/styles/Home.module.css"
 import "@/styles/globals.css"
 
 
-export default function RootLayout({
+
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-
 
   return (
     <html lang="en">

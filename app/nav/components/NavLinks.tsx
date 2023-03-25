@@ -10,6 +10,18 @@ import styles from "./NavLinks.module.css"
 
 export default function NavLinks({userId, admin, signedIn}: {userId: string, admin: boolean, signedIn: boolean}) {
    
+    if (!signedIn) {
+        return <div>
+            <nav className={styles.container}>
+                <div className={styles.logoContainer}>
+                    <Link href={"/"}>
+                        <h1 className={styles.logo}>binkyboard</h1>
+                    </Link>
+                </div>
+            </nav>
+        </div>
+    }
+
     if (signedIn) {
         return (
             <nav className={styles.container}>

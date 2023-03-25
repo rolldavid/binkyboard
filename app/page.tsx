@@ -13,7 +13,8 @@ export default function Page() {
     return <Spinner />
   }
 
-  if (!isLoading && (!user || error)) {
+  console.log(user)
+  if (!user) {
     return (
       <div className={styles.container}>
           <AuthContainer />

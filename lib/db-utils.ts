@@ -119,7 +119,7 @@ export async function getUserId() {
 }
 
 export async function getSession() {
-    const res = await fetch("/api/get-session")
+    const res = await fetch("http://localhost:3000/api/get-session")
     return res.json()
 }
 

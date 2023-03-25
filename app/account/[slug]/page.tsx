@@ -21,8 +21,6 @@ export default function Page({params: {slug}}: {params: { slug: string }}) {
     const [loading, setLoading] = useState(false)
     const [showDeleteModule, setShowDeleteModule] = useState(false)
 
-    const {isLoading, user, error} = useUser()
-
 
     const { data, status } = useQuery(["profile"], () => {
         return getProfile(slug)
@@ -99,9 +97,9 @@ export default function Page({params: {slug}}: {params: { slug: string }}) {
                         Save
                       </button>
                   </div>}
-                  <Link className={styles.logoutButton} href="/api/auth/logout">
+                  <a className={styles.logoutButton} href="/api/auth/logout">
                     Logout
-                </Link>
+                </a>
                 <p className={styles.deletePromptContainer}>Not having fun? <span className={styles.deletePrompt} onClick={() => setShowDeleteModule(true)}>Delete your account</span></p>
               </div>}
               {loading && <div className={styles.container}>

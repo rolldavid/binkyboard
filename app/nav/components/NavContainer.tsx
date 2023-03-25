@@ -1,8 +1,8 @@
 "use client"
 
 import { useUser } from "@auth0/nextjs-auth0/client"
-import { useQuery, useQueryClient } from "@tanstack/react-query"
-import { getUserId, updateUser } from "@/lib/db-utils"
+import { useQuery } from "@tanstack/react-query"
+import { getUserId } from "@/lib/db-utils"
 import { useState, useEffect } from "react"
 import NavLinks from "./NavLinks"
 import styles from "./NavContainer.module.css"
@@ -12,24 +12,12 @@ import Spinner from "@/lib/Spinner"
 export default function NavContainer() {
     const [userId, setUserId] = useState("")
     const [userRole, setUserRole] = useState("")
-    const [userUpdated, setUserUpdated] = useState(false)
-
-    const queryClient = useQueryClient()
 
     const {isLoading, user, error} = useUser()
 
     const {data, status} = useQuery(["userId"], () => {
         return getUserId()
     })
-
-    useEffect(() => {
-            const upUser = async () => {
-                await updateUser()
-                queryClient.invalidateQueries(["userId"])
-            }
-            upUser()
-        
-    }, [user])
 
 
     if (isLoading || !user || error) {
@@ -50,6 +38,7 @@ export default function NavContainer() {
             </div>
             )
         }
+        
         return (
             <div className={styles.container}>
             <NavLinks  userId={data.userId} admin={false} signedIn={true}/>
