@@ -6,7 +6,10 @@ import prisma from "@/lib/prisma";
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 
     const { user } = req.body;
-    console.log("adding user....", "email: ", user.email, "nickname: ", user.nickname, "user :", user)
+
+    if (user) {
+        console.log("adding user....", "email: ", user.email, "nickname: ", user.nickname, "user :", user)
+    
 
     try {
         const upsertUser = await prisma.user.upsert({
@@ -22,8 +25,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           })
         console.log("done adding user....")
         res.status(201).json({status: "ok"})
+        return
     
     } catch (err) {
         throw new Error("Did not manage to connect")
     }
+}
+res.status(201).json({status: "ok"})
 }
