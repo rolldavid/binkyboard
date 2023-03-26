@@ -38,7 +38,7 @@ export default function NavContainer() {
    
     if (user && data) {
       
-        if (data.role === "ADMIN" || data.role === "EARLY") {
+        if (data.role === "ADMIN" || data.role === "SUPER") {
             return (
                 <div className={styles.container}>
                 <NavLinks  userId={data.userId} admin={true} signedIn={true}/>
