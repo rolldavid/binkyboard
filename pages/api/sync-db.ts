@@ -9,18 +9,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const { user } = req.body;
 
     try {
-
-        const upsertUser = await prisma.user.upsert({
-            where: {
-              email: user.email,
-            },
-            update: {
-            },
-            create: {
-              email: user.email,
-              name: user.nickname,
-            },
-          })
+        console.log("doing it")
+        
         console.log(user, "user..........")
         console.log("did it")
         res.status(201).json({status: "ok"})
