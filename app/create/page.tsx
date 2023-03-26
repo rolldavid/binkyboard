@@ -28,7 +28,7 @@ export default function Page() {
             )
         }
 
-        if (data.role === "EARLY") {
+        if (data.role === "SUPER") {
             return (
                 <div className={styles.container}>
                     <CreateBoard />
