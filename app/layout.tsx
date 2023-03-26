@@ -3,6 +3,7 @@ import Footer from './footer/components/Footer'
 import NavContainer from './nav/components/NavContainer'
 import QueryProvider from '@/lib/QueryProvider'
 import { UserProvider } from '@auth0/nextjs-auth0/client'
+import { Metadata } from 'next'
 import styles from "@/styles/Home.module.css"
 import "@/styles/globals.css"
 
@@ -36,7 +37,7 @@ export default async function RootLayout({
   )
 }
 
-/* export const metadata: Metadata = {
+export const metadata: Metadata = {
   title: "binkyboard",
   description: "A simple place to celebrate life's biggest moments",
   openGraph: {
@@ -54,4 +55,4 @@ export default async function RootLayout({
     type: "website",
     locale: "en-US"
   },
-}  */
+}  
