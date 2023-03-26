@@ -6,15 +6,22 @@ import prisma from "@/lib/prisma";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 
-    const { user, text } = req.body;
-    console.log("doing it")
-    console.log(user, "user:::", text, "text:::")
+    const { user } = req.body;
+    console.log("adding user....")
 
     try {
-       
-        
-        console.log(user, "user..........")
-        console.log("did it")
+        const upsertUser = await prisma.user.upsert({
+            where: {
+              email: user.email,
+            },
+            update: {
+            },
+            create: {
+              email: user.email,
+              name: user.nickname,
+            },
+          })
+        console.log("done adding user....")
         res.status(201).json({status: "ok"})
     
     } catch (err) {
