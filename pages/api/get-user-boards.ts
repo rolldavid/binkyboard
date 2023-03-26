@@ -20,10 +20,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 }
             })
           
-            res.status(201).json({boards: userBoards?.boards})
+            if (userBoards && userBoards.role) {
+                res.status(201).json({boards: userBoards?.boards, role: userBoards.role})
+            }
+            res.status(201).json({boards: userBoards?.boards, role: "USER"})
             
         } else {
-            res.status(201).json({boards: undefined})
+            throw new Error("Did not manage to connect")
         }
                        
     } catch (err) {
