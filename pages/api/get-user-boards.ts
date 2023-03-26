@@ -7,7 +7,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     try {
         const session = await getSession(req, res)
         if (!session) {
-            return res.status(201).json({session: false, userId: undefined})
+            res.status(201).json({session: false, userId: undefined})
+            return
         }
 
         if (session?.user?.email) {
@@ -27,9 +28,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 return
             }
             
-        } else {
-            throw new Error("Did not manage to connect")
-        }
+        } 
+
+        res.status(201).json({status: "Did not manage to connect"})
                        
     } catch (err) {
         throw new Error("Did not manage to connect")
