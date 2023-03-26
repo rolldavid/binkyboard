@@ -21,7 +21,7 @@ export default function Page() {
   }
 
   if (status === "success" && data) {
-    if (data.role === "ADMIN" || data.role === "EARLY") {
+    if (data.role === "ADMIN" || data.role === "SUPER") {
       return (
         <div className={styles.container}>
 
