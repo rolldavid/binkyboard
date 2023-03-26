@@ -27,6 +27,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 res.status(201).json({boards: userBoards?.boards, role: userBoards?.role})
                 return
             }
+
+            res.status(201).json({status: "Did not manage to connect"})
+            return
             
         } 
 
