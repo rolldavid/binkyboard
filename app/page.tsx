@@ -10,9 +10,6 @@ import { updateUser } from "@/lib/db-utils";
 export default function Page() {
   const {isLoading, user, error} = useUser()
 
-  const callUser = async () => {
-    await updateUser()
-  }
   
   if (isLoading) {
     return <Spinner />
@@ -28,7 +25,7 @@ export default function Page() {
   }
 
   if (user) {
-    callUser()
+    updateUser()
     return <Landing />
   }
 
