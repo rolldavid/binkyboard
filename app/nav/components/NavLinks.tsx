@@ -23,6 +23,7 @@ export default function NavLinks({userId, admin, signedIn}: {userId: string, adm
     }
 
     if (signedIn) {
+
         return (
             <nav className={styles.container}>
                 <div className={styles.logoContainer}>

@@ -11,7 +11,6 @@ import Spinner from "@/lib/Spinner"
 let updatedUser = false;
 
 export default function NavContainer() {
-    const [userRole, setUserRole] = useState("")
 
     const {isLoading, user, error} = useUser()
 
@@ -39,7 +38,7 @@ export default function NavContainer() {
    
     if (user && data) {
       
-        if (userRole === "ADMIN") {
+        if (data.role === "ADMIN" || data.role === "EARLY") {
             return (
                 <div className={styles.container}>
                 <NavLinks  userId={data.userId} admin={true} signedIn={true}/>

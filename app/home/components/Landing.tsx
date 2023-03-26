@@ -20,9 +20,39 @@ export default function Page() {
       return <Spinner />
   }
 
-  if (status === "success" && data.boards) {
+  if (status === "success" && data) {
+    if (data.role === "ADMIN") {
       return (
-  
+        <div className={styles.container}>
+
+          {data.boards.length > 0 ? <div className={styles.boardContainer}>
+            <div className={styles.titleContainer}>
+              <h2 className={styles.titleText}>Your Boards</h2>
+            </div>
+              {
+                data.boards.map((board: Board, index: number) => {
+                  return (
+                    <Link href={`/board/${board.id}`} key={index} className={styles.boardItem}>
+                        <BoardCard board={board}/>
+                    </Link>
+                  )
+                })
+              }
+            </div> :
+            <div className={styles.noBoardContainer}>
+                <p className={styles.noBoardText}>You don&apos;t have any boards yet 😢</p>
+                <div className={styles.createButton} onClick={() => router.push("create")}>
+                  Create a Board        
+                </div>
+            </div>
+          }
+
+        </div>
+      )
+    }  
+
+    if (data.role === "EARLY") {
+      return (
         <div className={styles.container}>
 
           {data.boards.length > 0 ? <div className={styles.boardContainer}>
@@ -51,12 +81,39 @@ export default function Page() {
       )
     }
 
-    return (
-      <div className={styles.noBoardContainer}>
-          <p className={styles.noBoardText}>You don&apos;t have any boards yet 😢</p>
-          <div className={styles.createButton} onClick={() => router.push("create")}>
-            Create a Board        
-          </div>
-      </div>
-    )
+    if (data.role === "USER") {
+      return (
+        <div className={styles.container}>
+
+          {data.boards.length > 0 ? <div className={styles.boardContainer}>
+            <div className={styles.titleContainer}>
+              <h2 className={styles.titleText}>Your Boards</h2>
+            </div>
+              {
+                data.boards.map((board: Board, index: number) => {
+                  return (
+                    <Link href={`/board/${board.id}`} key={index} className={styles.boardItem}>
+                        <BoardCard board={board}/>
+                    </Link>
+                  )
+                })
+              }
+            </div> :
+            <div className={styles.noBoardContainer}>
+                <p className={styles.noBoardText}>You don&apos;t have any boards yet 😢</p>
+            </div>
+          }
+
+        </div>
+      )
+    }
+  }
+
+  return (
+    <div className={styles.noBoardContainer}>
+        <p className={styles.noBoardText}>You don&apos;t have any boards yet 😢</p>
+    </div>
+  )
+
+    
 }
