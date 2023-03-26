@@ -46,13 +46,7 @@ model User {
   posts       Post[]
   boards      Board[] @relation(name: "users")
   ownedBoards Board[] @relation(name: "owner")
-  role        Role    @default(USER)
-}
-
-enum Role {
-  USER
-  ADMIN
-  SUPER
+  role        String  @default("USER")
 }
 
 enum PrivacyLevel {

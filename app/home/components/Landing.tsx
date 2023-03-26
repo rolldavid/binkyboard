@@ -20,7 +20,7 @@ export default function Page() {
       return <Spinner />
   }
 
-  if (status === "success" && data) {
+  if (status === "success" && data && data.boards) {
     if (data.role === "ADMIN" || data.role === "SUPER") {
       return (
         <div className={styles.container}>
@@ -53,7 +53,7 @@ export default function Page() {
 
    
 
-    if (data.role === "USER" && data.boards) {
+    if (data.role === "USER") {
       return (
         <div className={styles.container}>
 
