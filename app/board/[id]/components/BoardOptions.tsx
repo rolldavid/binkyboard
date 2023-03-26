@@ -209,21 +209,21 @@ export default function BoardOptions({boardId, setShowOptions, accessList, priva
                         }
 
                         <div className={styles.saveContainer}>
-                            <button className={styles.saveButton} onClick={handleUpdate}>
+                            <div className={styles.saveButton} onClick={handleUpdate}>
                                 Save
-                            </button>
-                            <button className={styles.cancelButton} onClick={() => setShowOptions(false)}>
+                            </div>
+                            <div className={styles.cancelButton} onClick={() => setShowOptions(false)}>
                                 Cancel
-                            </button>
+                            </div>
                         </div>
                         {!deleteButton && <p className={styles.deletePromptContainer}>Ready to leave it behind? <span className={styles.deletePrompt} onClick={() => setDeleteButton(prev => !prev)}>Delete this board.</span></p>}
                         {deleteButton &&
                             <div className={styles.deleteContainer}>
                                 <p className={styles.deleteNote}>Deleting will permanently delete this board and all posts, forever.</p>
-                                <button className={styles.deleteButton} onClick={e => handleDelete(e)}>
+                                <div className={styles.deleteButton} onClick={e => handleDelete(e)}>
                                     Yes, delete the board
-                                </button>
-                                <button className={styles.cancelButton} onClick={() => setDeleteButton(false)}>Nevermind</button>
+                                </div>
+                                <div className={styles.cancelButton} onClick={() => setDeleteButton(false)}>Nevermind</div>
                             </div>
                         }
                     </form>}

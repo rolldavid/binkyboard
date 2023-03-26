@@ -39,7 +39,7 @@ export default function Page({params: {id}}: {params: { id: string }}) {
         router.push("/")
     }
 
-    if (isLoading) {
+    if (isLoading || status === "loading") {
         return <Spinner />
     }
 
@@ -81,12 +81,12 @@ export default function Page({params: {id}}: {params: { id: string }}) {
                     <div className={styles.accessContainer}>
                         <p className={styles.accessTitle}>The owner has made this board private.</p>
                         <div className={styles.updateContainer}>
-                            <button className={styles.requestButton} onClick={handleAccess}>
+                            <div className={styles.requestButton} onClick={handleAccess}>
                                 Request Access
-                            </button>
-                            <button className={styles.deleteButton} onClick={handleRemove}>
+                            </div>
+                            <div className={styles.deleteButton} onClick={handleRemove}>
                                 Remove
-                            </button>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -119,6 +119,7 @@
     width: 100%;
     cursor: pointer;
     font-size: 1rem;
+    text-align: center;
     font-family: 'Montserrat', sans-serif;
 }
 
@@ -130,6 +131,7 @@
     width: 100%;
     cursor: pointer;
     font-size: 1rem;
+    text-align: center;
     font-family: 'Montserrat', sans-serif;
 }
 
@@ -142,5 +144,6 @@
     color: var(--cream);
     cursor: pointer;
     font-size: 1rem;
+    text-align: center;
     font-family: 'Montserrat', sans-serif;
 }
