@@ -81,7 +81,7 @@ export default function Page() {
       )
     }
 
-    if (data.role === "USER") {
+    if (data.role === "USER" && data.boards) {
       return (
         <div className={styles.container}>
 

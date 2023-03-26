@@ -19,6 +19,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                    boards: true
                 }
             })
+
+            console.log(userBoards?.boards, "found board...........", userBoards?.role)
           
             if (userBoards) {
                 res.status(201).json({boards: userBoards?.boards, role: userBoards?.role})
