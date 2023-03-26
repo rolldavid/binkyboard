@@ -6,10 +6,12 @@ import prisma from "@/lib/prisma";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 
-    const { user } = req.body;
+    const { user, text } = req.body;
+    console.log("doing it")
+    console.log(user, "user:::", text, "text:::")
 
     try {
-        console.log("doing it")
+       
         
         console.log(user, "user..........")
         console.log("did it")
