@@ -29,14 +29,12 @@ export default function Page({params: {id}}: {params: { id: string }}) {
 
     const handleAccess = async (e: SyntheticEvent) => {
         e.preventDefault()
-        console.log("requesting access")
         await sendAccessEmail(data.board.id)
-        console.log("requested.....")
+      
     }
 
     const handleRemove = async (e:SyntheticEvent) => {
         e.preventDefault()
-        console.log("removing")
         await removeBoard(data.board.id)
         router.push("/")
     }

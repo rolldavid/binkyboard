@@ -17,7 +17,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             const board = await prisma.board.findUnique({where: {id: boardId}, include: {owner: {select: {email: true}} }})
 
             if (board && board.owner.email === session.user.email) {
-                console.log("removing post")
+               
                 const post = await prisma.post.delete({
                     where: {
                         id: postId

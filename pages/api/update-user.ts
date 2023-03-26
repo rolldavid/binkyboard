@@ -6,7 +6,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     try {
         const session = await getSession(req, res)
-        console.log(session, "session))))))))))))))))")
         if (!session) {
             return res.status(201).json({session: false, userId: undefined})
         }
@@ -17,8 +16,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                   email: session.user.email,
                 },
                 update: {
-                  email: session.user.email,
-                  name: session.user.nickname,
                 },
                 create: {
                   email: session.user.email,

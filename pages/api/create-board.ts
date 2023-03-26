@@ -6,26 +6,21 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     const { boardName, access, registry, accessList } = req.body;
 
-    console.log("lets try this")
     try {
         const session = await getSession(req, res)
         
         if (!session) {
-            console.log("no session")
             return res.status(201).json({status: "failed"})
         }
     
         if (session?.user?.email) {
-            console.log("session found")
             const user = await prisma.user.findUnique({
                 where: {
                     email: session.user.email
                 }
             })
 
-            console.log(user)
             if (user) {
-                console.log("yes user!!!!")
                 const board = await prisma.board.create({
                     data: {
                         name: boardName,

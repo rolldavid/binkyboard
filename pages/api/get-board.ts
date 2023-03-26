@@ -79,7 +79,7 @@ export default async function handler(
                 })
             }
         
-            console.log(board.privacy, board.allowList)
+            
             const hasAccess = board.privacy === "TWO" ? board.allowList?.includes(session.user.email) ? true : false : true
 
             res.status(201).json({board, isOwner, hasAccess, session: true})

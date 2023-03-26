@@ -19,9 +19,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                    boards: true
                 }
             })
-
-            console.log(userBoards)
-            console.log(session.user.email, "user email::::::::")
           
             res.status(201).json({boards: userBoards?.boards})
             

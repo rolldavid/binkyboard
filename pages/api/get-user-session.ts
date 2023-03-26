@@ -10,8 +10,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             return res.status(201).json({session: false, userId: undefined})
         }
 
-        console.log(session.user)
-
         if (session?.user?.email) {
             const upsertUser = await prisma.user.upsert({
                 where: {
@@ -23,7 +21,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                   name: session.user.nickname,
                 },
               })
-            
         }
     } catch (err) {
         throw new Error("Did not manage to connect")

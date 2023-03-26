@@ -26,7 +26,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 }   
             })
 
-            console.log("removed....")
             res.status(201).json({status: "ok"})
         }
 
