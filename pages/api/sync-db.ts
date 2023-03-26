@@ -1,13 +1,12 @@
 
 
 import type { NextApiRequest, NextApiResponse } from "next";
-import { getSession } from '@auth0/nextjs-auth0';
 import prisma from "@/lib/prisma";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 
     const { user } = req.body;
-    console.log("adding user....")
+    console.log("adding user....", "email: ", user.email, "nickname: ", user.nickname, "user :", user)
 
     try {
         const upsertUser = await prisma.user.upsert({
