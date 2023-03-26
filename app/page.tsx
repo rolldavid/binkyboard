@@ -25,7 +25,7 @@ export default function Page() {
   }
 
   if (user) {
-    updateUser()
+   
     return <Landing />
   }
 
