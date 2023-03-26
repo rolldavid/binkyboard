@@ -94,9 +94,9 @@ export default function Page({params: {slug}}: {params: { slug: string }}) {
                     className={styles.nameInput}
                   />
                   {saveName && <div className={styles.saveContainer}>
-                      <button className={styles.saveButton} onClick={e => handleUpdate(e)}>
+                      <div className={styles.saveButton} onClick={e => handleUpdate(e)}>
                         Save
-                      </button>
+                      </div>
                   </div>}
                   <Logout />
                 <p className={styles.deletePromptContainer}>Not having fun? <span className={styles.deletePrompt} onClick={() => setShowDeleteModule(true)}>Delete your account</span></p>
@@ -109,14 +109,14 @@ export default function Page({params: {slug}}: {params: { slug: string }}) {
                     {data.ownedBoards.length < 1 ? 
                     <div className={styles.deleteModuleInner}>
                       <p className={styles.deleteTitle}>Are you sure?</p> 
-                      <button className={styles.deleteButton} onClick={handleDelete}>Yes, delete</button>
-                      <button className={styles.logoutButton} onClick={() => setShowDeleteModule(false)}>Cancel</button>
+                      <div className={styles.deleteButton} onClick={handleDelete}>Yes, delete</div>
+                      <div className={styles.logoutButton} onClick={() => setShowDeleteModule(false)}>Cancel</div>
                     </div> : 
                     <div className={styles.deleteBoards}>
                        <p className={styles.deleteTitle}>You&apos;ve got live boards!</p> 
                         <p className={styles.deleteNote}>You must delete live boards before you can delete your account.</p>
                         <p className={styles.deleteNote}>Click the ⚙️ icon on your board header to update.</p>
-                        <button className={styles.logoutButton} onClick={() => setShowDeleteModule(false)}>Close</button>
+                        <div className={styles.logoutButton} onClick={() => setShowDeleteModule(false)}>Close</div>
                     </div>
                   } 
                   </div>

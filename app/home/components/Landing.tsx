@@ -41,9 +41,9 @@ export default function Page() {
             </div> :
             <div className={styles.noBoardContainer}>
                 <p className={styles.noBoardText}>You don&apos;t have any boards yet 😢</p>
-                <button className={styles.createButton} onClick={() => router.push("create")}>
+                <div className={styles.createButton} onClick={() => router.push("create")}>
                   Create a Board        
-                </button>
+                </div>
             </div>
           }
 
@@ -54,9 +54,9 @@ export default function Page() {
     return (
       <div className={styles.noBoardContainer}>
           <p className={styles.noBoardText}>You don&apos;t have any boards yet 😢</p>
-          <button className={styles.createButton} onClick={() => router.push("create")}>
+          <div className={styles.createButton} onClick={() => router.push("create")}>
             Create a Board        
-          </button>
+          </div>
       </div>
     )
 }

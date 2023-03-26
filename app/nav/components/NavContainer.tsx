@@ -28,7 +28,7 @@ export default function NavContainer() {
         }
     }, [user])
 
-    if (isLoading || !user || error) {
+    if (isLoading || !user || error || status === "loading") {
        
         return (
             <div className={styles.container}>

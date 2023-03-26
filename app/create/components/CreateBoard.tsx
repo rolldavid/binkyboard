@@ -108,7 +108,6 @@ export default function CreateBoard() {
                             id="private"
                             checked={access === "TWO" ? true : false}
                             onChange={() => setAccess("TWO")}
-                            
                         />
                         <span className={styles.accessLabel}>Private - only allowed emails can access</span>
                     </label>
@@ -137,12 +136,12 @@ export default function CreateBoard() {
                 <div className={styles.boardLinkTitleContainer}>
                     <h2 className={styles.boardLinkTitle}>Share your board!</h2>
                 </div>
-                <button onClick={(e) => copyLink(e)} className={styles.copyLink}>
+                <div onClick={(e) => copyLink(e)} className={styles.copyLink}>
                     {copyText}
-                </button>
-                <button onClick={() => router.push(`/board/${boardLink}`)} className={styles.boardLink}>
+                </div>
+                <div onClick={() => router.push(`/board/${boardLink}`)} className={styles.boardLink}>
                     Go to my board
-                </button>
+                </div>
                 
             </div>}
             {loading && <Spinner />}

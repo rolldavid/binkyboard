@@ -49,18 +49,18 @@ export default function PostOptions({setShowOptions, boardId, postId}: {setShowO
         <div className={styles.container}>
             <div className={styles.optionsModule}>
                 
-                <button className={styles.pinButton} >
+                <div className={styles.pinButton} >
                     Pin Post
-                </button>
-                {!confirmDelete && <button className={styles.deleteButton} onClick={() => setConfirmDelete(true)}>
+                </div>
+                {!confirmDelete && <div className={styles.deleteButton} onClick={() => setConfirmDelete(true)}>
                     Delete Post
-                </button>}
-                {confirmDelete && <button className={styles.deleteButton} onClick={preDelete}>
+                </div>}
+                {confirmDelete && <div className={styles.deleteButton} onClick={preDelete}>
                     {deleting ? `Deleting...` : `Yes, delete this post`}
-                </button>}
-                <button className={styles.cancelButton} onClick={() => setShowOptions(false)}>
+                </div>}
+                <div className={styles.cancelButton} onClick={() => setShowOptions(false)}>
                     Cancel
-                </button>
+                </div>
                     
             </div>
         </div>
