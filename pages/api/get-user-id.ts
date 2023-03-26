@@ -18,11 +18,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     email: userEmail
                 }
             })
+
+            if (dbUser) {
+                res.status(201).json({userId: dbUser?.id, role: dbUser?.role})
+                return
+            } 
+
+                res.status(201).json({status: "Did not manage to connect"})
+                return
             
-            res.status(201).json({userId: dbUser?.id, role: dbUser?.role})
-        } else {
-            res.status(201).json({userId: "", role: "USER"})
+
         }
+        res.status(201).json({status: "Did not manage to connect"})
 
     } catch (err) {
         throw new Error("Did not manage to connect")
