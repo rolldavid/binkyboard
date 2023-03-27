@@ -9,11 +9,14 @@ import Spinner from "@/lib/Spinner"
 import BoardCard from "@/app/board/[id]/components/BoardCard"
 import styles from './Landing.module.css'
 
+
+
 export default function Page() {
   const router = useRouter()
 
   const { data, status } = useQuery(["userBoards"], () => {
-    return getUserBoards()
+    const invite = localStorage.getItem("invite")
+    return getUserBoards(invite)
   });
 
   if (status === "loading") {

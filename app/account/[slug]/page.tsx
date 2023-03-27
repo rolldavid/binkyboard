@@ -75,7 +75,6 @@ export default function Page({params: {slug}}: {params: { slug: string }}) {
 
     const handleDelete = async (e: SyntheticEvent) => {
       e.preventDefault()
-      localStorage.setItem("user", "")
       const res = await deleteUser()
       router.push("/api/auth/logout")
       
