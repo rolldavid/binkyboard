@@ -38,7 +38,8 @@ export default async function handler(
         const posts = board.posts.map((post, index) => {
           return {
             post,
-            displayName: board.posts[index].user.name
+            displayName: board.posts[index].user.name,
+            isOwner: true
           }
         })
         res.status(200).json({ posts })

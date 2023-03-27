@@ -9,7 +9,7 @@ import styles from "./PostItem.module.css"
 import { deletePost } from "@/lib/db-utils"
 import PostOptions from "./PostOptions"
 
-export default function PostItem({post, slugs, boardId}: {post: PostItems, slugs: string[], boardId: string}) {
+export default function PostItem({post, slugs, boardId }: {post: PostItems, slugs: string[], boardId: string}) {
     const [showOptions, setShowOptions] = useState(false)
 
     const readableDate = new Date(post.post.createdAt).toLocaleDateString("en-US", {
@@ -26,9 +26,9 @@ export default function PostItem({post, slugs, boardId}: {post: PostItems, slugs
                     <p className={styles.dot}>·</p>
                     <p className={styles.date}>{readableDate}</p>
                 </div>
-                <div className={styles.ownerActions}>
+                {post.isOwner && <div className={styles.ownerActions}>
                     <p className={styles.postOptions} onClick={() => setShowOptions(true)}>···</p>
-                </div>
+                </div>}
             </div>
             <div className={styles.noteContainer}>  
                 <p className={styles.note}>

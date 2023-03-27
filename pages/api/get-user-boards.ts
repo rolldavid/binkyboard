@@ -22,10 +22,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 }
             })
 
-
-    
-                
-        
             if (userBoards) {    
                 res.status(201).json({boards: userBoards?.boards, role: userBoards?.role})
                 return

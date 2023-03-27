@@ -21,24 +21,25 @@ export default function Collection({boardId, isOwner}: {boardId: string, isOwner
     }
 
     if (status === "success" && data.posts) {
-        return (
+        
+            return (
                
                 <div className={styles.container}>
                     {
                         data.posts.map((post: PostItems, index: number) => {
                 
                             return (
-                                <PostItem key={index} post={post} slugs={post.post.slugs} boardId={boardId}/>
+                                <PostItem key={index} post={post} slugs={post.post.slugs} boardId={boardId} />
                             )
                         })
                     }
                 </div>
-               
-        )}
+        
+             )
+        }
 
-    return (
-        <div>Hey there</div>
-    )
+
+    return null;
 }
 
 

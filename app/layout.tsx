@@ -19,8 +19,9 @@ export default async function RootLayout({
     <html lang="en">
       <head />
       <body>
-        <QueryProvider>
-            <UserProvider>
+        
+          <UserProvider>
+            <QueryProvider>
             <nav className={styles.nav}>
                 <NavContainer/>
             </nav>
@@ -30,8 +31,9 @@ export default async function RootLayout({
             <footer className={styles.footer}>
                 <Footer />
             </footer>
+            </QueryProvider>
           </UserProvider>
-        </QueryProvider>
+        
       </body>
     </html>
   )
