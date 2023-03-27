@@ -46,6 +46,8 @@ export default function Submit({boardId}: {boardId: string}) {
     const [mediaDetailClass, setMediaDetailClass] = useState("")
     const [link, setLink] = useState("")
     const [toggleMedia, setToggleMedia] = useState(false)
+    const [disabled, setDisabled] = useState(false)
+    const [submitStyle, setSubmitStyle] = useState("readyButton")
     
     
    
@@ -53,9 +55,11 @@ export default function Submit({boardId}: {boardId: string}) {
 
         let slugList: string[] = []
        
+        setLoading(true)
+        setDisabled(true)
+        setSubmitStyle("submittingButton")
         if (mediaList) {
-            
-            setLoading(true)
+
             for (let i = 0; i < mediaList.length; i++) {
                 const s3id = nanoid()
                 const extensionIndex = mediaList[i].name.indexOf(".")
@@ -91,6 +95,8 @@ export default function Submit({boardId}: {boardId: string}) {
         setMediaPreviewList([])
         setMediaPreview(false)
         setLoading(false)
+        setDisabled(false)
+        setSubmitStyle("readyButton")
         queryClient.invalidateQueries(['collection'])
         window.scrollTo({
             top: 0,
@@ -270,7 +276,9 @@ export default function Submit({boardId}: {boardId: string}) {
                         
                     }
                     </div>
-                    <button type="submit" className={styles.submitButton}>{!loading ? "Share" : "Sharing..."}</button>
+                    <button type="submit" className={styles[`${submitStyle}`]}
+                        disabled={disabled}
+                    >{!loading ? "Share" : "Sharing..."}</button>
                 </div>
                 <div className={styles.uploadHidden}>
                     <input 
