@@ -27,7 +27,6 @@ export default function Page({boardId}: {boardId: string}) {
     const handleAccess = async (e: SyntheticEvent) => {
         e.preventDefault()
         await sendAccessEmail(data.board.id)
-      
     }
 
     const handleRemove = async (e:SyntheticEvent) => {
@@ -41,9 +40,9 @@ export default function Page({boardId}: {boardId: string}) {
     }
 
     if ( status === "success" && data.board) {
-        console.log("update...........")
+        
         if (data.isOwner) {
-            console.log("is owner....update")
+           
             return (
                 <div className={styles.container}>
                     {!showOptions && <>

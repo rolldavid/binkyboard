@@ -108,6 +108,10 @@ export default function BoardOptions({boardId, setShowOptions, accessList, priva
 
 
         setLoading(false)
+        window.scrollTo({
+            top: 0,
+            left: 0
+          });
         queryClient.invalidateQueries(["board"])
         setShowOptions(false)
     }

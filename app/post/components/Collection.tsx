@@ -14,11 +14,12 @@ export default function Collection({boardId, isOwner}: {boardId: string, isOwner
     const { data, status } = useQuery(["collection"], () => {
         return getPosts(boardId)
       });
-
     
     if (status === "loading") {
         <Spinner />
     }
+
+    
 
     if (status === "success" && data.posts) {
         

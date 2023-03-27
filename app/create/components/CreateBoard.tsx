@@ -53,6 +53,10 @@ export default function CreateBoard() {
         }
         
         setLoading(false)
+        window.scrollTo({
+            top: 0,
+            left: 0
+          });
     }
 
     const copyLink = (e: SyntheticEvent) => {

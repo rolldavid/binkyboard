@@ -66,7 +66,7 @@
 }
 
 
-.submitButton {
+.readyButton {
     width: 100%;
     padding: 5px;
     border-radius: 5px;
@@ -76,6 +76,18 @@
     font-family: 'Rokkitt', serif;
     color: var(--cream);
     background-color: var(--bluegreen);
+}
+
+.submittingButton {
+    width: 100%;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: default;
+    border: none;
+    font-size: 1.2rem;
+    font-family: 'Rokkitt', serif;
+    color: var(--cream);
+    background-color: var(--lightwenge);
 }
 
 .inputContainer {
