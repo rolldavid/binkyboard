@@ -3,16 +3,18 @@
 import type { Board } from "@prisma/client"
 import { getUserBoards } from "@/lib/db-utils"
 import { useRouter } from "next/navigation"
-import { useQuery } from "@tanstack/react-query"
+import { useQuery, useQueryClient } from "@tanstack/react-query"
 import Link from "next/link"
 import Spinner from "@/lib/Spinner"
 import BoardCard from "@/app/board/[id]/components/BoardCard"
 import styles from './Landing.module.css'
+import { useEffect } from "react"
 
-
+let toggle = false;
 
 export default function Page() {
   const router = useRouter()
+  const queryClient = useQueryClient()
 
   const { data, status } = useQuery(["userBoards"], () => {
     const invite = localStorage.getItem("invite")
@@ -22,6 +24,13 @@ export default function Page() {
   if (status === "loading") {
       return <Spinner />
   }
+
+  useEffect(() => {
+    if (status === "success" && !toggle) {
+      queryClient.invalidateQueries(["userBoards"])
+      toggle = true;
+    }
+  }, [data])
 
   if (status === "success" && data && data.boards) {
     if (data.role === "ADMIN" || data.role === "SUPER") {
