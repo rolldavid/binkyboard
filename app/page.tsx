@@ -26,6 +26,9 @@ export default function Page() {
   }
 
   if (user) {
+    if (process.env.NODE_ENV === "development") {
+      updateUser()
+    }
     return <Landing />
   }
 

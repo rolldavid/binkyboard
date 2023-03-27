@@ -1,8 +1,6 @@
 "use client"
 
-import Link from "next/link";
-import { nanoid } from "nanoid"
-import { useState, useEffect, SyntheticEvent } from "react";
+import { useState, SyntheticEvent } from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { yupResolver } from "@hookform/resolvers/yup";

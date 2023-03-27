@@ -155,8 +155,6 @@
     max-height: 200px;
     border: none;
     border-radius: 10px;
-    cursor: pointer;
-    background-color: aqua;
     overflow: hidden;
 }
 

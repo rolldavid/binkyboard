@@ -91,11 +91,14 @@ export default function Submit({boardId}: {boardId: string}) {
         setMediaPreviewList([])
         setMediaPreview(false)
         setLoading(false)
+        queryClient.invalidateQueries(['collection'])
         window.scrollTo({
             top: 0,
             left: 0
           });
     }
+
+   
 
     // handle when user is typing a note
     const handleChange = async (e: SyntheticEvent, val: string) => {
@@ -194,7 +197,7 @@ export default function Submit({boardId}: {boardId: string}) {
 
     const { mutateAsync } = useMutation(addPost, {
         onSuccess: () => {
-            queryClient.invalidateQueries(['collection'])
+            queryClient.invalidateQueries(['board'])
           },
     });
 
