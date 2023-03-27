@@ -29,6 +29,8 @@ export default function Page() {
 
 
   if (status === "success" && data && data.boards) {
+    queryClient.invalidateQueries(["collection"])
+
     if (data.role === "ADMIN" || data.role === "SUPER") {
       return (
         <div className={styles.container}>
