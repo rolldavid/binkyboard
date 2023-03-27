@@ -13,7 +13,6 @@ import { useEffect, useState } from "react"
 
 
 export default function Page() {
-  const [inviteLink, setInviteLink] = useState("")
 
   const router = useRouter()
   const queryClient = useQueryClient()

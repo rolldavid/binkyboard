@@ -4,4 +4,5 @@ export interface PostItems {
     post: Post,
     displayName: string,
     isOwner: boolean
+    isAdmin: boolean
   }

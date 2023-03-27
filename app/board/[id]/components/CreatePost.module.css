@@ -75,7 +75,7 @@
     font-size: 1.2rem;
     font-family: 'Rokkitt', serif;
     color: var(--cream);
-    background-color: var(--bluegreen);
+    background-color: var(--wenge);
 }
 
 .submittingButton {
@@ -87,7 +87,7 @@
     font-size: 1.2rem;
     font-family: 'Rokkitt', serif;
     color: var(--cream);
-    background-color: var(--lightwenge);
+    background-color: var(--midwenge);
 }
 
 .inputContainer {

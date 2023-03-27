@@ -8,7 +8,7 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: none;
+    background-color: rgba(0, 0, 0, 0.7);
     padding: 15px;
     z-index: 50;
     overflow: hidden;
@@ -23,7 +23,7 @@
     gap: 10px;
     border-radius: 15px;
     padding: 25px 20px 25px 20px;
-    background-color: var(--bluegreen);
+    background-color: var(--cream);
     z-index: 55;
 }
 
@@ -51,9 +51,11 @@
     border-radius: 10px;
     padding: 12px 15px 12px 15px;
     background-color: var(--cream);
+    color: var(--darkwenge);
     width: 100%;
     cursor: pointer;
     font-size: 1rem;
+    text-align: center;
     font-family: 'Montserrat', sans-serif;
 }
 
@@ -80,7 +82,8 @@
     background: none;
     width: 100%;
     cursor: pointer;
-    color: var(--wenge);
+    color: var(--darkwenge);
     font-size: 1rem;
+    text-align: center;
     font-family: 'Montserrat', sans-serif;
 }
