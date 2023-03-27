@@ -4,9 +4,6 @@ import prisma from "@/lib/prisma";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 
-    const { invite } = req.body;
-
-    console.log("invite...................", invite)
 
     try {
         const session = await getSession(req, res)
@@ -29,33 +26,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     
                 
         
-            if (userBoards) {
-
-                let isConnected = 0
-        
-                for (let j = 0; j < userBoards.boards.length; j++) {
-                    if (invite === userBoards.boards[j].id) {
-                        isConnected += 1
-                    }
-                }
-        
-                if (isConnected === 0) {
-                    await prisma.user.update({
-                        where: {
-                            email: session.user.email
-                        },
-                        data: {
-                            boards: {
-                                connect: {
-                                    id: invite
-                                }
-                            }
-                        }
-                    })
-                }
-                
-
-        
+            if (userBoards) {    
                 res.status(201).json({boards: userBoards?.boards, role: userBoards?.role})
                 return
             }

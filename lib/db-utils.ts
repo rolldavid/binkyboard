@@ -107,16 +107,8 @@ export async function getPosts(boardId: string) {
 }
 
 
-export async function getUserBoards(invite: string | null) {
-    const res = await fetch("/api/get-user-boards", {
-        method: "POST",
-        body: JSON.stringify({
-            invite
-        }),
-        headers: {
-            "Content-Type": "application/json"
-        }
-    })
+export async function getUserBoards() {
+    const res = await fetch("/api/get-user-boards")
     const data = await res.json()
     return data;
 }

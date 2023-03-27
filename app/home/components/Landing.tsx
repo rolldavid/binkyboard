@@ -12,7 +12,7 @@ import { useEffect, useState } from "react"
 
 
 
-export default function Page({invite}: {invite: string}) {
+export default function Page() {
   const [inviteLink, setInviteLink] = useState("")
 
   const router = useRouter()
@@ -20,7 +20,7 @@ export default function Page({invite}: {invite: string}) {
 
   const { data, status } = useQuery(["userBoards"], () => {
    
-    return getUserBoards(invite)
+    return getUserBoards()
   });
 
   if (status === "loading") {
