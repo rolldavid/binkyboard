@@ -25,12 +25,11 @@ export default function Page() {
       return <Spinner />
   }
 
-  useEffect(() => {
-    if (status === "success" && !toggle) {
-      queryClient.invalidateQueries(["userBoards"])
-      toggle = true;
-    }
-  }, [data])
+  if (status === "success" && !toggle) {
+    queryClient.invalidateQueries(["userBoards"])
+    toggle = true;
+  }
+
 
   if (status === "success" && data && data.boards) {
     if (data.role === "ADMIN" || data.role === "SUPER") {
