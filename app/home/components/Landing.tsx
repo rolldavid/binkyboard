@@ -8,26 +8,23 @@ import Link from "next/link"
 import Spinner from "@/lib/Spinner"
 import BoardCard from "@/app/board/[id]/components/BoardCard"
 import styles from './Landing.module.css'
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 
-let toggle = false;
 
-export default function Page() {
+
+export default function Page({invite}: {invite: string}) {
+  const [inviteLink, setInviteLink] = useState("")
+
   const router = useRouter()
   const queryClient = useQueryClient()
 
   const { data, status } = useQuery(["userBoards"], () => {
-    const invite = localStorage.getItem("invite")
+   
     return getUserBoards(invite)
   });
 
   if (status === "loading") {
       return <Spinner />
-  }
-
-  if (status === "success" && !toggle) {
-    queryClient.invalidateQueries(["userBoards"])
-    toggle = true;
   }
 
 
