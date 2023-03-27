@@ -34,6 +34,14 @@ body {
 
 body::-webkit-scrollbar {
   display: none;
+  -webkit-appearance: none;
+}
+
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 0px;
+  background: transparent; /* make scrollbar transparent */
+  display: none;
 }
 
 
