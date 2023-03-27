@@ -5,7 +5,7 @@ import { useState, useEffect, SyntheticEvent, Dispatch, SetStateAction } from "r
 import { deletePost } from "@/lib/db-utils"
 import styles from "./PostOptions.module.css"
 
-export default function PostOptions({setShowOptions, boardId, postId}: {setShowOptions: Dispatch<SetStateAction<boolean>>, boardId: string, postId: number}) {
+export default function PostOptions({setShowOptions, boardId, postId, isAdmin}: {setShowOptions: Dispatch<SetStateAction<boolean>>, boardId: string, postId: number, isAdmin: boolean}) {
     const [confirmDelete, setConfirmDelete] = useState(false)
     const [deleting, setDeleting] = useState(false)
 
@@ -49,9 +49,9 @@ export default function PostOptions({setShowOptions, boardId, postId}: {setShowO
         <div className={styles.container}>
             <div className={styles.optionsModule}>
                 
-                <div className={styles.pinButton} >
+                {isAdmin && <div className={styles.pinButton} >
                     Pin Post
-                </div>
+                </div>}
                 {!confirmDelete && <div className={styles.deleteButton} onClick={() => setConfirmDelete(true)}>
                     Delete Post
                 </div>}

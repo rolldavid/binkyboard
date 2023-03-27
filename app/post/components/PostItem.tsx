@@ -39,7 +39,7 @@ export default function PostItem({post, slugs, boardId }: {post: PostItems, slug
                     {slugs.length === 1 && <Image src={`${process.env.NEXT_PUBLIC_AWS_URL}/${slugs[0]}`} width={1200} height={675} alt="post image" className={styles.imageOne}/>}
                 </div>
         </div>
-        {showOptions && <PostOptions setShowOptions={setShowOptions} boardId={boardId} postId={post.post.id}/>}
+        {showOptions && <PostOptions setShowOptions={setShowOptions} boardId={boardId} postId={post.post.id} isAdmin={post.isAdmin}/>}
         </>
         
     )
