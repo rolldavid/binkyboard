@@ -1,6 +1,7 @@
 "use client"
 
 import { useUser } from "@auth0/nextjs-auth0/client";
+import { useEffect } from "react";
 import Spinner from "@/lib/Spinner";
 import AuthContainer from "./auth/components/AuthContainer";
 import Landing from "./home/components/Landing"
