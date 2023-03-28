@@ -19,7 +19,6 @@ export default function Collection({boardId, isOwner}: {boardId: string, isOwner
         <Spinner />
     }
 
-    
 
     if (status === "success" && data.posts) {
         
@@ -30,7 +29,7 @@ export default function Collection({boardId, isOwner}: {boardId: string, isOwner
                         data.posts.map((post: PostItems, index: number) => {
                 
                             return (
-                                <PostItem key={index} post={post} slugs={post.post.slugs} boardId={boardId} />
+                                <PostItem key={index} post={post} boardId={boardId} />
                             )
                         })
                     }
@@ -38,7 +37,6 @@ export default function Collection({boardId, isOwner}: {boardId: string, isOwner
         
              )
         }
-
 
     return null;
 }

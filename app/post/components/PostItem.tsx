@@ -9,8 +9,10 @@ import styles from "./PostItem.module.css"
 import { deletePost } from "@/lib/db-utils"
 import PostOptions from "./PostOptions"
 
-export default function PostItem({post, slugs, boardId }: {post: PostItems, slugs: string[], boardId: string}) {
+export default function PostItem({post, boardId }: {post: PostItems, boardId: string}) {
     const [showOptions, setShowOptions] = useState(false)
+
+    console.log(post.slugs, "slugs in post item>>>>>>>>>>>>")
 
     const readableDate = new Date(post.post.createdAt).toLocaleDateString("en-US", {
         day: "numeric",
@@ -35,9 +37,67 @@ export default function PostItem({post, slugs, boardId }: {post: PostItems, slug
                     {post.post.note}
                 </p>
             </div>
-            <div className={styles.imageContainer}>
-                    {slugs.length === 1 && <Image src={`${process.env.NEXT_PUBLIC_AWS_URL}/${slugs[0]}`} width={1200} height={675} alt="post image" className={styles.imageOne}/>}
+            {post.socialUrl.length > 0 && <div>
+                <ReactPlayer url={post.socialUrl} controls={true} width="100%" />
+            </div>
+
+            }
+            {post.slugs.length === 1 && <div className={styles.mediaContainer}>
+                {         
+                    post.slugs[0].type.includes("video") ?
+                        <video controls className={styles.mediaItemOne}>
+                            <source src={`${process.env.NEXT_PUBLIC_AWS_URL}/${post.slugs[0].slug}`} type="video/mp4" />
+                                Your browser does not support HTML5 video.
+                        </video> : 
+                        <Image src={`${process.env.NEXT_PUBLIC_AWS_URL}/${post.slugs[0].slug}`} width={800} height={800} alt="post image" className={styles.mediaItemOne}/>
+                }
+            </div>}
+            {post.slugs.length === 2 && <div className={styles.mediaContainerTwo}>
+                {
+                    post.slugs.map((item, index) => {
+                    return (
+                        <div className={styles.mediaItemContainer} key={index}>
+                            <Image src={`${process.env.NEXT_PUBLIC_AWS_URL}/${post.slugs[index].slug}`} width={250} height={250} alt="post image" className={styles.mediaItemTwo}/>
+                        </div>
+                    )
+                    })
+                }
+            </div>}
+            {post.slugs.length === 3 && <div className={styles.mediaContainer}>
+                <div className={styles.mediaContainerLeft}>
+                    <div className={styles.mediaItemContainerLeft}>
+                        <Image src={`${process.env.NEXT_PUBLIC_AWS_URL}/${post.slugs[0].slug}`} width={250} height={250} alt="post image" className={styles.mediaItemLeft}/>
+                    </div>
                 </div>
+                <div className={styles.mediaContainerRight}>
+                    <div className={styles.mediaItemContainerRight}>
+                        <Image src={`${process.env.NEXT_PUBLIC_AWS_URL}/${post.slugs[1].slug}`}  width={250} height={250} alt="post image" className={styles.mediaItemRight}/>
+                    </div>
+                    <div className={styles.mediaItemContainerRight}>
+                        <img src={`${process.env.NEXT_PUBLIC_AWS_URL}/${post.slugs[2].slug}`}  width={250} height={250} alt="post image" className={styles.mediaItemRight}/>
+                    </div>
+                </div>
+            </div>}
+            {post.slugs.length === 4 && <div className={styles.mediaContainer}>
+                <div className={styles.mediaContainerStack}>
+                    <div className={styles.mediaItemContainerRight}>
+                        <Image src={`${process.env.NEXT_PUBLIC_AWS_URL}/${post.slugs[0].slug}`}  width={250} height={250} alt="post image" className={styles.mediaItemRight}/>
+                    </div>
+                    <div className={styles.mediaItemContainerRight}>
+                        <Image src={`${process.env.NEXT_PUBLIC_AWS_URL}/${post.slugs[1].slug}`}  width={250} height={250} alt="post image" className={styles.mediaItemRight}/>
+                    </div>
+                </div>
+                <div className={styles.mediaContainerStack}>
+                    <div className={styles.mediaItemContainerRight}>
+                        <Image src={`${process.env.NEXT_PUBLIC_AWS_URL}/${post.slugs[2].slug}`}  width={250} height={250} alt="post image" className={styles.mediaItemRight}/>
+                    </div>
+                    <div className={styles.mediaItemContainerRight}>
+                        <Image src={`${process.env.NEXT_PUBLIC_AWS_URL}/${post.slugs[3].slug}`}  width={250} height={250} alt="post image" className={styles.mediaItemRight}/>
+                    </div>
+                </div>
+    
+            </div>}
+                   
         </div>
         {showOptions && <PostOptions setShowOptions={setShowOptions} boardId={boardId} postId={post.post.id} isAdmin={post.isAdmin}/>}
         </>

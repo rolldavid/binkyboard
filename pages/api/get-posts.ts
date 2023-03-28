@@ -38,13 +38,24 @@ export default async function handler(
       })
 
      
-      
-
       if (board && user !== null) {
+        console.log("slugs:::::", board.posts[0].slugs)
 
         const posts = board.posts.map((post, index) => {
+          const slugs = post.slugs.map((slug, index) => {
+            const isImage = slug.slice(slug.indexOf(".")).includes("mp4") || slug.slice(slug.indexOf(".")).includes("mov") || slug.slice(slug.indexOf(".")).includes("MOV") ? false : true;
+            return {
+              slug: slug,
+              type: isImage ? "image" : "video"
+            }
+          })
+
+          const socialUrl = post.note.split(" ").filter(word => word.includes("youtube.com/") || word.includes("soundcloud.com/"))
+
           return {
             post,
+            slugs,
+            socialUrl: socialUrl.length > 0 ? socialUrl[0] : [],
             displayName: board.posts[index].user.name,
             isOwner: board.ownerId === user.id || user.role === "ADMIN" || post.userId === user.id ? true : false,
             isAdmin: user.role === "ADMIN" || board.ownerId === user.id
