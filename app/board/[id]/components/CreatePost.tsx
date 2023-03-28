@@ -62,7 +62,7 @@ export default function Submit({boardId}: {boardId: string}) {
 
             for (let i = 0; i < mediaList.length; i++) {
                 const s3id = nanoid()
-                const extensionIndex = mediaList[i].name.indexOf(".")
+                const extensionIndex = mediaList[i].name.lastIndexOf(".")
                 const fileExtension = mediaList[i].name.slice(extensionIndex)
                 const { data } = await axios.post(
                     "/api/get-s3-url",
@@ -82,6 +82,7 @@ export default function Submit({boardId}: {boardId: string}) {
                   });
 
                
+                console.log("adding file.........", `${s3id}${fileExtension}`)
                 slugList.push(`${s3id}${fileExtension}`)
                 
             }
