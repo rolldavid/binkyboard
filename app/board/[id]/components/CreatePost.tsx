@@ -104,6 +104,14 @@ export default function Submit({boardId}: {boardId: string}) {
           });
     }
 
+    useEffect(() => {
+        if (mediaPreviewList.length === 2) {
+            window.scrollTo({
+                top: 150,
+                left: 0
+              });
+        }
+    }, [mediaPreviewList])
    
 
     // handle when user is typing a note
@@ -231,27 +239,62 @@ export default function Submit({boardId}: {boardId: string}) {
                     </div>}
                     
 
-                    {mediaPreview && <div className={styles.mediaContainer}>
-                        {
-                            mediaPreviewList.map((item, index) => {
-                                return (
-                                    <div className={styles.mediaItem} key={index}>
-                                        {
-                                            item.type.includes("video") ?
-                                                <video controls className={styles.mediaItemVid}>
-                                                    <source src={item.url} type="video/mp4" />
-                                                        Your browser does not support HTML5 video.
-                                                </video>
-                                                : <img src={item.url} alt="preview image" className={styles.mediaItemImg}/>
-                                        }
-                                    </div>
-                                )
-                            })
+                    {mediaPreview && mediaPreviewList.length === 1 && <div className={styles.mediaContainer}>
+                        {         
+                            mediaPreviewList[0].type.includes("video") ?
+                                <video controls className={styles.mediaItemOne}>
+                                    <source src={mediaPreviewList[0].url} type="video/mp4" />
+                                        Your browser does not support HTML5 video.
+                                </video> : 
+                                <img src={mediaPreviewList[0].url} alt="preview image" className={styles.mediaItemOne}/>
                         }
                     </div>}
-
-                 
-                    
+                    {mediaPreview && mediaPreviewList.length === 2 && <div className={styles.mediaContainerTwo}>
+                        {
+                         mediaPreviewList.map((item: PreviewFiles, index: number) => {
+                            return (
+                                <div className={styles.mediaItemContainer} key={index}>
+                                    <img src={item.url} alt="preview image" className={styles.mediaItemTwo}/>
+                                </div>
+                            )
+                         })
+                        }
+                    </div>}
+                    {mediaPreview && mediaPreviewList.length === 3 && <div className={styles.mediaContainer}>
+                        <div className={styles.mediaContainerLeft}>
+                            <div className={styles.mediaItemContainerLeft}>
+                                <img src={mediaPreviewList[0].url} alt="preview image" className={styles.mediaItemLeft}/>
+                            </div>
+                        </div>
+                        <div className={styles.mediaContainerRight}>
+                            <div className={styles.mediaItemContainerRight}>
+                                <img src={mediaPreviewList[1].url} alt="preview image" className={styles.mediaItemRight}/>
+                            </div>
+                            <div className={styles.mediaItemContainerRight}>
+                                <img src={mediaPreviewList[2].url} alt="preview image" className={styles.mediaItemRight}/>
+                            </div>
+                        </div>
+    
+                    </div>}
+                    {mediaPreview && mediaPreviewList.length === 4 && <div className={styles.mediaContainer}>
+                        <div className={styles.mediaContainerStack}>
+                            <div className={styles.mediaItemContainerRight}>
+                                <img src={mediaPreviewList[0].url} alt="preview image" className={styles.mediaItemRight}/>
+                            </div>
+                            <div className={styles.mediaItemContainerRight}>
+                                <img src={mediaPreviewList[1].url} alt="preview image" className={styles.mediaItemRight}/>
+                            </div>
+                        </div>
+                        <div className={styles.mediaContainerStack}>
+                            <div className={styles.mediaItemContainerRight}>
+                                <img src={mediaPreviewList[2].url} alt="preview image" className={styles.mediaItemRight}/>
+                            </div>
+                            <div className={styles.mediaItemContainerRight}>
+                                <img src={mediaPreviewList[3].url} alt="preview image" className={styles.mediaItemRight}/>
+                            </div>
+                        </div>
+    
+                    </div>}
 
                 </div>
               </div>

@@ -131,259 +131,6 @@
 }
 
 
-.mediaItemVid {
-    display: flex;
-    justify-content: center; 
-    flex-grow: 1;
-    width: 100%;
-    border: solid 1px lightgrey;
-    border-radius: 10px;
-    cursor: pointer;
-   
-}
-
-.mediaItemImg {
-    display: flex;
-    justify-content: center; 
-    width: 100%;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-}
-
-
-.mediaContainerTwo {
-    display: flex; 
-    width: 100%; 
-    margin: 15px 0px 15px 0px; 
-    gap: 8px;
-}
-
-.mediaItemTwo {
-    display: flex;
-    justify-content: center; 
-    flex-grow: 1;
-    width: 100%;
-    max-height: 200px;
-    border: none;
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.mediaItemTwoImg {
-    object-fit: cover;
-    min-width: 100%;
-    min-height: 100%;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-}
-
-.mediaContainerThree {
-    display: flex; 
-    align-items: center;
-    width: 100%; 
-    min-width: 250px;
-    max-width: 500px;
-    height: 100%;
-    flex-wrap: wrap; 
-    margin: 20px 0px 20px 0px; 
-    gap: 8px;
-}
-
-.mediaItemThreeBig {
-    display: flex;
-    justify-content: center; 
-    flex-grow: 1;
-    width: 100%;
-    max-height: 200px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    background-color: aqua;
-    overflow: hidden;
-}
-
-.mediaItemThreeStack {
-    display: flex;
-    flex-direction: column;
-    justify-content: center; 
-    flex-grow: 1;
-    width: 100%;
-    max-height: 200px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    background-color: aqua;
-    overflow: hidden;
-}
-
-.mediaItemThreeImg {
-    object-fit: cover;
-    min-width: 100%;
-    min-height: 100%;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-}
-
-.mediaContainerFour {
-    display: flex; 
-    align-items: center;
-    width: 100%; 
-    min-width: 250px;
-    max-width: 500px;
-    height: 100%;
-    flex-wrap: wrap; 
-    margin: 20px 0px 20px 0px; 
-    gap: 8px;
-}
-
-
-
-.mediaItemFour {
-    display: flex;
-    justify-content: center; 
-    flex-grow: 1;
-    flex-basis: 200px;
-    min-height: 200px;
-    width: 200px;
-    border: solid 1px lightgrey;
-    border-radius: 10px;
-    cursor: pointer;
-    background-color: var(--bluegreen);
-}
-
-
-
-
-
-
-
-
-/* .mediaClassOne {
-    display: flex;
-    justify-content: center;
-    flex-grow: 1;
-    width: 100%;
-    height: auto;
-    border: solid 1px lightgrey;
-    border-radius: 10px;
-    cursor: pointer;
-    background-color: var(--bluegreen);
-}
-
-.mediaClassTwo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-grow: 1;
-    width: 40%;
-    height: 150px;
-    flex-basis: 125px;
-    border: solid 1px lightgrey;
-    border-radius: 10px;
-    overflow: hidden;
-    
-}
-
-.mediaClassThree {
-    display: flex;
-    justify-content: center;
-    flex-grow: 1;
-    flex-basis: 120px;
-    height: 125px;
-    border: solid 1px lightgrey;
-    border-radius: 10px;
-    cursor: pointer;
-    overflow:hidden;
-}
-
-.mediaClassThreeThird {
-    display: flex;
-    justify-content: center;
-    flex-grow: 1;
-    flex-basis: 125px;
-    width: 100%;
-    border: solid 1px lightgrey;
-    border-radius: 10px;
-    cursor: pointer;
-    overflow:hidden;
-}
-
-.mediaClassFour {
-    display: flex;
-    justify-content: center;
-    flex-grow: 1;
-    flex-basis: 120px;
-    height: 150px;
-    border: solid 1px lightgrey;
-    border-radius: 10px;
-    cursor: pointer;
-    overflow:hidden;
-}
-
-.mediaDetailOne {
-    height: auto;
-    min-width: 100%;
-    width: 100%;
-    border-radius: 10px;
-    overflow:hidden;
-}
-
-.mediaDetailOneVid {
-    height: auto;
-    min-width: 100%;
-    width: 100%;
-    border-radius: 10px;
-    overflow:hidden;
-}
-
-.mediaDetailTwo {
-    min-height: 175px;
-    min-width: 175px;
-    border-radius: 10px;
-    overflow:hidden;
-}
-
-.mediaDetailTwoVid {
-    min-width: 100%;
-    height: 100%;
-    border-radius: 10px;
-    background-color: #2c2c2c;
-    overflow:hidden;
-}
-
-.mediaDetailThree {
-    min-height: 175px;
-    min-width: 200px;
-    border-radius: 10px;
-    overflow:hidden;
-}
-
-.mediaDetailThreeVid {
-    min-width: 100%;
-    height: 100%;
-    border-radius: 10px;
-    background-color: #2c2c2c;
-    overflow:hidden;
-}
-
-.mediaDetailFour {
-    min-height: 175px;
-    min-width: 200px;
-    border-radius: 10px;
-    overflow:hidden;
-}
-
-.mediaDetailFourVid {
-    min-width: 100%;
-    height: 100%;
-    border-radius: 10px;
-    background-color: #2c2c2c;
-    overflow:hidden;
-} */
-
 
 .addLinkContainer {
     display: flex;
@@ -455,4 +202,122 @@
     font-family: 'Rokkitt', serif;
     
 }
+
+
+
+
+.mediaContainer {
+    display: flex; 
+    align-items: center;
+    width: 100%; 
+    gap: 5px;
+    border: none;
+}
+
+.mediaItemOne {
+    display: flex;
+    justify-content: center; 
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    border: none;
+    cursor: default;
+}
+
+.mediaContainerTwo {
+    display: flex; 
+    align-items: center;
+    width: 100%; 
+    gap: 5px;
+}
+
+.mediaItemContainer {
+    display: flex; 
+    align-items: center;
+    width: 50%;
+    height: 200px;
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.mediaItemTwo {
+    object-fit: cover;
+    min-width: 100%;
+    min-height: 100%;
+    border: none;
+    border-radius: 10px;
+}
+
+.mediaContainerThree {
+    display: flex; 
+    align-items: center;
+    width: 100%; 
+    border: none;
+    gap: 5px;
+}
+
+.mediaContainerLeft {
+    display: flex; 
+    align-items: center;
+    width: 60%; 
+    gap: 5px;
+    margin: 0;
+    padding: 0;
+}
+
+.mediaContainerRight {
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    width: 40%; 
+    gap: 5px;
+    margin: 0;
+}
+
+.mediaItemContainerLeft {
+    display: flex; 
+    align-items: center;
+    width: 100%;
+    height: 200px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.mediaItemContainerRight {
+    display: flex; 
+    align-items: center;
+    width: 100%;
+    height: 98px;
+    border-radius: 10px;
+    border: none;
+    overflow: hidden;
+}
+
+.mediaItemLeft {
+    object-fit: cover;
+    min-width: 100%;
+    min-height: 100%;
+    border: none;
+    border-radius: 10px;
+}
+
+.mediaItemRight {
+    object-fit: cover;
+    min-width: 100%;
+    min-height: 100%;
+    border: none;
+    border-radius: 10px;
+}
+
+.mediaContainerStack {
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    width: 50%; 
+    gap: 5px;
+    margin: 0;
+}
+
+
 
