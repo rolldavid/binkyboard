@@ -11,31 +11,31 @@ datasource db {
 }
 
 model Board {
-  id         String       @id @default(cuid())
-  createdAt  DateTime     @default(now())
-  name       String
-  users      User[]       @relation(name: "users")
-  owner      User         @relation(fields: [ownerId], references: [id], name: "owner")
-  ownerId    String
-  posts      Post[]       @relation(name: "postlist")
-  pinnedPost Post?        @relation(name: "pinned")
-  allowList  String?
-  privacy    PrivacyLevel @default(ONE)
-  registry   String?
-  headerUrl  String       @default("")
+  id           String       @id @default(cuid())
+  createdAt    DateTime     @default(now())
+  name         String
+  users        User[]       @relation(name: "users")
+  owner        User         @relation(fields: [ownerId], references: [id], name: "owner")
+  ownerId      String
+  posts        Post[]       @relation(name: "postlist")
+  pinnedPost   Post?        @relation(fields: [pinnedPostId], references: [id], name: "pinned")
+  pinnedPostId Int?         @unique
+  allowList    String?
+  privacy      PrivacyLevel @default(ONE)
+  registry     String?
+  headerUrl    String       @default("")
 }
 
 model Post {
-  id            Int      @id @default(autoincrement())
-  createdAt     DateTime @default(now())
-  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId        String
-  note          String
-  slugs         String[]
-  board         Board    @relation(fields: [boardId], references: [id], onDelete: Cascade, name: "postlist")
-  boardId       String
-  pinnedOn      Board?   @relation(fields: [pinnedBoardId], references: [id], name: "pinned")
-  pinnedBoardId String?  @unique
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  note      String
+  slugs     String[]
+  board     Board    @relation(fields: [boardId], references: [id], onDelete: Cascade, name: "postlist")
+  boardId   String
+  pinnedOn  Board?   @relation(name: "pinned")
 }
 
 model User {
