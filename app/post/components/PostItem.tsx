@@ -6,13 +6,13 @@ import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { SyntheticEvent, useEffect, useState } from "react"
 import ReactPlayer from "react-player"
 import styles from "./PostItem.module.css"
+import pin from "../assets/pin.png"
 import { deletePost } from "@/lib/db-utils"
 import PostOptions from "./PostOptions"
 
-export default function PostItem({post, boardId }: {post: PostItems, boardId: string}) {
+export default function PostItem({post, boardId, pinnedPost }: {post: PostItems, boardId: string, pinnedPost: boolean}) {
     const [showOptions, setShowOptions] = useState(false)
 
-    console.log(post.slugs, "slugs in post item>>>>>>>>>>>>")
 
     const readableDate = new Date(post.post.createdAt).toLocaleDateString("en-US", {
         day: "numeric",
@@ -22,7 +22,12 @@ export default function PostItem({post, boardId }: {post: PostItems, boardId: st
     return (
         <>
         <div className={styles.container}>
+            {pinnedPost && <div className={styles.pinnedMessage}>
+                <Image src={pin} width={13} height={13} alt="pin" className={styles.pinnedImage} />
+                <p className={styles.pinText}>Pinned Post</p>
+            </div>}
             <div className={styles.headerContainer}>
+                
                 <div className={styles.headerItems}>
                     <p className={styles.displayName}>{post.displayName}</p>
                     <p className={styles.dot}>·</p>

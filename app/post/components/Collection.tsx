@@ -21,18 +21,23 @@ export default function Collection({boardId, isOwner}: {boardId: string, isOwner
 
 
     if (status === "success" && data.posts) {
-        
+            
             return (
-               
                 <div className={styles.container}>
-                    {
-                        data.posts.map((post: PostItems, index: number) => {
-                
-                            return (
-                                <PostItem key={index} post={post} boardId={boardId} />
-                            )
-                        })
-                    }
+                    {data.pinned && <div >
+                        <PostItem post={data.pinned} boardId={boardId} pinnedPost={true}/>
+                        
+                    </div>}
+                    <div className={styles.postContainer}>
+                        {
+                            data.posts.map((post: PostItems, index: number) => {
+                    
+                                return (
+                                    <PostItem key={index} post={post} boardId={boardId} pinnedPost={false}/>
+                                )
+                            })
+                        }
+                    </div>
                 </div>
         
              )

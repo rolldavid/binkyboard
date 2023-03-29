@@ -8,6 +8,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     try {
         const session = await getSession(req, res)
+
         if (!session) {
             res.status(401)
             return
@@ -15,10 +16,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
         if (session?.user?.email) {
             const board = await prisma.board.findUnique({where: {id: boardId}, include: {owner: {select: {email: true}} }})
+            const post = await prisma.post.findUnique({where: {id: postId}, include: { user: { select: {email: true}} }})
 
-            if (board && board.owner.email === session.user.email) {
+            if (board && post && board.owner.email === session.user.email || post?.user.email === session.user.email) {
                
-                const post = await prisma.post.delete({
+                const deletedPost = await prisma.post.delete({
                     where: {
                         id: postId
                     }

@@ -5,6 +5,8 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+
+
   const s3 = new S3({
       region: process.env.AWS_REGION,
       accessKeyId: process.env.ACCESS_KEY_ID,
@@ -19,6 +21,7 @@ export default async function handler(
     Expires: 600,
     ContentType: fileType,
   };
+
 
 
   const url = await s3.getSignedUrlPromise("putObject", fileParams);

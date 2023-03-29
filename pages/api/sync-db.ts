@@ -23,7 +23,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
               name: user.nickname,
             },
           })
-        console.log("done adding user....")
+       
         res.status(201).json({status: "ok"})
         return
     

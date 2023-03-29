@@ -61,6 +61,7 @@ export default function Submit({boardId}: {boardId: string}) {
         if (mediaList) {
 
             for (let i = 0; i < mediaList.length; i++) {
+                const startTime = Date.now()
                 const s3id = nanoid()
                 const extensionIndex = mediaList[i].name.lastIndexOf(".")
                 const fileExtension = mediaList[i].name.slice(extensionIndex)
@@ -81,10 +82,8 @@ export default function Submit({boardId}: {boardId: string}) {
                     },
                   });
 
-               
-                console.log("adding file.........", `${s3id}${fileExtension}`)
                 slugList.push(`${s3id}${fileExtension}`)
-                
+
             }
         
             const addPost = await createNewPost(boardId, note, slugList)
