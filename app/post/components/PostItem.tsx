@@ -23,7 +23,7 @@ export default function PostItem({post, boardId, pinnedPost }: {post: PostItems,
         <>
         <div className={styles.container}>
             {pinnedPost && <div className={styles.pinnedMessage}>
-                <Image src={pin} width={15} height={15} alt="pin" className={styles.pinnedImage} />
+                <Image src={pin} width={13} height={13} alt="pin" className={styles.pinnedImage} />
                 <p className={styles.pinText}>Pinned Post</p>
             </div>}
             <div className={styles.headerContainer}>

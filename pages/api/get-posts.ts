@@ -33,23 +33,14 @@ export default async function handler(
               }
             }
           },
-          pinnedPost: {
-            include: {
-              user: {
-                select: {
-                  name: true,
-                  email: true,
-                  role: true
-                }
-              }
-            }
-          }
+          pinnedPost: true
+            
         }
       })
 
       // configure pinned post 
 
-      
+      const pinnedOwner = await prisma.user.findUnique({ where: { id: board?.pinnedPost?.userId}}) 
 
       const pinnedSlugs = board && board.pinnedPost ? board?.pinnedPost.slugs.map((slug, index) => {
         const isImage = slug.slice(slug.indexOf(".")).includes("mp4") || slug.slice(slug.indexOf(".")).includes("mov") || slug.slice(slug.indexOf(".")).includes("MOV") ? false : true;
@@ -65,9 +56,9 @@ export default async function handler(
         post: board.pinnedPost,
         slugs: pinnedSlugs,
         socialUrl: pinnedSocialUrl,
-        displayName: board.pinnedPost.user.name,
-        isOwner: board.pinnedPost.user.email === session?.user.email || board.pinnedPost.user.role === "ADMIN" ? true : false,
-        isAdmin: board.pinnedPost.user.role === "ADMIN" ? true : false,
+        displayName: pinnedOwner?.name,
+        isOwner: pinnedOwner?.email === session?.user.email || pinnedOwner?.role === "ADMIN" ? true : false,
+        isAdmin: pinnedOwner?.role === "ADMIN" ? true : false,
       } : false;
 
      
