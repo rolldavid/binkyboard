@@ -6,7 +6,6 @@ export default async function handler(
   res: NextApiResponse
 ) {
 
-  const startTime = Date.now()
 
   const s3 = new S3({
       region: process.env.AWS_REGION,
@@ -24,9 +23,7 @@ export default async function handler(
   };
 
 
-  const totalTime = Date.now() - startTime
 
-  console.log("Total time to get S3 link:", totalTime)
   const url = await s3.getSignedUrlPromise("putObject", fileParams);
 
 
