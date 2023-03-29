@@ -1,18 +1,18 @@
-name: checkMigration
+name: checkPrevMigration
 on:
   push:
     branches:
-      - main
+      - dev
 
 jobs:
-  migrate:
+  prevMigrate:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: "18.15.0"
-      - name: Run production migration
+      - name: Run preview migration
         run: npx prisma migrate deploy
         env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL_PREV }}
