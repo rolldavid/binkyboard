@@ -21,6 +21,29 @@
     margin: 0px 0px 10px 5px;
 }
 
+.pinnedMessage {
+    display: flex;
+ 
+    align-items: center;
+    margin: 0px 0px 5px 5px;
+    gap: 5px;
+    height: 20px;
+}
+
+.pinnedImage {
+    display: flex;
+    align-items: center;
+    opacity: .85;
+}
+
+.pinText {
+    display: flex;
+    align-items: center;
+    font-size: .85rem;
+    height: 100%;
+    color: var(--darkwenge);
+}
+
 .optionsContainer {
     position: fixed;
     display: flex;

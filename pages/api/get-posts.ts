@@ -33,40 +33,105 @@ export default async function handler(
               }
             }
           },
-          
+          pinnedPost: {
+            include: {
+              user: {
+                select: {
+                  name: true,
+                  email: true,
+                  role: true
+                }
+              }
+            }
+          }
         }
       })
 
+      // configure pinned post 
+
+      
+
+      const pinnedSlugs = board && board.pinnedPost ? board?.pinnedPost.slugs.map((slug, index) => {
+        const isImage = slug.slice(slug.indexOf(".")).includes("mp4") || slug.slice(slug.indexOf(".")).includes("mov") || slug.slice(slug.indexOf(".")).includes("MOV") ? false : true;
+        return {
+          slug: slug,
+          type: isImage ? "image" : "video"
+        }
+      }) : false;
+
+      const pinnedSocialUrl = board && board.pinnedPost ? board.pinnedPost.note.split(" ").filter(word => word.includes("youtube.com/") || word.includes("soundcloud.com/")) : false;
+
+      const pinned = board?.pinnedPost ? {
+        post: board.pinnedPost,
+        slugs: pinnedSlugs,
+        socialUrl: pinnedSocialUrl,
+        displayName: board.pinnedPost.user.name,
+        isOwner: board.pinnedPost.user.email === session?.user.email || board.pinnedPost.user.role === "ADMIN" ? true : false,
+        isAdmin: board.pinnedPost.user.role === "ADMIN" ? true : false,
+      } : false;
+
      
       if (board && user !== null) {
-        console.log("slugs:::::", board.posts[0].slugs)
 
-        const posts = board.posts.map((post, index) => {
-          const slugs = post.slugs.map((slug, index) => {
-            const isImage = slug.slice(slug.indexOf(".")).includes("mp4") || slug.slice(slug.indexOf(".")).includes("mov") || slug.slice(slug.indexOf(".")).includes("MOV") ? false : true;
+        if (pinned) {
+          const filteredPosts = board.posts.filter(post => pinned.post.id !== post.id)
+          const posts = filteredPosts.map((post, index) => {
+
+            const slugs = post.slugs.map((slug, index) => {
+              const isImage = slug.slice(slug.indexOf(".")).includes("mp4") || slug.slice(slug.indexOf(".")).includes("mov") || slug.slice(slug.indexOf(".")).includes("MOV") ? false : true;
+              return {
+                slug: slug,
+                type: isImage ? "image" : "video"
+              }
+            })
+
+            const socialUrl = post.note.split(" ").filter(word => word.includes("youtube.com/") || word.includes("soundcloud.com/"))
+
             return {
-              slug: slug,
-              type: isImage ? "image" : "video"
+              post,
+              slugs,
+              socialUrl: socialUrl.length > 0 ? socialUrl[0] : [],
+              displayName: board.posts[index].user.name,
+              isOwner: board.ownerId === user.id || user.role === "ADMIN" || post.userId === user.id ? true : false,
+              isAdmin: user.role === "ADMIN" || board.ownerId === user.id
             }
-          })
-
-          const socialUrl = post.note.split(" ").filter(word => word.includes("youtube.com/") || word.includes("soundcloud.com/"))
-
-          return {
-            post,
-            slugs,
-            socialUrl: socialUrl.length > 0 ? socialUrl[0] : [],
-            displayName: board.posts[index].user.name,
-            isOwner: board.ownerId === user.id || user.role === "ADMIN" || post.userId === user.id ? true : false,
-            isAdmin: user.role === "ADMIN" || board.ownerId === user.id
-          }
+          
         })
-        res.status(200).json({ posts })
-        return
+
+        res.status(200).json({ posts, pinned: pinned ? pinned : false })
+        return;
+
+        } else {
+          const posts = board.posts.map((post, index) => {
+
+            const slugs = post.slugs.map((slug, index) => {
+              const isImage = slug.slice(slug.indexOf(".")).includes("mp4") || slug.slice(slug.indexOf(".")).includes("mov") || slug.slice(slug.indexOf(".")).includes("MOV") ? false : true;
+              return {
+                slug: slug,
+                type: isImage ? "image" : "video"
+              }
+            })
+
+            const socialUrl = post.note.split(" ").filter(word => word.includes("youtube.com/") || word.includes("soundcloud.com/"))
+
+            return {
+              post,
+              slugs,
+              socialUrl: socialUrl.length > 0 ? socialUrl[0] : [],
+              displayName: board.posts[index].user.name,
+              isOwner: board.ownerId === user.id || user.role === "ADMIN" || post.userId === user.id ? true : false,
+              isAdmin: user.role === "ADMIN" || board.ownerId === user.id
+            }
+          
+        })
+
+        res.status(200).json({ posts, pinned: pinned ? pinned : false })
+        return;
+        }
+      
       }
 
-    
-      throw new Error("Did not manage to connect")
+      res.status(401).json({status: "unauthorized"})
 
     } catch {
       throw new Error("Did not manage to connect")

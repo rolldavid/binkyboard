@@ -205,6 +205,21 @@ export async function updateDisplayName(displayName: string) {
     return data;
 }
 
+export async function pinPost({boardId, postId} : {boardId: string, postId: number}) {
+    const res = await fetch("/api/pin-post", {
+        method: "POST",
+        body: JSON.stringify({
+            boardId,
+            postId
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    const data = await res.json();
+    return data;
+}
+
 export async function removeBoard(boardId: string) {
     const res = await fetch("/api/remove-board", {
         method: "POST",
