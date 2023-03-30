@@ -37,7 +37,7 @@ export default function Submit({boardId}: {boardId: string}) {
     const [mediaList, setMediaList] = useState<File[]>([])
     const [mediaPreviewList, setMediaPreviewList] = useState<PreviewFiles[]>([])
     const [rowCount, setRowCount] = useState(2)
-    const [acceptMedia, setAcceptMedia] = useState("image/png, image/jpeg, audio/*, video/*, image/*")
+    const [acceptMedia, setAcceptMedia] = useState("image/png, image/jpeg, audio/*, video/*, image/*, video/mp4, video/mov, video/x-m4v")
     const [allowUpload, setAllowUpload] = useState(true)
     const [link, setLink] = useState("")
     const [toggleMedia, setToggleMedia] = useState(false)
