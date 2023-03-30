@@ -52,6 +52,7 @@ export default async function handler(
 
             for (let i = 0; i < boardUser.ownedBoards.length; i++) {
                 if (board.id === boardUser.ownedBoards[i].id) {
+
                 isOwner = true
                 }
             }

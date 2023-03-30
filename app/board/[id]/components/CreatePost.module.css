@@ -327,9 +327,10 @@
 }
 .dotFlashing {
     position: relative;
-    width: 10px;
-    height: 10px;
-    border-radius: 5px;
+    margin-top: 8px;
+    width: 4px;
+    height: 4px;
+    border-radius: 4px;
     background-color: var(--cream);
     color: var(--cream);
     animation: dot-flashing 1s infinite linear alternate;
@@ -342,20 +343,20 @@
     top: 0;
   }
   .dotFlashing::before {
-    left: -15px;
-    width: 10px;
-    height: 10px;
-    border-radius: 5px;
+    left: -10px;
+    width: 4px;
+    height: 4px;
+    border-radius: 4px;
     background-color: var(--cream);
     color: var(--cream);
     animation: dot-flashing 1s infinite alternate;
     animation-delay: 0s;
   }
   .dotFlashing::after {
-    left: 15px;
-    width: 10px;
-    height: 10px;
-    border-radius: 5px;
+    left: 10px;
+    width: 4px;
+    height: 4px;
+    border-radius: 4px;
     background-color: var(--cream);
     color: var(--cream);
     animation: dot-flashing 1s infinite alternate;
@@ -369,4 +370,8 @@
     50%, 100% {
       background-color: rgba(160, 146, 148, 0.2);
     }
+  }
+
+  .shareText {
+    margin: 0px 18px 0px 0px;
   }
