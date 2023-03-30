@@ -42,7 +42,7 @@ export default function PostItem({post, boardId, pinnedPost }: {post: PostItems,
                     {post.post.note}
                 </p>
             </div>
-            {post.socialUrl.length > 0 && <div>
+            {post.slugs.length === 0 && post.socialUrl.length > 0 && <div className={styles.linkContainer}>
                 <ReactPlayer url={post.socialUrl} controls={true} width="100%" />
             </div>
 

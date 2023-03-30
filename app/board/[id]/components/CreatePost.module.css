@@ -107,8 +107,8 @@
     padding: 10px;
     width: 100%;
     resize: none;
-    font-size: 1.2rem;
-    font-family: 'Rokkitt', serif;
+    font-size: 1rem;
+    font-family: 'Montserrat', sans-serif;
     overflow: visible;
 }
 
@@ -319,5 +319,54 @@
     margin: 0;
 }
 
-
-
+.flashContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+.dotFlashing {
+    position: relative;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: var(--cream);
+    color: var(--cream);
+    animation: dot-flashing 1s infinite linear alternate;
+    animation-delay: 0.5s;
+  }
+  .dotFlashing::before, .dotFlashing::after {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    top: 0;
+  }
+  .dotFlashing::before {
+    left: -15px;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: var(--cream);
+    color: var(--cream);
+    animation: dot-flashing 1s infinite alternate;
+    animation-delay: 0s;
+  }
+  .dotFlashing::after {
+    left: 15px;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: var(--cream);
+    color: var(--cream);
+    animation: dot-flashing 1s infinite alternate;
+    animation-delay: 1s;
+  }
+  
+  @keyframes dot-flashing {
+    0% {
+      background-color: var(--cream);
+    }
+    50%, 100% {
+      background-color: rgba(119, 107, 109, 0.2);
+    }
+  }
