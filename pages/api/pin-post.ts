@@ -7,7 +7,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
    
         const { boardId, postId } = req.body;
         
-        console.log(boardId, postId)
         try {
             const session = await getSession(req, res)
 

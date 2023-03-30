@@ -58,7 +58,7 @@ export default function Page({boardId}: {boardId: string}) {
         if (data.board.privacy === "TWO" && data.hasAccess) {
             return (
                 <div className={styles.container}>
-                    <BoardHeader boardId={boardId} isOwner={true} setShowOptions={setShowOptions} headerUrl={data.board.headerUrl} boardName={data.board.name} registry={data.board.registry}/>
+                    <BoardHeader boardId={boardId} isOwner={false} setShowOptions={setShowOptions} headerUrl={data.board.headerUrl} boardName={data.board.name} registry={data.board.registry}/>
                     <CreatePost boardId={boardId}/>
                     <Collection boardId={boardId} isOwner={false}/>
                 </div>

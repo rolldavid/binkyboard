@@ -54,6 +54,7 @@ export default function Submit({boardId}: {boardId: string}) {
         setDisabled(true)
         setSubmitStyle("submittingButton")
         if (mediaList) {
+            setAcceptMedia("image/png, image/jpeg, audio/*, video/*, image/*, video/mp4, video/mov, video/x-m4v")
 
             for (let i = 0; i < mediaList.length; i++) {
                 const startTime = Date.now()
@@ -311,16 +312,18 @@ export default function Submit({boardId}: {boardId: string}) {
                         <div className={styles.uploadItemGrey}>
                             <Image src={mov} width={35} height={25} alt="movie icon"/>
                         </div>
-                        
                     }
                     </div>
                     <button type="submit" className={styles[`${submitStyle}`]}
                         disabled={disabled}
-                    >{!loading ? "Share" : <div className={styles.flashContainer}><div className={styles.snippet} data-title="dot-flashing">
+                    >{!loading ? "Share" : <div className={styles.flashContainer}>
+                        <div className={styles.shareText}>Sharing</div>
+                        <div className={styles.snippet} data-title="dot-flashing">
                             <div className={styles.stage}>
                                 <div className={styles.dotFlashing}></div>
                             </div>
-                    </div></div>}</button>
+                        </div>
+                    </div>}</button>
                 </div>
                 <div className={styles.uploadHidden}>
                     <input 

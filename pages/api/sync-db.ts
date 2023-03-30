@@ -8,8 +8,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const { user } = req.body;
 
     if (user) {
-        console.log("adding user....", "email: ", user.email, "nickname: ", user.nickname, "user :", user)
-    
+        console.log("adding user...")
 
     try {
         const upsertUser = await prisma.user.upsert({
