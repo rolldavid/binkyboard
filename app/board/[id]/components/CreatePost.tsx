@@ -13,11 +13,10 @@ import img from "../assets/img.png"
 import mov from "../assets/mov.png"
 import Spinner from "@/lib/Spinner";
 
-let linkInput = false;
-let mediaInput = false;
+
 let holdLink = ""
 let linkChecked = false;
-
+let uploading = false;
 
 interface PreviewFiles {
     url: string
@@ -30,11 +29,10 @@ export default function Submit({boardId}: {boardId: string}) {
 
     const [loading, setLoading] = useState(false)
     const [note, setNote] = useState("")
-    
+    const [dbSlugs, setdbSlugs] = useState<string[]>([])
     const [linkPreview, setLinkPreview] = useState(false)
     const [toggleLink, setToggleLink] = useState(false)
     const [mediaPreview, setMediaPreview] = useState(false)
-    const [mediaList, setMediaList] = useState<File[]>([])
     const [mediaPreviewList, setMediaPreviewList] = useState<PreviewFiles[]>([])
     const [rowCount, setRowCount] = useState(2)
     const [acceptMedia, setAcceptMedia] = useState("image/png, image/jpeg, audio/*, video/*, image/*, video/mp4, video/mov, video/x-m4v")
@@ -44,60 +42,34 @@ export default function Submit({boardId}: {boardId: string}) {
     const [disabled, setDisabled] = useState(false)
     const [submitStyle, setSubmitStyle] = useState("readyButton")
     
-    
    
     async function addPost({note}: {note: string}) {
-
-        let slugList: string[] = []
-       
-        setLoading(true)
-        setDisabled(true)
-        setSubmitStyle("submittingButton")
-        if (mediaList) {
-            setAcceptMedia("image/png, image/jpeg, audio/*, video/*, image/*, video/mp4, video/mov, video/x-m4v")
-
-            for (let i = 0; i < mediaList.length; i++) {
-                const startTime = Date.now()
-                const s3id = nanoid()
-                const extensionIndex = mediaList[i].name.lastIndexOf(".")
-                const fileExtension = mediaList[i].name.slice(extensionIndex)
-                const { data } = await axios.post(
-                    "/api/get-s3-url",
-                    {
-                        filename: `${s3id}${fileExtension}`,
-                        fileType: mediaList[i].type
-                    }
-                )
-    
-                const url = data.url
-           
-                await axios.put(url, mediaList[i], {
-                    headers: {
-                      "Content-Type": mediaList[i].type,
-                      "Access-Control-Allow-Origin": "*",
-                    },
+        async function checkFlag() {
+            setLoading(true)
+            if(uploading) {
+               window.setTimeout(checkFlag, 100); 
+            } else {
+                await createNewPost(boardId, note, dbSlugs)
+                setDisabled(true)
+                setSubmitStyle("submittingButton")
+                setNote("")
+                setRowCount(2)
+                setdbSlugs([])
+                setMediaPreviewList([])
+                setMediaPreview(false)
+                setDisabled(false)
+                setSubmitStyle("readyButton")
+                setAcceptMedia("image/png, image/jpeg, audio/*, video/*, image/*, video/mp4, video/mov, video/quicktime, video/x-m4v")
+                queryClient.invalidateQueries(['collection'])
+                window.scrollTo({
+                    top: 0,
+                    left: 0
                   });
-
-                slugList.push(`${s3id}${fileExtension}`)
-
+                setLoading(false)
             }
-        
-            const addPost = await createNewPost(boardId, note, slugList)
-            
         }
-        setNote("")
-        setMediaList([])
-        setRowCount(2)
-        setMediaPreviewList([])
-        setMediaPreview(false)
-        setLoading(false)
-        setDisabled(false)
-        setSubmitStyle("readyButton")
-        queryClient.invalidateQueries(['collection'])
-        window.scrollTo({
-            top: 0,
-            left: 0
-          });
+        checkFlag();
+        
     }
 
     useEffect(() => {
@@ -148,9 +120,9 @@ export default function Submit({boardId}: {boardId: string}) {
 
 
         if (chosenFile && chosenFile[0].type) {
-            setMediaList([...mediaList, chosenFile[0]])
+            
             let reader = new FileReader()
-
+            
             if (chosenFile[0].type.includes("video") || chosenFile[0].type.includes("mp4")) {
                 if (mediaPreviewList.length === 0) {
                     setAllowUpload(false)
@@ -173,8 +145,36 @@ export default function Submit({boardId}: {boardId: string}) {
                 };
                 reader.readAsDataURL(chosenFile[0])
             }
+
+             startUpload(chosenFile[0])
         }
+    }
+
+    const startUpload = async (file: File) => {
+            
+            uploading = true
+            const s3id = nanoid()
+            const extensionIndex = file.name.lastIndexOf(".")
+            const fileExtension = file.name.slice(extensionIndex)
+            const { data } = await axios.post(
+                "/api/get-s3-url",
+                {
+                    filename: `${s3id}${fileExtension}`,
+                    fileType: file.type
+                }
+            )
+
+            const url = data.url
         
+            await axios.put(url, file, {
+                headers: {
+                    "Content-Type": file.type,
+                    "Access-Control-Allow-Origin": "*",
+                },
+                });
+
+            dbSlugs.push(`${s3id}${fileExtension}`)
+            uploading = false
     }
 
  
