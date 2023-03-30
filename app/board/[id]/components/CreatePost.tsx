@@ -34,16 +34,11 @@ export default function Submit({boardId}: {boardId: string}) {
     const [linkPreview, setLinkPreview] = useState(false)
     const [toggleLink, setToggleLink] = useState(false)
     const [mediaPreview, setMediaPreview] = useState(false)
-    const [mediaPreviewTwo, setMediaPreviewTwo] = useState(false)
-    const [mediaPreviewThree, setMediaPreviewThree] = useState(false)
-    const [mediaPreviewFour, setMediaPreviewFour] = useState(false)
     const [mediaList, setMediaList] = useState<File[]>([])
     const [mediaPreviewList, setMediaPreviewList] = useState<PreviewFiles[]>([])
     const [rowCount, setRowCount] = useState(2)
     const [acceptMedia, setAcceptMedia] = useState("image/png, image/jpeg, audio/*, video/*, image/*")
     const [allowUpload, setAllowUpload] = useState(true)
-    const [mediaClass, setMediaClass] = useState("")
-    const [mediaDetailClass, setMediaDetailClass] = useState("")
     const [link, setLink] = useState("")
     const [toggleMedia, setToggleMedia] = useState(false)
     const [disabled, setDisabled] = useState(false)
@@ -138,6 +133,8 @@ export default function Submit({boardId}: {boardId: string}) {
         if (chosenFile && !chosenFile[0]) {
             return;
         }
+
+        setLinkPreview(false)
     
         if (mediaPreviewList.length >= 4) {
             console.log("Add a max of 4 files to your post");
@@ -145,12 +142,10 @@ export default function Submit({boardId}: {boardId: string}) {
         }
 
         if (mediaPreviewList.length === 0) {
-            setAcceptMedia("image/png, image/jpeg, audio/*, image/*")
-
+            setAcceptMedia("image/png, image/jpeg, image/*")
         } 
 
 
-        
         if (chosenFile && chosenFile[0].type) {
             setMediaList([...mediaList, chosenFile[0]])
             let reader = new FileReader()
@@ -321,7 +316,11 @@ export default function Submit({boardId}: {boardId: string}) {
                     </div>
                     <button type="submit" className={styles[`${submitStyle}`]}
                         disabled={disabled}
-                    >{!loading ? "Share" : "Sharing..."}</button>
+                    >{!loading ? "Share" : <div className={styles.flashContainer}><div className={styles.snippet} data-title="dot-flashing">
+                            <div className={styles.stage}>
+                                <div className={styles.dotFlashing}></div>
+                            </div>
+                    </div></div>}</button>
                 </div>
                 <div className={styles.uploadHidden}>
                     <input 
