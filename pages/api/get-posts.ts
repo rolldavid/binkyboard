@@ -54,7 +54,8 @@ export default async function handler(
         
             const pinnedSlugs = board.pinnedPost ? 
               board.pinnedPost.slugs.map(slug => {
-                const isImage = slug.slice(slug.indexOf(".")).includes("mp4") || slug.slice(slug.indexOf(".")).includes("mov") || slug.slice(slug.indexOf(".")).includes("MOV") ? false : true;
+               
+                const isImage = slug.slice(slug.lastIndexOf(".")).includes("mp4") || slug.slice(slug.lastIndexOf(".")).includes("mov") || slug.slice(slug.lastIndexOf(".")).includes("MOV") || slug.slice(slug.lastIndexOf(".")).includes("quicktime")? false : true;
                 return {
                   slug: slug,
                   type: isImage ? "image" : "video"
@@ -77,7 +78,8 @@ export default async function handler(
             const posts = filteredPosts.map((post, index) => {
 
               const slugs = post.slugs.map((slug, index) => {
-                const isImage = slug.slice(slug.indexOf(".")).includes("mp4") || slug.slice(slug.indexOf(".")).includes("mov") || slug.slice(slug.indexOf(".")).includes("MOV") ? false : true;
+                const isImage = slug.slice(slug.lastIndexOf(".")).includes("mp4") || slug.slice(slug.lastIndexOf(".")).includes("mov") || slug.slice(slug.lastIndexOf(".")).includes("MOV") ? false : true;
+               
                 return {
                   slug: slug,
                   type: isImage ? "image" : "video"
