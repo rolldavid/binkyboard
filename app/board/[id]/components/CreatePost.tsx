@@ -109,9 +109,14 @@ export default function Submit({boardId}: {boardId: string}) {
 
         setLinkPreview(false)
     
+        
         if (mediaPreviewList.length >= 4) {
             console.log("Add a max of 4 files to your post");
             return;
+        }
+
+        if (mediaPreviewList.length === 3) {
+            setAllowUpload(false)
         }
 
         if (mediaPreviewList.length === 0) {
@@ -133,7 +138,6 @@ export default function Submit({boardId}: {boardId: string}) {
 
                 reader.onloadend = () => {
                     setMediaPreviewList([...mediaPreviewList, {url: reader.result as string, type: chosenFile[0].type}])
-                    
                     setMediaPreview(true)
                     
                   };
@@ -149,6 +153,8 @@ export default function Submit({boardId}: {boardId: string}) {
              startUpload(chosenFile[0])
         }
     }
+
+   
 
     const startUpload = async (file: File) => {
             
@@ -174,6 +180,7 @@ export default function Submit({boardId}: {boardId: string}) {
                 });
 
             dbSlugs.push(`${s3id}${fileExtension}`)
+            console.log("uploaded...")
             uploading = false
     }
 
@@ -240,7 +247,7 @@ export default function Submit({boardId}: {boardId: string}) {
                             mediaPreviewList[0].type.includes("video") ?
                                 <video controls className={styles.mediaItemOne}>
                                     <source src={mediaPreviewList[0].url} type="video/mp4" />
-                                        Your browser does not support HTML5 video.
+                                    Your browser does not support HTML5 video.
                                 </video> : 
                                 <img src={mediaPreviewList[0].url} alt="preview image" className={styles.mediaItemOne}/>
                         }
@@ -332,6 +339,7 @@ export default function Submit({boardId}: {boardId: string}) {
                         type="file" 
                         accept={acceptMedia}
                         onChange={handleUpload}
+                        disabled={!allowUpload}
                         hidden
                         />    
                 </div>

@@ -50,7 +50,11 @@ export default function PostItem({post, boardId, pinnedPost }: {post: PostItems,
             {post.slugs.length === 1 && <div className={styles.mediaContainer}>
                 {         
                     post.slugs[0].type.includes("video") ?
-                        <ReactPlayer controls className={styles.mediaItemOne} url={`${process.env.NEXT_PUBLIC_AWS_URL}/${post.slugs[0].slug}`} width="100%" height="auto"/> : 
+                        <video controls className={styles.mediaItemOne}>
+                            <source src={`${process.env.NEXT_PUBLIC_AWS_URL}/${post.slugs[0].slug}`} type="video/mp4" />
+                                Your browser does not support HTML5 video.
+                        </video> 
+                        :
                         <Image src={`${process.env.NEXT_PUBLIC_AWS_URL}/${post.slugs[0].slug}`} width={800} height={800} alt="post image" className={styles.mediaItemOne}/>
                 }
             </div>}
