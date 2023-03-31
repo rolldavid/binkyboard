@@ -109,9 +109,14 @@ export default function Submit({boardId}: {boardId: string}) {
 
         setLinkPreview(false)
     
+        
         if (mediaPreviewList.length >= 4) {
             console.log("Add a max of 4 files to your post");
             return;
+        }
+
+        if (mediaPreviewList.length === 3) {
+            setAllowUpload(false)
         }
 
         if (mediaPreviewList.length === 0) {
@@ -334,6 +339,7 @@ export default function Submit({boardId}: {boardId: string}) {
                         type="file" 
                         accept={acceptMedia}
                         onChange={handleUpload}
+                        disabled={!allowUpload}
                         hidden
                         />    
                 </div>
