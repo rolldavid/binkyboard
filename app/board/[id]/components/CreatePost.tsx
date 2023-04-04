@@ -249,7 +249,7 @@ export default function Submit({boardId}: {boardId: string}) {
                                     <source src={mediaPreviewList[0].url} type="video/mp4" />
                                     Your browser does not support HTML5 video.
                                 </video> : 
-                                <img src={mediaPreviewList[0].url} alt="preview image" className={styles.mediaItemOne}/>
+                                <img src={`${mediaPreviewList[0].url}#t=0.1`} alt="preview image" className={styles.mediaItemOne}/>
                         }
                     </div>}
                     {mediaPreview && mediaPreviewList.length === 2 && <div className={styles.mediaContainerTwo}>
