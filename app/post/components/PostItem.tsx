@@ -2,7 +2,6 @@
 
 import Image from "next/image"
 import { PostItems } from "./types"
-import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { SyntheticEvent, useEffect, useState } from "react"
 import ReactPlayer from "react-player"
 import styles from "./PostItem.module.css"

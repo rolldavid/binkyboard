@@ -60,7 +60,6 @@ export default function Submit({boardId}: {boardId: string}) {
                 setDisabled(false)
                 setSubmitStyle("readyButton")
                 setAcceptMedia("image/png, image/jpeg, audio/*, video/*, image/*, video/mp4, video/mov, video/quicktime, video/x-m4v")
-                queryClient.invalidateQueries(['collection'])
                 window.scrollTo({
                     top: 0,
                     left: 0
@@ -215,6 +214,7 @@ export default function Submit({boardId}: {boardId: string}) {
     const { mutateAsync } = useMutation(addPost, {
         onSuccess: () => {
             queryClient.invalidateQueries(['board'])
+            queryClient.invalidateQueries(['collection'])
           },
     });
 
