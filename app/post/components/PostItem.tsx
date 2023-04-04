@@ -50,8 +50,8 @@ export default function PostItem({post, boardId, pinnedPost }: {post: PostItems,
             {post.slugs.length === 1 && <div className={styles.mediaContainer}>
                 {         
                     post.slugs[0].type.includes("video") ?
-                        <video controls className={styles.mediaItemOne} preload="metadata">
-                            <source src={`${process.env.NEXT_PUBLIC_AWS_URL}/${post.slugs[0].slug}#t=0.5`} type="video/mp4" />
+                        <video controls className={styles.mediaItemOne} >
+                            <source src={`${process.env.NEXT_PUBLIC_AWS_URL}/${post.slugs[0].slug}#t=0.1`} type="video/mp4" />
                                 Your browser does not support HTML5 video.
                         </video> 
                         :
