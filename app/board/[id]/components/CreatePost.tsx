@@ -58,6 +58,7 @@ export default function Submit({boardId}: {boardId: string}) {
                 setMediaPreviewList([])
                 setMediaPreview(false)
                 setDisabled(false)
+                setAllowUpload(true)
                 setSubmitStyle("readyButton")
                 setAcceptMedia("image/png, image/jpeg, audio/*, video/*, image/*, video/mp4, video/mov, video/quicktime, video/x-m4v")
                 window.scrollTo({
