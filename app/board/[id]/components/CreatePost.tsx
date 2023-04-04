@@ -65,10 +65,16 @@ export default function Submit({boardId}: {boardId: string}) {
                     left: 0
                   });
                 setLoading(false)
+                invalidate()
             }
         }
         checkFlag();
         
+    }
+
+    const invalidate = () => {
+        queryClient.invalidateQueries(['board'])
+        queryClient.invalidateQueries(['collection'])
     }
 
     useEffect(() => {
@@ -211,16 +217,16 @@ export default function Submit({boardId}: {boardId: string}) {
     }
 
 
-    const { mutateAsync } = useMutation(addPost, {
+    /* const { mutateAsync } = useMutation(addPost, {
         onSuccess: () => {
             queryClient.invalidateQueries(['board'])
             queryClient.invalidateQueries(['collection'])
           },
-    });
+    }); */
 
     const handleSubmit = async (e: SyntheticEvent) => {
         e.preventDefault()
-        await mutateAsync({note})
+        await addPost({note})
     }
 
   
