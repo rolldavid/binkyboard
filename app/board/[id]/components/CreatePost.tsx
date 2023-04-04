@@ -12,6 +12,7 @@ import ReactPlayer from "react-player"
 import img from "../assets/img.png"
 import mov from "../assets/mov.png"
 import Spinner from "@/lib/Spinner";
+import banner from "../assets/banner.png"
 
 
 let holdLink = ""
@@ -50,7 +51,6 @@ export default function Submit({boardId}: {boardId: string}) {
                window.setTimeout(checkFlag, 100); 
             } else {
                 await createNewPost(boardId, note, dbSlugs)
-                setDisabled(true)
                 setSubmitStyle("submittingButton")
                 setNote("")
                 setRowCount(2)
@@ -251,8 +251,8 @@ export default function Submit({boardId}: {boardId: string}) {
                     {mediaPreview && mediaPreviewList.length === 1 && <div className={styles.mediaContainer}>
                         {         
                             mediaPreviewList[0].type.includes("video") ?
-                                <video controls className={styles.mediaItemOne}>
-                                    <source src={`${mediaPreviewList[0].url}#t=0.1`} type="video/mp4" />
+                                <video controls className={styles.mediaItemOne} preload="metadata">
+                                    <source src={`${mediaPreviewList[0].url}#t=0.5`} type="video/mp4" />
                                     Your browser does not support HTML5 video.
                                 </video> : 
                                 <img src={mediaPreviewList[0].url} alt="preview image" className={styles.mediaItemOne}/>
