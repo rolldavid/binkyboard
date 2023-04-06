@@ -1,10 +1,13 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Caveat+Brush&family=Concert+One&family=Courgette&family=Lobster+Two&family=Montserrat:wght@200;300;400;500&family=Pacifico&family=Patrick+Hand&family=Playball&family=Rouge+Script&family=The+Girl+Next+Door&display=swap');
 
+
+
 :root {
   --red: #B33951;
   --redorange: #e55628;
   --orange: #d6583c;
+  --greywenge: #f1f1f1;
   --lightwenge: #dbccd0;
   --midwenge: #776b6d;
   --wenge: #54494B;

@@ -1,3 +1,9 @@
+.outerContainer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
 .container {
     display: flex;
     flex-direction: column;
@@ -216,6 +222,233 @@
 
 .highlight {
     font-weight: 600;
+}
+
+
+@media screen and (min-width: 550px) {
+
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        width: 475px;
+        border: none;
+        margin: 20px 0px 0px 0px;
+        border-radius: 25px;
+        padding: 20px 20px 10px 20px;
+        border: 1.5px solid var(--wenge);
+        background-color: white;
+        box-shadow: 1px 1px 5px var(--greygrey);
+    }
+    
+    .errorMessage {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        width: 100%;
+        margin: 0px 0px 15px 0px;
+        background-color: var(--red);
+        color: var(--cream);
+        padding: 8px 5px 8px 5px;
+        border-radius: 5px;
+        font-size: .8rem;
+    }
+    
+    .checkContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        border: none;
+        border-radius: 25px;
+        margin: 25px 15px 10px 15px;
+        padding: 20px 20px 20px 20px;
+        box-shadow: 1px 1px 5px rgba(200, 200, 200, .5);
+        background-color: var(--bluegreen);
+    }
+    
+    .checkText {
+        text-align: center;
+        font-size: 1rem;
+        color: var(--darkwenge);
+        margin: 10px 0px 5px 0px;
+    }
+    
+    .checkTextSub {
+        text-align: center;
+        font-size: .9rem;
+        color: var(--darkwenge);
+        margin: 5px 0px 5px 0px;
+    }
+    
+    .authContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        padding: 5px 0px 20px 0px;
+    }
+    
+    .authButton {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        border-radius: 25px;
+        font-size: 1rem;
+        font-family: "Montserrat";
+        font-weight: 400;
+        color: var(--cream);
+        background-color: var(--bluegreen);
+        width: 100%;
+        padding: 12px 15px 12px 15px;
+        cursor: pointer;
+    }
+    
+    .authText {
+        margin: 0px 0px 0px 10px;
+        font-family: "Montserrat";
+        font-weight: 400;
+        color: var(--cream);
+    }
+    
+    .emailContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        padding: 20px 0px 20px 0px;
+    }
+    
+    .formContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+    
+    .inputContainer {
+        width: 100%;
+        border: 1.5px solid var(--wenge);
+        border-radius: 25px;
+        padding: 12px 20px 12px 20px;
+        font-family: "Montserrat";
+        font-weight: 400;
+        font-size: 1rem;
+        outline: none;
+        margin: 5px 0px 5px 0px;
+    }
+    
+    .emailButton {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        border-radius: 25px;
+        font-size: 1rem;
+        font-family: "Montserrat";
+        font-weight: 400;
+        color: var(--cream);
+        background-color: var(--wenge);
+        width: 100%;
+        margin-top: 5px;
+        padding: 12px 15px 12px 15px;
+        cursor: pointer;
+    }
+    
+    .emailNote {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        color: var(--wenge);
+        border-radius: 10px;
+        font-size: .75rem;
+        font-family: "Montserrat";
+        font-weight: 400;
+        width: 100%;
+        opacity: .8;
+        margin-top: 15px;
+    }
+    
+    .noteImg {
+      margin-right: 5px;
+      margin-bottom: -2px;
+      opacity: .7;
+    }
+    
+    .noteText {
+        text-align: center;
+        width: 100%;
+        color: var(--darkgrey);
+    }
+    
+    .loginLine {
+        display: flex;
+        align-items: center;
+        width: 80%;
+        margin: 8px 0px 8px 0px;
+      }
+      
+    .loginLine::before {
+        margin-right: 10px;
+    }
+    
+    .loginLine::after {
+        margin-left: 10px;;
+    }
+    
+    .loginLine::before, .loginLine::after {
+        content: "";
+        flex: 0 1 100%;
+        border-bottom: 1px solid var(--wenge);
+        opacity: .3;
+        transform: translateY(50%);
+    }
+    
+    .loginOr {
+        font-size: 1rem;
+        color: var(--wenge);
+        opacity: .3;
+    }
+    
+    .authHeader {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        padding: 0px 15px 10px 15px;
+        margin-bottom: 5px;
+    }
+    
+    .authHeaderTitle {
+        text-align: center;
+        font-weight: 500;
+        font-size: 1.25rem;
+        padding: 0px 15px 0px 15px;
+        margin: 0px 0px 10px 0px;
+        color: var(--darkwenge);
+    }
+    
+    .authHeaderSubtitle {
+        text-align: center;
+        font-size: 1rem;
+        width: 100%;
+        color: var(--wenge);
+        opacity: 1;
+       
+    }
+    
+    .highlight {
+        font-weight: 600;
+    }
+    
 }
 
 

@@ -375,3 +375,385 @@
   .shareText {
     margin: 0px 18px 0px 0px;
   }
+
+
+  @media screen and (min-width: 550px){
+    .container {
+        display: flex;
+        width: 500px;
+        justify-content: center;
+        margin: 0px 0px 40px 0px;
+    }
+    
+    .formContainer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+        margin: 0px 15px 0px 15px;
+        padding: 10px;
+        border-radius: 10px;
+        border: 1.5px solid var(--wenge);
+        background-color: white;
+    }
+    
+    .contentContainer {
+        border-bottom: 1px solid lightgrey;
+        margin: 0px 0px 10px 0px;
+    }
+    
+    .previewSection {
+        margin: 10px 0px 10px 0px;
+        border-radius: 10px;
+    }
+    
+    .postActions {
+        display: flex;
+        margin: 10px 0px 0px 0px;
+    }
+    
+    .uploadContainer {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        width: 100%;
+    }
+    
+    .uploadItem {
+        margin-top: 5px;
+        border-radius: 5px;
+        padding: 5px 10px 5px 10px;
+        cursor: pointer;
+        font-size: 1.2rem;
+        font-family: 'Rokkitt', serif;
+        background: none;
+        color: var(--wenge);
+        opacity: .8;
+    }
+    
+    .uploadItemGrey {
+        margin-top: 5px;
+        border-radius: 5px;
+        padding: 5px 10px 5px 10px;
+        cursor: pointer;
+        font-size: 1.2rem;
+        font-family: 'Rokkitt', serif;
+        background: none;
+        color: var(--wenge);
+        opacity: .3;
+        cursor: default;
+    
+    }
+    
+    
+    .readyButton {
+        width: 100%;
+        padding: 5px;
+        border-radius: 5px;
+        cursor: pointer;
+        border: none;
+        font-size: 1.2rem;
+        font-family: 'Rokkitt', serif;
+        color: var(--cream);
+        background-color: var(--wenge);
+    }
+    
+    .submittingButton {
+        width: 100%;
+        padding: 5px;
+        border-radius: 5px;
+        cursor: default;
+        border: none;
+        font-size: 1.2rem;
+        font-family: 'Rokkitt', serif;
+        color: var(--cream);
+        background-color: var(--midwenge);
+    }
+    
+    .inputContainer {
+        display: flex;
+        flex-direction: column;
+        background-color: white;
+        border-radius: 10px;
+        border-bottom: 1px solid var(--wenge);
+    }
+    
+    
+    .noteInput {
+        outline: none;
+        margin: 0px 0px 0px 0px;
+        border: none;
+        border-radius: 10px;
+        padding: 10px;
+        width: 100%;
+        resize: none;
+        font-size: 1rem;
+        font-family: 'Montserrat', sans-serif;
+        overflow: visible;
+    }
+    
+    
+    .mediaContainer {
+        display: flex; 
+        align-items: center;
+        width: 100%; 
+        margin: 15px 0px 15px 0px; 
+    }
+    
+    .mediaItem {
+        display: flex;
+        justify-content: center; 
+        flex-grow: 1;
+        width: 100%;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+    
+    
+    
+    .addLinkContainer {
+        display: flex;
+        width: 100%;
+        gap: 5px;
+        margin: 5px 0px 5px 0px;
+    }
+    
+    .addLink {
+        background: none;
+        border: 1px solid white;
+        color: white;
+        padding: 2px 5px 2px 5px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    
+    .addLinkInput {
+        outline: none;
+        width: 100%;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 15px 10px 15px;
+        color: grey;
+        font-size: 1rem;
+        font-family: 'Rokkitt', serif;
+        font-weight: 400;
+    
+    }
+    
+    .addVideoContainer {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+    
+    .previewSection {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .videoPreviewContainer {
+        border: none;
+        border-radius: 10px;
+    }
+    
+    
+    .upload {
+        font-size: 2.5rem;
+        color: white;
+    }
+    
+    
+    /* .noteInput:focus {
+        outline:1px solid fuchsia;
+    } */
+    
+    /* .authorInput:focus {
+        outline:1px solid fuchsia;
+    } */
+    
+    .authorInput {
+        margin: 10px 0px 0px 0px;
+        padding: 10px;
+        outline: none;
+        border-radius: 5px;
+        border: none;
+        font-size: 1.2rem;
+        font-family: 'Rokkitt', serif;
+        
+    }
+    
+    
+    
+    
+    .mediaContainer {
+        display: flex; 
+        align-items: center;
+        width: 100%; 
+        gap: 5px;
+        border: none;
+    }
+    
+    .mediaItemOne {
+        display: flex;
+        justify-content: center; 
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+        border: none;
+        cursor: default;
+    }
+    
+    .mediaContainerTwo {
+        display: flex; 
+        align-items: center;
+        width: 100%; 
+        gap: 5px;
+    }
+    
+    .mediaItemContainer {
+        display: flex; 
+        align-items: center;
+        width: 50%;
+        height: 200px;
+        border: none;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+    
+    .mediaItemTwo {
+        object-fit: cover;
+        min-width: 100%;
+        min-height: 100%;
+        border: none;
+        border-radius: 10px;
+    }
+    
+    .mediaContainerThree {
+        display: flex; 
+        align-items: center;
+        width: 100%; 
+        border: none;
+        gap: 5px;
+    }
+    
+    .mediaContainerLeft {
+        display: flex; 
+        align-items: center;
+        width: 60%; 
+        gap: 5px;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .mediaContainerRight {
+        display: flex; 
+        flex-direction: column;
+        align-items: center;
+        width: 40%; 
+        gap: 5px;
+        margin: 0;
+    }
+    
+    .mediaItemContainerLeft {
+        display: flex; 
+        align-items: center;
+        width: 100%;
+        height: 200px;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+    
+    .mediaItemContainerRight {
+        display: flex; 
+        align-items: center;
+        width: 100%;
+        height: 98px;
+        border-radius: 10px;
+        border: none;
+        overflow: hidden;
+    }
+    
+    .mediaItemLeft {
+        object-fit: cover;
+        min-width: 100%;
+        min-height: 100%;
+        border: none;
+        border-radius: 10px;
+    }
+    
+    .mediaItemRight {
+        object-fit: cover;
+        min-width: 100%;
+        min-height: 100%;
+        border: none;
+        border-radius: 10px;
+    }
+    
+    .mediaContainerStack {
+        display: flex; 
+        flex-direction: column;
+        align-items: center;
+        width: 50%; 
+        gap: 5px;
+        margin: 0;
+    }
+    
+    .flashContainer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+    .dotFlashing {
+        position: relative;
+        margin-top: 8px;
+        width: 4px;
+        height: 4px;
+        border-radius: 4px;
+        background-color: var(--cream);
+        color: var(--cream);
+        animation: dot-flashing 1s infinite linear alternate;
+        animation-delay: 0.5s;
+      }
+      .dotFlashing::before, .dotFlashing::after {
+        content: "";
+        display: inline-block;
+        position: absolute;
+        top: 0;
+      }
+      .dotFlashing::before {
+        left: -10px;
+        width: 4px;
+        height: 4px;
+        border-radius: 4px;
+        background-color: var(--cream);
+        color: var(--cream);
+        animation: dot-flashing 1s infinite alternate;
+        animation-delay: 0s;
+      }
+      .dotFlashing::after {
+        left: 10px;
+        width: 4px;
+        height: 4px;
+        border-radius: 4px;
+        background-color: var(--cream);
+        color: var(--cream);
+        animation: dot-flashing 1s infinite alternate;
+        animation-delay: 1s;
+      }
+      
+      @keyframes dot-flashing {
+        0% {
+          background-color: var(--cream);
+        }
+        50%, 100% {
+          background-color: rgba(160, 146, 148, 0.2);
+        }
+      }
+    
+      .shareText {
+        margin: 0px 18px 0px 0px;
+      }
+
+  }
