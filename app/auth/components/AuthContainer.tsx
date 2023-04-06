@@ -9,7 +9,7 @@ export default function AuthContainer() {
  
 
     return (
-        <>
+        <div className={styles.outerContainer}>
          <section className={styles.container}>
             
             <div className={styles.authHeader}>
@@ -24,6 +24,6 @@ export default function AuthContainer() {
                 <Login />
             </div>
         </section>
-        </>
+        </div>
     )
 }

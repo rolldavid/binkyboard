@@ -1,10 +1,10 @@
-
+import styles from "@/styles/Board.module.css"
 export default async function Layout({ children }: {
     children: React.ReactNode;
   }) {
  
     return (
-        <>{children}</>
+        <div className={styles.outerContainer}>{children}</div>
     );
   }
 

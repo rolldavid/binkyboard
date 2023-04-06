@@ -30,5 +30,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     ownedBoards: user.ownedBoards
                 }) 
             }
+        } else {
+            res.status(401).json({status: "unauthorized"})
         }
 }
