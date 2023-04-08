@@ -1,10 +1,12 @@
 .outerContainer {
     display: flex;
     justify-content: center;
+    flex-grow: 1;
     width: 100%;
-    background-image: url("https://d3h42dhdxazsqn.cloudfront.net/lightfloral.png");
+    background-image: url("https://d3h42dhdxazsqn.cloudfront.net/floral.webp");
     background-repeat: repeat;
-    padding-bottom: 65px;
+    padding-bottom: 70px;
+    margin-bottom: -60px;
 }
 
 .container {
@@ -85,6 +87,7 @@
         border: none;
         width: 550px;
         background-color: var(--cream);
+
     }
     
     .authContainer {

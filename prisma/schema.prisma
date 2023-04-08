@@ -23,6 +23,7 @@ model Board {
   allowList    String?
   privacy      PrivacyLevel @default(ONE)
   registry     String?
+  wallpaper    String       @default("default")
   headerUrl    String       @default("")
 }
 
