@@ -8,9 +8,18 @@ import styles from "./PostItem.module.css"
 import pin from "../assets/pin.png"
 import { deletePost } from "@/lib/db-utils"
 import PostOptions from "./PostOptions"
+import PostGallery from "./PostGallery"
 
 export default function PostItem({post, boardId, pinnedPost }: {post: PostItems, boardId: string, pinnedPost: boolean}) {
-    const [showOptions, setShowOptions] = useState(false)
+    const [showOptions, setShowOptions] = useState(false)    
+    const [showGallery, setShowGallery] = useState(false)
+    const [selectedItem, setSelectedItem] = useState(0)
+
+    const setPrepGallery = (e: SyntheticEvent, index: number) => {
+        e.preventDefault()
+        setSelectedItem(index)
+        setShowGallery(true)
+    }
 
 
     const readableDate = new Date(post.post.createdAt).toLocaleDateString("en-US", {
@@ -54,7 +63,15 @@ export default function PostItem({post, boardId, pinnedPost }: {post: PostItems,
                                 Your browser does not support HTML5 video.
                         </video> 
                         :
-                        <Image src={`${process.env.NEXT_PUBLIC_AWS_URL}/${post.slugs[0].slug}`} width={800} height={800} alt="post image" className={styles.mediaItemOne}/>
+                        <Image 
+                            src={`${process.env.NEXT_PUBLIC_AWS_URL}/${post.slugs[0].slug}`} 
+                            width={800} 
+                            height={800} 
+                            alt="post image" 
+                            className={styles.mediaItemOne}
+                            onClick={(e) => setPrepGallery(e, 0)}
+
+                        />
                 }
             </div>}
             {post.slugs.length === 2 && <div className={styles.mediaContainerTwo}>
@@ -62,7 +79,14 @@ export default function PostItem({post, boardId, pinnedPost }: {post: PostItems,
                     post.slugs.map((item, index) => {
                     return (
                         <div className={styles.mediaItemContainer} key={index}>
-                            <Image src={`${process.env.NEXT_PUBLIC_AWS_URL}/${post.slugs[index].slug}`} width={250} height={250} alt="post image" className={styles.mediaItemTwo}/>
+                            <Image 
+                                src={`${process.env.NEXT_PUBLIC_AWS_URL}/${post.slugs[index].slug}`} 
+                                width={250} 
+                                height={250} 
+                                alt="post image" 
+                                className={styles.mediaItemTwo}
+                                onClick={(e) => setPrepGallery(e, index)}
+                            />
                         </div>
                     )
                     })
@@ -71,15 +95,36 @@ export default function PostItem({post, boardId, pinnedPost }: {post: PostItems,
             {post.slugs.length === 3 && <div className={styles.mediaContainer}>
                 <div className={styles.mediaContainerLeft}>
                     <div className={styles.mediaItemContainerLeft}>
-                        <Image src={`${process.env.NEXT_PUBLIC_AWS_URL}/${post.slugs[0].slug}`} width={250} height={250} alt="post image" className={styles.mediaItemLeft}/>
+                        <Image 
+                            src={`${process.env.NEXT_PUBLIC_AWS_URL}/${post.slugs[0].slug}`} 
+                            width={250} 
+                            height={250} 
+                            alt="post image" 
+                            className={styles.mediaItemLeft}
+                            onClick={(e) => setPrepGallery(e, 0)}
+                        />
                     </div>
                 </div>
                 <div className={styles.mediaContainerRight}>
                     <div className={styles.mediaItemContainerRight}>
-                        <Image src={`${process.env.NEXT_PUBLIC_AWS_URL}/${post.slugs[1].slug}`}  width={250} height={250} alt="post image" className={styles.mediaItemRight}/>
+                        <Image 
+                            src={`${process.env.NEXT_PUBLIC_AWS_URL}/${post.slugs[1].slug}`}  
+                            width={250} 
+                            height={250} 
+                            alt="post image" 
+                            className={styles.mediaItemRight}
+                            onClick={(e) => setPrepGallery(e, 1)}
+                        />
                     </div>
                     <div className={styles.mediaItemContainerRight}>
-                        <img src={`${process.env.NEXT_PUBLIC_AWS_URL}/${post.slugs[2].slug}`}  width={250} height={250} alt="post image" className={styles.mediaItemRight}/>
+                        <img 
+                            src={`${process.env.NEXT_PUBLIC_AWS_URL}/${post.slugs[2].slug}`}  
+                            width={250} 
+                            height={250} 
+                            alt="post image" 
+                            className={styles.mediaItemRight}
+                            onClick={(e) => setPrepGallery(e, 2)}
+                        />
                     </div>
                 </div>
             </div>}
@@ -105,6 +150,7 @@ export default function PostItem({post, boardId, pinnedPost }: {post: PostItems,
                    
         </div>
         {showOptions && <PostOptions setShowOptions={setShowOptions} boardId={boardId} postId={post.post.id} isAdmin={post.isAdmin}/>}
+        {showGallery && <PostGallery setShowGallery={setShowGallery} slugs={post.slugs} selectedItem={selectedItem}/>}
         </>
         
     )

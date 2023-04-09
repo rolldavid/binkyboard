@@ -1,0 +1,83 @@
+.container {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0, .8);
+    padding: 10px;
+    z-index: 50;
+    overflow: hidden;
+}
+
+.galleryModule {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    padding-top: 20px;
+    background: none;
+    z-index: 55;
+}
+
+.closeContainer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    height: 20px;
+    padding: 0px 0px 0px 0px;
+    margin: 0px 30px 0px 0px;
+    z-index: 30;
+}
+
+.closeButton {
+    color: var(--darkwenge);
+    font-size: 1.3rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.galleryContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    margin-top: -20px;
+    
+}
+
+.galleryImageWrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.galleryImage {  
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.prevArrow {
+    cursor: pointer;
+    margin-right: -30px;
+    z-index: 30;
+}
+
+.nextArrow {
+    cursor: pointer;
+    margin-left: -30px;
+    z-index: 30;
+}
+
