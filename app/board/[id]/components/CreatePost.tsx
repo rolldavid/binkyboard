@@ -144,7 +144,10 @@ export default function Submit({boardId}: {boardId: string}) {
 
                 reader.onloadend = () => {
                     setMediaPreviewList([...mediaPreviewList, {url: reader.result as string, type: chosenFile[0].type}])
-                    setMediaPreview(true)
+                    setTimeout(() => {
+                        setMediaPreview(true)
+                    }, 1500)
+                    
                     
                   };
                   reader.readAsDataURL(chosenFile[0])
@@ -252,10 +255,11 @@ export default function Submit({boardId}: {boardId: string}) {
                     {mediaPreview && mediaPreviewList.length === 1 && <div className={styles.mediaContainer}>
                         {         
                             mediaPreviewList[0].type.includes("video") ?
-                                <video controls className={styles.mediaItemOne} preload="metadata">
-                                    <source src={`${mediaPreviewList[0].url}#t=0.5`} type="video/mp4" />
-                                    Your browser does not support HTML5 video.
-                                </video> : 
+                                <video controls className={styles.mediaItemOne} >
+                                    <source src={mediaPreviewList[0].url} type="video/mp4" />
+                                        Your browser does not support HTML5 video.
+                                </video> 
+                                :
                                 <img src={mediaPreviewList[0].url} alt="preview image" className={styles.mediaItemOne}/>
                         }
                     </div>}
