@@ -66,6 +66,7 @@ export default function Submit({boardId}: {boardId: string}) {
                     left: 0
                   });
                 setLoading(false)
+                queryClient.invalidateQueries(['collection'])
                 invalidate()
             }
         }
