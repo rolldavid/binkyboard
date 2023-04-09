@@ -112,9 +112,9 @@ export default function Page({params: {slug}}: {params: { slug: string }}) {
                       <div className={styles.logoutButton} onClick={() => setShowDeleteModule(false)}>Cancel</div>
                     </div> : 
                     <div className={styles.deleteBoards}>
-                       <p className={styles.deleteTitle}>You&apos;ve got live boards!</p> 
+                       <p className={styles.deleteTitle}>You have live boards!</p> 
                         <p className={styles.deleteNote}>You must delete live boards before you can delete your account.</p>
-                        <p className={styles.deleteNote}>Click the ⚙️ icon on your board header to update.</p>
+                        <p className={styles.deleteNote}>Click the ⚙️ icon on your board header to delete.</p>
                         <div className={styles.logoutButton} onClick={() => setShowDeleteModule(false)}>Close</div>
                     </div>
                   } 
