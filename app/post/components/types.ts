@@ -12,3 +12,8 @@ export interface PostItems {
     isAdmin: boolean
   }
 
+  export interface GalleryItems {
+    slug: string
+    type: string
+  }
+
