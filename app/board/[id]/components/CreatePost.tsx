@@ -66,6 +66,7 @@ export default function Submit({boardId}: {boardId: string}) {
                     left: 0
                   });
                 setLoading(false)
+                queryClient.invalidateQueries(['collection'])
                 invalidate()
             }
         }
@@ -146,8 +147,7 @@ export default function Submit({boardId}: {boardId: string}) {
                     setMediaPreviewList([...mediaPreviewList, {url: reader.result as string, type: chosenFile[0].type}])
                     setTimeout(() => {
                         setMediaPreview(true)
-                    }, 1500)
-                    
+                    }, 1000)
                     
                   };
                   reader.readAsDataURL(chosenFile[0])
@@ -256,7 +256,7 @@ export default function Submit({boardId}: {boardId: string}) {
                         {         
                             mediaPreviewList[0].type.includes("video") ?
                                 <video controls className={styles.mediaItemOne} >
-                                    <source src={mediaPreviewList[0].url} type="video/mp4" />
+                                    <source src={`${mediaPreviewList[0].url}#t=0.1`} type="video/mp4" />
                                         Your browser does not support HTML5 video.
                                 </video> 
                                 :
