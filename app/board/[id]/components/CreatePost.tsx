@@ -42,6 +42,8 @@ export default function Submit({boardId}: {boardId: string}) {
     const [toggleMedia, setToggleMedia] = useState(false)
     const [disabled, setDisabled] = useState(false)
     const [submitStyle, setSubmitStyle] = useState("readyButton")
+
+    const [prevUrl, setPrevUrl] = useState("")
     
    
     async function addPost({note}: {note: string}) {
@@ -75,8 +77,10 @@ export default function Submit({boardId}: {boardId: string}) {
     }
 
     const invalidate = () => {
-        queryClient.invalidateQueries(['board'])
-        queryClient.invalidateQueries(['collection'])
+        setTimeout(() => {
+            queryClient.invalidateQueries(['board'])
+            queryClient.invalidateQueries(['collection'])
+        })
     }
 
     useEffect(() => {
@@ -141,6 +145,8 @@ export default function Submit({boardId}: {boardId: string}) {
                 }
                 reader.onload = e => {
                     let blobData = reader.result;
+                    console.log(blobData)
+                    setPrevUrl(blobData as string)
                };
 
                 reader.onloadend = () => {
@@ -153,6 +159,7 @@ export default function Submit({boardId}: {boardId: string}) {
                   reader.readAsDataURL(chosenFile[0])
             } else {
                 reader.onloadend = () => {
+                    
                     setMediaPreviewList([...mediaPreviewList, {url: reader.result as string, type: chosenFile[0].type}])
                     setMediaPreview(true)
                 };
@@ -256,7 +263,7 @@ export default function Submit({boardId}: {boardId: string}) {
                         {         
                             mediaPreviewList[0].type.includes("video") ?
                                 <video controls className={styles.mediaItemOne} >
-                                    <source src={`${mediaPreviewList[0].url}#t=0.1`} type="video/mp4" />
+                                    <source src={prevUrl} type="video/mp4" />
                                         Your browser does not support HTML5 video.
                                 </video> 
                                 :
