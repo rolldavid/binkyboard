@@ -52,6 +52,12 @@ export default function Submit({boardId}: {boardId: string}) {
                window.setTimeout(checkFlag, 100); 
             } else {
                 await createNewPost(boardId, note, dbSlugs)
+                queryClient.invalidateQueries(['collection'], {
+                    refetchType: 'all', 
+                })
+                queryClient.invalidateQueries(['board'], {
+                    refetchType: 'all', 
+                })
                 setSubmitStyle("submittingButton")
                 setNote("")
                 setRowCount(2)
@@ -67,20 +73,14 @@ export default function Submit({boardId}: {boardId: string}) {
                     left: 0
                   });
                 setLoading(false)
-                queryClient.invalidateQueries(['collection'])
-                invalidate()
+                
             }
         }
         checkFlag();
         
     }
 
-    const invalidate = () => {
-        setTimeout(() => {
-            queryClient.invalidateQueries(['board'])
-            queryClient.invalidateQueries(['collection'])
-        })
-    }
+   
 
     useEffect(() => {
         if (mediaPreviewList.length === 2) {
@@ -217,23 +217,23 @@ export default function Submit({boardId}: {boardId: string}) {
         }
     }
 
-
     /* const { mutateAsync } = useMutation(addPost, {
         onSuccess: () => {
-            queryClient.invalidateQueries(['board'])
-            queryClient.invalidateQueries(['collection'])
+            queryClient.invalidateQueries(['board','collection'], {
+                refetchType: 'all', 
+            })
           },
-    }); */
+    });  */
 
     const handleSubmit = async (e: SyntheticEvent) => {
         e.preventDefault()
         await addPost({note})
+        
     }
 
-  
     return (
         <div className={styles.container}>
-             <form onSubmit={e => handleSubmit(e)} className={styles.formContainer}>
+             <form onSubmit={(e) => handleSubmit(e)} className={styles.formContainer}>
               <div className={styles.contentContainer}>
                 <textarea 
                     value={note}
