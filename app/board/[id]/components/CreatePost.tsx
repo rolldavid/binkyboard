@@ -143,25 +143,13 @@ export default function Submit({boardId}: {boardId: string}) {
                     setAllowUpload(false)
                 }
                 
-                reader.readAsDataURL(chosenFile[0])
-
-                reader.onload = e => {
-                    let blobData = reader.result;
-                    console.log("starting....", blobData)
-               };
-
-                reader.onloadend = () => {
-                    let blobData = reader.result;
-                    setMediaPreviewList([...mediaPreviewList, {url: reader.result as string, type: chosenFile[0].type}])
-                    setTimeout(() => {
-                        setMediaPreview(true)
-                    }, 1000)
-                    setPrevUrl(blobData as string)
-                  };
+                let media = URL.createObjectURL(chosenFile[0])
+                setMediaPreviewList([...mediaPreviewList, {url: "video", type: chosenFile[0].type}])
+                setPrevUrl(media)
+                setMediaPreview(true)
 
             } else {
                 reader.onloadend = () => {
-                    
                     setMediaPreviewList([...mediaPreviewList, {url: reader.result as string, type: chosenFile[0].type}])
                     setMediaPreview(true)
                 };
