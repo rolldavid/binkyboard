@@ -253,7 +253,7 @@ export default function Submit({boardId}: {boardId: string}) {
                         {         
                             mediaPreviewList[0].type.includes("video") ?
                                 <video controls className={styles.mediaItemOne} >
-                                    <source src={prevUrl} type="video/mp4" />
+                                    <source src={`${prevUrl}#t=0.5`} type="video/mp4" />
                                         Your browser does not support HTML5 video.
                                 </video> 
                                 :
