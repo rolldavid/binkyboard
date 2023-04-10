@@ -252,10 +252,8 @@ export default function Submit({boardId}: {boardId: string}) {
                     {mediaPreview && mediaPreviewList.length === 1 && <div className={styles.mediaContainer}>
                         {         
                             mediaPreviewList[0].type.includes("video") ?
-                                <video controls className={styles.mediaItemOne} >
-                                    <source src={`${prevUrl}#t=0.5`} type="video/mp4" />
-                                        Your browser does not support HTML5 video.
-                                </video> 
+                            <ReactPlayer url={prevUrl} controls={true} width="100%" onError={() => setLinkPreview(false)}/>
+
                                 :
                                 <img src={mediaPreviewList[0].url} alt="preview image" className={styles.mediaItemOne}/>
                         }
