@@ -44,7 +44,6 @@ export default function Submit({boardId}: {boardId: string}) {
     const [submitStyle, setSubmitStyle] = useState("readyButton")
 
     const [prevUrl, setPrevUrl] = useState("")
-    
    
     async function addPost({note}: {note: string}) {
         async function checkFlag() {
@@ -143,23 +142,14 @@ export default function Submit({boardId}: {boardId: string}) {
                 if (mediaPreviewList.length === 0) {
                     setAllowUpload(false)
                 }
-                reader.onload = e => {
-                    let blobData = reader.result;
-                    console.log(blobData)
-                    setPrevUrl(blobData as string)
-               };
+                
+                let media = URL.createObjectURL(chosenFile[0])
+                setMediaPreviewList([...mediaPreviewList, {url: "video", type: chosenFile[0].type}])
+                setPrevUrl(media)
+                setMediaPreview(true)
 
-                reader.onloadend = () => {
-                    setMediaPreviewList([...mediaPreviewList, {url: reader.result as string, type: chosenFile[0].type}])
-                    setTimeout(() => {
-                        setMediaPreview(true)
-                    }, 1000)
-                    
-                  };
-                  reader.readAsDataURL(chosenFile[0])
             } else {
                 reader.onloadend = () => {
-                    
                     setMediaPreviewList([...mediaPreviewList, {url: reader.result as string, type: chosenFile[0].type}])
                     setMediaPreview(true)
                 };
