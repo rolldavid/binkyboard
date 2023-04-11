@@ -3,6 +3,7 @@
     justify-content: center;
     flex-grow: 1;
     width: 100%;
+   
     background-image: url("https://d3h42dhdxazsqn.cloudfront.net/floral.webp");
     background-repeat: repeat;
     padding-bottom: 70px;
@@ -19,6 +20,7 @@
     border: none;
     background-color: var(--cream);
     width: 100vw;
+ 
 }
 
 .authContainer {
