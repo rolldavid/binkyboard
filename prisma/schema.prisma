@@ -21,6 +21,7 @@ model Board {
   pinnedPost   Post?        @relation(fields: [pinnedPostId], references: [id], name: "pinned")
   pinnedPostId Int?         @unique
   allowList    String?
+  blocklist    String?
   privacy      PrivacyLevel @default(ONE)
   registry     String?
   wallpaper    String       @default("default")

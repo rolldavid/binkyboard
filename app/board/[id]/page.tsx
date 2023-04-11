@@ -12,7 +12,11 @@ export default function Page({params: {id}}: {params: { id: string }}) {
 
    
     if (isLoading) {
-        return <Spinner />
+        return (
+            <div className={styles.outerContainer}>
+                <Spinner />
+            </div>
+        )
     }
 
     if (!isLoading && (!user || error)) {
