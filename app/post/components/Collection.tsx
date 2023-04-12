@@ -1,45 +1,112 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { getPosts } from "@/lib/db-utils"
+import React, {useEffect} from "react"
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import { getPinnedPost } from "@/lib/db-utils"
 import { PostItems } from "./types"
-import { useQuery } from "@tanstack/react-query"
 import PostItem from "./PostItem"
 import styles from "./Collection.module.css"
 import Spinner from "@/lib/Spinner"
 
 
-export default function Collection({boardId, isOwner}: {boardId: string, isOwner: boolean}) {
 
-    const { data, status } = useQuery(["collection"], () => {
-        return getPosts(boardId)
+export default function Collection({boardId, isOwner, }: {boardId: string, isOwner: boolean}) {
+
+    const { data: pinData, status: pinStatus } = useQuery(["pinnedPost"], () => {
+        return getPinnedPost(boardId)
+    })
+
+    const getInfinitePosts = async ({ pageParam = 1}) => {
+        const res = await fetch(
+          "http://localhost:3000/api/get-infinite-posts?cursor=" + pageParam,
+          {
+            method: "POST",
+            body: JSON.stringify({
+                boardId
+            }),
+            headers: {
+                "Content-Type": "application/json"
+            
+            }
+          }
+        );
+       
+        return res.json();
+      };
+
+      const {
+        data,
+        error,
+        fetchNextPage,
+        hasNextPage,
+        isFetchingNextPage,
+        status,
+      } = useInfiniteQuery(["collection"], getInfinitePosts, {
+        getNextPageParam: (lastPage) => {
+          return lastPage.nextCursor
+        },
       });
+
+      useEffect(() => {
+
+        const handleScroll = async () => {
+          if (
+            window.innerHeight + window.pageYOffset >=
+            document.body.offsetHeight - 20
+          ) {
+            fetchNextPage();
+          }
+        };
+        document.addEventListener("scroll", handleScroll);
+        return () => document.removeEventListener("scroll", handleScroll);
+      }, []);
+    
     
     if (status === "loading") {
         <Spinner />
     }
 
 
-    if (status === "success" && data.posts) {
+    if (status === "success" && data) {
             
+            /* if (data.posts.length === 0) {
+                return (
+                    <div className={styles.container}>
+                        <div className={styles.noPostContainer}>
+                            <p className={styles.empty}>Let&apos;s get this party started!</p>
+                        </div>
+                    </div>
+                )
+            } */
             return (
+                <>
                 <div className={styles.container}>
-                    {data.pinned && <div >
-                        <PostItem post={data.pinned} boardId={boardId} pinnedPost={true}/>
+                    {pinData.pinned && <div >
+                        <PostItem post={pinData.pinned} boardId={boardId} pinnedPost={true}/>
                         
                     </div>}
                     <div className={styles.postContainer}>
+                        
                         {
-                            data.posts.map((post: PostItems, index: number) => {
-                    
-                                return (
-                                    <PostItem key={index} post={post} boardId={boardId} pinnedPost={false}/>
-                                )
-                            })
-                        }
+                            data.pages.map((group, i) => (
+                                <React.Fragment key={i}>
+                                    {
+                                    group.posts.map((post: PostItems, index: number) => (
+                            
+                                        <PostItem key={index} post={post} boardId={boardId} pinnedPost={false}/>
+                                        
+                                    ))}
+                                </React.Fragment>
+                        ))}
+                        
                     </div>
                 </div>
-        
+                {isFetchingNextPage && (
+                    <div>
+                        <Spinner />
+                    </div>
+                )}
+                </>
              )
         }
 

@@ -6,7 +6,7 @@ import { nanoid } from "nanoid"
 import { useRouter } from "next/navigation"
 import { useQuery, useQueryClient } from "@tanstack/react-query"
 import { updateBoard, deleteBoard, getBoardOptions } from "@/lib/db-utils"
-import edit from "../assets/editButton.png"
+import edit from "../assets/edit.png"
 import { Dispatch, SyntheticEvent, useEffect, useState, SetStateAction } from "react"
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -142,8 +142,8 @@ export default function BoardOptions({boardId, setShowOptions, accessList, priva
                                 <label htmlFor="uploadBanner" className={styles.uploadItem}>
                                     <Image 
                                         src={edit}
-                                        width={45}
-                                        height={45}
+                                        width={35}
+                                        height={35}
                                         alt="edit banner button"
                                         className={styles.editBanner}
                                     />

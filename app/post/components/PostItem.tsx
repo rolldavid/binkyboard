@@ -149,7 +149,7 @@ export default function PostItem({post, boardId, pinnedPost }: {post: PostItems,
             </div>}
                    
         </div>
-        {showOptions && <PostOptions setShowOptions={setShowOptions} boardId={boardId} postId={post.post.id} isAdmin={post.isAdmin}/>}
+        {showOptions && <PostOptions setShowOptions={setShowOptions} boardId={boardId} postId={post.post.id} isAdmin={post.isAdmin} isPinned={pinnedPost ? true : false}/>}
         {showGallery && <PostGallery setShowGallery={setShowGallery} slugs={post.slugs} selectedItem={selectedItem}/>}
         </>
         

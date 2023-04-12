@@ -11,6 +11,7 @@ import styles from "@/styles/Board.module.css"
 import { SyntheticEvent, useEffect, useState } from "react";
 import BoardOptions from "./BoardOptions";
 
+
 export default function Page({boardId}: {boardId: string}) {
     const [showOptions, setShowOptions] = useState(false)
 
@@ -36,7 +37,11 @@ export default function Page({boardId}: {boardId: string}) {
     }
 
     if (status === "loading") {
-        return <Spinner />
+        return (
+            <div className={styles.container}>
+                <Spinner />
+            </div>
+        )
     }
 
     if ( status === "success" && data.board) {
@@ -48,7 +53,7 @@ export default function Page({boardId}: {boardId: string}) {
                     {!showOptions && <>
                         <BoardHeader boardId={boardId} isOwner={true} setShowOptions={setShowOptions} headerUrl={data.board.headerUrl} boardName={data.board.name} registry={data.board.registry}/>
                         <CreatePost boardId={boardId}/>
-                        <Collection boardId={boardId} isOwner={true}/>
+                        <Collection boardId={boardId} isOwner={true} />
                     </>}
                     {showOptions && <BoardOptions boardId={boardId} accessList={data.board.allowList} setShowOptions={setShowOptions} privacy={data.board.privacy} headerUrl={data.board.headerUrl} name={data.board.name} registryLink={data.board.registry}/>}
                 </div>
@@ -60,7 +65,7 @@ export default function Page({boardId}: {boardId: string}) {
                 <div className={styles.container}>
                     <BoardHeader boardId={boardId} isOwner={false} setShowOptions={setShowOptions} headerUrl={data.board.headerUrl} boardName={data.board.name} registry={data.board.registry}/>
                     <CreatePost boardId={boardId}/>
-                    <Collection boardId={boardId} isOwner={false}/>
+                    <Collection boardId={boardId} isOwner={false} />
                 </div>
             )
         }
@@ -88,7 +93,7 @@ export default function Page({boardId}: {boardId: string}) {
             <div className={styles.container}>
                 <BoardHeader boardId={boardId} isOwner={false} setShowOptions={setShowOptions} headerUrl={data.board.headerUrl} boardName={data.board.name} registry={data.board.registry}/>
                 <CreatePost boardId={boardId}/>
-                <Collection boardId={boardId} isOwner={false}/>
+                <Collection boardId={boardId} isOwner={false} />
             </div>
         )
 

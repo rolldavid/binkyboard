@@ -50,6 +50,20 @@ export async function sendAccessEmail(boardId: string) {
 
 // READ
 
+export async function getInfinitePosts({boardId} : {boardId: string}) {
+    const res = await fetch("/api/get-infinite-posts", {
+        method: "POST",
+        body: JSON.stringify({
+            boardId
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    const data = await res.json();
+    return data;
+}
+
 export async function getPostUser(userId: string) {
     const res = await fetch("/api/get-post-user", {
         method: "POST",
@@ -94,6 +108,20 @@ export async function getBoardHeader(boardId: string) {
 
 export async function getPosts(boardId: string) {
     const res = await fetch("/api/get-posts", {
+        method: "POST",
+        body: JSON.stringify({
+            boardId
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    const data = await res.json()
+    return data;
+}
+
+export async function getPinnedPost(boardId: string) {
+    const res = await fetch("/api/get-pinned-post", {
         method: "POST",
         body: JSON.stringify({
             boardId
@@ -207,6 +235,21 @@ export async function updateDisplayName(displayName: string) {
 
 export async function pinPost({boardId, postId} : {boardId: string, postId: number}) {
     const res = await fetch("/api/pin-post", {
+        method: "POST",
+        body: JSON.stringify({
+            boardId,
+            postId
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    const data = await res.json();
+    return data;
+}
+
+export async function unpinPost({boardId, postId} : {boardId: string, postId: number}) {
+    const res = await fetch("/api/update-pin-post", {
         method: "POST",
         body: JSON.stringify({
             boardId,

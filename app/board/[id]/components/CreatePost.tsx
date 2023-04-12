@@ -1,6 +1,6 @@
 "use client"
 
-
+import { useRouter } from "next/navigation";
 import axios from "axios";
 import { nanoid } from 'nanoid'
 import { SyntheticEvent, useState, useEffect, ClipboardEvent, SetStateAction, Dispatch } from "react"
@@ -11,8 +11,6 @@ import styles from "./CreatePost.module.css"
 import ReactPlayer from "react-player"
 import img from "../assets/img.png"
 import mov from "../assets/mov.png"
-import Spinner from "@/lib/Spinner";
-import banner from "../assets/banner.png"
 
 
 let holdLink = ""
@@ -44,6 +42,8 @@ export default function Submit({boardId}: {boardId: string}) {
     const [submitStyle, setSubmitStyle] = useState("readyButton")
 
     const [prevUrl, setPrevUrl] = useState("")
+
+    const router = useRouter()
    
     async function addPost({note}: {note: string}) {
         async function checkFlag() {
@@ -52,10 +52,8 @@ export default function Submit({boardId}: {boardId: string}) {
                window.setTimeout(checkFlag, 100); 
             } else {
                 await createNewPost(boardId, note, dbSlugs)
+                
                 queryClient.invalidateQueries(['collection'], {
-                    refetchType: 'all', 
-                })
-                queryClient.invalidateQueries(['board'], {
                     refetchType: 'all', 
                 })
                 setSubmitStyle("submittingButton")
@@ -73,7 +71,7 @@ export default function Submit({boardId}: {boardId: string}) {
                     left: 0
                   });
                 setLoading(false)
-                
+               
             }
         }
         checkFlag();
@@ -217,13 +215,6 @@ export default function Submit({boardId}: {boardId: string}) {
         }
     }
 
-    /* const { mutateAsync } = useMutation(addPost, {
-        onSuccess: () => {
-            queryClient.invalidateQueries(['board','collection'], {
-                refetchType: 'all', 
-            })
-          },
-    });  */
 
     const handleSubmit = async (e: SyntheticEvent) => {
         e.preventDefault()
@@ -308,22 +299,21 @@ export default function Submit({boardId}: {boardId: string}) {
                 </div>
               </div>
                     
-              
                
                 <div className={styles.postActions}>
                     <div className={styles.uploadContainer}>
                         {allowUpload ? <label htmlFor="upload" className={styles.uploadItem}>
-                            <Image src={img} width={27} height={25} alt="image icon"/>
+                            <Image src={img} width={35} height={23} alt="image icon"/>
                         </label> : 
                         <div className={styles.uploadItemGrey}>
-                            <Image src={img} width={27} height={25} alt="image icon"/>
+                            <Image src={img} width={35} height={23} alt="image icon"/>
                          </div>
                         }
                         {mediaPreviewList.length < 1 ? <label htmlFor="upload" className={styles.uploadItem}>
-                            <Image src={mov} width={35} height={25} alt="movie icon"/>
+                            <Image src={mov} width={35} height={23} alt="movie icon"/>
                         </label> :
                         <div className={styles.uploadItemGrey}>
-                            <Image src={mov} width={35} height={25} alt="movie icon"/>
+                            <Image src={mov} width={35} height={23} alt="movie icon"/>
                         </div>
                     }
                     </div>

@@ -22,13 +22,14 @@ export default async function handler(
             posts: {
                 orderBy: {
                     createdAt: "desc"
-                }
+                },
+                take: 1
             },
             users: true,
             owner: true
         }
-    
     })
+
 
 
     if (session?.user?.email && board) {
@@ -83,8 +84,7 @@ export default async function handler(
             
             const hasAccess = board.privacy === "TWO" ? board.allowList?.includes(session.user.email) ? true : false : true
 
-            res.status(201).json({board, isOwner, hasAccess, session: true})
-            
+            res.status(201).json({board, isOwner, hasAccess, session: true, cursor: board.posts[0].id})
 
         } else {
             

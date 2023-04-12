@@ -8,7 +8,7 @@ import styles from "./PostGallery.module.css"
 
 export default function PostGallery ({setShowGallery, slugs, selectedItem}: {setShowGallery: Dispatch<SetStateAction<boolean>>, slugs: GalleryItems[], selectedItem: number}) {
     const [imageIndex, setImageIndex] = useState(selectedItem)
-    console.log(imageIndex, "index....", "slugs: ", slugs)
+
     
     useEffect(() => {
         const body = document.querySelector("body")
