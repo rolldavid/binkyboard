@@ -102,7 +102,7 @@ export default function Collection({boardId, isOwner, }: {boardId: string, isOwn
                     </div>
                 </div>
                 {isFetchingNextPage && (
-                    <div>
+                    <div className={styles.loadMore}>
                         <Spinner />
                     </div>
                 )}
