@@ -37,9 +37,7 @@ export default async function handler(
             include: {
               user: {
                 select: {
-                  name: true,
                   id: true,
-                  role: true
                 }
               }
             }
@@ -52,28 +50,6 @@ export default async function handler(
       if (board && user) {
             const filteredPosts = board.posts.filter(post => board.pinnedPost ? board.pinnedPost.id !== post.id : post.id)
         
-            const pinnedSlugs = board.pinnedPost ? 
-              board.pinnedPost.slugs.map(slug => {
-               
-                const isImage = slug.slice(slug.lastIndexOf(".")).includes("mp4") || slug.slice(slug.lastIndexOf(".")).includes("mov") || slug.slice(slug.lastIndexOf(".")).includes("MOV") || slug.slice(slug.lastIndexOf(".")).includes("quicktime")? false : true;
-                return {
-                  slug: slug,
-                  type: isImage ? "image" : "video"
-                }
-              })
-            : false;
-
-            const pinnedSocialUrl = board.pinnedPost ? board.pinnedPost.note.split(" ").filter(word => word.includes("youtube.com/") || word.includes("soundcloud.com/")) : false;
-
-            const pinnedPost = board.pinnedPost ? {
-              post: board.pinnedPost,
-              slugs: pinnedSlugs,
-              socialUrl: pinnedSocialUrl ? pinnedSocialUrl.length > 0 ? pinnedSocialUrl[0] : [] : [],
-              displayName: board.pinnedPost.user.name,
-              isOwner: board.ownerId === user.id ? true : false,
-              isAdmin: board.pinnedPost.user.role === "ADMIN" || board.ownerId === board.pinnedPost.user.id
-            }
-            : false;
        
             const posts = filteredPosts.map((post, index) => {
 
@@ -99,7 +75,7 @@ export default async function handler(
             
           })
 
-          res.status(200).json({ posts, pinned: pinnedPost })
+          res.status(200).json({ posts })
           return;
           }
         
