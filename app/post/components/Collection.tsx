@@ -10,7 +10,7 @@ import Spinner from "@/lib/Spinner"
 
 
 
-export default function Collection({boardId, isOwner, cursor}: {boardId: string, isOwner: boolean, cursor: number}) {
+export default function Collection({boardId, isOwner, }: {boardId: string, isOwner: boolean}) {
 
     const { data: pinData, status: pinStatus } = useQuery(["pinnedPost"], () => {
         return getPinnedPost(boardId)
