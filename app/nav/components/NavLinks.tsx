@@ -2,9 +2,8 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import gift from "../assets/gift.png"
 import plus from "../assets/plus.png"
-import profile from "../assets/prof.png"
+import profile from "../assets/profile.png"
 import styles from "./NavLinks.module.css"
 
 
@@ -36,8 +35,8 @@ export default function NavLinks({userId, admin, signedIn}: {userId: string, adm
                     <Link href={`/account/${userId}`} className={styles.navItem}>
                         <Image 
                             src={profile}
-                            width={28}
-                            height={28}
+                            width={30}
+                            height={30}
                             alt="profile"
                             className={styles.linkIcon}
                         />
