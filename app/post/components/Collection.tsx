@@ -8,14 +8,13 @@ import PostItem from "./PostItem"
 import styles from "./Collection.module.css"
 import Spinner from "@/lib/Spinner"
 
-
-
 export default function Collection({boardId, isOwner, }: {boardId: string, isOwner: boolean}) {
 
     const { data: pinData, status: pinStatus } = useQuery(["pinnedPost"], () => {
         return getPinnedPost(boardId)
     })
 
+    
     const getInfinitePosts = async ({ pageParam = 1}) => {
         const res = await fetch(
           `${process.env.NEXT_PUBLIC_FRONTEND_URL}/api/get-infinite-posts?cursor=${pageParam}`,
@@ -26,7 +25,6 @@ export default function Collection({boardId, isOwner, }: {boardId: string, isOwn
             }),
             headers: {
                 "Content-Type": "application/json"
-            
             }
           }
         );
@@ -46,6 +44,8 @@ export default function Collection({boardId, isOwner, }: {boardId: string, isOwn
           return lastPage.nextCursor
         },
       });
+
+      console.log("board id:::::",boardId)
 
       useEffect(() => {
 
@@ -81,7 +81,7 @@ export default function Collection({boardId, isOwner, }: {boardId: string, isOwn
             return (
                 <>
                 <div className={styles.container}>
-                    {pinData.pinned && <div >
+                    {pinData && pinData.pinned && <div >
                         <PostItem post={pinData.pinned} boardId={boardId} pinnedPost={true}/>
                         
                     </div>}

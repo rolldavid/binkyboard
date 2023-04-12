@@ -6,11 +6,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const { cursor } = req.query
   const { boardId } = req.body
 
+
+
   if (typeof cursor === "string") {
       const myCursor = parseInt(cursor)
      
         try {
             const session = await getSession(req,res)
+
+
 
             const newCursor = await prisma.board.findUnique(
                 {
@@ -27,9 +31,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 }
             })
 
+         
+
+        
+
             const user = await prisma.user.findUnique({where: {email: session?.user.email}})
 
-                
+           
+
+            const initCursor = newCursor && newCursor.posts.length > 0 && myCursor === 1 ? newCursor.posts[0].id : myCursor
+            
+
                 const board = await prisma.board.findUnique({
                     where: {
                     id: boardId
@@ -39,7 +51,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                         take: 6,
                         skip: myCursor === 1 ? 0 : 1,
                         cursor: {
-                            id: myCursor === 1 ? newCursor?.posts[0].id : myCursor,
+                            id: initCursor
                         },
                         orderBy: {
                         createdAt: "desc"
@@ -66,6 +78,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                         
                     }
                 })
+
+               
             
                 if (board && user) {
                     const filteredPosts = board.posts.filter(post => board.pinnedPost ? board.pinnedPost.id !== post.id : post.id)
@@ -97,10 +111,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             
                 const returnCursor = mappedPosts.length === 6 ? 5 : posts.length === 5 ? 4 : posts.length === 4 ? 3 : posts.length === 3 ? 2 : posts.length === 2 ? 1 : posts.length === 1 ? 0 : undefined
                 
-                if (returnCursor) {
-                    console.log(posts[returnCursor].post.id)
-                }
-            
+              
                     res.status(200).json({ posts: mappedPosts, nextCursor: returnCursor ? posts[returnCursor].post.id : undefined})
                 return;
                 

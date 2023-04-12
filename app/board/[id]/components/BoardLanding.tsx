@@ -45,6 +45,7 @@ export default function Page({boardId}: {boardId: string}) {
     }
 
     if ( status === "success" && data.board) {
+       
         
         if (data.isOwner) {
            
@@ -96,7 +97,6 @@ export default function Page({boardId}: {boardId: string}) {
                 <Collection boardId={boardId} isOwner={false} />
             </div>
         )
-
     }
 
     return null;
