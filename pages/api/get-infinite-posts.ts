@@ -48,7 +48,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     },
                     include: {
                     posts: {
-                        take: 6,
+                        take: 11,
                         skip: myCursor === 1 ? 0 : 1,
                         cursor: {
                             id: initCursor
@@ -107,9 +107,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     }
                 })
 
-                const mappedPosts = posts.slice(0,5)
+                const mappedPosts = posts.slice(0,10)
             
-                const returnCursor = mappedPosts.length === 6 ? 5 : posts.length === 5 ? 4 : posts.length === 4 ? 3 : posts.length === 3 ? 2 : posts.length === 2 ? 1 : posts.length === 1 ? 0 : undefined
+                const returnCursor = mappedPosts.length === 10 ? 9 : mappedPosts.length === 9 ? 8 : mappedPosts.length === 8 ? 7 : mappedPosts.length === 7 ? 6 : mappedPosts.length === 6 ? 5 : posts.length === 5 ? 4 : posts.length === 4 ? 3 : posts.length === 3 ? 2 : posts.length === 2 ? 1 : posts.length === 1 ? 0 : undefined
                 
               
                     res.status(200).json({ posts: mappedPosts, nextCursor: returnCursor ? posts[returnCursor].post.id : undefined})

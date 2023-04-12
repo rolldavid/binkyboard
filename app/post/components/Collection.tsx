@@ -45,15 +45,18 @@ export default function Collection({boardId, isOwner, }: {boardId: string, isOwn
         },
       });
 
-      console.log("board id:::::",boardId)
+
 
       useEffect(() => {
 
         const handleScroll = async () => {
+        
           if (
             window.innerHeight + window.pageYOffset >=
-            document.body.offsetHeight - 20
+            document.body.offsetHeight - 1000
+
           ) {
+            
             fetchNextPage();
           }
         };
