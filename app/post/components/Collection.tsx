@@ -18,7 +18,7 @@ export default function Collection({boardId, isOwner, }: {boardId: string, isOwn
 
     const getInfinitePosts = async ({ pageParam = 1}) => {
         const res = await fetch(
-          "http://localhost:3000/api/get-infinite-posts?cursor=" + pageParam,
+          `${process.env.NEXT_PUBLIC_FRONTEND_URL}/api/get-infinite-posts?cursor=${pageParam}`,
           {
             method: "POST",
             body: JSON.stringify({
