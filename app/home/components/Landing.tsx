@@ -15,7 +15,7 @@ import { useEffect, useState } from "react"
 export default function Page() {
 
   const router = useRouter()
-  const queryClient = useQueryClient()
+ 
 
   const { data, status } = useQuery(["userBoards"], () => {
    
@@ -28,7 +28,6 @@ export default function Page() {
 
 
   if (status === "success" && data && data.boards) {
-    queryClient.invalidateQueries(["collection"])
 
     if (data.role === "ADMIN" || data.role === "SUPER") {
       return (
@@ -41,9 +40,9 @@ export default function Page() {
               {
                 data.boards.map((board: Board, index: number) => {
                   return (
-                    <Link href={`/board/${board.id}`} key={index} className={styles.boardItem}>
+                    <a href={`/board/${board.id}`} key={index} className={styles.boardItem}>
                         <BoardCard board={board}/>
-                    </Link>
+                    </a>
                   )
                 })
               }
