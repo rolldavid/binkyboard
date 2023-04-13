@@ -6,7 +6,6 @@ import { SyntheticEvent, useEffect, useState } from "react"
 import ReactPlayer from "react-player"
 import styles from "./PostItem.module.css"
 import pin from "../assets/pin.png"
-import { deletePost } from "@/lib/db-utils"
 import PostOptions from "./PostOptions"
 import PostGallery from "./PostGallery"
 
@@ -70,6 +69,7 @@ export default function PostItem({post, boardId, pinnedPost }: {post: PostItems,
                             alt="post image" 
                             className={styles.mediaItemOne}
                             onClick={(e) => setPrepGallery(e, 0)}
+                        
 
                         />
                 }
@@ -86,6 +86,7 @@ export default function PostItem({post, boardId, pinnedPost }: {post: PostItems,
                                 alt="post image" 
                                 className={styles.mediaItemTwo}
                                 onClick={(e) => setPrepGallery(e, index)}
+                          
                             />
                         </div>
                     )

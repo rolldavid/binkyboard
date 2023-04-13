@@ -1,4 +1,5 @@
 import styles from "@/styles/Board.module.css"
+import prisma from "@/lib/prisma";
 export default async function Layout({ children }: {
     children: React.ReactNode;
   }) {
@@ -8,14 +9,13 @@ export default async function Layout({ children }: {
     );
   }
 
-
   export async function generateMetadata({params: {id}}: {params: { id: string }}) {
-
+    const boardName = await prisma.board.findUnique({where: {id}})
     return {
         title: "binkyboard",
         description: "A simple place to celebrate life's biggest moments",
         openGraph: {
-            title: "Join David on binkyboard!",
+            title: `You're invited to join ${boardName?.name}`,
             description: "A simple place to celebrate life's biggest moments",
             url: `https://binkyboard.com`,
             images: [
