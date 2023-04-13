@@ -278,18 +278,18 @@ export default function Submit({boardId}: {boardId: string}) {
                     </div>}
                     {mediaPreview && mediaPreviewList.length === 4 && <div className={styles.mediaContainer}>
                         <div className={styles.mediaContainerStack}>
-                            <div className={styles.mediaItemContainerRight}>
+                            <div className={styles.mediaItemContainerSquare}>
                                 <img src={mediaPreviewList[0].url} alt="preview image" className={styles.mediaItemRight}/>
                             </div>
-                            <div className={styles.mediaItemContainerRight}>
+                            <div className={styles.mediaItemContainerSquare}>
                                 <img src={mediaPreviewList[1].url} alt="preview image" className={styles.mediaItemRight}/>
                             </div>
                         </div>
                         <div className={styles.mediaContainerStack}>
-                            <div className={styles.mediaItemContainerRight}>
+                            <div className={styles.mediaItemContainerSquare}>
                                 <img src={mediaPreviewList[2].url} alt="preview image" className={styles.mediaItemRight}/>
                             </div>
-                            <div className={styles.mediaItemContainerRight}>
+                            <div className={styles.mediaItemContainerSquare}>
                                 <img src={mediaPreviewList[3].url} alt="preview image" className={styles.mediaItemRight}/>
                             </div>
                         </div>
