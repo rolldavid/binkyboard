@@ -9,6 +9,7 @@ import styles from "./Collection.module.css"
 import Spinner from "@/lib/Spinner"
 
 let scroll = 0;
+let firstLoad = true;
 
 export default function Collection({boardId, isOwner, }: {boardId: string, isOwner: boolean}) {
 
@@ -40,12 +41,12 @@ export default function Collection({boardId, isOwner, }: {boardId: string, isOwn
         fetchNextPage,
         hasNextPage,
         isFetchingNextPage,
+        isFetching,
         status,
       } = useInfiniteQuery(["collection"], getInfinitePosts, {
         getNextPageParam: (lastPage) => {
           return lastPage.nextCursor
         },
-        cacheTime: 0
       });
 
 
@@ -66,6 +67,16 @@ export default function Collection({boardId, isOwner, }: {boardId: string, isOwn
     
     if (status === "loading") {
         <Spinner />
+    }
+
+    if (firstLoad && (isFetching || status === "loading")) {
+        firstLoad = false;
+        console.log("first load...")
+        return (
+            <div className={styles.container}>
+                Loading....
+            </div>
+        )
     }
 
 
