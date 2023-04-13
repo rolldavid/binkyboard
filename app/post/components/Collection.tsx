@@ -52,13 +52,10 @@ export default function Collection({boardId, isOwner, }: {boardId: string, isOwn
       useEffect(() => {
 
         const handleScroll = async () => {
-          console.log(scroll)
-          console.log(window.pageYOffset)
+          
           const position = window.pageYOffset
           if (scroll + 250 <= position) {
-            console.log("fetching....")
             scroll = position
-            console.log("scroll position for next one", scroll)
             fetchNextPage();
           }
         };
