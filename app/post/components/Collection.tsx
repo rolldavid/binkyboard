@@ -45,8 +45,8 @@ export default function Collection({boardId, isOwner, }: {boardId: string, isOwn
         getNextPageParam: (lastPage) => {
           return lastPage.nextCursor
         },
+        cacheTime: 0
       });
-
 
 
       useEffect(() => {
