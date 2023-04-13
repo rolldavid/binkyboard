@@ -31,6 +31,7 @@ export default function PostOptions({setShowOptions, boardId, postId, isAdmin, i
     const { mutateAsync: mutateDelete } = useMutation(deletePost, {
         onSuccess: () => {
             queryClient.invalidateQueries(['collection'])
+            queryClient.invalidateQueries(['pinnedPost'])
             setDeleting(false)
             window.scrollTo({
                 top: 0,

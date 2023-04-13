@@ -1,12 +1,14 @@
 "use client"
 
-import React, {useEffect} from "react"
+import React, {useEffect, useState} from "react"
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { getPinnedPost } from "@/lib/db-utils"
 import { PostItems } from "./types"
 import PostItem from "./PostItem"
 import styles from "./Collection.module.css"
 import Spinner from "@/lib/Spinner"
+
+let scroll = 0;
 
 export default function Collection({boardId, isOwner, }: {boardId: string, isOwner: boolean}) {
 
@@ -50,13 +52,10 @@ export default function Collection({boardId, isOwner, }: {boardId: string, isOwn
       useEffect(() => {
 
         const handleScroll = async () => {
-        
-          if (
-            window.innerHeight + window.pageYOffset >=
-            document.body.offsetHeight - 1000
-
-          ) {
-            
+          
+          const position = window.pageYOffset
+          if (scroll + 250 <= position) {
+            scroll = position
             fetchNextPage();
           }
         };
