@@ -8,7 +8,6 @@ import styles from "./PostGallery.module.css"
 
 export default function PostGallery ({setShowGallery, slugs, selectedItem}: {setShowGallery: Dispatch<SetStateAction<boolean>>, slugs: GalleryItems[], selectedItem: number}) {
     const [imageIndex, setImageIndex] = useState(selectedItem)
-
     
     useEffect(() => {
         const body = document.querySelector("body")
@@ -206,6 +205,146 @@ export default function PostGallery ({setShowGallery, slugs, selectedItem}: {set
                             onClick={() => setImageIndex(1)}/>
                         <Image 
                             src={`${process.env.NEXT_PUBLIC_AWS_URL}/${slugs[2].slug}`} 
+                            width={250} 
+                            height={250} 
+                            alt="gallery image"
+                            className={styles.galleryImage}
+                        />
+                        <Image 
+                            src={next}
+                            width={30}
+                            height={30}
+                            alt="previous image"
+                            className={styles.nextArrow}
+                            onClick={() => setImageIndex(0)}/>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>}
+        {slugs.length === 4 && <div className={styles.container}>
+            { imageIndex === 0 &&
+            <div className={styles.galleryModule} >
+                <div className={styles.closeContainer}>
+                        <div className={styles.closeButton} onClick={() => setShowGallery(false)}>
+                            <Image src={close} width={30} height={30} alt="close image gallery"/>
+                        </div>
+                </div>
+                <div className={styles.galleryContainer}>
+                    <div className={styles.galleryImageWrap}>
+                    <Image 
+                            src={prev}
+                            width={30}
+                            height={30}
+                            alt="previous image"
+                            className={styles.prevArrow}
+                            onClick={() => setImageIndex(3)}/>
+                        <Image 
+                            src={`${process.env.NEXT_PUBLIC_AWS_URL}/${slugs[0].slug}`} 
+                            width={250} 
+                            height={250} 
+                            alt="gallery image"
+                            className={styles.galleryImage}
+                        />
+                        <Image 
+                            src={next}
+                            width={30}
+                            height={30}
+                            alt="previous image"
+                            className={styles.nextArrow}
+                            onClick={() => setImageIndex(1)}/>
+                    </div>
+                </div>
+            </div>
+            }
+            { imageIndex === 1 &&
+            <div className={styles.galleryModule} >
+                <div className={styles.closeContainer}>
+                    <div className={styles.closeButton} onClick={() => setShowGallery(false)}>
+                        <Image src={close} width={30} height={30} alt="close image gallery"/>
+                    </div>
+                </div>
+                <div className={styles.galleryContainer}>
+                    <div className={styles.galleryImageWrap}>
+                    <Image 
+                            src={prev}
+                            width={30}
+                            height={30}
+                            alt="previous image"
+                            className={styles.prevArrow}
+                            onClick={() => setImageIndex(0)}/>
+                      
+                        <Image 
+                            src={`${process.env.NEXT_PUBLIC_AWS_URL}/${slugs[1].slug}`} 
+                            width={250} 
+                            height={250} 
+                            alt="gallery image"
+                            className={styles.galleryImage}
+                        />
+                       
+                       <Image 
+                            src={next}
+                            width={30}
+                            height={30}
+                            alt="previous image"
+                            className={styles.nextArrow}
+                            onClick={() => setImageIndex(2)}/>
+                    </div>
+                </div>
+            </div>
+            }
+            { imageIndex === 2 &&
+            <div className={styles.galleryModule} >
+                <div className={styles.closeContainer}>
+                    <div className={styles.closeButton} onClick={() => setShowGallery(false)}>
+                        <Image src={close} width={30} height={30} alt="close image gallery"/>
+                    </div>
+                </div>
+                <div className={styles.galleryContainer}>
+                    <div className={styles.galleryImageWrap}>
+                    <Image 
+                            src={prev}
+                            width={30}
+                            height={30}
+                            alt="previous image"
+                            className={styles.prevArrow}
+                            onClick={() => setImageIndex(1)}/>
+                        <Image 
+                            src={`${process.env.NEXT_PUBLIC_AWS_URL}/${slugs[2].slug}`} 
+                            width={250} 
+                            height={250} 
+                            alt="gallery image"
+                            className={styles.galleryImage}
+                        />
+                        <Image 
+                            src={next}
+                            width={30}
+                            height={30}
+                            alt="previous image"
+                            className={styles.nextArrow}
+                            onClick={() => setImageIndex(3)}/>
+                    </div>
+                </div>
+            </div>
+            }
+             { imageIndex === 3 &&
+            <div className={styles.galleryModule} >
+                <div className={styles.closeContainer}>
+                    <div className={styles.closeButton} onClick={() => setShowGallery(false)}>
+                        <Image src={close} width={30} height={30} alt="close image gallery"/>
+                    </div>
+                </div>
+                <div className={styles.galleryContainer}>
+                    <div className={styles.galleryImageWrap}>
+                    <Image 
+                            src={prev}
+                            width={30}
+                            height={30}
+                            alt="previous image"
+                            className={styles.prevArrow}
+                            onClick={() => setImageIndex(2)}/>
+                        <Image 
+                            src={`${process.env.NEXT_PUBLIC_AWS_URL}/${slugs[3].slug}`} 
                             width={250} 
                             height={250} 
                             alt="gallery image"

@@ -214,7 +214,7 @@
     display: flex; 
     align-items: center;
     width: 50%;
-    height: 200px;
+    height: 225px;
     border: none;
     border-radius: 10px;
     overflow: hidden;
@@ -262,7 +262,7 @@
     display: flex; 
     align-items: center;
     width: 100%;
-    height: 200px;
+    height: 250px;
     border-radius: 10px;
     overflow: hidden;
 }
@@ -271,7 +271,7 @@
     display: flex; 
     align-items: center;
     width: 100%;
-    height: 98px;
+    height: 123px;
     border-radius: 10px;
     border: none;
     overflow: hidden;
@@ -291,6 +291,7 @@
     min-height: 100%;
     border: none;
     border-radius: 10px;
+    cursor: pointer;
 }
 
 .mediaContainerStack {
@@ -303,5 +304,14 @@
     margin: 15px 0px 0px 0px;
 }
 
+.mediaItemContainerSquare {
+    display: flex; 
+    align-items: center;
+    width: 100%;
+    height: 150px;
+    border-radius: 10px;
+    border: none;
+    overflow: hidden;
+}
 
 

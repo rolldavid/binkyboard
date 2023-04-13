@@ -14,12 +14,13 @@ export default function PostItem({post, boardId, pinnedPost }: {post: PostItems,
     const [showGallery, setShowGallery] = useState(false)
     const [selectedItem, setSelectedItem] = useState(0)
 
-    const setPrepGallery = (e: SyntheticEvent, index: number) => {
+    console.log(post.slugs.length, "slugs: ", post.slugs)
+
+    const setPrepGallery = (e: SyntheticEvent, selectedIndex: number) => {
         e.preventDefault()
-        setSelectedItem(index)
+        setSelectedItem(selectedIndex)
         setShowGallery(true)
     }
-
 
     const readableDate = new Date(post.post.createdAt).toLocaleDateString("en-US", {
         day: "numeric",
@@ -69,8 +70,6 @@ export default function PostItem({post, boardId, pinnedPost }: {post: PostItems,
                             alt="post image" 
                             className={styles.mediaItemOne}
                             onClick={(e) => setPrepGallery(e, 0)}
-                        
-
                         />
                 }
             </div>}
@@ -118,7 +117,7 @@ export default function PostItem({post, boardId, pinnedPost }: {post: PostItems,
                         />
                     </div>
                     <div className={styles.mediaItemContainerRight}>
-                        <img 
+                        <Image
                             src={`${process.env.NEXT_PUBLIC_AWS_URL}/${post.slugs[2].slug}`}  
                             width={250} 
                             height={250} 
@@ -131,19 +130,47 @@ export default function PostItem({post, boardId, pinnedPost }: {post: PostItems,
             </div>}
             {post.slugs.length === 4 && <div className={styles.mediaContainer}>
                 <div className={styles.mediaContainerStack}>
-                    <div className={styles.mediaItemContainerRight}>
-                        <Image src={`${process.env.NEXT_PUBLIC_AWS_URL}/${post.slugs[0].slug}`}  width={250} height={250} alt="post image" className={styles.mediaItemRight}/>
+                    <div className={styles.mediaItemContainerSquare}>
+                        <Image
+                            src={`${process.env.NEXT_PUBLIC_AWS_URL}/${post.slugs[0].slug}`}  
+                            width={250} 
+                            height={250} 
+                            alt="post image" 
+                            className={styles.mediaItemRight}
+                            onClick={(e) => setPrepGallery(e, 0)}
+                        />
                     </div>
-                    <div className={styles.mediaItemContainerRight}>
-                        <Image src={`${process.env.NEXT_PUBLIC_AWS_URL}/${post.slugs[1].slug}`}  width={250} height={250} alt="post image" className={styles.mediaItemRight}/>
+                    <div className={styles.mediaItemContainerSquare}>
+                        <Image
+                            src={`${process.env.NEXT_PUBLIC_AWS_URL}/${post.slugs[1].slug}`}  
+                            width={250} 
+                            height={250} 
+                            alt="post image" 
+                            className={styles.mediaItemRight}
+                            onClick={(e) => setPrepGallery(e, 1)}
+                        />
                     </div>
                 </div>
                 <div className={styles.mediaContainerStack}>
-                    <div className={styles.mediaItemContainerRight}>
-                        <Image src={`${process.env.NEXT_PUBLIC_AWS_URL}/${post.slugs[2].slug}`}  width={250} height={250} alt="post image" className={styles.mediaItemRight}/>
+                    <div className={styles.mediaItemContainerSquare}>
+                        <Image
+                            src={`${process.env.NEXT_PUBLIC_AWS_URL}/${post.slugs[2].slug}`}  
+                            width={250} 
+                            height={250} 
+                            alt="post image" 
+                            className={styles.mediaItemRight}
+                            onClick={(e) => setPrepGallery(e, 2)}
+                        />
                     </div>
-                    <div className={styles.mediaItemContainerRight}>
-                        <Image src={`${process.env.NEXT_PUBLIC_AWS_URL}/${post.slugs[3].slug}`}  width={250} height={250} alt="post image" className={styles.mediaItemRight}/>
+                    <div className={styles.mediaItemContainerSquare}>
+                        <Image
+                            src={`${process.env.NEXT_PUBLIC_AWS_URL}/${post.slugs[3].slug}`}  
+                            width={250} 
+                            height={250} 
+                            alt="post image" 
+                            className={styles.mediaItemRight}
+                            onClick={(e) => setPrepGallery(e, 3)}
+                        />
                     </div>
                 </div>
     
