@@ -34,37 +34,37 @@ export default function Page() {
         <div className={styles.container}>
 
           {data.boards.length > 0 ? <div className={styles.boardContainer}>
-            
-              <div onClick={() => router.push("create")} className={styles.newBoardContainer}>
-                  <div className={styles.newBoardContainer}>
-                      <h4 className={styles.newBoardTitle}>
-                        Create a board
-                      </h4>
-                  </div>
+              <div className={styles.newBoardContainer} onClick={() => router.push("create")}>
+                  <h4 className={styles.newBoardTitle} >
+                    + Create a board
+                  </h4>
               </div>
-            
-            <div className={styles.titleContainer}>
-              <h2 className={styles.titleText}>Your Boards</h2>
+              <div className={styles.boardInnerContainer}>
+                {
+                  data.boards.map((board: Board, index: number) => {
+                    return (
+                      <a href={`/board/${board.id}`} key={index} className={styles.boardItem}>
+                          <BoardCard board={board}/>
+                      </a>
+                    )
+                  })
+                }
+              </div>
             </div>
-              {
-                data.boards.map((board: Board, index: number) => {
-                  return (
-                    <a href={`/board/${board.id}`} key={index} className={styles.boardItem}>
-                        <BoardCard board={board}/>
-                    </a>
-                  )
-                })
-              }
-            </div> :
+             :
+            <>
+            <div className={styles.newBoardContainer} onClick={() => router.push("create")}>
+                <h4 className={styles.newBoardTitle} >
+                  + Create a board
+                </h4>
+            </div>
             <div className={styles.noBoardContainer}>
                 <p className={styles.noBoardText}>You don&apos;t have any boards yet 😢</p>
-                <div className={styles.createButton} onClick={() => router.push("create")}>
-                  Create a Board        
-                </div>
-            </div>
+            </div>  
+            </>
           }
-
         </div>
+        
       )
     }  
 
@@ -78,6 +78,7 @@ export default function Page() {
             <div className={styles.titleContainer}>
               <h2 className={styles.titleText}>Your Boards</h2>
             </div>
+            <div className={styles.boardInnerContainer}>
               {
                 data.boards.map((board: Board, index: number) => {
                   return (
@@ -87,6 +88,7 @@ export default function Page() {
                   )
                 })
               }
+            </div>
             </div> :
             <div className={styles.noBoardContainer}>
                 <p className={styles.noBoardText}>You don&apos;t have any boards yet 😢</p>
