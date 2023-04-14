@@ -50,6 +50,12 @@ export async function sendAccessEmail(boardId: string) {
 
 // READ
 
+export async function getNotifications() {
+    const res = await fetch("/api/get-notifications")
+    const data = await res.json()
+    return data
+}
+
 export async function getInfinitePosts({boardId} : {boardId: string}) {
     const res = await fetch("/api/get-infinite-posts", {
         method: "POST",
@@ -196,6 +202,14 @@ export async function getBoard(boardId: string) {
 
 
 // UPDATE
+
+
+export async function updateNotifications() {
+    const res = await fetch("/api/update-notifications")
+    const data = await res.json();
+    return data;
+}
+
 
 export async function updateBoard(boardId: string, headerUrl: string, boardName: string, registryLink: string | null, accessStatus: string, accessList: string | null) {
     const res = await fetch("/api/update-board", {

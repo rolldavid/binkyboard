@@ -1,0 +1,175 @@
+.notificationsModuleContainer {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: transparent;
+    z-index: 10;
+}
+
+.notificationsModule {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  width: 300px;
+  height: 300px;
+  padding: 5px 5px 5px 5px;
+  background-color: white;
+  z-index: 30;
+  box-shadow: 2px 2px 5px rgba(0,0,0,.1);
+  border: 1px solid var(--wenge);
+  border-radius: 25px;
+  overflow: scroll;
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+
+
+.notificationsModule::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+  }
+
+.notificationOuterContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100%;
+    padding: 15px 10px 20px 10px;
+   
+}
+
+.notificationIconContainer {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.notificationContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+    text-align: left;
+}
+
+.notificationNewContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+    text-align: left;
+    margin: 0px 0px 15px 0px;
+}
+
+.notificationCompleteContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+    text-align: left;
+    margin: 0px 0px 0px 0px;
+}
+
+.notificationInner {
+    display: flex;
+    width: 100%;
+}
+
+.newTitle {
+    text-align: left;
+    font-weight: 600;
+    color: var(--offblack);
+    margin: 0px 0px 0px 0px;
+}
+
+.recentTitle {
+    text-align: left;
+    font-weight: 600;
+    color: var(--darkgrey);
+    margin: 0px 0px 0px 0px;
+}
+
+.bellImg {
+    cursor: pointer;
+}
+
+
+.searchContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}
+
+.searchText {
+    text-align: center;
+    padding: 0px 5px 0px 5px;
+    width: 100%;
+}
+
+.searchLink {
+    text-align: center;
+    width: 100%;
+}
+
+.welcomeNotification {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    text-align: center;
+    width:100%;
+    height: 100%;
+}
+
+.welcomeTitle {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    font-weight: 500;
+    width: 100%;
+    margin: 0px 0px 10px 0px;
+    color: var(--darkestgrey);
+}
+
+.welcomeText {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    color: var(--darkestgrey);
+    margin: 0;
+}
+
+.welcomeImgContainer {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    width:100%;
+    height: 100%;
+    z-index: -10;
+}
+
+.welcomeImg {  
+  opacity: .7;
+}
+
+.navText {
+    display: none;
+}
+
