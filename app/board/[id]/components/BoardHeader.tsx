@@ -45,8 +45,8 @@ export default function BoardHeader({boardId, isOwner, setShowOptions, boardName
                     <div className={styles.editBoardButton}>
                         <Image className={styles.editBoard} 
                             src={gear}
-                            width={40}
-                            height={40}
+                            width={45}
+                            height={45}
                             alt="edit banner image"
                             onClick={() => setShowOptions(true)}
                         />

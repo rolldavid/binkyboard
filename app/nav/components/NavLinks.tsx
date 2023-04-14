@@ -4,7 +4,11 @@ import Link from "next/link";
 import Image from "next/image";
 import plus from "../assets/plus.png"
 import profile from "../assets/profile.png"
+import board from "../assets/board.png"
+import bell from "../assets/bell.png"
+import bellding from "../assets/bellding.png"
 import styles from "./NavLinks.module.css"
+import pin from "../assets/pin.png"
 
 
 export default function NavLinks({userId, admin, signedIn}: {userId: string, admin: boolean, signedIn: boolean}) {
@@ -31,7 +35,16 @@ export default function NavLinks({userId, admin, signedIn}: {userId: string, adm
                     </Link>
                 </div>
                 <div className={styles.linkContainer}>
-                
+                    <Link href={`/`} className={styles.navItem}>
+                        <Image 
+                            src={board}
+                            width={29}
+                            height={29}
+                            alt="profile"
+                            className={styles.linkIcon}
+                        />
+                    </Link>
+
                     <Link href={`/account/${userId}`} className={styles.navItem}>
                         <Image 
                             src={profile}
@@ -41,15 +54,15 @@ export default function NavLinks({userId, admin, signedIn}: {userId: string, adm
                             className={styles.linkIcon}
                         />
                     </Link>
-                    {admin && <Link href="/create" className={styles.navItem}>
+                    {/* <Link href={`/account/${userId}`} className={styles.navItem}>
                         <Image 
-                            src={plus}
-                            width={25}
-                            height={25}
-                            alt="create board"
+                            src={bellding}
+                            width={30}
+                            height={30}
+                            alt="profile"
                             className={styles.linkIcon}
                         />
-                    </Link>}
+                    </Link> */}
                     
                 </div>
             </nav>
