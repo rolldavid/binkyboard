@@ -34,6 +34,15 @@ export default function Page() {
         <div className={styles.container}>
 
           {data.boards.length > 0 ? <div className={styles.boardContainer}>
+            
+              <div onClick={() => router.push("create")} className={styles.newBoardContainer}>
+                  <div className={styles.newBoardContainer}>
+                      <h4 className={styles.newBoardTitle}>
+                        Create a board
+                      </h4>
+                  </div>
+              </div>
+            
             <div className={styles.titleContainer}>
               <h2 className={styles.titleText}>Your Boards</h2>
             </div>
