@@ -1,0 +1,22 @@
+
+.notificationsTitle {
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.15rem;
+    color: var(--darkgrey);
+    margin: 5px 0px 10px 0px;
+}
+
+
+.newNotification {
+    color: var(--offblack);
+    margin: 10px 0px 10px 0px;
+    cursor: pointer;
+}
+
+.recentNotification {
+    color: var(--darkgrey);
+    margin: 10px 0px 10px 0px;
+    cursor: pointer;
+}
+

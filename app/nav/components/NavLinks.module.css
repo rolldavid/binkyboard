@@ -16,6 +16,11 @@
     margin: 0px 0px 0px 20px;
 }
 
+.notificationContainer {
+    margin: 0px 0px 0px 0px;
+    cursor: pointer;
+}
+
 .linkContainer {
     display: flex;
     justify-content: flex-end;

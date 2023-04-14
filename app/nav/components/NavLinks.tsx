@@ -9,6 +9,7 @@ import bell from "../assets/bell.png"
 import bellding from "../assets/bellding.png"
 import styles from "./NavLinks.module.css"
 import pin from "../assets/pin.png"
+import NotificationIcon from "@/app/notifications/components/NotificationIcon";
 
 
 export default function NavLinks({userId, admin, signedIn}: {userId: string, admin: boolean, signedIn: boolean}) {
@@ -38,8 +39,8 @@ export default function NavLinks({userId, admin, signedIn}: {userId: string, adm
                     <Link href={`/`} className={styles.navItem}>
                         <Image 
                             src={board}
-                            width={29}
-                            height={29}
+                            width={28}
+                            height={28}
                             alt="profile"
                             className={styles.linkIcon}
                         />
@@ -54,16 +55,9 @@ export default function NavLinks({userId, admin, signedIn}: {userId: string, adm
                             className={styles.linkIcon}
                         />
                     </Link>
-                    {/* <Link href={`/account/${userId}`} className={styles.navItem}>
-                        <Image 
-                            src={bellding}
-                            width={30}
-                            height={30}
-                            alt="profile"
-                            className={styles.linkIcon}
-                        />
-                    </Link> */}
-                    
+                    <div  className={styles.notificationContainer}>
+                        <NotificationIcon />
+                    </div>
                 </div>
             </nav>
         )
