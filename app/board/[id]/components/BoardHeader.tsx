@@ -13,7 +13,6 @@ import styles from "./BoardHeader.module.css"
 
 export default function BoardHeader({boardId, isOwner, setShowOptions, boardName, registry, headerUrl}: {boardId: string, isOwner: boolean, setShowOptions: Dispatch<SetStateAction<boolean>>, boardName: string, registry: string, headerUrl: string}) {
 
-       
     return (
         <div className={styles.container}>
                 <div className={styles.bannerContainer}>

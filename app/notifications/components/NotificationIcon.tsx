@@ -25,6 +25,26 @@ export default function NotificationIcon() {
         return getNotifications()
     })
 
+    useEffect(() => {
+        const body = document.querySelector("body")
+        if (body && showNotifications) {
+            body.style.overflow = "hidden"
+        }
+
+        if (body && !showNotifications) {
+            body.style.overflow = "auto"
+        }
+
+        return () => {
+            
+            const body = document.querySelector("body")
+
+            if (body) {
+                body.style.overflow = "auto"
+            }
+        }
+    }, [showNotifications])
+
 
     const handleModalClose = async (e: MouseEvent) => {
         e.preventDefault()

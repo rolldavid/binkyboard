@@ -35,8 +35,6 @@ export default function BoardOptions({boardId, setShowOptions, accessList, priva
     const [loading, setLoading] = useState(false)
     const [deleteButton, setDeleteButton] = useState(false)
 
-    //`${process.env.NEXT_PUBLIC_AWS_URL}/${board.headerUrl}`
-
 
     const router = useRouter()
 

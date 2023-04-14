@@ -8,7 +8,7 @@
     display: flex;
     justify-content: center;
     width: 100%;
-    margin: 0px 0px 0px 0px;
+    margin: 10px 0px -10px 0px;
   }
   
   .titleText {
@@ -20,7 +20,15 @@
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-    margin: 20px 0px 0px 0px;
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+    gap: 20px;
+  }
+
+  .boardInnerContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
     padding: 0px 10px 0px 10px;
     gap: 20px;
   }
@@ -66,20 +74,21 @@
   .newBoardContainer {
     display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: center;
+    padding:0px 0px 0px 0px;
     width: 100%;
-    height: 40px;
-    
-    border-radius: 10px;
+    height: 30px;
     cursor: pointer;
-    background: var(--cream);
-    border: .5px solid var(--wenge);
+    background-color: var(--wenge);
+    border: none;
 }
 
 .newBoardTitle {
     text-align: center;
     font-weight: 400;
-    color: var(--wenge);
+    color: var(--cream);
+  
 }
   
 
@@ -87,7 +96,8 @@
     .container {
       display: flex;
       flex-direction: column;
-      width: 500px;
+      align-items: center;
+      width: 100%;
     }
     
     .titleContainer {
@@ -104,10 +114,14 @@
     
     .boardContainer {
       display: flex;
-      flex-wrap: wrap;
+      justify-content: center;
       width: 100%;
-      margin: 20px 0px 0px 0px;
+      margin: 0px 0px 0px 0px;
       gap: 20px;
+    }
+
+    .boardInnerContainer {
+      width: 500px;
     }
     
     .boardItem {
