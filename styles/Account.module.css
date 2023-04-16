@@ -92,7 +92,7 @@
 }
 
 .nameTitle {
-    color: var(--wenge);
+    color: var(--blueblack);
     font-weight: 500;
 }
 
@@ -124,7 +124,7 @@
 }
 
 .logoutButton {
-    border: 2px solid var(--wenge);
+    border: 1.5px solid var(--blueblack);
     border-radius: 10px;
     padding: 12px 15px 12px 15px;
     background: none;
@@ -244,7 +244,7 @@
     }
     
     .nameTitle {
-        color: var(--wenge);
+        color: var(--blueblack);
         font-weight: 500;
     }
     
@@ -276,7 +276,7 @@
     }
     
     .logoutButton {
-        border: 2px solid var(--wenge);
+        border: 1.5px solid var(--blueblack);
         border-radius: 10px;
         padding: 12px 15px 12px 15px;
         background: none;

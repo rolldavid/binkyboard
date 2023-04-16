@@ -70,7 +70,7 @@ model NotificationActive {
   notification   Notification @relation(fields: [notificationId], references: [id], onDelete: Cascade)
   notificationId Int
   receivers      User[]
-  sender         String?
+  sender         String
   board          Board?       @relation(fields: [boardId], references: [id], onDelete: Cascade)
   boardId        String?
 }
@@ -81,7 +81,7 @@ model NotificationComplete {
   notification   Notification @relation(fields: [notificationId], references: [id], onDelete: Cascade)
   notificationId Int
   receivers      User[]
-  sender         String?
+  sender         String
   board          Board?       @relation(fields: [boardId], references: [id], onDelete: Cascade)
   boardId        String?
 }

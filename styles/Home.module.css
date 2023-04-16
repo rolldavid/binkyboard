@@ -6,6 +6,7 @@
   align-items: center;
   width: 100%;
   min-height: 100vh;
+  background-color: white;
 }
 
 .nav {
@@ -15,8 +16,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--cream);
-  border-bottom: 1px solid var(--darkwenge);
+  background-color: white;
+  border-bottom: 1px solid var(--blueblack);
   
 }
 
@@ -25,4 +26,5 @@
   flex-direction: column;
   width: 100%;
   padding: 40px 15px 0px 15px;
+
 }

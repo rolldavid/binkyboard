@@ -40,7 +40,7 @@
     align-items: center;
     font-size: .85rem;
     height: 100%;
-    color: var(--darkwenge);
+    color: var(--blueblack);
 }
 
 .optionsContainer {
@@ -103,7 +103,7 @@
 }
 
 .cancelButton {
-    border: 2px solid var(--wenge);
+    border: 1.5px solid var(--blueblack);
     border-radius: 10px;
     padding: 12px 15px 12px 15px;
     background-color: none;

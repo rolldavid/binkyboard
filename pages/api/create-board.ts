@@ -37,7 +37,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                             }
                         },
                         registry: registry,
-                        headerUrl: `yPwbiLyA-e_APVJ1vI6MS.png`
+                        headerUrl: `bannerteal.png`
                     },
                 })
 

@@ -9,6 +9,7 @@
     flex-direction: column;
     padding: 10px;
     width: 100%;
+    background: none;
 }
 
 .titleContainer {
@@ -20,7 +21,7 @@
 
 .nameInput {
     width: 100%;
-    border: 2px solid var(--wenge);
+    border: 1.5px solid var(--blueblack);
     border-radius: 25px;
     padding: 12px 20px 12px 20px;
     font-family: "Montserrat";
@@ -54,14 +55,14 @@
     width: 100%;
     text-align: center;
     margin: 5px 0px 10px 0px;
-    color: var(--wenge);
+    color: var(--blueblack);
    
     font-style: italic;
 }
 
 .accessInput {
     width: 100%;
-    border: 2px solid var(--wenge);
+    border: 1.5px solid var(--blueblack);
     border-radius: 25px;
     padding: 12px 20px 12px 20px;
     font-family: "Montserrat";
@@ -83,35 +84,38 @@
 .submitButton {
     all: unset;
     text-align: center;
-    border: 2px solid var(--bluegreen);
+    border: none;
     border-radius: 25px;
-    padding: 12px 15px 12px 15px;
+    padding: 14px 15px 14px 15px;
     margin: 10px 0px 0px 0px;;
     background-color: var(--bluegreen);
     width: 100%;
     cursor: pointer;
     font-size: 1rem;
+    color: white;
+    font-weight: 500;
     font-family: 'Montserrat', sans-serif;
 }
 
 .submittedContainer {
     display: flex;
     flex-direction: column;
+    align-items: center;
     margin: 40px 0px 0px 0px;
-    width: 100%;
-
+    width: 225px;
 }
 
 
 .boardLink {
     text-align: center;
-    border: none;
+    border: 1.5px solid var(--bluegreen);
     border-radius: 25px;
     padding: 12px 15px 12px 15px;
     margin: 15px 0px 0px 0px;
-    background-color: var(--wenge);
-    color: var(--cream);
-    width: 100%;
+    background-color: var(--bluegreen);
+    color: white;
+
+    width: 95%;
     cursor: pointer;
     font-size: 1rem;
     font-family: 'Montserrat', sans-serif;
@@ -122,9 +126,10 @@
     border: none;
     border-radius: 25px;
     padding: 12px 15px 12px 15px;
-    color: var(--cream);
-    background-color: var(--bluegreen);
-    width: 100%;
+    color: var(--blueblack);
+    background-color: none;
+    border: 1.5px solid var(--blueblack);
+    width: 95%;
     cursor: pointer;
     font-size: 1rem;
     font-family: 'Montserrat', sans-serif;
@@ -137,6 +142,13 @@
     margin: 0px 0px 30px 0px;
 }
 
+.boardLinkTitle {
+    font-weight: 400;
+}
+
+.createTitle {
+    font-weight: 400;
+}
 
 
 @media screen and (min-width: 550px) {
@@ -153,11 +165,5 @@
         width: 500px;
     }
 
-    .submittedContainer {
-        display: flex;
-        flex-direction: column;
-        margin: 40px 0px 0px 0px;
-        width: 500px;
     
-    }
 }

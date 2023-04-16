@@ -4,4 +4,5 @@ export interface NotificationProps {
     slug: string | boolean;
     createdAt: Date;
     notificationId: number;
+    sender: string
 }

@@ -14,8 +14,6 @@ export default function PostItem({post, boardId, pinnedPost }: {post: PostItems,
     const [showGallery, setShowGallery] = useState(false)
     const [selectedItem, setSelectedItem] = useState(0)
 
-    console.log(post.slugs.length, "slugs: ", post.slugs)
-
     const setPrepGallery = (e: SyntheticEvent, selectedIndex: number) => {
         e.preventDefault()
         setSelectedItem(selectedIndex)

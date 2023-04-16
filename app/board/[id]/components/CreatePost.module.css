@@ -13,7 +13,7 @@
     margin: 0px 15px 0px 15px;
     padding: 10px;
     border-radius: 10px;
-    border: 1.5px solid var(--wenge);
+    border: 1.5px solid var(--blueblack);
     background-color: white;
 }
 
@@ -47,7 +47,7 @@
     font-size: 1.2rem;
     font-family: 'Rokkitt', serif;
     background: none;
-    color: var(--wenge);
+    color: var(--blueblack);
     opacity: .8;
 }
 
@@ -59,7 +59,7 @@
     font-size: 1.2rem;
     font-family: 'Rokkitt', serif;
     background: none;
-    color: var(--wenge);
+    color: var(--blueblack);
     opacity: .3;
     cursor: default;
 
@@ -67,27 +67,28 @@
 
 
 .readyButton {
-    width: 100%;
-    padding: 5px;
+    width: 150px;
+    padding: 0px;
     border-radius: 5px;
     cursor: pointer;
     border: none;
-    font-size: 1.2rem;
-    font-family: 'Rokkitt', serif;
-    color: var(--cream);
-    background-color: var(--wenge);
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    background: var(--bluegreen);
 }
 
 .submittingButton {
     width: 100%;
-    padding: 5px;
+    padding: 0px;
     border-radius: 5px;
     cursor: default;
     border: none;
     font-size: 1.2rem;
     font-family: 'Rokkitt', serif;
-    color: var(--cream);
-    background-color: var(--midwenge);
+    color: white;
+    background-color: var(--blueblack);
 }
 
 .inputContainer {
@@ -95,7 +96,7 @@
     flex-direction: column;
     background-color: white;
     border-radius: 10px;
-    border-bottom: 1px solid var(--wenge);
+    border-bottom: 1.5px solid var(--blueblack);
 }
 
 
@@ -402,7 +403,7 @@
         margin: 0px 15px 0px 15px;
         padding: 10px;
         border-radius: 10px;
-        border: 1.5px solid var(--wenge);
+        border: 1.5px solid var(--blueblack);
         background-color: white;
     }
     

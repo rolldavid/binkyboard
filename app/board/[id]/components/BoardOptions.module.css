@@ -47,7 +47,7 @@
 }
 
 .nameTitle {
-    color: var(--wenge);
+    color: var(--blueblack);
     font-weight: 500;
 }
 
@@ -55,7 +55,7 @@
     border: none;
     border-radius: 25px;
     padding: 12px 15px 12px 15px;
-    outline: 2px solid var(--wenge);
+    outline: 1.5px solid var(--blueblack);
     width: 100%;
     font-size: 1rem;
     font-family: 'Montserrat', sans-serif;
@@ -80,7 +80,7 @@
 }
 
 .cancelButton {
-    border: 2px solid var(--wenge);
+    border: 1.5px solid var(--blueblack);
     border-radius: 10px;
     padding: 12px 15px 12px 15px;
     background-color: none;
@@ -123,12 +123,12 @@
     width: 100%;
     text-align: left;
     margin: 0px 0px 0px 5px;
-    color: var(--wenge);
+    color: var(--blueblack);
 }
 
 .accessInput {
     width: 100%;
-    border: 2px solid var(--wenge);
+    border: 1.5px solid var(--blueblack);
     border-radius: 25px;
     padding: 12px 20px 12px 20px;
     font-family: "Montserrat";
@@ -163,7 +163,7 @@
     font-size: 1.2rem;
     font-family: 'Rokkitt', serif;
     background: none;
-    color: var(--wenge);
+    color: var(--blueblack);
     opacity: .8;
 }
 
@@ -282,7 +282,7 @@
 }
 
 .nameTitle {
-    color: var(--wenge);
+    color: var(--blueblack);
     font-weight: 500;
 }
 
@@ -290,7 +290,7 @@
     border: none;
     border-radius: 25px;
     padding: 12px 15px 12px 15px;
-    outline: 2px solid var(--wenge);
+    outline: 1.5px solid var(--blueblack);
     width: 100%;
     font-size: 1rem;
     font-family: 'Montserrat', sans-serif;
@@ -315,7 +315,7 @@
 }
 
 .cancelButton {
-    border: 2px solid var(--wenge);
+    border: 1.5px solid var(--blueblack);
     border-radius: 10px;
     padding: 12px 15px 12px 15px;
     background-color: none;
@@ -358,12 +358,12 @@
     width: 100%;
     text-align: left;
     margin: 0px 0px 0px 5px;
-    color: var(--wenge);
+    color: var(--blueblack);
 }
 
 .accessInput {
     width: 100%;
-    border: 2px solid var(--wenge);
+    border: 1.5px solid var(--blueblack);
     border-radius: 25px;
     padding: 12px 20px 12px 20px;
     font-family: "Montserrat";
@@ -381,7 +381,7 @@
 .editBannerContainer {
     display: flex;
     justify-content: flex-end;
-    margin: -65px 15px 0px 0px;
+    margin: -60px 20px 0px 0px;
     width: 100%;
 }
 
@@ -398,7 +398,7 @@
     font-size: 1.2rem;
     font-family: 'Rokkitt', serif;
     background: none;
-    color: var(--wenge);
+    color: var(--blueblack);
     opacity: .8;
 }
 

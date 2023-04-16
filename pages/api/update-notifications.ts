@@ -21,6 +21,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                                     id: true
                                 }
                             }, 
+                            sender: true
                         }, 
                         
                     },                        
@@ -50,7 +51,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                             connect: {
                                 id: activeNotification.board?.id
                             }
-                        }
+                        },
+                        sender: activeNotification.sender
                     }
                 }
             })
