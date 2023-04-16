@@ -35,7 +35,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 include: {posts: true}
             })
 
-            if (board && user && board.posts.length > 1) {
+            if (board && user && user.name && board.posts.length >= 1) {
              
                 const boardFollowers = board.posts.filter(post => post.userId !== user.id)
 
@@ -44,7 +44,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                         id: post.userId
                     }
                 })
-
 
                 if (receivers.length > 0) {
                 const notification = await prisma.notificationActive.create({

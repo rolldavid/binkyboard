@@ -44,6 +44,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     notification: activeNotification.notification.message,
                     notificationId: activeNotification.notification.id,
                     name: activeNotification?.board?.name ? activeNotification.board.name : false,
+                    sender: activeNotification.sender,
                     slug: activeNotification.board?.id ? activeNotification.board.id : false,
                     createdAt: activeNotification.notification.createdAt
                 }
@@ -55,6 +56,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     notificationId: completeNotification.notification.id,
                     name: completeNotification.board?.name ? completeNotification.board.name : false,
                     slug: completeNotification.board?.id ? completeNotification.board.id : false,
+                    sender: completeNotification.sender,
                     createdAt: completeNotification.notification.createdAt,
                 }
             })
