@@ -9,7 +9,7 @@ import { NotificationProps } from "../types"
 import Notification from "./Notification";
 import welcome from "../assets/celebrate.png"
 import bell from "../assets/bell.png"
-import bellNotify from "../assets/bellding.png"
+import bellding from "../assets/bellding.png"
 import styles from "./NotificationIcon.module.css"
 
 export default function NotificationIcon() {
@@ -82,8 +82,8 @@ export default function NotificationIcon() {
             <div className={styles.notificationIconContainer}>
                 <Image 
                     src={bell}
-                    width={23}
-                    height={26}
+                    width={28}
+                    height={28}
                     alt="notifications"
                 />
             </div>
@@ -95,7 +95,7 @@ export default function NotificationIcon() {
         if (slug) {
             setShowNotifications(false)
             queryClient.invalidateQueries(['notification'])
-            router.push(`/property/${slug}`)
+            router.push(`/board/${slug}`)
         }
 
     }
@@ -107,9 +107,9 @@ export default function NotificationIcon() {
             
             {data.activeNotifications.length > 0 && <div className={styles.notificationIconContainer}>
                 <Image 
-                    src={bellNotify}
-                    width={29}
-                    height={29}
+                    src={bellding}
+                    width={28}
+                    height={28}
                     alt="notifications"
                     onClick={handleNotifications}
                     className={styles.bellImg}
@@ -120,8 +120,8 @@ export default function NotificationIcon() {
             {data.activeNotifications.length === 0 && <div className={styles.notificationIconContainer}>
                 <Image 
                     src={bell}
-                    width={29}
-                    height={29}
+                    width={28}
+                    height={28}
                     alt="notifications"
                     onClick={handleNotifications}
                     className={styles.bellImg}
@@ -224,7 +224,7 @@ export default function NotificationIcon() {
                 <div className={styles.notificationsModuleContainer} ref={ref}>
                     <div className={styles.notificationsModule}>
                         <div className={styles.searchContainer}>
-                                <p className={styles.searchText}>Add a review or follow a property to get notifications.</p>
+                                <p className={styles.searchText}>Join a board to get notifications.</p>
                             </div>
                             </div>
                 </div>

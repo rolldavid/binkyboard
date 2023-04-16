@@ -10,8 +10,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     try {
         const session = await getSession(req, res)
 
-
         if (session?.user?.email) {
+
+            const user = await prisma.user.findUnique({where: {email: session.user.email}})
 
             const board = await prisma.board.update({
                 where: {
@@ -30,8 +31,45 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                             
                         }
                     }
-                }
+                },
+                include: {posts: true}
             })
+
+            if (board && user && board.posts.length > 1) {
+             
+                const boardFollowers = board.posts.filter(post => post.userId !== user.id)
+
+                const receivers = boardFollowers.map(post => {
+                    return {
+                        id: post.userId
+                    }
+                })
+
+
+                if (receivers.length > 0) {
+                const notification = await prisma.notificationActive.create({
+                    data: {
+                        receivers: {
+                            connect: 
+                                receivers
+                        },
+                        notification: {
+                            connect: {
+                                id: 1,
+                            }
+                        },
+                        board: {
+                            connect: {
+                                id: boardId
+                            }
+                        }, 
+                        sender: user.name
+                       
+                    }
+                })
+                
+                }
+            }
         }
 
         res.status(201).json({status: "ok"})

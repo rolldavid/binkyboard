@@ -7,7 +7,7 @@ export default function Notifications({ notification, status }: { notification: 
         if (notification.notificationId === 1) {
             return (
                 
-                    <p className={styles.newNotification}>{notification.notification} for {notification.name}</p>
+                    <p className={styles.newNotification}>{notification.sender}{notification.notification} on {notification.name}</p>
               
             )
         }
@@ -15,7 +15,7 @@ export default function Notifications({ notification, status }: { notification: 
         if (notification.notificationId === 2) {
             return (
                 
-                    <p className={styles.newNotification}>{notification.notification} for {notification.name}</p>
+                    <p className={styles.newNotification}>{notification.sender}{notification.notification} on {notification.name}</p>
            
             )
         }
@@ -23,7 +23,7 @@ export default function Notifications({ notification, status }: { notification: 
         if (notification.notificationId === 1 || notification.notificationId === 2) {
             return (
                 
-                    <p className={styles.recentNotification}>{notification.notification} for {notification.name}</p>
+                    <p className={styles.recentNotification}>{notification.sender}{notification.notification} on {notification.name}</p>
                
             )
         }

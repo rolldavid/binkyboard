@@ -16,7 +16,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                         select: {
                             createdAt: true,
                             notification: true,
-                        
+                            sender: true,
                             board: true
                         },
                         orderBy: {
@@ -24,10 +24,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                         } 
                     },
                     notificationsComplete: {
+                        take: 10,
                         select: {
                             createdAt: true,
                             notification: true,
-                         
+                            sender: true,
                             board: true
                         },
                         orderBy: {
