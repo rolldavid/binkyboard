@@ -20,7 +20,6 @@ const schema = yup
 .required();
 
 
-
 export default function CreateBoard() {
     const [boardName, setBoardName] = useState("")
     const [registry, setRegistry] = useState("")
@@ -70,7 +69,7 @@ export default function CreateBoard() {
             
             {!loading && !submitted && <form onSubmit={handleSubmit(createBoard)} className={styles.formContainer}>
                 <div className={styles.titleContainer}>
-                    <h2>Create a Board</h2>
+                    <h2 className={styles.createTitle}>Create a board</h2>
                 </div>
                 
                 <input 

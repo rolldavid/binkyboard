@@ -3,13 +3,14 @@
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { nanoid } from 'nanoid'
+import Spinner from "@/lib/SpinnerWhite";
 import { SyntheticEvent, useState, useEffect, ClipboardEvent, SetStateAction, Dispatch } from "react"
 import Image from "next/image"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { createNewPost } from "@/lib/db-utils";
 import styles from "./CreatePost.module.css"
 import ReactPlayer from "react-player"
-import img from "../assets/img.png"
+import img from "../assets/image.png"
 import mov from "../assets/mov.png"
 
 
@@ -303,29 +304,24 @@ export default function Submit({boardId}: {boardId: string}) {
                 <div className={styles.postActions}>
                     <div className={styles.uploadContainer}>
                         {allowUpload ? <label htmlFor="upload" className={styles.uploadItem}>
-                            <Image src={img} width={35} height={23} alt="image icon"/>
+                            <Image src={img} width={28} height={28} alt="image icon"/>
                         </label> : 
                         <div className={styles.uploadItemGrey}>
-                            <Image src={img} width={35} height={23} alt="image icon"/>
+                            <Image src={img} width={30} height={30} alt="image icon"/>
                          </div>
                         }
-                        {mediaPreviewList.length < 1 ? <label htmlFor="upload" className={styles.uploadItem}>
-                            <Image src={mov} width={35} height={23} alt="movie icon"/>
+                        {/* {mediaPreviewList.length < 1 ? <label htmlFor="upload" className={styles.uploadItem}>
+                            <Image src={mov} width={32} height={32} alt="movie icon"/>
                         </label> :
                         <div className={styles.uploadItemGrey}>
-                            <Image src={mov} width={35} height={23} alt="movie icon"/>
+                            <Image src={mov} width={32} height={32} alt="movie icon"/>
                         </div>
-                    }
+                    } */}
                     </div>
                     <button type="submit" className={styles[`${submitStyle}`]}
                         disabled={disabled}
                     >{!loading ? "Share" : <div className={styles.flashContainer}>
-                        <div className={styles.shareText}>Sharing</div>
-                        <div className={styles.snippet} data-title="dot-flashing">
-                            <div className={styles.stage}>
-                                <div className={styles.dotFlashing}></div>
-                            </div>
-                        </div>
+                        <Spinner />
                     </div>}</button>
                 </div>
                 <div className={styles.uploadHidden}>

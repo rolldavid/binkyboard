@@ -12,7 +12,7 @@
   }
   
   .titleText {
-    color: var(--wenge);
+    color: var(--blueblack);
   }
   
   
@@ -77,18 +77,29 @@
     align-items: center;
     justify-content: center;
     padding:0px 0px 0px 0px;
+    margin: 25px 0px 5px 0px;
     width: 100%;
     height: 30px;
     cursor: pointer;
-    background-color: var(--wenge);
+    background-color: none;
     border: none;
 }
 
 .newBoardTitle {
+    display: flex;
+    align-items: center;
+    gap: 7px;
     text-align: center;
     font-weight: 400;
-    color: var(--cream);
-  
+    color: var(--blueblack);
+}
+
+.createPlus {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  font-size: 1.8rem;
+  font-weight: 300;
 }
   
 
@@ -108,7 +119,7 @@
     }
     
     .titleText {
-      color: var(--wenge);
+      color: var(--blueblack);
     }
     
     

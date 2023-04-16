@@ -44,8 +44,8 @@ export default function NavLinks({userId, admin, signedIn}: {userId: string, adm
                     <Link href={`/`} className={styles.navItem}>
                         <Image 
                             src={board}
-                            width={28}
-                            height={28}
+                            width={27}
+                            height={27}
                             alt="profile"
                             className={styles.linkIcon}
                         />

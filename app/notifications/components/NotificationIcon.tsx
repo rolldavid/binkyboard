@@ -108,8 +108,8 @@ export default function NotificationIcon() {
             {data.activeNotifications.length > 0 && <div className={styles.notificationIconContainer}>
                 <Image 
                     src={bellding}
-                    width={28}
-                    height={28}
+                    width={26}
+                    height={26}
                     alt="notifications"
                     onClick={handleNotifications}
                     className={styles.bellImg}
@@ -120,8 +120,8 @@ export default function NotificationIcon() {
             {data.activeNotifications.length === 0 && <div className={styles.notificationIconContainer}>
                 <Image 
                     src={bell}
-                    width={28}
-                    height={28}
+                    width={26}
+                    height={26}
                     alt="notifications"
                     onClick={handleNotifications}
                     className={styles.bellImg}

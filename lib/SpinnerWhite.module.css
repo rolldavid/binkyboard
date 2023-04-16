@@ -11,9 +11,9 @@
   .loadingSpinner {
     width: 30px;
     height: 30px;
-    border: 4px solid transparent; 
-    border-top: 4px solid var(--blueblack);
-    border-right: 4px solid var(--blueblack);
+    border: 4px solid var(--bluegreen); 
+    border-top: 4px solid white;
+    border-right: 4px solid white;
     border-radius: 50%;
     animation: spinner .75s linear infinite;
   }

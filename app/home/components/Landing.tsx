@@ -35,9 +35,9 @@ export default function Page() {
 
           {data.boards.length > 0 ? <div className={styles.boardContainer}>
               <div className={styles.newBoardContainer} onClick={() => router.push("create")}>
-                  <h4 className={styles.newBoardTitle} >
-                    + Create a board
-                  </h4>
+                  <h3 className={styles.newBoardTitle} >
+                  <span className={styles.createPlus}>+</span> Create a board
+                  </h3>
               </div>
               <div className={styles.boardInnerContainer}>
                 {
@@ -54,9 +54,9 @@ export default function Page() {
              :
             <>
             <div className={styles.newBoardContainer} onClick={() => router.push("create")}>
-                <h4 className={styles.newBoardTitle} >
-                  + Create a board
-                </h4>
+                <h3 className={styles.newBoardTitle} >
+                  <span className={styles.createPlus}>+</span> Create a board
+                </h3>
             </div>
             <div className={styles.noBoardContainer}>
                 <p className={styles.noBoardText}>You don&apos;t have any boards yet 😢</p>

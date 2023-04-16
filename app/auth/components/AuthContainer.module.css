@@ -48,14 +48,14 @@
 .checkText {
     text-align: center;
     font-size: 1rem;
-    color: var(--darkwenge);
+    color: var(--blueblack);
     margin: 10px 0px 5px 0px;
 }
 
 .checkTextSub {
     text-align: center;
     font-size: .9rem;
-    color: var(--darkwenge);
+    color: var(--blueblack);
     margin: 5px 0px 5px 0px;
 }
 
@@ -142,7 +142,7 @@
     align-items: center;
     justify-content: center;
     border: none;
-    color: var(--wenge);
+    color: var(--blueblack);
     border-radius: 10px;
     font-size: .75rem;
     font-family: "Montserrat";
@@ -189,7 +189,7 @@
 
 .loginOr {
     font-size: 1rem;
-    color: var(--wenge);
+    color: var(--blueblack);
     opacity: .3;
 }
 
@@ -208,14 +208,14 @@
     font-size: 1.25rem;
     padding: 0px 15px 0px 15px;
     margin: 0px 0px 10px 0px;
-    color: var(--darkwenge);
+    color: var(--blueblack);
 }
 
 .authHeaderSubtitle {
     text-align: center;
     font-size: 1rem;
     width: 100%;
-    color: var(--wenge);
+    color: var(--blueblack);
     opacity: 1;
    
 }
@@ -273,14 +273,14 @@
     .checkText {
         text-align: center;
         font-size: 1rem;
-        color: var(--darkwenge);
+        color: var(--blueblack);
         margin: 10px 0px 5px 0px;
     }
     
     .checkTextSub {
         text-align: center;
         font-size: .9rem;
-        color: var(--darkwenge);
+        color: var(--blueblack);
         margin: 5px 0px 5px 0px;
     }
     
@@ -367,7 +367,7 @@
         align-items: center;
         justify-content: center;
         border: none;
-        color: var(--wenge);
+        color: var(--blueblack);
         border-radius: 10px;
         font-size: .75rem;
         font-family: "Montserrat";
@@ -414,7 +414,7 @@
     
     .loginOr {
         font-size: 1rem;
-        color: var(--wenge);
+        color: var(--blueblack);
         opacity: .3;
     }
     
@@ -433,14 +433,14 @@
         font-size: 1.25rem;
         padding: 0px 15px 0px 15px;
         margin: 0px 0px 10px 0px;
-        color: var(--darkwenge);
+        color: var(--blueblack);
     }
     
     .authHeaderSubtitle {
         text-align: center;
         font-size: 1rem;
         width: 100%;
-        color: var(--wenge);
+        color: var(--blueblack);
         opacity: 1;
        
     }
