@@ -50,6 +50,7 @@ model User {
   posts                 Post[]
   boards                Board[]                @relation(name: "users")
   ownedBoards           Board[]                @relation(name: "owner")
+  boardOrder            String[]
   role                  String                 @default("USER")
   notificationsActive   NotificationActive[]
   notificationsComplete NotificationComplete[]

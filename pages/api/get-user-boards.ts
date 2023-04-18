@@ -4,7 +4,6 @@ import prisma from "@/lib/prisma";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 
-
     try {
         const session = await getSession(req, res)
         if (!session) {
@@ -13,17 +12,23 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         }
 
         if (session?.user?.email) {
-            const userBoards = await prisma.user.findUnique({
+            const user = await prisma.user.findUnique({
                 where: {
                     email: session.user.email
                 },
                 include: {
-                   boards: true
+                    boards: true,
                 }
             })
 
-            if (userBoards) {    
-                res.status(201).json({boards: userBoards?.boards, role: userBoards?.role})
+            if (user) {    
+                
+                const orderedBoards = user.boards
+                orderedBoards.sort(function (a,b) {
+                    return user.boardOrder.indexOf(a.id) - user.boardOrder.indexOf(b.id)
+                })
+                
+                res.status(201).json({boards: orderedBoards, role: user.role})
                 return
             }
 

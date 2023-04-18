@@ -204,6 +204,21 @@ export async function getBoard(boardId: string) {
 // UPDATE
 
 
+export async function updateBoardOrder(boardId: string) {
+    const res = await fetch("/api/update-board-order", {
+        method: "POST",
+        body: JSON.stringify({
+            boardId
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    const data = await res.json();
+    return data;
+}
+
+
 export async function updateNotifications() {
     const res = await fetch("/api/update-notifications")
     const data = await res.json();
