@@ -2,7 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import { getBoard, removeBoard, sendAccessEmail } from "@/lib/db-utils";
+import { getBoard, removeBoard, sendAccessEmail, updateBoardOrder } from "@/lib/db-utils";
 import Spinner from "@/lib/Spinner"
 import CreatePost from "./CreatePost"
 import BoardHeader from './BoardHeader';
@@ -23,6 +23,7 @@ export default function Page({boardId}: {boardId: string}) {
 
     useEffect(() => {
         localStorage.setItem("invite", boardId)
+        updateBoardOrder(boardId)
     }, [])
 
     const handleAccess = async (e: SyntheticEvent) => {
@@ -45,7 +46,6 @@ export default function Page({boardId}: {boardId: string}) {
     }
 
     if ( status === "success" && data.board) {
-       
         
         if (data.isOwner) {
            

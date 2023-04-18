@@ -10,8 +10,8 @@ import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { createNewPost } from "@/lib/db-utils";
 import styles from "./CreatePost.module.css"
 import ReactPlayer from "react-player"
-import img from "../assets/image.png"
-import mov from "../assets/mov.png"
+import img from "../assets/cam.png"
+
 
 
 let holdLink = ""

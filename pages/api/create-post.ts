@@ -46,6 +46,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 })
 
                 if (receivers.length > 0) {
+                   
                 const notification = await prisma.notificationActive.create({
                     data: {
                         receivers: {

@@ -140,8 +140,8 @@ export default function BoardOptions({boardId, setShowOptions, accessList, priva
                                 <label htmlFor="uploadBanner" className={styles.uploadItem}>
                                     <Image 
                                         src={edit}
-                                        width={30}
-                                        height={30}
+                                        width={32}
+                                        height={32}
                                         alt="edit banner button"
                                         className={styles.editBanner}
                                     />
