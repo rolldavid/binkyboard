@@ -141,6 +141,7 @@ export async function getPinnedPost(boardId: string) {
 }
 
 
+
 export async function getUserBoards() {
     const res = await fetch("/api/get-user-boards")
     const data = await res.json()

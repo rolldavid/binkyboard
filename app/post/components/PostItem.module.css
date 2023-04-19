@@ -21,6 +21,21 @@
     margin: 0px 0px 10px 5px;
 }
 
+.reactionContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: 20px 0px 0px 0px;
+    padding: 0px 5px 0px 5px;
+    cursor: pointer;
+    opacity: .9;
+}
+
+.counter {
+    margin: 0px 0px 0px 5px;
+    font-size: .9rem;
+}
+
 .pinnedMessage {
     display: flex;
     align-items: center;

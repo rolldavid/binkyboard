@@ -28,6 +28,7 @@ model Board {
   headerUrl             String                 @default("")
   notificationsActive   NotificationActive[]
   notificationsComplete NotificationComplete[]
+  bookmarkedBy          BookmarksByUser[]
 }
 
 model Post {
@@ -54,6 +55,8 @@ model User {
   role                  String                 @default("USER")
   notificationsActive   NotificationActive[]
   notificationsComplete NotificationComplete[]
+  bookmarks             BookmarksByUser[]
+  disableNotifications  String[]               @default([""])
 }
 
 model Notification {
@@ -85,6 +88,16 @@ model NotificationComplete {
   sender         String
   board          Board?       @relation(fields: [boardId], references: [id], onDelete: Cascade)
   boardId        String?
+}
+
+model BookmarksByUser {
+  board      Board    @relation(fields: [boardId], references: [id], onDelete: Cascade)
+  boardId    String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId     String
+  assignedAt DateTime @default(now())
+
+  @@id([boardId, userId])
 }
 
 enum PrivacyLevel {
