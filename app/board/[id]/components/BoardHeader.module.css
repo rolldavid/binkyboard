@@ -39,12 +39,13 @@
 }
 
 .giftItem {
-    z-index: 0;
+    z-index: 10;
     opacity: .85;
 }
 
 .shareIcon {
     cursor: pointer;
+    z-index: 15;
 }
 
 .copyContainer {
