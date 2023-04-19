@@ -1,4 +1,3 @@
-
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { getSession } from '@auth0/nextjs-auth0';
 import prisma from '@/lib/prisma'
@@ -23,6 +22,8 @@ export default async function handler(
             owner: true
         }
     })
+
+    console.log(board?.allowList, "allowlist")
 
 
 

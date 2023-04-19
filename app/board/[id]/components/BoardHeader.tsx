@@ -1,17 +1,45 @@
 
 "use client"
 
-import {  SetStateAction, Dispatch, useState } from "react"
-import { useQuery } from "@tanstack/react-query"
-import { getBoardHeader } from "@/lib/db-utils"
+import {  SetStateAction, Dispatch, SyntheticEvent, useState, useEffect } from "react"
 import Image from "next/image"
-import gift from "../assets/gift.png"
-import banner from "../assets/banner.png"
+import share from "../assets/share.png"
 import gear from "../assets/gear.png"
-import Spinner from "@/lib/Spinner"
 import styles from "./BoardHeader.module.css"
 
 export default function BoardHeader({boardId, isOwner, setShowOptions, boardName, registry, headerUrl}: {boardId: string, isOwner: boolean, setShowOptions: Dispatch<SetStateAction<boolean>>, boardName: string, registry: string, headerUrl: string}) {
+    const [showCopy, setShowCopy] = useState(false)
+
+    const copyLink = (e: SyntheticEvent) => {
+        e.preventDefault()
+        navigator.clipboard.writeText(`${process.env.NEXT_PUBLIC_FRONTEND_URL}/board/${boardId}`)
+        setShowCopy(true)
+        setTimeout(() => {
+            setShowCopy(false)
+        }, 1500)
+    }
+
+    useEffect(() => {
+        const body = document.querySelector("body")
+        if (body && showCopy) {
+            body.style.overflow = "hidden"
+        }
+
+        if (body && !showCopy) {
+            body.style.overflow = "auto"
+        }
+
+        return () => {
+            
+            const body = document.querySelector("body")
+
+            if (body) {
+                body.style.overflow = "auto"
+            }
+        }
+    }, [showCopy])
+
+    
 
     return (
         <div className={styles.container}>
@@ -27,14 +55,16 @@ export default function BoardHeader({boardId, isOwner, setShowOptions, boardName
                    
                 <div className={styles.actionContainer}>
                     {registry.length > 0 ? <div className={styles.actionInnerContainer}>
-                        <a target="_blank" href={`${registry}`} className={styles.giftItem} rel="noopener noreferrer">
+                        <div className={styles.giftItem}>
                             <Image 
-                                src={gift}
+                                src={share}
                                 width={25}
                                 height={25}
                                 alt="registry link"
+                                className={styles.shareIcon}
+                                onClick={copyLink}
                             />
-                        </a> 
+                        </div> 
                     </div> :
                     <div className={styles.actionInnerContainerHold}></div>
                     }
@@ -53,7 +83,16 @@ export default function BoardHeader({boardId, isOwner, setShowOptions, boardName
                 </div>}
                 <div className={styles.headerContainer}>
                     <h2 className={styles.boardHeader}>{`${boardName}`}</h2>
+                    <p className={styles.registryLink}>Registry</p>
                 </div>  
+                {showCopy && <div className={styles.copyContainer}>
+                    <div className={styles.copyInnerContainer}>
+                        <div className={styles.copyMessageContainer}>
+                            <p className={styles.copyMessage}>✓ Board Link Copied</p>
+                        </div>
+                        
+                    </div>
+                </div>}
         </div>
          )
 

@@ -76,7 +76,7 @@ export default function Page() {
 
           {data.boards.length > 0 ? <div className={styles.boardContainer}>
             <div className={styles.titleContainer}>
-              <h2 className={styles.titleText}>Your Boards</h2>
+              
             </div>
             <div className={styles.boardInnerContainer}>
               {

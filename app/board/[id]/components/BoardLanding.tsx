@@ -14,6 +14,7 @@ import BoardOptions from "./BoardOptions";
 
 export default function Page({boardId}: {boardId: string}) {
     const [showOptions, setShowOptions] = useState(false)
+    const [accessRequested, setAccessRequested] = useState(false)
 
     const router = useRouter()
 
@@ -28,6 +29,7 @@ export default function Page({boardId}: {boardId: string}) {
 
     const handleAccess = async (e: SyntheticEvent) => {
         e.preventDefault()
+        setAccessRequested(true)
         await sendAccessEmail(data.board.id)
     }
 
@@ -75,14 +77,17 @@ export default function Page({boardId}: {boardId: string}) {
             return (
                 <div className={styles.container}>
                     <div className={styles.accessContainer}>
-                        <p className={styles.accessTitle}>The owner has made this board private.</p>
+                        <p className={styles.accessTitle}>The owner has made this board private</p>
                         <div className={styles.updateContainer}>
-                            <div className={styles.requestButton} onClick={handleAccess}>
+
+                            {!accessRequested ? <div className={styles.requestButton} onClick={handleAccess}>
                                 Request Access
+                            </div> :
+                            <div className={styles.requestButton} >
+                                Access Requested
                             </div>
-                            <div className={styles.deleteButton} onClick={handleRemove}>
-                                Remove
-                            </div>
+                            }
+                            
                         </div>
                     </div>
                 </div>

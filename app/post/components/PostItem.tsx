@@ -8,11 +8,17 @@ import styles from "./PostItem.module.css"
 import pin from "../assets/pin.png"
 import PostOptions from "./PostOptions"
 import PostGallery from "./PostGallery"
+import heart from "../assets/heart.png"
+import heartfull from "../assets/heartfull.png"
+import save from "../assets/save.png"
+import savedIcon from "../assets/saved.png"
+
 
 export default function PostItem({post, boardId, pinnedPost }: {post: PostItems, boardId: string, pinnedPost: boolean}) {
     const [showOptions, setShowOptions] = useState(false)    
     const [showGallery, setShowGallery] = useState(false)
     const [selectedItem, setSelectedItem] = useState(0)
+   
 
     const setPrepGallery = (e: SyntheticEvent, selectedIndex: number) => {
         e.preventDefault()
@@ -170,6 +176,7 @@ export default function PostItem({post, boardId, pinnedPost }: {post: PostItems,
                             onClick={(e) => setPrepGallery(e, 3)}
                         />
                     </div>
+                   
                 </div>
     
             </div>}
