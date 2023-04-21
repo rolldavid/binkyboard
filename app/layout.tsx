@@ -1,4 +1,5 @@
 
+import { Analytics } from '@vercel/analytics/react'
 import Footer from './footer/components/Footer'
 import NavContainer from './nav/components/NavContainer'
 import QueryProvider from '@/lib/QueryProvider'
@@ -19,7 +20,7 @@ export default async function RootLayout({
     <html lang="en">
       <head />
       <body>
-        
+
           <UserProvider>
             <QueryProvider>
             <nav className={styles.nav}>
@@ -33,7 +34,7 @@ export default async function RootLayout({
             </footer>
             </QueryProvider>
           </UserProvider>
-        
+          < Analytics />
       </body>
     </html>
   )
