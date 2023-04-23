@@ -23,6 +23,11 @@ interface PreviewFiles {
     type: string
 }
 
+interface FileErr {
+    isError: boolean
+    message: string
+}
+
 export default function Submit({boardId}: {boardId: string}) {
 
     const queryClient = useQueryClient()
@@ -41,7 +46,7 @@ export default function Submit({boardId}: {boardId: string}) {
     const [toggleMedia, setToggleMedia] = useState(false)
     const [disabled, setDisabled] = useState(false)
     const [submitStyle, setSubmitStyle] = useState("readyButton")
-
+    const [fileError, setFileError] = useState<FileErr>({isError: false, message: ""})
     const [prevUrl, setPrevUrl] = useState("")
 
     const router = useRouter()
@@ -57,6 +62,7 @@ export default function Submit({boardId}: {boardId: string}) {
                 queryClient.invalidateQueries(['collection'], {
                     refetchType: 'all', 
                 })
+                
                 setSubmitStyle("submittingButton")
                 setNote("")
                 setRowCount(2)
@@ -120,7 +126,6 @@ export default function Submit({boardId}: {boardId: string}) {
     
         
         if (mediaPreviewList.length >= 4) {
-            console.log("Add a max of 4 files to your post");
             return;
         }
 
@@ -136,6 +141,11 @@ export default function Submit({boardId}: {boardId: string}) {
         if (chosenFile && chosenFile[0].type) {
             
             let reader = new FileReader()
+
+            if (chosenFile[0].size > 800000000) {
+                setFileError({isError: true, message: "File is too large - Keep videos under 5 min"})
+                return;
+            }
             
             if (chosenFile[0].type.includes("video") || chosenFile[0].type.includes("mp4")) {
                 if (mediaPreviewList.length === 0) {
@@ -159,10 +169,14 @@ export default function Submit({boardId}: {boardId: string}) {
         }
     }
 
-   
+
 
     const startUpload = async (file: File) => {
             
+            if (file.size > 800000000) {
+                setFileError({isError: true, message: "File is too large"})
+                return;
+            }
             uploading = true
             const s3id = nanoid()
             const extensionIndex = file.name.lastIndexOf(".")
@@ -323,7 +337,13 @@ export default function Submit({boardId}: {boardId: string}) {
                     >{!loading ? "Share" : <div className={styles.flashContainer}>
                         <Spinner />
                     </div>}</button>
+                   
                 </div>
+                {fileError.isError && <div className={styles.errorContainer}>
+                    <p className={styles.errorMessage}>
+                        {fileError.message}
+                    </p>
+                </div>}
                 <div className={styles.uploadHidden}>
                     <input 
                         id="upload"
