@@ -23,9 +23,6 @@ export default async function handler(
         }
     })
 
-    console.log(board?.allowList, "allowlist")
-
-
 
     if (session?.user?.email && board) {
 
