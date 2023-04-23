@@ -88,9 +88,9 @@
     cursor: pointer;
     border: none;
     font-size: 1rem;
-    font-weight: 600;
+    font-weight: 400;
     font-family: 'Montserrat', sans-serif;
-    color: white;
+    color: var(--blueblack);
     background: var(--bluegreen);
 }
 

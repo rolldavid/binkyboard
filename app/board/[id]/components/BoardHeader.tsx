@@ -54,7 +54,7 @@ export default function BoardHeader({boardId, isOwner, setShowOptions, boardName
                 </div>
                    
                 <div className={styles.actionContainer}>
-                    {registry.length > 0 ? <div className={styles.actionInnerContainer}>
+                     <div className={styles.actionInnerContainer}>
                         <div className={styles.giftItem}>
                             <Image 
                                 src={share}
@@ -65,10 +65,7 @@ export default function BoardHeader({boardId, isOwner, setShowOptions, boardName
                                 onClick={copyLink}
                             />
                         </div> 
-                    </div> :
-                    <div className={styles.actionInnerContainerHold}></div>
-                    }
-                    
+                    </div> 
                 </div>
                 {isOwner && <div className={styles.editBoardContainer}>
                     <div className={styles.editBoardButton}>
@@ -83,7 +80,13 @@ export default function BoardHeader({boardId, isOwner, setShowOptions, boardName
                 </div>}
                 <div className={styles.headerContainer}>
                     <h2 className={styles.boardHeader}>{`${boardName}`}</h2>
-                    <p className={styles.registryLink}>Registry</p>
+                    {registry.length > 0 && <a 
+                        target="_blank" 
+                        className={styles.registryLink}
+                        href={registry.includes("http") ? registry : `http://${registry}`}
+                        >
+                            Registry
+                    </a>}
                 </div>  
                 {showCopy && <div className={styles.copyContainer}>
                     <div className={styles.copyInnerContainer}>

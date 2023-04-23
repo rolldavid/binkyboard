@@ -320,13 +320,7 @@ export default function Submit({boardId}: {boardId: string}) {
                             <Image src={img} width={30} height={30} alt="image icon"/>
                          </div>
                         }
-                        {/* {mediaPreviewList.length < 1 ? <label htmlFor="upload" className={styles.uploadItem}>
-                            <Image src={mov} width={32} height={32} alt="movie icon"/>
-                        </label> :
-                        <div className={styles.uploadItemGrey}>
-                            <Image src={mov} width={32} height={32} alt="movie icon"/>
-                        </div>
-                    } */}
+                        
                     </div>
                     <button type="submit" className={styles[`${submitStyle}`]}
                         disabled={disabled}
