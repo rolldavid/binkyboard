@@ -62,7 +62,7 @@ export default function PostItem({post, boardId, pinnedPost }: {post: PostItems,
             {post.slugs.length === 1 && <div className={styles.mediaContainer}>
                 {         
                     post.slugs[0].type.includes("video") ?
-                    <ReactPlayer url={`${process.env.NEXT_PUBLIC_AWS_URL}/${post.slugs[0].slug}#t=0.1`} controls className={styles.mediaItemOne} width="100%" height="auto"/>
+                    <ReactPlayer url={`${process.env.NEXT_PUBLIC_AWS_URL}/${post.slugs[0].slug}#t=0.5`} controls className={styles.mediaItemOne} width="100%" height="auto" />
 
                         :
                         <Image 

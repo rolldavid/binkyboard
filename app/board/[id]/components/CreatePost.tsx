@@ -58,7 +58,9 @@ export default function Submit({boardId}: {boardId: string}) {
                window.setTimeout(checkFlag, 100); 
             } else {
                 await createNewPost(boardId, note, dbSlugs)
-                
+                queryClient.invalidateQueries(['collection'], {
+                    refetchType: 'all', 
+                })
                 setSubmitStyle("submittingButton")
                 setNote("")
                 setRowCount(2)
@@ -74,11 +76,7 @@ export default function Submit({boardId}: {boardId: string}) {
                     left: 0
                   });
                 setLoading(false)
-                setTimeout(() => {
-                    queryClient.invalidateQueries(['collection'], {
-                        refetchType: 'all', 
-                    })
-                }, 500)
+                
             }
         }
         checkFlag();
