@@ -163,7 +163,7 @@ export default function NotificationIcon() {
                                 <div className={styles.notificationContainer}>
                                     <div className={styles.welcomeNotification}>
                                         <h4 className={styles.welcomeTitle}>Welcome!</h4>
-                                        <p className={styles.welcomeText}>Join a board to get notifications</p>
+                                        <p className={styles.welcomeText}>{`You'll get notified about new posts on your boards`}</p>
                                     </div>
                                     <div className={styles.welcomeImgContainer}>
                                         <Image 
@@ -224,7 +224,7 @@ export default function NotificationIcon() {
                 <div className={styles.notificationsModuleContainer} ref={ref}>
                     <div className={styles.notificationsModule}>
                         <div className={styles.searchContainer}>
-                                <p className={styles.searchText}>Join a board to get notifications.</p>
+                                <p className={styles.searchText}>{`You'll get notified about new posts on your boards`}</p>
                             </div>
                             </div>
                 </div>

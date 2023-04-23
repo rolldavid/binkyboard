@@ -17,7 +17,7 @@ export default function AuthContainer() {
                     {`Welcome!`}
                 </h2>
                 <p className={styles.authHeaderSubtitle}>
-                    {`Continue below to join your family on binkyboard`}
+                    {`Continue below to join your family & friends on binkyboard`}
                 </p>
             </div>
             <div className={styles.authContainer}>
