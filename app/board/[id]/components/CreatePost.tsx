@@ -59,10 +59,6 @@ export default function Submit({boardId}: {boardId: string}) {
             } else {
                 await createNewPost(boardId, note, dbSlugs)
                 
-                queryClient.invalidateQueries(['collection'], {
-                    refetchType: 'all', 
-                })
-                
                 setSubmitStyle("submittingButton")
                 setNote("")
                 setRowCount(2)
@@ -82,7 +78,7 @@ export default function Submit({boardId}: {boardId: string}) {
                     queryClient.invalidateQueries(['collection'], {
                         refetchType: 'all', 
                     })
-                }, 1000)
+                }, 500)
             }
         }
         checkFlag();
