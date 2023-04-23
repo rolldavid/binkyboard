@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     url: `https://binkyboard.com`,
     images: [
       {
-      url: `https://d3h42dhdxazsqn.cloudfront.net/yPwbiLyA-e_APVJ1vI6MS.png`,
+      url: `https://d3h42dhdxazsqn.cloudfront.net/ogbanner.png`,
       width: 1200,
       height: 675,
       alt: "binkyboard"
