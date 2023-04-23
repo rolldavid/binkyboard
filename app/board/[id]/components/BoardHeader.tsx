@@ -82,6 +82,7 @@ export default function BoardHeader({boardId, isOwner, setShowOptions, boardName
                     <h2 className={styles.boardHeader}>{`${boardName}`}</h2>
                     {registry.length > 0 && <a 
                         target="_blank" 
+                        rel="noreferrer"
                         className={styles.registryLink}
                         href={registry.includes("http") ? registry : `http://${registry}`}
                         >
@@ -93,7 +94,6 @@ export default function BoardHeader({boardId, isOwner, setShowOptions, boardName
                         <div className={styles.copyMessageContainer}>
                             <p className={styles.copyMessage}>✓ Board Link Copied</p>
                         </div>
-                        
                     </div>
                 </div>}
         </div>
