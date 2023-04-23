@@ -78,13 +78,15 @@ export default function Submit({boardId}: {boardId: string}) {
                     left: 0
                   });
                 setLoading(false)
-               
+                setTimeout(() => {
+                    queryClient.invalidateQueries(['collection'], {
+                        refetchType: 'all', 
+                    })
+                }, 1000)
             }
         }
         checkFlag();
-        
     }
-
    
 
     useEffect(() => {
