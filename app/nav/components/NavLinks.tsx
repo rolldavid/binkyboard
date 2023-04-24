@@ -1,7 +1,6 @@
 "use client"
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faThumbtack } from '@fortawesome/free-solid-svg-icons'
+
 import Link from "next/link";
 import Image from "next/image";
 import plus from "../assets/plus.png"
