@@ -24,12 +24,12 @@
   border: none;
   padding: 5px 5px 5px 5px;
   background-color: var(--cream);
-  z-index: 30;
   box-shadow: 2px 2px 5px rgba(0,0,0,.1);
   border-radius: 0px;
   overflow: scroll;
   -ms-overflow-style: none;  /* Internet Explorer 10+ */
   scrollbar-width: none;  /* Firefox */
+  z-index: 50;
 }
 
 
@@ -85,6 +85,7 @@
 
 .notificationInner {
     display: flex;
+    justify-content: flex-start;
     width: 100%;
 }
 
