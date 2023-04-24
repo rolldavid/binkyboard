@@ -41,6 +41,7 @@ export default function PostGallery ({setShowGallery, slugs, selectedItem}: {set
                             height={250} 
                             alt="gallery image"
                             className={styles.galleryImage}
+                            priority
                         />
                     </div>
                 </div>
@@ -69,6 +70,7 @@ export default function PostGallery ({setShowGallery, slugs, selectedItem}: {set
                             height={250} 
                             alt="gallery image"
                             className={styles.galleryImage}
+                            priority
                         />
                         <Image 
                             src={next}
@@ -103,6 +105,7 @@ export default function PostGallery ({setShowGallery, slugs, selectedItem}: {set
                             height={250} 
                             alt="gallery image"
                             className={styles.galleryImage}
+                            priority
                         />
                         <Image 
                             src={next}
@@ -139,6 +142,7 @@ export default function PostGallery ({setShowGallery, slugs, selectedItem}: {set
                             height={250} 
                             alt="gallery image"
                             className={styles.galleryImage}
+                            priority
                         />
                         <Image 
                             src={next}
@@ -174,6 +178,7 @@ export default function PostGallery ({setShowGallery, slugs, selectedItem}: {set
                             height={250} 
                             alt="gallery image"
                             className={styles.galleryImage}
+                            priority
                         />
                        
                        <Image 
@@ -209,6 +214,7 @@ export default function PostGallery ({setShowGallery, slugs, selectedItem}: {set
                             height={250} 
                             alt="gallery image"
                             className={styles.galleryImage}
+                            priority
                         />
                         <Image 
                             src={next}
@@ -245,6 +251,7 @@ export default function PostGallery ({setShowGallery, slugs, selectedItem}: {set
                             height={250} 
                             alt="gallery image"
                             className={styles.galleryImage}
+                            priority
                         />
                         <Image 
                             src={next}
@@ -280,6 +287,7 @@ export default function PostGallery ({setShowGallery, slugs, selectedItem}: {set
                             height={250} 
                             alt="gallery image"
                             className={styles.galleryImage}
+                            priority
                         />
                        
                        <Image 
@@ -315,6 +323,7 @@ export default function PostGallery ({setShowGallery, slugs, selectedItem}: {set
                             height={250} 
                             alt="gallery image"
                             className={styles.galleryImage}
+                            priority
                         />
                         <Image 
                             src={next}
@@ -349,6 +358,7 @@ export default function PostGallery ({setShowGallery, slugs, selectedItem}: {set
                             height={250} 
                             alt="gallery image"
                             className={styles.galleryImage}
+                            priority
                         />
                         <Image 
                             src={next}
