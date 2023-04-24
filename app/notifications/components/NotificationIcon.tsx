@@ -85,6 +85,7 @@ export default function NotificationIcon() {
                     width={28}
                     height={28}
                     alt="notifications"
+                    priority
                 />
             </div>
         )
@@ -113,6 +114,7 @@ export default function NotificationIcon() {
                     alt="notifications"
                     onClick={handleNotifications}
                     className={styles.bellImg}
+                    priority
                 />
                 
              </div>
@@ -125,6 +127,7 @@ export default function NotificationIcon() {
                     alt="notifications"
                     onClick={handleNotifications}
                     className={styles.bellImg}
+                    priority
                 />
              
              </div>
@@ -171,7 +174,9 @@ export default function NotificationIcon() {
                                         src={welcome}
                                         width={50}
                                         height={50}
-                                        alt="celebrate icon"/>
+                                        alt="celebrate icon"
+                                        priority/>
+                                        
                                 </div></div>}
                             </div>
                       

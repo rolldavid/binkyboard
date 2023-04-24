@@ -30,7 +30,7 @@ export default function PostGallery ({setShowGallery, slugs, selectedItem}: {set
             <div className={styles.galleryModule}>
                 <div className={styles.closeContainer}>
                     <div className={styles.closeButton} onClick={() => setShowGallery(false)}>
-                        <Image src={close} width={30} height={30} alt="close image gallery"/>
+                        <Image src={close} width={30} height={30} alt="close image gallery" priority/>
                     </div>
                 </div>
                 <div className={styles.galleryContainer}>
@@ -52,7 +52,7 @@ export default function PostGallery ({setShowGallery, slugs, selectedItem}: {set
             <div className={styles.galleryModule} >
                 <div className={styles.closeContainer}>
                         <div className={styles.closeButton} onClick={() => setShowGallery(false)}>
-                            <Image src={close} width={30} height={30} alt="close image gallery"/>
+                            <Image src={close} width={30} height={30} alt="close image gallery" priority/>
                         </div>
                 </div>
                 <div className={styles.galleryContainer}>
@@ -63,6 +63,7 @@ export default function PostGallery ({setShowGallery, slugs, selectedItem}: {set
                             height={30}
                             alt="previous image"
                             className={styles.prevArrow}
+                            priority
                             onClick={() => setImageIndex(1)}/>
                         <Image 
                             src={`${process.env.NEXT_PUBLIC_AWS_URL}/${slugs[0].slug}`} 
@@ -78,6 +79,7 @@ export default function PostGallery ({setShowGallery, slugs, selectedItem}: {set
                             height={30}
                             alt="previous image"
                             className={styles.nextArrow}
+                            priority
                             onClick={() => setImageIndex(1)}/>
                     </div>
                 </div>
@@ -87,7 +89,7 @@ export default function PostGallery ({setShowGallery, slugs, selectedItem}: {set
             <div className={styles.galleryModule} >
                 <div className={styles.closeContainer}>
                         <div className={styles.closeButton} onClick={() => setShowGallery(false)}>
-                            <Image src={close} width={30} height={30} alt="close image gallery"/>
+                            <Image src={close} width={30} height={30} alt="close image gallery" priority/>
                         </div>
                 </div>
                 <div className={styles.galleryContainer}>
@@ -98,6 +100,7 @@ export default function PostGallery ({setShowGallery, slugs, selectedItem}: {set
                             height={30}
                             alt="previous image"
                             className={styles.prevArrow}
+                            priority
                             onClick={() => setImageIndex(0)}/>
                         <Image 
                             src={`${process.env.NEXT_PUBLIC_AWS_URL}/${slugs[1].slug}`} 
@@ -113,6 +116,7 @@ export default function PostGallery ({setShowGallery, slugs, selectedItem}: {set
                             height={30}
                             alt="previous image"
                             className={styles.nextArrow}
+                            priority
                             onClick={() => setImageIndex(0)}/>
                     </div>
                 </div>
@@ -124,7 +128,7 @@ export default function PostGallery ({setShowGallery, slugs, selectedItem}: {set
             <div className={styles.galleryModule} >
                 <div className={styles.closeContainer}>
                         <div className={styles.closeButton} onClick={() => setShowGallery(false)}>
-                            <Image src={close} width={30} height={30} alt="close image gallery"/>
+                            <Image src={close} width={30} height={30} alt="close image gallery" priority/>
                         </div>
                 </div>
                 <div className={styles.galleryContainer}>
@@ -135,6 +139,7 @@ export default function PostGallery ({setShowGallery, slugs, selectedItem}: {set
                             height={30}
                             alt="previous image"
                             className={styles.prevArrow}
+                            priority
                             onClick={() => setImageIndex(2)}/>
                         <Image 
                             src={`${process.env.NEXT_PUBLIC_AWS_URL}/${slugs[0].slug}`} 
@@ -150,6 +155,7 @@ export default function PostGallery ({setShowGallery, slugs, selectedItem}: {set
                             height={30}
                             alt="previous image"
                             className={styles.nextArrow}
+                            priority
                             onClick={() => setImageIndex(1)}/>
                     </div>
                 </div>
@@ -159,7 +165,7 @@ export default function PostGallery ({setShowGallery, slugs, selectedItem}: {set
             <div className={styles.galleryModule} >
                 <div className={styles.closeContainer}>
                     <div className={styles.closeButton} onClick={() => setShowGallery(false)}>
-                        <Image src={close} width={30} height={30} alt="close image gallery"/>
+                        <Image src={close} width={30} height={30} alt="close image gallery" priority/>
                     </div>
                 </div>
                 <div className={styles.galleryContainer}>
@@ -170,6 +176,7 @@ export default function PostGallery ({setShowGallery, slugs, selectedItem}: {set
                             height={30}
                             alt="previous image"
                             className={styles.prevArrow}
+                            priority
                             onClick={() => setImageIndex(0)}/>
                       
                         <Image 
@@ -187,6 +194,7 @@ export default function PostGallery ({setShowGallery, slugs, selectedItem}: {set
                             height={30}
                             alt="previous image"
                             className={styles.nextArrow}
+                            priority
                             onClick={() => setImageIndex(2)}/>
                     </div>
                 </div>
@@ -196,7 +204,7 @@ export default function PostGallery ({setShowGallery, slugs, selectedItem}: {set
             <div className={styles.galleryModule} >
                 <div className={styles.closeContainer}>
                     <div className={styles.closeButton} onClick={() => setShowGallery(false)}>
-                        <Image src={close} width={30} height={30} alt="close image gallery"/>
+                        <Image src={close} width={30} height={30} alt="close image gallery" priority/>
                     </div>
                 </div>
                 <div className={styles.galleryContainer}>
@@ -207,6 +215,7 @@ export default function PostGallery ({setShowGallery, slugs, selectedItem}: {set
                             height={30}
                             alt="previous image"
                             className={styles.prevArrow}
+                            priority
                             onClick={() => setImageIndex(1)}/>
                         <Image 
                             src={`${process.env.NEXT_PUBLIC_AWS_URL}/${slugs[2].slug}`} 
@@ -222,6 +231,7 @@ export default function PostGallery ({setShowGallery, slugs, selectedItem}: {set
                             height={30}
                             alt="previous image"
                             className={styles.nextArrow}
+                            priority
                             onClick={() => setImageIndex(0)}/>
                     </div>
                 </div>
@@ -233,7 +243,7 @@ export default function PostGallery ({setShowGallery, slugs, selectedItem}: {set
             <div className={styles.galleryModule} >
                 <div className={styles.closeContainer}>
                         <div className={styles.closeButton} onClick={() => setShowGallery(false)}>
-                            <Image src={close} width={30} height={30} alt="close image gallery"/>
+                            <Image src={close} width={30} height={30} alt="close image gallery" priority/>
                         </div>
                 </div>
                 <div className={styles.galleryContainer}>
@@ -244,6 +254,7 @@ export default function PostGallery ({setShowGallery, slugs, selectedItem}: {set
                             height={30}
                             alt="previous image"
                             className={styles.prevArrow}
+                            priority
                             onClick={() => setImageIndex(3)}/>
                         <Image 
                             src={`${process.env.NEXT_PUBLIC_AWS_URL}/${slugs[0].slug}`} 
@@ -259,6 +270,7 @@ export default function PostGallery ({setShowGallery, slugs, selectedItem}: {set
                             height={30}
                             alt="previous image"
                             className={styles.nextArrow}
+                            priority
                             onClick={() => setImageIndex(1)}/>
                     </div>
                 </div>
@@ -268,7 +280,7 @@ export default function PostGallery ({setShowGallery, slugs, selectedItem}: {set
             <div className={styles.galleryModule} >
                 <div className={styles.closeContainer}>
                     <div className={styles.closeButton} onClick={() => setShowGallery(false)}>
-                        <Image src={close} width={30} height={30} alt="close image gallery"/>
+                        <Image src={close} width={30} height={30} alt="close image gallery" priority/>
                     </div>
                 </div>
                 <div className={styles.galleryContainer}>
@@ -279,6 +291,7 @@ export default function PostGallery ({setShowGallery, slugs, selectedItem}: {set
                             height={30}
                             alt="previous image"
                             className={styles.prevArrow}
+                            priority
                             onClick={() => setImageIndex(0)}/>
                       
                         <Image 
@@ -296,6 +309,7 @@ export default function PostGallery ({setShowGallery, slugs, selectedItem}: {set
                             height={30}
                             alt="previous image"
                             className={styles.nextArrow}
+                            priority
                             onClick={() => setImageIndex(2)}/>
                     </div>
                 </div>
@@ -305,7 +319,7 @@ export default function PostGallery ({setShowGallery, slugs, selectedItem}: {set
             <div className={styles.galleryModule} >
                 <div className={styles.closeContainer}>
                     <div className={styles.closeButton} onClick={() => setShowGallery(false)}>
-                        <Image src={close} width={30} height={30} alt="close image gallery"/>
+                        <Image src={close} width={30} height={30} alt="close image gallery" priority/>
                     </div>
                 </div>
                 <div className={styles.galleryContainer}>
@@ -316,6 +330,7 @@ export default function PostGallery ({setShowGallery, slugs, selectedItem}: {set
                             height={30}
                             alt="previous image"
                             className={styles.prevArrow}
+                            priority
                             onClick={() => setImageIndex(1)}/>
                         <Image 
                             src={`${process.env.NEXT_PUBLIC_AWS_URL}/${slugs[2].slug}`} 
@@ -331,6 +346,7 @@ export default function PostGallery ({setShowGallery, slugs, selectedItem}: {set
                             height={30}
                             alt="previous image"
                             className={styles.nextArrow}
+                            priority
                             onClick={() => setImageIndex(3)}/>
                     </div>
                 </div>
@@ -340,7 +356,7 @@ export default function PostGallery ({setShowGallery, slugs, selectedItem}: {set
             <div className={styles.galleryModule} >
                 <div className={styles.closeContainer}>
                     <div className={styles.closeButton} onClick={() => setShowGallery(false)}>
-                        <Image src={close} width={30} height={30} alt="close image gallery"/>
+                        <Image src={close} width={30} height={30} alt="close image gallery" priority/>
                     </div>
                 </div>
                 <div className={styles.galleryContainer}>
@@ -351,7 +367,9 @@ export default function PostGallery ({setShowGallery, slugs, selectedItem}: {set
                             height={30}
                             alt="previous image"
                             className={styles.prevArrow}
-                            onClick={() => setImageIndex(2)}/>
+                            onClick={() => setImageIndex(2)}
+                            priority
+                        />
                         <Image 
                             src={`${process.env.NEXT_PUBLIC_AWS_URL}/${slugs[3].slug}`} 
                             width={250} 
@@ -366,7 +384,10 @@ export default function PostGallery ({setShowGallery, slugs, selectedItem}: {set
                             height={30}
                             alt="previous image"
                             className={styles.nextArrow}
-                            onClick={() => setImageIndex(0)}/>
+                            onClick={() => setImageIndex(0)}
+                            priority
+                        />
+                            
                     </div>
                 </div>
             </div>
