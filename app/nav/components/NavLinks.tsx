@@ -47,6 +47,7 @@ export default function NavLinks({userId, admin, signedIn}: {userId: string, adm
                             height={27}
                             alt="profile"
                             className={styles.linkIcon}
+                            priority
                         />
                     </Link>
                     <Link href={`/account/${userId}`} className={styles.navItem}>
@@ -56,6 +57,7 @@ export default function NavLinks({userId, admin, signedIn}: {userId: string, adm
                             height={28}
                             alt="profile"
                             className={styles.linkIcon}
+                            priority
                         />
                     </Link>
                     <div  className={styles.notificationContainer}>
