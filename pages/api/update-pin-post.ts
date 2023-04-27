@@ -50,7 +50,4 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         } catch {
             throw new Error("Did not manage to connect")
         }
-        
-        
-        
 }

@@ -85,7 +85,7 @@ export default function Collection({boardId, isOwner, }: {boardId: string, isOwn
             return (
                 <>
                 <div className={styles.container}>
-                    {pinData && pinData.pinned && <div >
+                    {pinStatus == "success" && pinData && pinData.pinned && <div >
                         <PostItem post={pinData.pinned} boardId={boardId} pinnedPost={true}/>
                         
                     </div>}
