@@ -20,6 +20,7 @@ model Board {
   posts                 Post[]                 @relation(name: "postlist")
   pinnedPost            Post?                  @relation(fields: [pinnedPostId], references: [id], name: "pinned")
   pinnedPostId          Int?                   @unique
+  collaborators         String?
   allowList             String?
   blocklist             String?
   privacy               PrivacyLevel           @default(ONE)
