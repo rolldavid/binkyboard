@@ -50,7 +50,7 @@ export default async function handler(
 
 
       if (board && user) {
-            const filteredPosts = board.posts.filter(post => board.pinnedPost ? board.pinnedPost.id !== post.id : post.id)
+            //const filteredPosts = board.posts.filter(post => board.pinnedPost ? board.pinnedPost.id !== post.id : post.id)
         
             const pinnedSlugs = board.pinnedPost ? 
               board.pinnedPost.slugs.map(slug => {
@@ -74,8 +74,6 @@ export default async function handler(
               isAdmin: board.pinnedPost.user.role === "ADMIN" || board.ownerId === board.pinnedPost.user.id
             }
             : false;
-       
-           
 
           res.status(200).json({ pinned: pinnedPost })
           return;
