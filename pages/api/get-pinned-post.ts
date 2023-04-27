@@ -78,7 +78,6 @@ export default async function handler(
           res.status(200).json({ pinned: pinnedPost })
           return;
           }
-        
 
       res.status(401).json({status: "unauthorized"})
 

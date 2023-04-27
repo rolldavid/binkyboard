@@ -43,6 +43,7 @@ export default function PostOptions({setShowOptions, boardId, postId, isAdmin, i
 
     const { mutateAsync: mutatePin } = useMutation(pinPost, {
         onSuccess: () => {
+       
             queryClient.invalidateQueries(['collection'])
             queryClient.invalidateQueries(['pinnedPost'])
             setDeleting(false)
@@ -56,6 +57,7 @@ export default function PostOptions({setShowOptions, boardId, postId, isAdmin, i
 
     const { mutateAsync: mutateUnpin } = useMutation(unpinPost, {
         onSuccess: () => {
+           
             queryClient.invalidateQueries(['collection'])
             queryClient.invalidateQueries(['pinnedPost'])
             setDeleting(false)

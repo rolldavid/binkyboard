@@ -7,13 +7,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     const { boardId, note, slugs } = req.body;
 
+    console.log("incoming data.....", boardId, note, slugs)
+
     try {
         const session = await getSession(req, res)
 
         if (session?.user?.email) {
+         
 
             const user = await prisma.user.findUnique({where: {email: session.user.email}})
 
+          
             const board = await prisma.board.update({
                 where: {
                     id: boardId
@@ -32,26 +36,35 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                         }
                     }
                 },
+                
                 include: {posts: true}
             })
 
+          
+
             if (board && user && user.name && board.posts.length >= 1) {
              
-                const boardFollowers = board.posts.filter(post => post.userId !== user.id)
+                const followers = board.posts.filter(post => post.userId !== user.id)
 
-                const receivers = boardFollowers.map(post => {
+                let uniqueUsers = [
+                    ...new Map(followers.map((item) => [item["userId"], item])).values(),
+                ];
+
+
+                const receivers = uniqueUsers.map(user => {
                     return {
-                        id: post.userId
+                        id: user.userId
                     }
                 })
+        
 
-                if (receivers.length > 0) {
+                if (receivers && receivers.length > 0) {
                    
-                const notification = await prisma.notificationActive.create({
+                
+                    const notification = await prisma.notificationActive.create({
                     data: {
                         receivers: {
-                            connect: 
-                                receivers
+                            connect: receivers
                         },
                         notification: {
                             connect: {
@@ -71,6 +84,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 }
             }
         }
+
+      
 
         res.status(201).json({status: "ok"})
 

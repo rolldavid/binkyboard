@@ -86,36 +86,34 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             
                     const posts = filteredPosts.map((post, index) => {
 
-                    const slugs = post.slugs.map((slug, index) => {
-                        const isImage = slug.slice(slug.lastIndexOf(".")).includes("mp4") || slug.slice(slug.lastIndexOf(".")).includes("mov") || slug.slice(slug.lastIndexOf(".")).includes("MOV") ? false : true;
-                    
+                        const slugs = post.slugs.map((slug, index) => {
+                            const isImage = slug.slice(slug.lastIndexOf(".")).includes("mp4") || slug.slice(slug.lastIndexOf(".")).includes("mov") || slug.slice(slug.lastIndexOf(".")).includes("MOV") ? false : true;
+                            return {
+                                slug: slug,
+                                type: isImage ? "image" : "video"
+                            }
+                        })
+
+                        const socialUrl = post.note.split(" ").filter(word => word.includes("youtube.com/") || word.includes("soundcloud.com/"))
+
                         return {
-                        slug: slug,
-                        type: isImage ? "image" : "video"
+                            post,
+                            slugs,
+                            socialUrl: socialUrl.length > 0 ? socialUrl[0] : [],
+                            displayName: filteredPosts[index].user.name,
+                            isOwner: board.ownerId === user.id || user.role === "ADMIN" || post.userId === user.id ? true : false,
+                            isAdmin: user.role === "ADMIN" || board.ownerId === user.id
                         }
                     })
 
-                    const socialUrl = post.note.split(" ").filter(word => word.includes("youtube.com/") || word.includes("soundcloud.com/"))
-
-                    return {
-                        post,
-                        slugs,
-                        socialUrl: socialUrl.length > 0 ? socialUrl[0] : [],
-                        displayName: board.posts[index].user.name,
-                        isOwner: board.ownerId === user.id || user.role === "ADMIN" || post.userId === user.id ? true : false,
-                        isAdmin: user.role === "ADMIN" || board.ownerId === user.id
-                    }
-                })
-
-                const mappedPosts = posts.slice(0,10)
+                    const mappedPosts = posts.slice(0,10)
             
-                const returnCursor = mappedPosts.length === 10 ? 9 : mappedPosts.length === 9 ? 8 : mappedPosts.length === 8 ? 7 : mappedPosts.length === 7 ? 6 : mappedPosts.length === 6 ? 5 : posts.length === 5 ? 4 : posts.length === 4 ? 3 : posts.length === 3 ? 2 : posts.length === 2 ? 1 : posts.length === 1 ? 0 : undefined
+                    const returnCursor = mappedPosts.length === 10 ? 9 : mappedPosts.length === 9 ? 8 : mappedPosts.length === 8 ? 7 : mappedPosts.length === 7 ? 6 : mappedPosts.length === 6 ? 5 : posts.length === 5 ? 4 : posts.length === 4 ? 3 : posts.length === 3 ? 2 : posts.length === 2 ? 1 : posts.length === 1 ? 0 : undefined
                 
-              
                     res.status(200).json({ posts: mappedPosts, nextCursor: returnCursor ? posts[returnCursor].post.id : undefined})
-                return;
+                    return;
                 
-        }
+                }
         
       
     } catch (err) {
