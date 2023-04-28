@@ -1,12 +1,11 @@
 "use client"
 
-import axios from "axios";
 import { nanoid } from 'nanoid'
-import Spinner from "@/lib/SpinnerWhite";
+import Spinner from "@/lib/Spinner";
 import { SyntheticEvent, useState, useEffect, useRef, ClipboardEvent, SetStateAction, Dispatch } from "react"
 import Image from "next/image"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { createNewPost } from "@/lib/db-utils";
+import { createNewPost, getS3Url } from "@/lib/db-utils";
 import styles from "./CreatePost.module.css"
 import ReactPlayer from "react-player"
 import img from "../assets/cam.png"
@@ -182,22 +181,20 @@ export default function Submit({boardId}: {boardId: string}) {
             const s3id = nanoid()
             const extensionIndex = file.name.lastIndexOf(".")
             const fileExtension = file.name.slice(extensionIndex)
-            const { data } = await axios.post(
-                "/api/get-s3-url",
-                {
-                    filename: `${s3id}${fileExtension}`,
-                    fileType: file.type
-                }
-            )
+
+            const data = await getS3Url(`${s3id}${fileExtension}`, file.type)
 
             const url = data.url
-        
-            await axios.put(url, file, {
+
+            await fetch(url, {
+                method: "PUT",
                 headers: {
                     "Content-Type": file.type,
                     "Access-Control-Allow-Origin": "*",
                 },
-                });
+                body: file
+            })
+        
 
             dbSlugs.push(`${s3id}${fileExtension}`)
             console.log("uploaded...")

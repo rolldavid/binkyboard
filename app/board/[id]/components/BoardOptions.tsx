@@ -1,11 +1,10 @@
 "use client"
 
 import Image from "next/image"
-import axios from "axios"
 import { nanoid } from "nanoid"
 import { useRouter } from "next/navigation"
 import { useQuery, useQueryClient } from "@tanstack/react-query"
-import { updateBoard, deleteBoard, getBoardOptions } from "@/lib/db-utils"
+import { updateBoard, deleteBoard, getS3Url } from "@/lib/db-utils"
 import edit from "../assets/edit.png"
 import { Dispatch, SyntheticEvent, useEffect, useState, SetStateAction } from "react"
 import { useForm } from "react-hook-form";
@@ -81,22 +80,18 @@ export default function BoardOptions({boardId, setShowOptions, accessList, priva
             if (chosenFile) {
                 const extensionIndex = chosenFile.name.lastIndexOf(".")
                 const fileExtension = chosenFile.name.slice(extensionIndex)
-                const { data: s3Data } = await axios.post(
-                    "/api/get-s3-url",
-                    {
-                        filename: `${s3id}${fileExtension}`,
-                        fileType: chosenFile.type
-                    }
-                )
+                const data = await getS3Url(`${s3id}${fileExtension}`, chosenFile.type)
 
-                const s3Url = s3Data.url
-            
-                await axios.put(s3Url, chosenFile, {
+                const url = data.url
+
+                await fetch(url, {
+                    method: "PUT",
                     headers: {
                         "Content-Type": chosenFile.type,
                         "Access-Control-Allow-Origin": "*",
                     },
-                    });
+                    body: chosenFile
+                })
 
                 bannerUrl = `${s3id}${fileExtension}`
             
