@@ -41,6 +41,11 @@ export default async function RootLayout({
 }
 
 export const metadata: Metadata = {
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 1,
+  },
   title: "binkyboard",
   description: "A simple place to celebrate life's biggest moments",
   openGraph: {
