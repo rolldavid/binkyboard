@@ -8,10 +8,7 @@ import styles from "./PostItem.module.css"
 import pin from "../assets/pin.png"
 import PostOptions from "./PostOptions"
 import PostGallery from "./PostGallery"
-import heart from "../assets/heart.png"
-import heartfull from "../assets/heartfull.png"
-import save from "../assets/save.png"
-import savedIcon from "../assets/saved.png"
+
 
 
 export default function PostItem({post, boardId, pinnedPost }: {post: PostItems, boardId: string, pinnedPost: boolean}) {
@@ -50,6 +47,7 @@ export default function PostItem({post, boardId, pinnedPost }: {post: PostItems,
                 </div>}
             </div>
             <div className={styles.noteContainer}>  
+            
                 <p className={styles.note}>
                     {post.post.note}
                 </p>

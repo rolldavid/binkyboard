@@ -2,7 +2,12 @@
 const nextConfig = {
   experimental: {
     appDir: true,
-    serverComponentsExternalPackages: ["prisma", "@prisma/client"],
+    serverComponentsExternalPackages: [
+      "prisma",
+      "@prisma/client",
+      "react-markdown",
+      "rehype-raw",
+    ],
   },
   images: {
     remotePatterns: [
