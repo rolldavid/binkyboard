@@ -1,10 +1,9 @@
 "use client"
 
-import { useRouter } from "next/navigation";
 import axios from "axios";
 import { nanoid } from 'nanoid'
 import Spinner from "@/lib/SpinnerWhite";
-import { SyntheticEvent, useState, useEffect, ClipboardEvent, SetStateAction, Dispatch } from "react"
+import { SyntheticEvent, useState, useEffect, useRef, ClipboardEvent, SetStateAction, Dispatch } from "react"
 import Image from "next/image"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { createNewPost } from "@/lib/db-utils";
@@ -17,6 +16,7 @@ import img from "../assets/cam.png"
 let holdLink = ""
 let linkChecked = false;
 let uploading = false;
+
 
 interface PreviewFiles {
     url: string
@@ -34,6 +34,7 @@ export default function Submit({boardId}: {boardId: string}) {
 
     const [loading, setLoading] = useState(false)
     const [note, setNote] = useState("")
+    const [noteMD, setNoteMD] = useState("")
     const [dbSlugs, setdbSlugs] = useState<string[]>([])
     const [linkPreview, setLinkPreview] = useState(false)
     const [toggleLink, setToggleLink] = useState(false)
@@ -49,9 +50,10 @@ export default function Submit({boardId}: {boardId: string}) {
     const [fileError, setFileError] = useState<FileErr>({isError: false, message: ""})
     const [prevUrl, setPrevUrl] = useState("")
 
-    const router = useRouter()
    
     async function addPost({note}: {note: string}) {
+        
+ 
         async function checkFlag() {
             setLoading(true)
             if(uploading) {
@@ -63,6 +65,7 @@ export default function Submit({boardId}: {boardId: string}) {
                 })
                 setSubmitStyle("submittingButton")
                 setNote("")
+                setNoteMD("")
                 setRowCount(2)
                 setdbSlugs([])
                 setMediaPreviewList([])
@@ -96,12 +99,14 @@ export default function Submit({boardId}: {boardId: string}) {
     // handle when user is typing a note
     const handleChange = async (e: SyntheticEvent, val: string) => {
         e.preventDefault()
-        setNote(val)
+        
         const lines = val.match(/\n/g)
-        if (lines) {
+        setNote(val)
+       
+        if  (lines && lines.length > 0) {
             setRowCount(lines.length + 1)
         }
-       
+
         if (linkChecked) {
             setToggleLink(prev => !prev)
         }
@@ -237,6 +242,21 @@ export default function Submit({boardId}: {boardId: string}) {
         <div className={styles.container}>
              <form onSubmit={(e) => handleSubmit(e)} className={styles.formContainer}>
               <div className={styles.contentContainer}>
+              {/* <Editor
+                    apiKey='6ke7xjvqgdb5n9a1iwxpk3lw0v2xdciowz302j2b4zqwzznh'
+                    initialValue="<p>This is the initial content of the editor.</p>"
+                    init={{
+                    height: 200,
+                    menubar: false,
+                   
+                    branding: false,
+                    resize: false,
+                    statusbar: false,
+                    toolbar: '',
+                    content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+                    }}
+                /> */}
+                
                 <textarea 
                     value={note}
                     onChange={(e) => handleChange(e, e.target.value)}

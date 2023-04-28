@@ -28,7 +28,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 const checkBoard = await prisma.board.findUnique({where: {id: boardId}, include: {pinnedPost: true}})
 
                 if (checkBoard && checkBoard.pinnedPost) {
-                    console.log("Pinned post: ", checkBoard.pinnedPost)
+                
                     const removePin = await prisma.board.update({
                         where: {
                             id: boardId
