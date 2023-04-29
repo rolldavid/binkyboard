@@ -31,6 +31,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 }) 
             }
         } else {
-            res.status(401).json({status: "unauthorized"})
+            res.status(401).json({accountOwner: false})
         }
 }

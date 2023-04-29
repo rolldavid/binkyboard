@@ -77,10 +77,14 @@ export default function Page({params: {slug}}: {params: { slug: string }}) {
       e.preventDefault()
       const res = await deleteUser()
       router.push("/api/auth/logout")
-      
     }
 
-    if (status === "success" && data) { 
+    if (status === "success" && !data.accountOwner) {
+      router.push("/")
+    }
+
+
+    if (status === "success" && data.accountOwner) { 
 
       return (
             <div className={styles.container}>
