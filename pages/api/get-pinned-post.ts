@@ -71,7 +71,7 @@ export default async function handler(
               socialUrl: pinnedSocialUrl ? pinnedSocialUrl.length > 0 ? pinnedSocialUrl[0] : [] : [],
               displayName: board.pinnedPost.user.name,
               isOwner: board.ownerId === user.id ? true : false,
-              isAdmin: board.pinnedPost.user.role === "ADMIN" || board.ownerId === board.pinnedPost.user.id
+              isAdmin: board.pinnedPost.user.role === "ADMIN" || board.ownerId === board.pinnedPost.user.id || board.ownerId === user.id
             }
             : false;
 

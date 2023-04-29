@@ -14,8 +14,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         try {
             const session = await getSession(req,res)
 
-
-
             const newCursor = await prisma.board.findUnique(
                 {
                     where: {
@@ -32,13 +30,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             })
 
          
-
-        
-
             const user = await prisma.user.findUnique({where: {email: session?.user.email}})
 
            
-
             const initCursor = newCursor && newCursor.posts.length > 0 && myCursor === 1 ? newCursor.posts[0].id : myCursor
             
 
