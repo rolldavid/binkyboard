@@ -7,16 +7,16 @@ export default function Login() {
     
     if (pathname) {
         return (
-            <a className={styles.loginButton} href={`/api/auth/login?returnTo=${encodeURIComponent(pathname)}`} target="_top">
+            <Link className={styles.loginButton} href={`/api/auth/login?returnTo=${encodeURIComponent(pathname)}`} target="_top" prefetch={false}>
                 Login
-            </a>         
+            </Link>         
         )
     }
 
     return (
-        <a className={styles.loginButton} href="/api/auth/login" target="_top">
+        <Link className={styles.loginButton} href="/api/auth/login" target="_top" prefetch={false}>
             Login
-        </a>         
+        </Link>         
     )
     
 }
