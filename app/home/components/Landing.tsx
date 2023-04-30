@@ -8,8 +8,6 @@ import Link from "next/link"
 import Spinner from "@/lib/Spinner"
 import BoardCard from "@/app/board/[id]/components/BoardCard"
 import styles from './Landing.module.css'
-import { useEffect, useState } from "react"
-
 
 
 export default function Page() {

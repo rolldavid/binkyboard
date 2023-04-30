@@ -1,8 +1,6 @@
 "use client"
 
 import { useUser } from "@auth0/nextjs-auth0/client";
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
 import Spinner from "@/lib/Spinner";
 import AuthContainer from "./auth/components/AuthContainer";
 import Landing from "./home/components/Landing"
@@ -11,11 +9,7 @@ import { updateUser } from "@/lib/db-utils";
 
 export default function Page() {
   const {isLoading, user, error} = useUser()
-  const router = useRouter()
 
-  useEffect(() => {
-    router.refresh()
-}, [])
   
   if (isLoading) {
     return <Spinner />

@@ -46,8 +46,8 @@ export default function Search () {
                 {results &&
                     <UserItem user={results}/>
                 }
-                {!results && email.length > 0 && <div className={styles.noUser}>
-                    No user found
+                {!results && email.includes("@") && <div className={styles.noUser}>
+                    type full email
                 </div>}
             </div>
             
