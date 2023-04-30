@@ -2,7 +2,8 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
 }
 
 datasource db {
@@ -46,7 +47,7 @@ model Post {
 
 model User {
   id                    String                 @id @default(cuid())
-  name                  String?
+  name                  String
   email                 String?                @unique
   image                 String?
   posts                 Post[]
@@ -58,6 +59,7 @@ model User {
   notificationsComplete NotificationComplete[]
   bookmarks             BookmarksByUser[]
   disableNotifications  String[]               @default([""])
+  status                UserStatus             @default(ACTIVE)
 }
 
 model Notification {
@@ -105,4 +107,10 @@ enum PrivacyLevel {
   ONE
   TWO
   THREE
+}
+
+enum UserStatus {
+  ACTIVE
+  BANNED
+  LIMITED
 }
