@@ -14,7 +14,7 @@ datasource db {
 model Board {
   id                    String                 @id @default(cuid())
   createdAt             DateTime               @default(now())
-  name                  String
+  name                  String?
   users                 User[]                 @relation(name: "users")
   owner                 User                   @relation(fields: [ownerId], references: [id], name: "owner")
   ownerId               String
