@@ -59,7 +59,6 @@ model User {
   notificationsComplete NotificationComplete[]
   bookmarks             BookmarksByUser[]
   disableNotifications  String[]               @default([""])
-  status                String?                @default("ACTIVE")
 }
 
 model Notification {
