@@ -65,6 +65,21 @@ export async function getS3Url(filename: string, filetype: string) {
 
 // READ
 
+export async function searchEmail(email : string) {
+    const res = await fetch("/api/get-search", {
+        method: "POST",
+        body: JSON.stringify({
+            email
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    const data = await res.json();
+    return data;
+}
+
+
 export async function getNotifications() {
     const res = await fetch("/api/get-notifications")
     const data = await res.json()
@@ -324,6 +339,21 @@ export async function removeBoard(boardId: string) {
 
 export async function updateUser(){
     const res = await fetch("/api/update-user");
+    const data = await res.json();
+    return data;
+}
+
+export async function updateUserRole(userId: string, role: string) {
+    const res = await fetch("/api/update-user-role", {
+        method: "POST",
+        body: JSON.stringify({
+            userId,
+            role
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
     const data = await res.json();
     return data;
 }
