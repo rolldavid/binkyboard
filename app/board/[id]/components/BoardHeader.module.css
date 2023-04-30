@@ -140,7 +140,7 @@
 .editBoardContainer {
     display: flex;
     justify-content: flex-start;
-    margin: -65px 0px 35px 0px;
+    margin: -72px 0px 35px 0px;
     width: 100%;
 }
 
@@ -217,7 +217,7 @@
     .editBoardContainer {
         display: flex;
         justify-content: flex-start;
-        margin: -65px 0px 35px 0px;
+        margin: -72px 0px 35px 0px;
         width: 100%;
     }
     

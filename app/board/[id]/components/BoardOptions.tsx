@@ -16,8 +16,7 @@ import styles from "./BoardOptions.module.css"
 
 const schema = yup
 .object({
-  access: yup.string().required()
-
+  access: yup.string().required(),
 })
 .required();
 
@@ -34,12 +33,26 @@ export default function BoardOptions({boardId, setShowOptions, accessList, priva
     const [loading, setLoading] = useState(false)
     const [deleteButton, setDeleteButton] = useState(false)
 
-
     const router = useRouter()
 
     const queryClient = useQueryClient()
 
    
+    useEffect(() => {
+        const body = document.querySelector("body")
+        if (body) {
+            body.style.overflow = "hidden"
+        }
+        return () => {
+            
+            const body = document.querySelector("body")
+
+            if (body) {
+                body.style.overflow = "auto"
+            }
+        }
+    }, [])
+    
     const {
         register,
         handleSubmit,
@@ -135,8 +148,8 @@ export default function BoardOptions({boardId, setShowOptions, accessList, priva
                                 <label htmlFor="uploadBanner" className={styles.uploadItem}>
                                     <Image 
                                         src={edit}
-                                        width={32}
-                                        height={32}
+                                        width={40}
+                                        height={40}
                                         alt="edit banner button"
                                         className={styles.editBanner}
                                     />
@@ -198,13 +211,14 @@ export default function BoardOptions({boardId, setShowOptions, accessList, priva
                                 {...register("accessList")}
                                 type="textarea"
                                 value={allowList}
+                                
                                 onChange={e => setAllowList(e.target.value)}
                                 className={styles.accessInput}
                                 placeholder="Enter emails, separated by commas"
                             />
                         </div>
                         }
-
+                        
                         <div className={styles.saveContainer}>
                             <div className={styles.saveButton} onClick={handleUpdate}>
                                 Save
@@ -212,7 +226,9 @@ export default function BoardOptions({boardId, setShowOptions, accessList, priva
                             <div className={styles.cancelButton} onClick={() => setShowOptions(false)}>
                                 Cancel
                             </div>
+                            
                         </div>
+                    
                         {!deleteButton && <p className={styles.deletePromptContainer}>Ready to leave it behind? <span className={styles.deletePrompt} onClick={() => setDeleteButton(prev => !prev)}>Delete this board.</span></p>}
                         {deleteButton &&
                             <div className={styles.deleteContainer}>
@@ -220,9 +236,10 @@ export default function BoardOptions({boardId, setShowOptions, accessList, priva
                                 <div className={styles.deleteButton} onClick={e => handleDelete(e)}>
                                     Yes, delete the board
                                 </div>
-                                <div className={styles.cancelButton} onClick={() => setDeleteButton(false)}>Nevermind</div>
+                                <div className={styles.cancelButton} onClick={() => setDeleteButton(false)}>No, go back</div>
                             </div>
-                        }
+                        } 
+                        
                     </form>}
                     {loading && 
                     <div className={styles.loadingContainer}>
@@ -230,7 +247,9 @@ export default function BoardOptions({boardId, setShowOptions, accessList, priva
                       
                     </div>
                     }
+                    
                 </div>
+                
             </div>
         ) 
    

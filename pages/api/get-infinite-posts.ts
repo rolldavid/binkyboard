@@ -7,7 +7,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const { boardId } = req.body
 
 
-
   if (typeof cursor === "string") {
       const myCursor = parseInt(cursor)
      
@@ -116,3 +115,4 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
 }
+

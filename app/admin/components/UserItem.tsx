@@ -8,7 +8,7 @@ import styles from "./UserItem.module.css"
 
 export default function UserItem ({ user }: { user: User }) {
     const [username, setUsername] = useState("")
-    const [role, setRole] = useState("")
+    const [role, setRole] = useState(user.role)
     const [loadingUser, setLoadingUser] = useState(false)
     const [loadingRole, setLoadingRole] = useState(false)
 
@@ -54,7 +54,7 @@ export default function UserItem ({ user }: { user: User }) {
                                 value={role} 
                                 className={styles.inputItem}
                                 onChange={e => setRole(e.target.value)}
-                                placeholder={`${user.role}`}
+                                
                             />
                         </div>
                         <button className={styles.saveButton} onClick={handleRole}>{loadingRole ? <Spinner/> : "Save"}</button>
