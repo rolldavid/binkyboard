@@ -59,7 +59,7 @@ model User {
   notificationsComplete NotificationComplete[]
   bookmarks             BookmarksByUser[]
   disableNotifications  String[]               @default([""])
-  status                UserStatus             @default(ACTIVE)
+  status                String?                @default("ACTIVE")
 }
 
 model Notification {
@@ -107,10 +107,4 @@ enum PrivacyLevel {
   ONE
   TWO
   THREE
-}
-
-enum UserStatus {
-  ACTIVE
-  BANNED
-  LIMITED
 }
