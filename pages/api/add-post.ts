@@ -9,6 +9,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const { note, mediaDetails,  } = req.body;
+
   const userSession = await getSession(req, res)
 
   if (!userSession) {
