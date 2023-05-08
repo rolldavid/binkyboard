@@ -17,3 +17,4 @@ jobs:
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL_PREV }}
           SHADOW_DATABASE_URL: ${{ secrets.DATABASE_SHADOW_PREV }}
+          DIRECT_URL: ${{ secrets.DIRECT_URL_PREV }}
