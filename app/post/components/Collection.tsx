@@ -42,6 +42,8 @@ export default function Collection({boardId, isOwner, }: {boardId: string, isOwn
         error,
         fetchNextPage,
         hasNextPage,
+        isFetching,
+        isLoading,
         isFetchingNextPage,
         status,
       } = useInfiniteQuery(["collection"], getInfinitePosts, {
@@ -49,7 +51,6 @@ export default function Collection({boardId, isOwner, }: {boardId: string, isOwn
           return lastPage.nextCursor
         },
       });
-
 
       useEffect(() => {
 
@@ -68,6 +69,10 @@ export default function Collection({boardId, isOwner, }: {boardId: string, isOwn
     
     if (status === "loading") {
         <Spinner />
+    }
+
+    if (isLoading) {
+        return <Spinner />
     }
 
 

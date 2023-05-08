@@ -10,7 +10,6 @@ import PostOptions from "./PostOptions"
 import PostGallery from "./PostGallery"
 
 
-
 export default function PostItem({post, boardId, pinnedPost }: {post: PostItems, boardId: string, pinnedPost: boolean}) {
     const [showOptions, setShowOptions] = useState(false)    
     const [showGallery, setShowGallery] = useState(false)
@@ -70,6 +69,8 @@ export default function PostItem({post, boardId, pinnedPost }: {post: PostItems,
                             alt="post image" 
                             className={styles.mediaItemOne}
                             onClick={(e) => setPrepGallery(e, 0)}
+                            placeholder="blur"
+                            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mN8XA8AAksBZG7LpHYAAAAASUVORK5CYII="
                         />
                 }
             </div>}
@@ -85,6 +86,8 @@ export default function PostItem({post, boardId, pinnedPost }: {post: PostItems,
                                 alt="post image" 
                                 className={styles.mediaItemTwo}
                                 onClick={(e) => setPrepGallery(e, index)}
+                                placeholder="blur"
+                                blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mN8XA8AAksBZG7LpHYAAAAASUVORK5CYII="
                           
                             />
                         </div>
@@ -102,6 +105,8 @@ export default function PostItem({post, boardId, pinnedPost }: {post: PostItems,
                             alt="post image" 
                             className={styles.mediaItemLeft}
                             onClick={(e) => setPrepGallery(e, 0)}
+                            placeholder="blur"
+                            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mN8XA8AAksBZG7LpHYAAAAASUVORK5CYII="
                         />
                     </div>
                 </div>
@@ -114,6 +119,8 @@ export default function PostItem({post, boardId, pinnedPost }: {post: PostItems,
                             alt="post image" 
                             className={styles.mediaItemRight}
                             onClick={(e) => setPrepGallery(e, 1)}
+                            placeholder="blur"
+                            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mN8XA8AAksBZG7LpHYAAAAASUVORK5CYII="
                         />
                     </div>
                     <div className={styles.mediaItemContainerRight}>
@@ -124,6 +131,8 @@ export default function PostItem({post, boardId, pinnedPost }: {post: PostItems,
                             alt="post image" 
                             className={styles.mediaItemRight}
                             onClick={(e) => setPrepGallery(e, 2)}
+                            placeholder="blur"
+                            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mN8XA8AAksBZG7LpHYAAAAASUVORK5CYII="
                         />
                     </div>
                 </div>
@@ -138,6 +147,8 @@ export default function PostItem({post, boardId, pinnedPost }: {post: PostItems,
                             alt="post image" 
                             className={styles.mediaItemRight}
                             onClick={(e) => setPrepGallery(e, 0)}
+                            placeholder="blur"
+                            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mN8XA8AAksBZG7LpHYAAAAASUVORK5CYII="
                         />
                     </div>
                     <div className={styles.mediaItemContainerSquare}>
@@ -148,6 +159,8 @@ export default function PostItem({post, boardId, pinnedPost }: {post: PostItems,
                             alt="post image" 
                             className={styles.mediaItemRight}
                             onClick={(e) => setPrepGallery(e, 1)}
+                            placeholder="blur"
+                            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mN8XA8AAksBZG7LpHYAAAAASUVORK5CYII="
                         />
                     </div>
                 </div>
@@ -160,6 +173,8 @@ export default function PostItem({post, boardId, pinnedPost }: {post: PostItems,
                             alt="post image" 
                             className={styles.mediaItemRight}
                             onClick={(e) => setPrepGallery(e, 2)}
+                            placeholder="blur"
+                            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mN8XA8AAksBZG7LpHYAAAAASUVORK5CYII="
                         />
                     </div>
                     <div className={styles.mediaItemContainerSquare}>
@@ -170,6 +185,8 @@ export default function PostItem({post, boardId, pinnedPost }: {post: PostItems,
                             alt="post image" 
                             className={styles.mediaItemRight}
                             onClick={(e) => setPrepGallery(e, 3)}
+                            placeholder="blur"
+                            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mN8XA8AAksBZG7LpHYAAAAASUVORK5CYII="
                         />
                     </div>
                    
