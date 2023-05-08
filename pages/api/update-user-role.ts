@@ -14,11 +14,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
         if (session?.user?.email) {
 
-            const checkAdmin = true
-            //await prisma.user.findUnique({ where: {email: session.user.email}})
-            //checkAdmin.role === "ADMIN"
+            const checkAdmin = await prisma.user.findUnique({ where: {email: session.user.email}})
             
-            if (checkAdmin && typeof userId === "string") {
+            if (checkAdmin && checkAdmin.role === "ADMIN" && typeof userId === "string") {
                 
                 const user = await prisma.user.update({
                     where: {
