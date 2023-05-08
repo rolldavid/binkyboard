@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query"
 import { useRouter } from "next/navigation"
 import { getUserId } from "@/lib/db-utils"
 import Search from "./Search"
+import Notification from "./Notification"
 import Spinner from "@/lib/Spinner"
 import styles from "./UserConsole.module.css"
 
@@ -24,6 +25,9 @@ export default function UserManagement () {
             <div className={styles.container}>
                 <div className={styles.searchContainer}>
                     <Search />
+                </div>
+                <div className={styles.searchContainer}>
+                    <Notification />
                 </div>
             </div>
         )

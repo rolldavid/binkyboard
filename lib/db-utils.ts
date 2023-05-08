@@ -34,6 +34,21 @@ export async function createNewPost(boardId: string, note: string, slugs: string
     return data;
 }
 
+export async function createNotification( message: string, description: string) {
+    const res = await fetch("/api/create-notification-type", {
+        method: "POST",
+        body: JSON.stringify({
+            message,
+            description
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    const data = await res.json()
+    return data;
+}
+
 export async function sendAccessEmail(boardId: string) {
     const res = await fetch("/api/send-access-request", {
         method: "POST",
