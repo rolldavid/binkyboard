@@ -7,15 +7,20 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     const { boardId, note, slugs } = req.body;
 
+
     try {
         const session = await getSession(req, res)
 
+        
+
         if (session?.user?.email) {
-         
+            
+            
 
             const user = await prisma.user.findUnique({where: {email: session.user.email}})
 
-          
+       
+
             const board = await prisma.board.update({
                 where: {
                     id: boardId
@@ -38,17 +43,21 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 include: {posts: true}
             })
 
+            
           
 
             if (board && user && user.name && board.posts.length >= 1) {
-             
+                
                 const followers = board.posts.filter(post => post.userId !== user.id)
+
+            
 
                 let uniqueUsers = [
                     ...new Map(followers.map((item) => [item["userId"], item])).values(),
                 ];
 
 
+              
                 const receivers = uniqueUsers.map(user => {
                     return {
                         id: user.userId
@@ -58,7 +67,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
                 if (receivers && receivers.length > 0) {
                    
-                
                     const notification = await prisma.notificationActive.create({
                     data: {
                         receivers: {
