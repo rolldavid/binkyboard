@@ -6,7 +6,7 @@ import Image from "next/image";
 import profile from "../assets/profile.png"
 import board from "../assets/board.png"
 import styles from "./NavLinks.module.css"
-import logo from "../assets/binkylogo.png"
+import logo from "../assets/logo.png"
 import NotificationIcon from "@/app/notifications/components/NotificationIcon";
 
 
@@ -19,8 +19,8 @@ export default function NavLinks({userId, admin, signedIn}: {userId: string, adm
                 <Link href={"/"} className={styles.logoInnerContainer}>
                         <Image 
                             src={logo}
-                            width={162}
-                            height={49}
+                            width={139}
+                            height={42}
                             alt="binkyboard logo"
                             className={styles.logo}
                         />
@@ -38,8 +38,8 @@ export default function NavLinks({userId, admin, signedIn}: {userId: string, adm
                     <Link href={"/"} className={styles.logoInnerContainer}>
                         <Image 
                             src={logo}
-                            width={162}
-                            height={49}
+                            width={139}
+                            height={42}
                             alt="binkyboard logo"
                             className={styles.logo}
                         />
