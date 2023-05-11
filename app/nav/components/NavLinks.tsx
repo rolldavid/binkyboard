@@ -23,6 +23,7 @@ export default function NavLinks({userId, admin, signedIn}: {userId: string, adm
                             height={42}
                             alt="binkyboard logo"
                             className={styles.logo}
+                            priority
                         />
                     </Link>
                 </div>
@@ -42,6 +43,7 @@ export default function NavLinks({userId, admin, signedIn}: {userId: string, adm
                             height={42}
                             alt="binkyboard logo"
                             className={styles.logo}
+                            priority
                         />
                     </Link>
                 </div>
