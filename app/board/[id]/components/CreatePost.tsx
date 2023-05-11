@@ -11,7 +11,6 @@ import ReactPlayer from "react-player"
 import img from "../assets/cam.png"
 
 
-
 let holdLink = ""
 let linkChecked = false;
 let uploading = false;

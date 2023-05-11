@@ -34,7 +34,7 @@ export default async function RootLayout({
             </footer>
             </QueryProvider>
           </UserProvider>
-          < Analytics />
+          
       </body>
     </html>
   )

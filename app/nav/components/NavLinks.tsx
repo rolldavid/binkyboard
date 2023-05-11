@@ -3,13 +3,10 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import plus from "../assets/plus.png"
 import profile from "../assets/profile.png"
 import board from "../assets/board.png"
-import bell from "../assets/bell.png"
-import bellding from "../assets/bellding.png"
 import styles from "./NavLinks.module.css"
-import pin from "../assets/pin.png"
+import logo from "../assets/binkylogo.png"
 import NotificationIcon from "@/app/notifications/components/NotificationIcon";
 
 
@@ -19,8 +16,14 @@ export default function NavLinks({userId, admin, signedIn}: {userId: string, adm
         return <div>
             <nav className={styles.container}>
                 <div className={styles.logoContainer}>
-                    <Link href={"/"}>
-                        <h1 className={styles.logo}>binkyboard</h1>
+                <Link href={"/"} className={styles.logoInnerContainer}>
+                        <Image 
+                            src={logo}
+                            width={162}
+                            height={49}
+                            alt="binkyboard logo"
+                            className={styles.logo}
+                        />
                     </Link>
                 </div>
             </nav>
@@ -32,14 +35,18 @@ export default function NavLinks({userId, admin, signedIn}: {userId: string, adm
         return (
             <nav className={styles.container}>
                 <div className={styles.logoContainer}>
-                    <Link href={"/"}>
-                        <h1 className={styles.logo}>binkyboard</h1>
+                    <Link href={"/"} className={styles.logoInnerContainer}>
+                        <Image 
+                            src={logo}
+                            width={162}
+                            height={49}
+                            alt="binkyboard logo"
+                            className={styles.logo}
+                        />
                     </Link>
                 </div>
                 <div className={styles.linkContainer}>
-                
-
-                    
+            
                     <Link href={`/`} className={styles.navItem}>
                         <Image 
                             src={board}
