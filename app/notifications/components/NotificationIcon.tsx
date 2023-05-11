@@ -76,7 +76,6 @@ export default function NotificationIcon() {
     }
 
 
-
     if (status === "loading") {
         return (
             <div className={styles.notificationIconContainer}>

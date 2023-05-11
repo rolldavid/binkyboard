@@ -41,8 +41,6 @@ export default function Collection({boardId, isOwner, }: {boardId: string, isOwn
         data,
         error,
         fetchNextPage,
-        hasNextPage,
-        isFetching,
         isLoading,
         isFetchingNextPage,
         status,
@@ -78,15 +76,7 @@ export default function Collection({boardId, isOwner, }: {boardId: string, isOwn
 
     if (status === "success" && data) {
             
-            /* if (data.posts.length === 0) {
-                return (
-                    <div className={styles.container}>
-                        <div className={styles.noPostContainer}>
-                            <p className={styles.empty}>Let&apos;s get this party started!</p>
-                        </div>
-                    </div>
-                )
-            } */
+           
             return (
                 <>
                 <div className={styles.container}>
