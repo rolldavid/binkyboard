@@ -1,4 +1,5 @@
-
+import Image from "next/image"
+import logo from "../../nav/assets/logo.png"
 import styles from "./Footer.module.css" 
 
 export default function Footer(){
@@ -6,7 +7,14 @@ export default function Footer(){
     
         <section className={styles.container}>
             <div className={styles.logoContainer}>
-                <h1 className={styles.logo}>binkyboard</h1>
+            <Image 
+                    src={logo}
+                    width={125}
+                    height={38}
+                    alt="binkyboard logo"
+                    className={styles.logo}
+                    priority
+                />
             </div>
         </section>
         
