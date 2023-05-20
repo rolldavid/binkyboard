@@ -62,7 +62,7 @@ export default async function handler(
                 }
               })
 
-              const socialUrl = post.note.split(" ").filter(word => word.includes("youtube.com/") || word.includes("soundcloud.com/"))
+              const socialUrl = post.note.split(" ").filter(word => word.includes("youtube.com/") || word.includes("soundcloud.com/") || word.includes("youtu.be"))
 
               return {
                 post,
