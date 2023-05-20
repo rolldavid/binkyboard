@@ -63,7 +63,7 @@ export default async function handler(
               })
             : false;
 
-            const pinnedSocialUrl = board.pinnedPost ? board.pinnedPost.note.split(" ").filter(word => word.includes("youtube.com/") || word.includes("soundcloud.com/")) : false;
+            const pinnedSocialUrl = board.pinnedPost ? board.pinnedPost.note.split(" ").filter(word => word.includes("youtube.com/") || word.includes("soundcloud.com/") || word.includes("youtu.be")) : false;
 
             const pinnedPost = board.pinnedPost ? {
               post: board.pinnedPost,

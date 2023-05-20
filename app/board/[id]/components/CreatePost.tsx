@@ -221,7 +221,7 @@ export default function Submit({boardId}: {boardId: string}) {
         setNote(prev => prev + e.clipboardData.getData("text"))
         holdLink = e.clipboardData.getData("text")
         setLink(e.clipboardData.getData("text"))
-        if ((!linkChecked && e.clipboardData.getData("text").includes("youtube")) || (!linkChecked && e.clipboardData.getData("text").includes("soundcloud"))) {
+        if ((!linkChecked && e.clipboardData.getData("text").includes("youtube")) || !linkChecked && e.clipboardData.getData("text").includes("youtu.be") || (!linkChecked && e.clipboardData.getData("text").includes("soundcloud"))) {
             setLinkPreview(true)
             linkChecked = true;
         }
