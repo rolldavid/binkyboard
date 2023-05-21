@@ -3,11 +3,15 @@ import { getSession } from '@auth0/nextjs-auth0';
 import prisma from "@/lib/prisma";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+    const startTime = Date.now()
 
     try {
         const session = await getSession(req, res)
         if (!session) {
+            const endTime = Date.now()
+            console.log(`get user ID execution time: ${endTime - startTime} ms`)
             return res.status(201).json({session: false, userId: undefined})
+         
         }
 
         if (session?.user?.email) {
@@ -20,12 +24,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             })
 
             if (dbUser) {
-                res.status(201).json({userId: dbUser?.id, role: dbUser?.role})
-                return
+                const endTime = Date.now()
+                console.log(`get user ID execution time: ${endTime - startTime} ms`)
+                return res.status(201).json({userId: dbUser?.id, role: dbUser?.role})
+               
             } 
 
-            res.status(201).json({status: "Did not manage to connect"})
-                return
+            return res.status(201).json({status: "Did not manage to connect"})
             
 
         }

@@ -3,7 +3,8 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { getSession } from '@auth0/nextjs-auth0';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  
+    const startTime = Date.now()
+
     try {
         const session = await getSession(req,res)
         
@@ -63,22 +64,31 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
             if (mappedActive && mappedActive.length > 0) {
                 if (mappedComplete && mappedComplete.length > 0) {
-                    res.status(201).json({activeNotifications: mappedActive, completeNotifications: mappedComplete, loggedIn: true})
+                    console.log(`get notifications execution time: ${Date.now() - startTime} ms`)
+                    return res.status(201).json({activeNotifications: mappedActive, completeNotifications: mappedComplete, loggedIn: true})
                 } else {
-                    res.status(201).json({activeNotifications: mappedActive, completeNotifications: [], loggedIn: true})
+                    console.log(`get notifications execution time: ${Date.now() - startTime} ms`)
+
+                    return res.status(201).json({activeNotifications: mappedActive, completeNotifications: [], loggedIn: true})
                 }
               
             } else { 
                 if (mappedComplete && mappedComplete.length > 0) {
-                    res.status(201).json({activeNotifications: [], completeNotifications: mappedComplete, loggedIn: true})
+                    console.log(`get notifications execution time: ${Date.now() - startTime} ms`)
+
+                    return res.status(201).json({activeNotifications: [], completeNotifications: mappedComplete, loggedIn: true})
                 } else { 
-                    res.status(201).json({activeNotifications: [], completeNotifications: [], loggedIn: true})
+                    console.log(`get notifications execution time: ${Date.now() - startTime} ms`)
+
+                    return res.status(201).json({activeNotifications: [], completeNotifications: [], loggedIn: true})
                 } 
             } 
 
-        } else {
-            res.status(201).json({loggedIn: false})
-        }
+        } 
+        console.log(`get notifications execution time: ${Date.now() - startTime} ms`)
+
+        res.status(201).json({loggedIn: false})
+        
         
     } catch (err) {
         res.status(401).json({message: "Did not manage to connect"})

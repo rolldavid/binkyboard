@@ -7,6 +7,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const { boardId } = req.body
 
 
+  const startTime = Date.now()
+
   if (typeof cursor === "string") {
       const myCursor = parseInt(cursor)
      
@@ -103,11 +105,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             
                     const returnCursor = mappedPosts.length === 10 ? 9 : mappedPosts.length === 9 ? 8 : mappedPosts.length === 8 ? 7 : mappedPosts.length === 7 ? 6 : mappedPosts.length === 6 ? 5 : posts.length === 5 ? 4 : posts.length === 4 ? 3 : posts.length === 3 ? 2 : posts.length === 2 ? 1 : posts.length === 1 ? 0 : undefined
                 
-              
-                    res.status(200).json({ posts: mappedPosts, nextCursor: returnCursor ? posts[returnCursor].post.id : undefined})
-                    return;
+                    console.log(`infinite posts execution time: ${Date.now() - startTime} ms`)
+                    return res.status(200).json({ posts: mappedPosts, nextCursor: returnCursor ? posts[returnCursor].post.id : undefined})
                 
                 }
+
+                console.log(`infinite posts execution time: ${Date.now() - startTime} ms`)
+                return res.status(200).json({ posts: undefined, nextCursor: undefined})
         
       
     } catch (err) {

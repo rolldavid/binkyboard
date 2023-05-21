@@ -3,12 +3,14 @@ import { getSession } from '@auth0/nextjs-auth0';
 import prisma from "@/lib/prisma";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+    const startTime = Date.now()
 
     try {
         const session = await getSession(req, res)
         if (!session) {
-            res.status(201).json({session: false, userId: undefined})
-            return
+            console.log(`get boards execution time: ${Date.now() - startTime} ms`)
+            return res.status(201).json({session: false, userId: undefined})
+          
         }
 
         if (session?.user?.email) {
@@ -28,15 +30,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     return user.boardOrder.indexOf(a.id) - user.boardOrder.indexOf(b.id)
                 })
                 
-                res.status(201).json({boards: orderedBoards, role: user.role})
-                return
+                console.log(`get boards execution time: ${Date.now() - startTime} ms`)
+                return res.status(201).json({boards: orderedBoards, role: user.role})
+              
             }
 
-            res.status(201).json({status: "Did not manage to connect"})
-            return
-            
+            console.log(`get boards execution time: ${Date.now() - startTime} ms`)
+            return res.status(201).json({status: "Did not manage to connect"})
+          
         } 
 
+        console.log(`execution time: ${Date.now() - startTime} ms`)
         res.status(201).json({status: "Did not manage to connect"})
                        
     } catch (err) {
